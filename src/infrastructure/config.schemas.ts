@@ -1,12 +1,14 @@
 import { z } from 'zod';
 
 import { AirQualityConfigSchema } from '../features/air-quality/infrastructure/config';
-import { WeatherWidgetConfigSchema } from '../features/weather/infrastructure/config';
+import { WeatherWidgetConfigSchema } from '../features/weather/infrastructure/config.schemas';
+import { TabsWidgetConfigSchema } from '../features/tabs/infrastructure/config.schemas';
 
-export const WidgetConfigSchema = z.discriminatedUnion('type', [
+export const WidgetConfigSchema = z.lazy(() => z.union([
     WeatherWidgetConfigSchema,
     AirQualityConfigSchema,
-]);
+    TabsWidgetConfigSchema,
+])) as z.ZodSchema;
 
 export type WidgetConfig = z.infer<typeof WidgetConfigSchema>;
 

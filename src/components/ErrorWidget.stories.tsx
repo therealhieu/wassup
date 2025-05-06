@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ErrorWidget } from './ErrorWidget';
 
 const meta = {
-    title: 'Components/ErrorWidget',
+    title: 'components/ErrorWidget',
     component: ErrorWidget,
     parameters: {
         layout: 'centered',

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { WeatherWidget } from './WeatherWidget';
 
 const meta: Meta<typeof WeatherWidget> = {
-    title: 'Weather/WeatherWidget',
+    title: 'widgets/weather/WeatherWidget',
     component: WeatherWidget,
     parameters: {
         layout: 'centered',

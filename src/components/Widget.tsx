@@ -7,19 +7,22 @@ import { WeatherWidget, WeatherWidgetProps } from "@/features/weather/presentati
 import { WeatherWidgetSkeleton } from "@/features/weather/presentation/WeatherWidgetSkeleton";
 import { getWeatherWidgetProps } from "@/features/weather/services/weather.actions";
 import { useDashboardContext } from "@/context/DashboardContext";
+import { TabsWidget, TabsWidgetProps } from "@/features/tabs/presentation/TabWidget";
+import { WidgetProps } from "@/lib/schemas";
+import { TabsWidgetSkeleton } from "@/features/tabs/presentation/TabsWidgetSkeleton";
 
-interface WidgetProps {
+interface WidgetComponentProps {
     widgetConfig: WidgetConfig;
 }
 
-export function Widget({ widgetConfig }: WidgetProps) {
+export function Widget({ widgetConfig }: WidgetComponentProps) {
     const { initialWidgetData } = useDashboardContext();
     const widgetKey = JSON.stringify(widgetConfig);
     const initialData = initialWidgetData[widgetKey] ?? null;
 
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(initialData ? false : true);
     const [error, setError] = useState<Error | null>(null);
-    const [data, setData] = useState<WeatherWidgetProps | null>(initialData);
+    const [data, setData] = useState<WidgetProps | null>(initialData);
 
     useEffect(() => {
         // Reset data when widget config changes
@@ -33,11 +36,15 @@ export function Widget({ widgetConfig }: WidgetProps) {
         async function fetchData() {
             setLoading(true);
             setError(null);
+
             try {
                 switch (widgetConfig.type) {
                     case 'weather':
                         const getResult = await getWeatherWidgetProps(widgetConfig) as WeatherWidgetProps;
                         setData(getResult);
+                        break;
+                    case 'tabs':
+                        setData({ config: widgetConfig });
                         break;
                 }
             } catch (e) {
@@ -54,6 +61,8 @@ export function Widget({ widgetConfig }: WidgetProps) {
         switch (widgetConfig.type) {
             case 'weather':
                 return <WeatherWidgetSkeleton />;
+            case 'tabs':
+                return <TabsWidgetSkeleton />;
             default:
                 return null;
         }
@@ -66,7 +75,9 @@ export function Widget({ widgetConfig }: WidgetProps) {
     if (data) {
         switch (widgetConfig.type) {
             case 'weather':
-                return <WeatherWidget {...data} />;
+                return <WeatherWidget {...data as WeatherWidgetProps} />;
+            case 'tabs':
+                return <TabsWidget {...data as TabsWidgetProps} />;
             default:
                 return <ErrorWidget error={new Error(`Unsupported widget type: ${widgetConfig.type}`)} />;
         }

@@ -1,6 +1,6 @@
 'use server';
 
-import { WeatherWidgetConfig } from "../infrastructure/config";
+import { WeatherWidgetConfig } from "../infrastructure/config.schemas";
 import { WeatherService } from "./weather";
 import { WeatherWidgetProps } from "../presentation/WeatherWidget";
 import { LRUCache } from 'lru-cache'

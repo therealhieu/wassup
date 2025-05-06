@@ -6,8 +6,8 @@ import yaml from 'yaml';
 
 import { AppConfig, AppConfigSchema } from '../infrastructure/config.schemas';
 import { WidgetProps } from './schemas';
-import { getWeatherWidgetProps } from '@/features/weather/services/weather.actions';
 import { logger } from './logger';
+import { getWeatherWidgetProps } from '@/features/weather/services/weather.actions';
 
 
 

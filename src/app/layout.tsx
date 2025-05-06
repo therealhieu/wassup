@@ -38,6 +38,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const initialConfig = await getAppConfig();
+  console.log(initialConfig);
   const initialWidgetData = await getIntialWidgetData(initialConfig);
 
   return (

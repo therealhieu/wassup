@@ -13,8 +13,15 @@ ui:
               location: Tokyo
         - size: 7
           widgets:
-            - type: weather
-              location: Hanoi
+            - type: tabs
+              labels:
+                - Tokyo
+                - Paris
+              widgets:
+                - type: weather
+                  location: Tokyo
+                - type: weather
+                  location: Paris
         - size: 3
           widgets:
             - type: weather

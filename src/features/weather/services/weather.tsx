@@ -4,7 +4,7 @@ import { logger } from '@/lib/logger';
 import { err, ok, Result } from 'neverthrow';
 
 import { DailyWeatherReportRepository } from '../domain/repositories/daily-weather-report';
-import { WeatherWidgetConfig } from '../infrastructure/config';
+import { WeatherWidgetConfig } from '../infrastructure/config.schemas';
 import { OpenmeteoDailyWeatherReportRepository } from '../infrastructure/repositories/openmeteo';
 import { WeatherWidgetProps } from '../presentation/WeatherWidget';
 

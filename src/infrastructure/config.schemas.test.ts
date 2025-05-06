@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { AirQualityConfig } from '../features/air-quality/infrastructure/config';
-import { WeatherWidgetConfig } from '../features/weather/infrastructure/config';
+import { WeatherWidgetConfig } from '../features/weather/infrastructure/config.schemas';
 import {
     ColumnConfig,
     ColumnConfigSchema,

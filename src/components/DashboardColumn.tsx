@@ -1,4 +1,4 @@
-import { ColumnConfig, WidgetConfig } from "@/infrastructure/config/schemas";
+import { ColumnConfig, WidgetConfig } from "@/infrastructure/config.schemas";
 import { Widget } from "./Widget";
 
 interface DashboardColumnProps {
