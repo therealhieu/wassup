@@ -1,0 +1,28 @@
+server:
+  port: 5000
+
+ui:
+  theme: light
+  pages:
+    - title: Home
+      path: /
+      columns:
+        - size: 2
+          widgets:
+            - type: weather
+              location: Ho Chi Minh City
+        - size: 7
+          widgets:
+            - type: weather
+              location: Hanoi
+        - size: 3
+          widgets:
+            - type: weather
+              location: Ho Chi Minh City
+    - title: News
+      path: /news
+      columns:
+        - size: 3
+          widgets:
+            - type: weather
+              location: Ho Chi Minh City
