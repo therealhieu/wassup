@@ -1,6 +1,5 @@
 import { describe, expect, it } from "vitest";
 import { WeatherService } from "./weather";
-import { GeonamesGeocodeRepository } from "@/features/geocoding/infrastructure/geonames";
 import { WeatherWidgetConfigSchema } from "../infrastructure/config";
 
 describe('WeatherService', () => {

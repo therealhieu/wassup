@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { AppConfig, AppConfigSchema } from '@/infrastructure/config/schemas';
+import { AppConfig, AppConfigSchema } from '@/infrastructure/config.schemas';
 
 export function useConfigSSE(url: string, initialConfig: AppConfig | null): [AppConfig | null, Error | null] {
     const [config, setConfig] = useState<AppConfig | null>(initialConfig);
@@ -19,13 +19,13 @@ export function useConfigSSE(url: string, initialConfig: AppConfig | null): [App
                 } else {
                     console.error('Invalid config shape', result.error);
                 }
-            } catch (err: any) {
+            } catch (err: unknown) {
                 console.error('Malformed JSON from SSE', err);
                 setError(err instanceof Error ? err : new Error(String(err)));
             }
         }
 
-        es.onerror = (err: any) => {
+        es.onerror = (err: unknown) => {
             console.error('SSE error:', err);
             setError(err instanceof Error ? err : new Error(String(err)));
         }

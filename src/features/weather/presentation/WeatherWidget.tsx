@@ -2,6 +2,7 @@ import { Box, Card, CardContent, Divider, Typography } from '@mui/material';
 import { z } from 'zod';
 
 import { DailyWeatherReportListSchema, DailyWeatherReportSchema } from '../domain/entities/daily-weather-report';
+import Image from 'next/image';
 
 const weatherIconUrl = "https://openweathermap.org/img/wn/"
 
@@ -137,10 +138,12 @@ export type WeatherIconProps = z.infer<typeof WeatherIconPropsSchema>;
 const WeatherIcon = ({ weatherCode, size, style }: WeatherIconProps) => {
     const iconPath = size == 1 ? `${WeatherCodeInfo[weatherCode].icon}.png` : `${WeatherCodeInfo[weatherCode].icon}@${size}x.png`;
 
-    return <img
+    return <Image
         src={`${weatherIconUrl}${iconPath}`}
         alt={WeatherCodeInfo[weatherCode].description}
-        style={{ width: 128, height: 128, ...style }}
+        style={{ ...style }}
+        width={128}
+        height={128}
     />;
 };
 

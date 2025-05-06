@@ -8,7 +8,7 @@ import { Box } from "@mui/material";
 
 export const WeatherWidgetSkeleton = () => {
     return (
-        <Card sx={{ width: '100%', minWidth: 345 }}>
+        <Card sx={{ width: '100%' }}>
             <Box>
                 <CardContent>
                     <Skeleton variant="text" height={48} width="50%" />

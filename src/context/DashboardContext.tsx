@@ -2,16 +2,18 @@
 
 import { createContext, useContext, ReactNode, useState, useEffect } from 'react';
 import { useConfigSSE } from '@/hooks/use-config-sse';
-import type { AppConfig } from '@/infrastructure/config/schemas';
+import type { AppConfig } from '@/infrastructure/config.schemas';
 import { ThemeProvider } from '@mui/material/styles';
 import { appThemes } from '@/themes';
 import { CssBaseline } from '@mui/material';
+import { WidgetProps } from '@/lib/schemas';
 
 export const THEME_OPTIONS = ['light', 'dark'] as const;
 export type ThemeOption = typeof THEME_OPTIONS[number];
 
 export interface DashboardContextType {
     appConfig: AppConfig;
+    initialWidgetData: Record<string, WidgetProps | null>;
     theme: ThemeOption;
     setTheme: (theme: ThemeOption) => void;
 }
@@ -21,9 +23,10 @@ const DashboardContext = createContext<DashboardContextType | null>(null);
 export interface DashboardContextProviderProps {
     children: ReactNode;
     initialConfig: AppConfig;
+    initialWidgetData: Record<string, WidgetProps | null>;
 }
 
-export function DashboardContextProvider({ children, initialConfig }: DashboardContextProviderProps) {
+export function DashboardContextProvider({ children, initialConfig, initialWidgetData }: DashboardContextProviderProps) {
     const [config, error] = useConfigSSE('/api/config-sse', initialConfig);
     const [theme, setTheme] = useState<ThemeOption>(config?.ui.theme || 'light');
 
@@ -42,7 +45,7 @@ export function DashboardContextProvider({ children, initialConfig }: DashboardC
     }
 
     return (
-        <DashboardContext.Provider value={{ appConfig: config, theme, setTheme }}>
+        <DashboardContext.Provider value={{ appConfig: config, theme, setTheme, initialWidgetData }}>
             <ThemeProvider theme={appThemes[theme]}>
                 <CssBaseline />
                 {children}

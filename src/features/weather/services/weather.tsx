@@ -35,7 +35,7 @@ export class WeatherService {
             return err(new Error(errorMessage));
         }
 
-        let geocodeRepository = new GeonamesGeocodeRepository(geonames);
+        const geocodeRepository = new GeonamesGeocodeRepository(geonames);
         await geocodeRepository.fetchData();
 
         const dailyWeatherRepository = new OpenmeteoDailyWeatherReportRepository();

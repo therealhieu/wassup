@@ -2,7 +2,7 @@
 
 import { DashboardPage } from '@/components/DashboardPage';
 import { useDashboardContext } from '@/context/DashboardContext';
-import { PageConfig } from '@/infrastructure/config/schemas';
+import { PageConfig } from '@/infrastructure/config.schemas';
 import { Box, Typography } from '@mui/material';
 import { usePathname } from 'next/navigation';
 
@@ -16,7 +16,7 @@ export default function CatchAllPage() {
         return (
             <Box p={4}>
                 <Typography variant="h4">404 — Page Not Found</Typography>
-                <Typography>No configuration for path: "{pathname}"</Typography>
+                <Typography>No configuration for path: &quot;{pathname}&quot;</Typography>
             </Box>
         );
     }

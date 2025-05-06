@@ -6,7 +6,8 @@ import { Geist, Geist_Mono, Roboto } from 'next/font/google';
 import type { Metadata } from "next";
 import { DashboardContextProvider } from '@/context/DashboardContext';
 import { DashboardAppBar } from '@/components/DashboardAppBar';
-import { getAppConfig } from '@/infrastructure/config/actions';
+import { getAppConfig } from '@/lib/actions';
+import { getIntialWidgetData } from '@/lib/actions';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,6 +38,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const initialConfig = await getAppConfig();
+  const initialWidgetData = await getIntialWidgetData(initialConfig);
 
   return (
     <html lang="en">
@@ -44,7 +46,7 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} antialiased`}
       >
         <AppRouterCacheProvider>
-          <DashboardContextProvider initialConfig={initialConfig}>
+          <DashboardContextProvider initialConfig={initialConfig} initialWidgetData={initialWidgetData}>
             <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '8px 16px 0' }}>
               <DashboardAppBar />
             </div>

@@ -1,22 +1,35 @@
 'use client';
 
-import { WidgetConfig } from "@/infrastructure/config/schemas";
+import { WidgetConfig } from "@/infrastructure/config.schemas";
 import { ErrorWidget } from "./ErrorWidget";
 import { useEffect, useState } from "react";
 import { WeatherWidget, WeatherWidgetProps } from "@/features/weather/presentation/WeatherWidget";
 import { WeatherWidgetSkeleton } from "@/features/weather/presentation/WeatherWidgetSkeleton";
 import { getWeatherWidgetProps } from "@/features/weather/services/weather.actions";
+import { useDashboardContext } from "@/context/DashboardContext";
 
 interface WidgetProps {
     widgetConfig: WidgetConfig;
 }
 
 export function Widget({ widgetConfig }: WidgetProps) {
-    const [loading, setLoading] = useState(true);
+    const { initialWidgetData } = useDashboardContext();
+    const widgetKey = JSON.stringify(widgetConfig);
+    const initialData = initialWidgetData[widgetKey] ?? null;
+
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState<Error | null>(null);
-    const [data, setData] = useState<WeatherWidgetProps | null>(null);
+    const [data, setData] = useState<WeatherWidgetProps | null>(initialData);
 
     useEffect(() => {
+        // Reset data when widget config changes
+        setData(initialWidgetData[widgetKey] ?? null);
+
+        // Skip if we have data from initialWidgetData
+        if (initialWidgetData[widgetKey]) {
+            return;
+        }
+
         async function fetchData() {
             setLoading(true);
             setError(null);
@@ -33,8 +46,9 @@ export function Widget({ widgetConfig }: WidgetProps) {
                 setLoading(false);
             }
         }
+
         fetchData();
-    }, [widgetConfig]);
+    }, [widgetConfig, widgetKey, initialWidgetData]);
 
     if (loading) {
         switch (widgetConfig.type) {

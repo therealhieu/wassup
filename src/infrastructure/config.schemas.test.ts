@@ -1,15 +1,14 @@
 import { describe, expect, it } from 'vitest';
 
-import { AirQualityConfig } from '../../features/air-quality/infrastructure/config';
-import { WeatherWidgetConfig } from '../../features/weather/infrastructure/config';
-import { WeatherWidget } from '../../features/weather/presentation/WeatherWidget';
+import { AirQualityConfig } from '../features/air-quality/infrastructure/config';
+import { WeatherWidgetConfig } from '../features/weather/infrastructure/config';
 import {
     ColumnConfig,
     ColumnConfigSchema,
     WidgetConfigSchema,
     PageConfig,
     PageConfigSchema,
-} from './schemas';
+} from './config.schemas';
 
 describe('Config', () => {
     it('should be able to parse widget config object', () => {

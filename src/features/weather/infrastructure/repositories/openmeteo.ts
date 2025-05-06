@@ -66,7 +66,6 @@ export class OpenmeteoDailyWeatherReportRepository implements DailyWeatherReport
 
         // Attributes for timezone and location
         const utcOffsetSeconds = response.utcOffsetSeconds();
-        const timezone = response.timezone();
 
         const daily = response.daily()!;
 

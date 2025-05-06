@@ -10,7 +10,7 @@ ui:
         - size: 2
           widgets:
             - type: weather
-              location: Ho Chi Minh City
+              location: Tokyo
         - size: 7
           widgets:
             - type: weather

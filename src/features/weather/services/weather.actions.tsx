@@ -5,10 +5,10 @@ import { WeatherService } from "./weather";
 import { WeatherWidgetProps } from "../presentation/WeatherWidget";
 import { LRUCache } from 'lru-cache'
 
-let serviceCache = new LRUCache<string, WeatherService>({ max: 5 });
+const serviceCache = new LRUCache<string, WeatherService>({ max: 5 });
 
 export async function getWeatherWidgetProps(config: WeatherWidgetConfig): Promise<WeatherWidgetProps> {
-    let key = JSON.stringify(config);
+    const key = JSON.stringify(config);
     let service = serviceCache.get(key);
 
     if (!service) {

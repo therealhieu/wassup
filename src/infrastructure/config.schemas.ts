@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-import { AirQualityConfigSchema } from '../../features/air-quality/infrastructure/config';
-import { WeatherWidgetConfigSchema } from '../../features/weather/infrastructure/config';
+import { AirQualityConfigSchema } from '../features/air-quality/infrastructure/config';
+import { WeatherWidgetConfigSchema } from '../features/weather/infrastructure/config';
 
 export const WidgetConfigSchema = z.discriminatedUnion('type', [
     WeatherWidgetConfigSchema,
