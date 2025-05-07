@@ -16,12 +16,10 @@ ui:
             - type: tabs
               labels:
                 - Tokyo
-                - Paris
-              widgets:
+              tabs:
                 - type: weather
                   location: Tokyo
-                - type: weather
-                  location: Paris
+
         - size: 3
           widgets:
             - type: weather

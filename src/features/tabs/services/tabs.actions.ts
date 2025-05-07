@@ -1,5 +1,42 @@
-import { TabsWidgetConfig } from "../infrastructure/config.schemas";
+"use server";
 
-export async function getTabsWidgetProps(widgetConfig: TabsWidgetConfig) {
-    return widgetConfig;
+import { WidgetProps } from "@/lib/schemas";
+import { TabsWidgetConfig } from "../infrastructure/config.schemas";
+import { getWeatherWidgetProps } from "@/features/weather/services/weather.actions";
+import { TabsWidgetProps } from "../presentation/TabWidget";
+
+export async function getTabsWidgetProps(
+	widgetConfig: TabsWidgetConfig
+): Promise<TabsWidgetProps> {
+	return {
+		config: widgetConfig,
+	};
+}
+
+export async function getTabsWidgetRecord(
+	tabsWidgetConfig: TabsWidgetConfig
+): Promise<Record<string, WidgetProps | null>> {
+	const record: Record<string, WidgetProps | null> = {};
+	record[JSON.stringify(tabsWidgetConfig)] = await getTabsWidgetProps(
+		tabsWidgetConfig
+	);
+
+	for (const tab of tabsWidgetConfig.tabs) {
+		const key = JSON.stringify(tab);
+		switch (tab.type) {
+			case "weather":
+				record[key] = await getWeatherWidgetProps(tab);
+				break;
+			case "tabs":
+				const nestedRecord = await getTabsWidgetRecord(
+					tab as TabsWidgetConfig
+				);
+				record[key] = nestedRecord[JSON.stringify(tab)];
+				break;
+			default:
+				record[key] = null;
+		}
+	}
+
+	return record;
 }
