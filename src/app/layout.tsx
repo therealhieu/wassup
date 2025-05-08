@@ -9,6 +9,7 @@ import { getAppConfig } from "@/lib/actions";
 import { getIntialWidgetCache } from "@/lib/actions";
 import { AppStoreContextProvider } from "@/providers/AppStoreContextProvider";
 import { AppConfigSseProvider } from "@/providers/AppConfigSseProvider";
+import { ReactQueryProvider } from "@/providers/ReactQueryProvider";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -38,6 +39,7 @@ export default async function RootLayout({
 	children: React.ReactNode;
 }>) {
 	const initialConfig = await getAppConfig();
+	console.log("initialConfig", JSON.stringify(initialConfig, null, 2));
 	const initialWidgetData = await getIntialWidgetCache(initialConfig);
 
 	return (
@@ -61,7 +63,9 @@ export default async function RootLayout({
 						>
 							<DashboardAppBar />
 						</div>
-						<AppConfigSseProvider>{children}</AppConfigSseProvider>
+						<AppConfigSseProvider>
+							<ReactQueryProvider>{children}</ReactQueryProvider>
+						</AppConfigSseProvider>
 					</AppStoreContextProvider>
 				</AppRouterCacheProvider>
 			</body>

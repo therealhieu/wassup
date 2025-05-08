@@ -10,24 +10,39 @@ ui:
         - size: 2
           widgets:
             - type: weather
-              location: Tokyo
-        - size: 7
+              location: Ho Chi Minh City
+        - size: 6
           widgets:
             - type: tabs
               labels:
-                - Tokyo
+                - r/compsci
+                - r/rust
+                - r/vozforums
+                - r/dataengineering
+                - r/leetcode
               tabs:
-                - type: weather
-                  location: Tokyo
-
-        - size: 3
-          widgets:
-            - type: weather
-              location: Ho Chi Minh City
-    - title: News
-      path: /news
-      columns:
-        - size: 3
-          widgets:
-            - type: weather
-              location: Ho Chi Minh City
+                - type: reddit
+                  subreddit: compsci
+                  hideTitle: true
+                  sort: new
+                  limit: 5
+                - type: reddit
+                  subreddit: rust
+                  hideTitle: true
+                  sort: new
+                  limit: 5
+                - type: reddit
+                  subreddit: vozforums
+                  hideTitle: true
+                  sort: new
+                  limit: 5
+                - type: reddit
+                  subreddit: dataengineering
+                  hideTitle: true
+                  sort: new
+                  limit: 5
+                - type: reddit
+                  subreddit: leetcode
+                  hideTitle: true
+                  sort: new
+                  limit: 5

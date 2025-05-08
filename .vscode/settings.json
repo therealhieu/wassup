@@ -1,5 +1,8 @@
 {
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": "explicit"
+    },
+    "yaml.schemas": {
+        "./.vscode/app-config.schema.json": "configs/wassup.yml"
     }
 }
