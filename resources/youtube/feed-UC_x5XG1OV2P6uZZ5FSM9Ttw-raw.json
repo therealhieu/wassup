@@ -1,0 +1,658 @@
+{
+  "?xml": {
+    "version": "1.0",
+    "encoding": "UTF-8"
+  },
+  "feed": {
+    "link": [
+      {
+        "rel": "self",
+        "href": "http://www.youtube.com/feeds/videos.xml?channel_id=UC_x5XG1OV2P6uZZ5FSM9Ttw"
+      },
+      {
+        "rel": "alternate",
+        "href": "https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw"
+      }
+    ],
+    "id": "yt:channel:_x5XG1OV2P6uZZ5FSM9Ttw",
+    "channelId": "_x5XG1OV2P6uZZ5FSM9Ttw",
+    "title": "Google for Developers",
+    "author": {
+      "name": "Google for Developers",
+      "uri": "https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw"
+    },
+    "published": "2007-08-23T00:34:43+00:00",
+    "entry": [
+      {
+        "id": "yt:video:IDCG1MOyj78",
+        "videoId": "IDCG1MOyj78",
+        "channelId": "UC_x5XG1OV2P6uZZ5FSM9Ttw",
+        "title": "Tap into a fountain of tech knowledge at #GoogleIO!",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=IDCG1MOyj78"
+        },
+        "author": {
+          "name": "Google for Developers",
+          "uri": "https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw"
+        },
+        "published": "2025-05-09T16:34:09+00:00",
+        "updated": "2025-05-09T19:17:23+00:00",
+        "group": {
+          "title": "Tap into a fountain of tech knowledge at #GoogleIO!",
+          "content": {
+            "url": "https://www.youtube.com/v/IDCG1MOyj78?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i2.ytimg.com/vi/IDCG1MOyj78/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "Explore a refreshing array of keynotes and sessions covering the latest in AI, Android, web, and cloud. It's the perfect blend to fuel your next project.\n\nSet a reminder → https://goo.gle/IO25_DevKeynote \nSubscribe to Google for Developers → https://goo.gle/developers  \n\nEvent: Google IO",
+          "community": {
+            "starRating": {
+              "count": "41",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "1039"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:VSg2ztAdNjw",
+        "videoId": "VSg2ztAdNjw",
+        "channelId": "UC_x5XG1OV2P6uZZ5FSM9Ttw",
+        "title": "Just in from the news desk 📰: What is TxGemma?",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=VSg2ztAdNjw"
+        },
+        "author": {
+          "name": "Google for Developers",
+          "uri": "https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw"
+        },
+        "published": "2025-05-08T23:00:37+00:00",
+        "updated": "2025-05-08T23:00:42+00:00",
+        "group": {
+          "title": "Just in from the news desk 📰: What is TxGemma?",
+          "content": {
+            "url": "https://www.youtube.com/v/VSg2ztAdNjw?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i3.ytimg.com/vi/VSg2ztAdNjw/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "We're excited to release TxGemma, a collection of open models designed to improve the efficiency of therapeutic development by leveraging the power of large language models. See if this tool can be used in your developer projects. \n\nSubscribe to Google for Developers → https://goo.gle/developers \n\nSpeakers: Meghan Mehta \nProducts Mentioned: Gemini, Google AI, Google IO",
+          "community": {
+            "starRating": {
+              "count": "78",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "2225"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:O7vZ4LIPYuk",
+        "videoId": "O7vZ4LIPYuk",
+        "channelId": "UC_x5XG1OV2P6uZZ5FSM9Ttw",
+        "title": "What's Your I/O Power-Up?",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=O7vZ4LIPYuk"
+        },
+        "author": {
+          "name": "Google for Developers",
+          "uri": "https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw"
+        },
+        "published": "2025-05-08T19:00:32+00:00",
+        "updated": "2025-05-09T23:23:51+00:00",
+        "group": {
+          "title": "What's Your I/O Power-Up?",
+          "content": {
+            "url": "https://www.youtube.com/v/O7vZ4LIPYuk?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i4.ytimg.com/vi/O7vZ4LIPYuk/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "What's your I/O power-up? \n\nResources: \nSet a reminder to catch the best sessions in AI, Android, web and cloud→ https://goo.gle/IO25_DevKeynote \n\nSubscribe to Google for Developers → https://goo.gle/developers \n\nEvent: Google IO",
+          "community": {
+            "starRating": {
+              "count": "39",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "1743"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:n1mPxhdZ0kc",
+        "videoId": "n1mPxhdZ0kc",
+        "channelId": "UC_x5XG1OV2P6uZZ5FSM9Ttw",
+        "title": "Day in the Life of a Google Wallet Tech Lead",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=n1mPxhdZ0kc"
+        },
+        "author": {
+          "name": "Google for Developers",
+          "uri": "https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw"
+        },
+        "published": "2025-05-08T17:05:25+00:00",
+        "updated": "2025-05-09T06:08:26+00:00",
+        "group": {
+          "title": "Day in the Life of a Google Wallet Tech Lead",
+          "content": {
+            "url": "https://www.youtube.com/v/n1mPxhdZ0kc?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i3.ytimg.com/vi/n1mPxhdZ0kc/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "Curious about what it's like to be at the forefront of Google’s digital wallet? Join us for an exclusive behind-the-scenes look into the daily life of Gokmen Goksel, a Tech Lead for Google Wallet. In this live stream, Gokmen will walk us through his day, offering insights into the challenges, achievements, and collaborative spirit involved in building and maintaining Google Wallet. Don't miss this unique opportunity to ask Gokmen your questions live!\n\nSubscribe to Google for Developers → https://goo.gle/developers\nSubscribe to the Google Wallet Developer Newsletter → https://g.co/wallet/newsletter\n\nSpeaker: Edson Yanaga\nProducts Mentioned: Google Wallet",
+          "community": {
+            "starRating": {
+              "count": "64",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "2516"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:zprbGE9Gb8g",
+        "videoId": "zprbGE9Gb8g",
+        "channelId": "UC_x5XG1OV2P6uZZ5FSM9Ttw",
+        "title": "So, how many monitors do you use?",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=zprbGE9Gb8g"
+        },
+        "author": {
+          "name": "Google for Developers",
+          "uri": "https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw"
+        },
+        "published": "2025-05-08T04:01:08+00:00",
+        "updated": "2025-05-08T21:57:04+00:00",
+        "group": {
+          "title": "So, how many monitors do you use?",
+          "content": {
+            "url": "https://www.youtube.com/v/zprbGE9Gb8g?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i3.ytimg.com/vi/zprbGE9Gb8g/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "If you’re not at least coding with two…\n\nSubscribe to Google for Developers → https://goo.gle/developers",
+          "community": {
+            "starRating": {
+              "count": "86",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "6863"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:pC2DhFJQocY",
+        "videoId": "pC2DhFJQocY",
+        "channelId": "UC_x5XG1OV2P6uZZ5FSM9Ttw",
+        "title": "Get started with Gemma 3 on Vertex AI",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=pC2DhFJQocY"
+        },
+        "author": {
+          "name": "Google for Developers",
+          "uri": "https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw"
+        },
+        "published": "2025-05-07T20:00:29+00:00",
+        "updated": "2025-05-09T15:11:49+00:00",
+        "group": {
+          "title": "Get started with Gemma 3 on Vertex AI",
+          "content": {
+            "url": "https://www.youtube.com/v/pC2DhFJQocY?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i1.ytimg.com/vi/pC2DhFJQocY/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "Simplify AI model deployment and tuning with Vertex AI! This video demonstrates how to use Vertex AI Model Garden to deploy Gemma 3 in just three lines of code. Plus, learn how to fine-tune Gemma 3 using Vertex AI tools and infrastructure, unlocking powerful AI capabilities for your applications.\n\nChapters:\n0:00 - Introduction\n2:07 - How to leverage Gemma 3 models effectively\n3:11 - Deployment Demo\n5:50 - Tuning demo\n\nResources:\nModel Garden →  https://goo.gle/44zhWt4 \nGemma documentation → https://goo.gle/406JjIM\n\nSubscribe to Google for Developers → https://goo.gle/developers \n\nSpeaker: Ivan Nardini. Erwin Huizenga\nProducts Mentioned: Gemma, Vertex AI",
+          "community": {
+            "starRating": {
+              "count": "100",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "2555"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:-GKH8xZn6M8",
+        "videoId": "-GKH8xZn6M8",
+        "channelId": "UC_x5XG1OV2P6uZZ5FSM9Ttw",
+        "title": "Which I/O session are you most excited for?",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=-GKH8xZn6M8"
+        },
+        "author": {
+          "name": "Google for Developers",
+          "uri": "https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw"
+        },
+        "published": "2025-05-07T16:00:00+00:00",
+        "updated": "2025-05-09T09:52:49+00:00",
+        "group": {
+          "title": "Which I/O session are you most excited for?",
+          "content": {
+            "url": "https://www.youtube.com/v/-GKH8xZn6M8?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i2.ytimg.com/vi/-GKH8xZn6M8/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "Pause or screenshot to see what sessions are destined for you! \n\nSubscribe to Google for Developers → https://goo.gle/developers \n\nProducts Mentioned: Google IO",
+          "community": {
+            "starRating": {
+              "count": "48",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "2528"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:rRSlUINKXnU",
+        "videoId": "rRSlUINKXnU",
+        "channelId": "UC_x5XG1OV2P6uZZ5FSM9Ttw",
+        "title": "POV: You’re productive... too productive. 🕒💻",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=rRSlUINKXnU"
+        },
+        "author": {
+          "name": "Google for Developers",
+          "uri": "https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw"
+        },
+        "published": "2025-05-07T04:00:51+00:00",
+        "updated": "2025-05-08T13:57:46+00:00",
+        "group": {
+          "title": "POV: You’re productive... too productive. 🕒💻",
+          "content": {
+            "url": "https://www.youtube.com/v/rRSlUINKXnU?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i3.ytimg.com/vi/rRSlUINKXnU/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "That moment you crush your to-do list, check the time, and realize it’s only 11am. \n\nSubscribe to Google for Developers → https://goo.gle/developers",
+          "community": {
+            "starRating": {
+              "count": "143",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "11491"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:hPzjkQFV5yI",
+        "videoId": "hPzjkQFV5yI",
+        "channelId": "UC_x5XG1OV2P6uZZ5FSM9Ttw",
+        "title": "Build a Browser Use Agent with ADK and Selenium",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=hPzjkQFV5yI"
+        },
+        "author": {
+          "name": "Google for Developers",
+          "uri": "https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw"
+        },
+        "published": "2025-05-05T23:00:56+00:00",
+        "updated": "2025-05-07T15:46:20+00:00",
+        "group": {
+          "title": "Build a Browser Use Agent with ADK and Selenium",
+          "content": {
+            "url": "https://www.youtube.com/v/hPzjkQFV5yI?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i1.ytimg.com/vi/hPzjkQFV5yI/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "Elevate your retail website's performance with a Browser Use agent, built with Agent Development Kit and Selenium, to enhance product data. This powerful tool generates relevant keywords from your product information, then actively visits your site, analyzes top search results, and provides actionable suggestions to enrich your product titles for better visibility. By identifying and filling gaps in your product data, the agent helps ensure your website users always find products by your brand. \n\nRecources: \nBrand Search Optimization → https://goo.gle/42XZgRG \nGet Started → https://goo.gle/3RGrB9T \nOther Sample Agents →https://goo.gle/3Rbdo4s \n\nChapters; \n0:00 - Intro \n1:13 - Chapter 1: Brand search optimization workflow\n2:30 - Chapter 2: Architecture\n7:53 - Chapter 3: Setup the agent with bigquery\n9:55 - Chapter 4: Root Agent and sub agent walkthrough\n14:44 - Chapter 5: Web browser / Search results Agent\n22:39 - Chapter 6: Evaluation and Testing\n27:20 - Chapter 7: Running the ADK web app\n35:57 - Chapter 8: Recap\n\nSubscribe to Google for Developers → https://goo.gle/developers \n\n#BrandSearchOptimization #ProductData #SEO",
+          "community": {
+            "starRating": {
+              "count": "208",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "5974"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:an7VFh9_HLY",
+        "videoId": "an7VFh9_HLY",
+        "channelId": "UC_x5XG1OV2P6uZZ5FSM9Ttw",
+        "title": "What’s the minimum total distance the train must travel to deliver all cars? Go!",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=an7VFh9_HLY"
+        },
+        "author": {
+          "name": "Google for Developers",
+          "uri": "https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw"
+        },
+        "published": "2025-05-05T13:00:07+00:00",
+        "updated": "2025-05-08T07:01:28+00:00",
+        "group": {
+          "title": "What’s the minimum total distance the train must travel to deliver all cars? Go!",
+          "content": {
+            "url": "https://www.youtube.com/v/an7VFh9_HLY?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i2.ytimg.com/vi/an7VFh9_HLY/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "Here's an algorithmic challenge with real-world applications: A train must deliver specific numbers of cargo cars to three stations with constraints on capacity. How would you optimize the delivery route to minimize total distance traveled? What's your minimum-distance solution, and what approach did you use to find it? Share your thoughts in the comments!\n\nSubscribe to Google for Developers → https://goo.gle/developers \n\nSpeakers: M.E Francis",
+          "community": {
+            "starRating": {
+              "count": "160",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "5534"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:NHMJ9mqKeMQ",
+        "videoId": "NHMJ9mqKeMQ",
+        "channelId": "UC_x5XG1OV2P6uZZ5FSM9Ttw",
+        "title": "Deep Dive into Long Context",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=NHMJ9mqKeMQ"
+        },
+        "author": {
+          "name": "Google for Developers",
+          "uri": "https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw"
+        },
+        "published": "2025-05-02T15:00:40+00:00",
+        "updated": "2025-05-04T13:25:14+00:00",
+        "group": {
+          "title": "Deep Dive into Long Context",
+          "content": {
+            "url": "https://www.youtube.com/v/NHMJ9mqKeMQ?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i3.ytimg.com/vi/NHMJ9mqKeMQ/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "Explore the synergy between long context models and Retrieval Augmented Generation (RAG) in this episode of the Release Notes podcast. Join Google DeepMind's Nikolay Savinov with host Logan Kilpatrick as they discuss scaling context windows into the millions, recent quality improvements, RAG versus long context, and what's next in the field.\n\nListen to this podcast: \nApple Podcasts → https://goo.gle/3Bm7QzQ \nSpotify → https://goo.gle/3ZL3ADl \n\nChapters:\n0:00 - Intro \n0:52 Introduction & defining tokens\n5:27 Context window importance\n9:53 RAG vs. Long Context\n14:19 Scaling beyond 2 million tokens\n18:41 Long context improvements since 1.5 Pro release\n23:26 Difficulty of attending to the whole context\n28:37 Evaluating long context: beyond needle-in-a-haystack\n33:41 Integrating long context research\n34:57 Reasoning and long outputs\n40:54 Tips for using long context\n48:51 The future of long context: near-perfect recall and cost reduction\n54:42 The role of infrastructure\n56:15 Long-context and agents\n\nSubscribe to Google for Developers → https://goo.gle/developers \n\n\nSpeaker: Nikolay Savinov, Logan Kilpatrick\nProducts Mentioned:  Google AI,",
+          "community": {
+            "starRating": {
+              "count": "879",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "27314"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:4IK9s0Di6bo",
+        "videoId": "4IK9s0Di6bo",
+        "channelId": "UC_x5XG1OV2P6uZZ5FSM9Ttw",
+        "title": "How will AI affect the future of gaming?",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=4IK9s0Di6bo"
+        },
+        "author": {
+          "name": "Google for Developers",
+          "uri": "https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw"
+        },
+        "published": "2025-05-02T04:00:03+00:00",
+        "updated": "2025-05-03T17:41:20+00:00",
+        "group": {
+          "title": "How will AI affect the future of gaming?",
+          "content": {
+            "url": "https://www.youtube.com/v/4IK9s0Di6bo?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i1.ytimg.com/vi/4IK9s0Di6bo/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "In the last few months, Google has unveiled some exciting updates about Gemma, Gemini, and other Google AI tools. We asked Jetha Chan from Google Deepmind about the effects of AI in the gaming sphere. \n\nSubscribe to Google for Developers → https://goo.gle/developers",
+          "community": {
+            "starRating": {
+              "count": "308",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "14135"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:OW05Cwg8SBY",
+        "videoId": "OW05Cwg8SBY",
+        "channelId": "UC_x5XG1OV2P6uZZ5FSM9Ttw",
+        "title": "Just in from the news desk 📰: What to expect at Google I/O",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=OW05Cwg8SBY"
+        },
+        "author": {
+          "name": "Google for Developers",
+          "uri": "https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw"
+        },
+        "published": "2025-05-01T23:00:19+00:00",
+        "updated": "2025-05-03T22:18:09+00:00",
+        "group": {
+          "title": "Just in from the news desk 📰: What to expect at Google I/O",
+          "content": {
+            "url": "https://www.youtube.com/v/OW05Cwg8SBY?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i4.ytimg.com/vi/OW05Cwg8SBY/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "Google I/O is almost here! Kick off your Google I/O experience on May 20-21 with insights for developers and keynotes covering everything from AI and Android to web development. Then, on May 22nd, explore the complete lineup of on-demand sessions and codelabs at your own pace. Register to plan your I/O experience.\n\nSubscribe to Google for Developers → https://goo.gle/developers \n\nSpeakers: Meghan Mehta \nProducts Mentioned: Gemini, Google AI, Google IO",
+          "community": {
+            "starRating": {
+              "count": "337",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "9012"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:DbwWEt32CJU",
+        "videoId": "DbwWEt32CJU",
+        "channelId": "UC_x5XG1OV2P6uZZ5FSM9Ttw",
+        "title": "Customize Gemma with Hugging Face Transformers",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=DbwWEt32CJU"
+        },
+        "author": {
+          "name": "Google for Developers",
+          "uri": "https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw"
+        },
+        "published": "2025-04-30T23:00:25+00:00",
+        "updated": "2025-05-02T17:30:28+00:00",
+        "group": {
+          "title": "Customize Gemma with Hugging Face Transformers",
+          "content": {
+            "url": "https://www.youtube.com/v/DbwWEt32CJU?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i1.ytimg.com/vi/DbwWEt32CJU/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "This guide walks you through how to fine-tune Gemma on a custom text-to-sql dataset using Hugging Face Transformers and TRL. \n\nChapters:\n00:00 - Introduction\n00:34-  What is Quantized Low-Rank Adaptation (QLoRA)\n1:08 - Setup development environment\n2:06 - Create and prepare the fine-tuning dataset\n4:32 - Fine-tune Gemma using TRL and the SFTTrainer\n\nResources:\nFine-Tune Gemma using Hugging Face Transformers and QloRA → https://goo.gle/4jVpjjj \n\n\nSubscribe to Google for Developers → https://goo.gle/developers \n\n\nSpeaker: Philipp Schmid\nProducts mentioned: Gemma",
+          "community": {
+            "starRating": {
+              "count": "173",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "4664"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:F2q1ytkQ1-M",
+        "videoId": "F2q1ytkQ1-M",
+        "channelId": "UC_x5XG1OV2P6uZZ5FSM9Ttw",
+        "title": "Early access or full release? 👀",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=F2q1ytkQ1-M"
+        },
+        "author": {
+          "name": "Google for Developers",
+          "uri": "https://www.youtube.com/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw"
+        },
+        "published": "2025-04-29T04:00:22+00:00",
+        "updated": "2025-05-01T00:49:26+00:00",
+        "group": {
+          "title": "Early access or full release? 👀",
+          "content": {
+            "url": "https://www.youtube.com/v/F2q1ytkQ1-M?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i3.ytimg.com/vi/F2q1ytkQ1-M/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "We asked some devs at GDC if they prefer early access or full release. Looks like both answers have equal popularity. \n\nSubscribe to Google for Developers → https://goo.gle/developers \n\nProducts Mentioned: GDC",
+          "community": {
+            "starRating": {
+              "count": "235",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "10203"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

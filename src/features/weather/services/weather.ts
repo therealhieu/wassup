@@ -1,6 +1,6 @@
 import { GeocodeRepository } from "@/features/geocoding/domain/repositories/geocode";
 import { GeonamesGeocodeRepository } from "@/features/geocoding/infrastructure/geonames";
-import { logger } from "@/lib/logger";
+import { baseLogger } from "@/lib/logger";
 import { err, ok, Result } from "neverthrow";
 
 import { DailyWeatherReportRepository } from "../domain/repositories/daily-weather-report";
@@ -51,7 +51,7 @@ export class WeatherService {
 	public async getWeatherWidgetProps(
 		config: WeatherWidgetConfig
 	): Promise<Result<WeatherWidgetInnerProps, Error>> {
-		const getGeocodeResult = await this.geocodeRepository.getGeocode(
+		const getGeocodeResult = await this.geocodeRepository.find(
 			config.location
 		);
 
@@ -66,7 +66,7 @@ export class WeatherService {
 		const { forecastDays } = config;
 		const { name, latitude, longitude } = getGeocodeResult.value;
 
-		const forecastResult = await this.dailyWeatherRepository.forecastDaily(
+		const forecastResult = await this.dailyWeatherRepository.fetchMany(
 			latitude,
 			longitude,
 			forecastDays

@@ -6,9 +6,13 @@ import yaml from "yaml";
 
 import { AppConfig, AppConfigSchema } from "../infrastructure/config.schemas";
 import { WidgetProps } from "./schemas";
-import { logger } from "./logger";
+import { baseLogger } from "./logger";
 import { getWeatherWidgetProps } from "@/features/weather/services/weather.actions";
 import { getTabsWidgetProps } from "@/features/tabs/services/tabs.actions";
+
+const logger = baseLogger.getSubLogger({
+	name: "actions",
+});
 
 export async function getAppConfig(): Promise<AppConfig> {
 	const filePath = path.resolve(process.cwd(), "configs", "wassup.yml");

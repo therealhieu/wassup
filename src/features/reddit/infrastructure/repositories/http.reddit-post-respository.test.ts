@@ -1,11 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { RedditClient } from "../client";
+import { HttpRedditPostRepository } from "./http.reddit-post-respository";
 
-describe("RedditClient", () => {
-	describe("fetchPosts", () => {
+describe("HttpRedditPostRepository", () => {
+	describe("fetchMany", () => {
 		it("should fetch posts from a subreddit", async () => {
-			const client = new RedditClient();
-			const posts = await client.fetchPosts({
+			const client = new HttpRedditPostRepository();
+			const posts = await client.fetchMany({
+				type: "reddit",
 				subreddit: "typescript",
 				sort: "hot",
 				limit: 5,

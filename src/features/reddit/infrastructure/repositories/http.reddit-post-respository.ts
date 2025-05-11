@@ -8,7 +8,7 @@ import camelcaseKeys from "camelcase-keys";
 export class HttpRedditPostRepository implements RedditPostRepository {
 	private readonly BASE_URL = "https://www.reddit.com/r";
 
-	public async fetchPosts(
+	public async fetchMany(
 		params: FetchPostParams
 	): Promise<Result<RedditPost[], Error>> {
 		const { subreddit, sort, limit } = params;

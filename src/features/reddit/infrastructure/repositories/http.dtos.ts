@@ -16,6 +16,8 @@ export const SubredditResponseSchema = z.object({
 
 export class SubredditResponse extends Z.class(SubredditResponseSchema.shape) {
 	public getPosts(): RedditPost[] {
-		return this.data.children.map((child) => child.data);
+		return this.data.children.map((child) =>
+			RedditPostSchema.parse(child.data)
+		);
 	}
 }

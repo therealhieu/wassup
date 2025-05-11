@@ -1,0 +1,621 @@
+{
+  "feed": {
+    "entry": [
+      {
+        "id": "yt:video:9KUC_nHydZg",
+        "videoId": "9KUC_nHydZg",
+        "title": "Harmful Content Detection / Content Moderation | ML System Design Problem Breakdown",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=9KUC_nHydZg"
+        },
+        "author": {
+          "name": "Hello Interview - SWE Interview Preparation",
+          "uri": "https://www.youtube.com/channel/UC3kf-QFT6FZzDk9JsPg8Svg"
+        },
+        "published": "2025-05-04T16:00:10+00:00",
+        "updated": "2025-05-06T04:23:53+00:00",
+        "group": {
+          "title": "Harmful Content Detection / Content Moderation | ML System Design Problem Breakdown",
+          "content": {
+            "url": "https://www.youtube.com/v/9KUC_nHydZg?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i2.ytimg.com/vi/9KUC_nHydZg/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "00:00 - Intro\n03:06 - ML System Design Delivery Framework\n06:43 - Problem Framing\n13:06 - High Level Design\n14:50 - Data and Features\n23:01 - Modeling\n33:44 - Inference and Evaluation\n42:26 - Deep Dives\n47:49 - Assessment\n50:19 - Conclusion\n\nA step-by-step breakdown of Detecting Harmful Content on Faecbook.\n\nStefan, a former Meta senior manager and current co-founder of Hello Interview, walks through the problem from the perspective of an interviewer.\n\nConnect with me on LinkedIn:\nStefan: https://www.linkedin.com/in/stefanmai/\n\nResources:\n1. Read the written version of this problem: https://www.hellointerview.com/learn/ml-system-design/problem-breakdowns/harmful-content\n2. Excalidraw from the video: https://link.excalidraw.com/l/56zGeHiLyKZ/6GbdXW1wRR\n3. Learn more about our Delivery Framework for ML System Design: https://www.hellointerview.com/learn/ml-system-design/in-a-hurry/delivery\n4. More about the differences in ML interviews: https://www.hellointerview.com/learn/ml-system-design/in-a-hurry/introduction\n5. Evaluations in ML system design interviews: https://www.hellointerview.com/learn/ml-system-design/core-concepts/evaluation\n6. Vote for the question you want us to do next: https://www.hellointerview.com/learn/system-design/in-a-hurry/vote\n\n\nPreparing for an upcoming interview and want to practice with top FAANG interviewers like Stefan? Schedule a mock interview with a experienced ML interviewer: https://www.hellointerview.com/mock/schedule?focus=true\n\nAll the best with your upcoming interview!",
+          "community": {
+            "starRating": {
+              "count": "143",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "5168"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:7-6F3b14baA",
+        "videoId": "7-6F3b14baA",
+        "title": "API Gateways in System Design Interviews w/ Ex-Meta Staff Engineer",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=7-6F3b14baA"
+        },
+        "author": {
+          "name": "Hello Interview - SWE Interview Preparation",
+          "uri": "https://www.youtube.com/channel/UC3kf-QFT6FZzDk9JsPg8Svg"
+        },
+        "published": "2025-04-17T23:54:06+00:00",
+        "updated": "2025-04-20T05:27:52+00:00",
+        "group": {
+          "title": "API Gateways in System Design Interviews w/ Ex-Meta Staff Engineer",
+          "content": {
+            "url": "https://www.youtube.com/v/7-6F3b14baA?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i4.ytimg.com/vi/7-6F3b14baA/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "API Gateways have become a central part of modern applications following the rise of microservices. Learn the history, what they do, and when to use them in a system design interview.\n\n00:00 History\n02:52 What an API Gateway does\n05:10 Examples\n\n\nFull writeup here:\nhttps://www.hellointerview.com/learn/system-design/deep-dives/api-gateway\n\nConnect with me on LinkedIn:\nhttps://www.linkedin.com/in/evan-king-40072280/\n\nPreparing for your upcoming interviews and want to practice with top FAANG interviewers like Evan? Book a mock interview at:\nhttps://www.hellointerview.com\n\nGood luck with your upcoming interviews!",
+          "community": {
+            "starRating": {
+              "count": "999",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "26978"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:nJsVO84LCGs",
+        "videoId": "nJsVO84LCGs",
+        "title": "How to Learn System Design with Jordan Has No Life",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=nJsVO84LCGs"
+        },
+        "author": {
+          "name": "Hello Interview - SWE Interview Preparation",
+          "uri": "https://www.youtube.com/channel/UC3kf-QFT6FZzDk9JsPg8Svg"
+        },
+        "published": "2025-03-13T20:35:00+00:00",
+        "updated": "2025-03-16T00:44:41+00:00",
+        "group": {
+          "title": "How to Learn System Design with Jordan Has No Life",
+          "content": {
+            "url": "https://www.youtube.com/v/nJsVO84LCGs?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i3.ytimg.com/vi/nJsVO84LCGs/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "Stefan interviews Jordan, the creator of the YouTube channel 'Jordan Has No Life.' They discuss Jordan's journey into system design, his learning process, and the evolution of his content creation. Jordan shares insights on the importance of understanding core concepts, the value of personal projects, and the trends in system design. They also touch on the impact of AI on engineering and the significance of practical decision-making in system design.\n\nJordan's channel: @jordanhasnolife5163 \nLearn System Design: https://www.hellointerview.com/learn/system-design\nSchedule mock interviews with real interviewers at top companies: https://www.hellointerview.com\n\n00:00 Introduction to Jordan and His Journey\n01:00 The Birth of a YouTube Channel: Learning Systems Design\n03:35 Learning Process: From Books to Teaching\n07:25 Transitioning to Deep Dives: A Shift in Focus\n09:49 Advice for Newcomers: Building a Strong Foundation\n12:57 Personal Projects: Practical Learning Experiences\n15:44 Trends in System Design: The Evolution of Technologies\n18:01 Emerging Technologies in Data Engineering\n20:13 The Evolution of Databases and Their Applications\n23:53 Innovative Systems and Technologies\n26:18 Career Insights and Real-World Applications\n31:09 The Role of AI in System Design",
+          "community": {
+            "starRating": {
+              "count": "511",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "18539"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:IUrQ5_g3XKs",
+        "videoId": "IUrQ5_g3XKs",
+        "title": "System Design Interview: Design YouTube w/ a Ex-Meta Staff Engineer",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=IUrQ5_g3XKs"
+        },
+        "author": {
+          "name": "Hello Interview - SWE Interview Preparation",
+          "uri": "https://www.youtube.com/channel/UC3kf-QFT6FZzDk9JsPg8Svg"
+        },
+        "published": "2025-03-09T16:00:30+00:00",
+        "updated": "2025-03-11T00:27:19+00:00",
+        "group": {
+          "title": "System Design Interview: Design YouTube w/ a Ex-Meta Staff Engineer",
+          "content": {
+            "url": "https://www.youtube.com/v/IUrQ5_g3XKs?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i2.ytimg.com/vi/IUrQ5_g3XKs/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "00:00 - Intro\n01:37 - The Approach\n3:37 - Requirements \n8:05 - API & Core Entities\n11:41 - High Level Design\n20:16- Deep Dives\n42:07 - Conclusion\n\nA step-by-step breakdown of everyones first system design interview question, Design YouTube.\n\nEvan, a former Meta Staff Engineer and current co-founder of Hello Interview, walks through the problem from the perspective of an interviewer.\n\nConnect with me on LinkedIn:  \nEvan: https://www.linkedin.com/in/evan-king-40072280/\n\nResources:\n1. Practice with our new Guided Practice: https://www.hellointerview.com/practice\n2. Detailed write up of the problem: https://www.hellointerview.com/learn/system-design/answer-keys/youtube\n3. System Design In a Hurry: https://www.hellointerview.com/learn/system-design/in-a-hurry/introduction\n4. Excalidraw used in the video: https://link.excalidraw.com/l/56zGeHiLyKZ/4OfV5tY4yBk\n5. Vote for the question you want us to do next: https://www.hellointerview.com/learn/system-design/in-a-hurry/vote\n\nPreparing for your upcoming interviews and want to practice with top FAANG interviewers like Evan? Book a mock interview at www.hellointerview.com. \n\nGood luck with your upcoming interviews!",
+          "community": {
+            "starRating": {
+              "count": "1445",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "50094"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:SHkbPm1Wrno",
+        "videoId": "SHkbPm1Wrno",
+        "title": "Networking Essentials for System Design Interviews",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=SHkbPm1Wrno"
+        },
+        "author": {
+          "name": "Hello Interview - SWE Interview Preparation",
+          "uri": "https://www.youtube.com/channel/UC3kf-QFT6FZzDk9JsPg8Svg"
+        },
+        "published": "2025-03-02T17:00:26+00:00",
+        "updated": "2025-03-03T23:15:58+00:00",
+        "group": {
+          "title": "Networking Essentials for System Design Interviews",
+          "content": {
+            "url": "https://www.youtube.com/v/SHkbPm1Wrno?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i4.ytimg.com/vi/SHkbPm1Wrno/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "We'll cover the important topics of networking you're likely to encounter in system design interviews: OSI Model, IP, TCP/UDP, HTTP, SSE, Websockets, gRPC, GraphQL,  WebRTC, Load Balancing, Regionalization, Retries with Backoff and Jitter, Circuit Breakers.\n\n00:00 Introduction\n01:10 OSI Model\n02:47 HTTP Request Breakdown\n04:22 Internet Protocol (IP)\n07:38 TCP/UDP\n12:37 Hypertext Transport Protocol (HTTP)\n15:01 Representational State Transfer (REST)\n18:36 GraphQL\n23:00 Google Remote Procedure Call (gRPC)\n26:42 Server Sent Events (SSE)\n30:34 WebSockets (WS)\n34:18 WebRTC (Real-time Communication)\n38:00 Horizontal and Vertical Scaling\n39:35 Load Balancing\n40:00 Client-Side Load Balancing\n43:00 Dedicated Load Balancers\n46:06 Layer 4 and Layer 7 Load Balancers\n50:03 Regionalization\n55:49 Timeouts, Backoff, and Retries\n1:00:15 Cascading Failures and Circuit Breakers\n1:04:35 Summary\n\nCompanion Writeup: https://www.hellointerview.com/learn/system-design/core-concepts/networking-essentials\nRealtime Updates: https://www.hellointerview.com/learn/system-design/deep-dives/realtime-updates\n\nI'm using Excalidraw for the drawing.\nExcalidraw from video: https://link.excalidraw.com/l/56zGeHiLyKZ/nfrypwDYa4\n\nConnect with me on LinkedIn / https://www.linkedin.com/in/stefanmai/\n\nPreparing for your upcoming interviews and want to practice with top FAANG interviewers like Stefan? Book a mock interview at:\nhttps://www.hellointerview.com\n\nGood luck with your upcoming interviews!",
+          "community": {
+            "starRating": {
+              "count": "1506",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "49540"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:vccwdhfqIrI",
+        "videoId": "vccwdhfqIrI",
+        "title": "Consistent Hashing: Easy Explanation",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=vccwdhfqIrI"
+        },
+        "author": {
+          "name": "Hello Interview - SWE Interview Preparation",
+          "uri": "https://www.youtube.com/channel/UC3kf-QFT6FZzDk9JsPg8Svg"
+        },
+        "published": "2025-02-20T23:00:54+00:00",
+        "updated": "2025-03-06T00:11:32+00:00",
+        "group": {
+          "title": "Consistent Hashing: Easy Explanation",
+          "content": {
+            "url": "https://www.youtube.com/v/vccwdhfqIrI?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i3.ytimg.com/vi/vccwdhfqIrI/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "Learn about consistent hashing, including the problem it solves, how it works, and when to use it in a system design interview. \n\n0:00 Introduction\n0:07 An Example\n1:22 Problem with simple hashing with modulo\n3:01 How consistent hashing works\n5:10 Virtual Nodes\n6:28 When to use in an interview\n\nExcalidraw from video: https://link.excalidraw.com/l/56zGeHiLyKZ/4UfYVC7olb2\n\nConnect with me on LinkedIn:\n  / evan-king-40072280  \n\nPreparing for your upcoming interviews and want to practice with top FAANG interviewers like Evan? Book a mock interview at:\nhttps://www.hellointerview.com\n\nGood luck with your upcoming interviews!",
+          "community": {
+            "starRating": {
+              "count": "1262",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "29332"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:IgyU0iFIoqM",
+        "videoId": "IgyU0iFIoqM",
+        "title": "Data Structures for Big Data in Interviews - Bloom Filters, Count-Min Sketch, HyperLogLog",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=IgyU0iFIoqM"
+        },
+        "author": {
+          "name": "Hello Interview - SWE Interview Preparation",
+          "uri": "https://www.youtube.com/channel/UC3kf-QFT6FZzDk9JsPg8Svg"
+        },
+        "published": "2025-02-15T17:00:18+00:00",
+        "updated": "2025-03-05T00:51:54+00:00",
+        "group": {
+          "title": "Data Structures for Big Data in Interviews - Bloom Filters, Count-Min Sketch, HyperLogLog",
+          "content": {
+            "url": "https://www.youtube.com/v/IgyU0iFIoqM?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i2.ytimg.com/vi/IgyU0iFIoqM/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "Learn about data structures which are useful in designing systems which handle large amounts of data.\n\nExcalidraw from video: https://link.excalidraw.com/l/56zGeHiLyKZ/7KgpbORPEdl\nDetailed breakdown: https://www.hellointerview.com/learn/system-design/deep-dives/data-structures-for-big-data\n\nConnect with me on LinkedIn / https://www.linkedin.com/in/stefanmai/\n\nPreparing for your upcoming interviews and want to practice with top FAANG interviewers like Stefan? Book a mock interview at:\nhttps://www.hellointerview.com\n\nGood luck with your upcoming interviews!",
+          "community": {
+            "starRating": {
+              "count": "445",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "19044"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:BHCSL_ZifI0",
+        "videoId": "BHCSL_ZifI0",
+        "title": "DB Indexing in System Design Interviews - B-tree, Geospatial, Inverted Index, and more!",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=BHCSL_ZifI0"
+        },
+        "author": {
+          "name": "Hello Interview - SWE Interview Preparation",
+          "uri": "https://www.youtube.com/channel/UC3kf-QFT6FZzDk9JsPg8Svg"
+        },
+        "published": "2025-02-09T17:00:09+00:00",
+        "updated": "2025-03-02T21:53:49+00:00",
+        "group": {
+          "title": "DB Indexing in System Design Interviews - B-tree, Geospatial, Inverted Index, and more!",
+          "content": {
+            "url": "https://www.youtube.com/v/BHCSL_ZifI0?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i3.ytimg.com/vi/BHCSL_ZifI0/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "Learn about database indexing, including why they're essential, when to use them, and a few different types of indexes that are useful to know for system design interviews like b-trees, geospatial, inverted indexing, and more.\n\nExcalidraw from video: https://link.excalidraw.com/l/56zGeHiLyKZ/5H0brtIUeTQ\nDetailed breakdown: https://www.hellointerview.com/learn/system-design/deep-dives/db-indexing\n\nConnect with me on LinkedIn:\n  / evan-king-40072280  \n\nPreparing for your upcoming interviews and want to practice with top FAANG interviewers like Evan? Book a mock interview at:\nhttps://www.hellointerview.com\n\nGood luck with your upcoming interviews!",
+          "community": {
+            "starRating": {
+              "count": "1655",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "45067"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:bBvPQZmPXwQ",
+        "videoId": "bBvPQZmPXwQ",
+        "title": "Behavioral Interview Discussion with Ex-Meta Hiring Committee Member",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=bBvPQZmPXwQ"
+        },
+        "author": {
+          "name": "Hello Interview - SWE Interview Preparation",
+          "uri": "https://www.youtube.com/channel/UC3kf-QFT6FZzDk9JsPg8Svg"
+        },
+        "published": "2025-02-04T21:00:24+00:00",
+        "updated": "2025-03-05T23:15:31+00:00",
+        "group": {
+          "title": "Behavioral Interview Discussion with Ex-Meta Hiring Committee Member",
+          "content": {
+            "url": "https://www.youtube.com/v/bBvPQZmPXwQ?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i3.ytimg.com/vi/bBvPQZmPXwQ/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "In this conversation, Stefan Mai interviews Austen McDonald, a former senior engineering manager and hiring committee member at Meta, about the how behavioral interviews are assessed, what you should do to prepare, and common red flags. \n\nCheck out Austen's substack here: https://thebehavioral.substack.com/\nFor preparing behavioral anecdotes with AI, use Story Builder for free: https://www.hellointerview.com/learn/behavioral/story-builder\nSchedule mock interviews with real interviewers at top companies: https://www.hellointerview.com\n\n00:00 Introduction to Behavioral Interviews\n02:15 The Importance of Behavioral Interviews\n06:00 Evaluating Candidates in Behavioral Interviews\n12:43 Understanding Interviewer Signals\n18:11 Presenting Your Experience Effectively\n24:13 The Importance of Authenticity in Interviews\n25:35 Common Candidate Mistakes and Red Flags\n30:50 Making a Strong First Impression\n37:00 Team Match and Asking Questions",
+          "community": {
+            "starRating": {
+              "count": "1378",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "47567"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:GncgOIiMII8",
+        "videoId": "GncgOIiMII8",
+        "title": "Recommendation System Infra Basics 1",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=GncgOIiMII8"
+        },
+        "author": {
+          "name": "Hello Interview - SWE Interview Preparation",
+          "uri": "https://www.youtube.com/channel/UC3kf-QFT6FZzDk9JsPg8Svg"
+        },
+        "published": "2025-01-26T21:30:01+00:00",
+        "updated": "2025-03-05T00:13:16+00:00",
+        "group": {
+          "title": "Recommendation System Infra Basics 1",
+          "content": {
+            "url": "https://www.youtube.com/v/GncgOIiMII8?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i4.ytimg.com/vi/GncgOIiMII8/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "0:00 Introduction\n1:40 Naive approaches and why they don't work\n4:34 Candidate generation\n6:00 Similarity search in candidate generation\n7:03 Multi-Stage Architecture in Recommendation Systems\n\nIn this video we'll cover some of the basics of how recommendation systems work, with an eye toward some generalizable software engineering lessons.\n\nConnect with me on LinkedIn:  https://www.linkedin.com/in/stefanmai/\n\nPreparing for your upcoming interviews and want to practice with top FAANG interviewers like Stefan? Book a mock interview at www.hellointerview.com.",
+          "community": {
+            "starRating": {
+              "count": "916",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "19901"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:2X2SO3Y-af8",
+        "videoId": "2X2SO3Y-af8",
+        "title": "DynamoDB Deep Dive w/ a Ex-Meta Staff Engineer",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=2X2SO3Y-af8"
+        },
+        "author": {
+          "name": "Hello Interview - SWE Interview Preparation",
+          "uri": "https://www.youtube.com/channel/UC3kf-QFT6FZzDk9JsPg8Svg"
+        },
+        "published": "2025-01-23T16:00:04+00:00",
+        "updated": "2025-02-28T09:44:11+00:00",
+        "group": {
+          "title": "DynamoDB Deep Dive w/ a Ex-Meta Staff Engineer",
+          "content": {
+            "url": "https://www.youtube.com/v/2X2SO3Y-af8?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i3.ytimg.com/vi/2X2SO3Y-af8/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "DynamoDB is a must-know technology for System Design interviews. This video, with a former Meta staff engineer, breaks down the essentials, starting at a high level and working our way down into more and more detail. \n\n00:00 Intro\n00:33 Data Model\n02:44 Indexing\n09:21 How to use it\n12:35 Architecture\n16:27 Advanced features\n20:53 When to use it\n22:22 Advanced features\n\nExcalidraw from video: \nhttps://link.excalidraw.com/l/56zGeHiLyKZ/8DQmcY9eAbM\n\nFull writeup here:\nhttps://www.hellointerview.com/learn/system-design/deep-dives/dynamoDB\n\n\nConnect with me on LinkedIn:\nhttps://www.linkedin.com/in/evan-king-40072280/\n\nPreparing for your upcoming interviews and want to practice with top FAANG interviewers like Evan? Book a mock interview at:\nhttps://www.hellointerview.com\n\nGood luck with your upcoming interviews!",
+          "community": {
+            "starRating": {
+              "count": "1095",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "37717"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:FbEKrBcrLiI",
+        "videoId": "FbEKrBcrLiI",
+        "title": "Live Q&A with FAANG Engineers and Managers 2025/01/16",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=FbEKrBcrLiI"
+        },
+        "author": {
+          "name": "Hello Interview - SWE Interview Preparation",
+          "uri": "https://www.youtube.com/channel/UC3kf-QFT6FZzDk9JsPg8Svg"
+        },
+        "published": "2025-01-17T13:42:04+00:00",
+        "updated": "2025-01-19T00:49:04+00:00",
+        "group": {
+          "title": "Live Q&A with FAANG Engineers and Managers 2025/01/16",
+          "content": {
+            "url": "https://www.youtube.com/v/FbEKrBcrLiI?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i3.ytimg.com/vi/FbEKrBcrLiI/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "Live stream with the hellointerview.com co-founders Stefan and Evan. Stefan is a former Amazon Bar Raiser and Meta Sr. Hiring Manager and Evan a former Meta Staff Engineer. \n\nResources:\nSchedule a mock: https://www.hellointerview.com/mock/schedule/\nInterview resources: https://www.hellointerview.com/learn",
+          "community": {
+            "starRating": {
+              "count": "124",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "5071"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:tIvCjH2ETzo",
+        "videoId": "tIvCjH2ETzo",
+        "title": "SQL vs NoSQL is the WRONG Question (System Design Tips)",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=tIvCjH2ETzo"
+        },
+        "author": {
+          "name": "Hello Interview - SWE Interview Preparation",
+          "uri": "https://www.youtube.com/channel/UC3kf-QFT6FZzDk9JsPg8Svg"
+        },
+        "published": "2025-01-16T03:08:58+00:00",
+        "updated": "2025-03-08T01:03:27+00:00",
+        "group": {
+          "title": "SQL vs NoSQL is the WRONG Question (System Design Tips)",
+          "content": {
+            "url": "https://www.youtube.com/v/tIvCjH2ETzo?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i1.ytimg.com/vi/tIvCjH2ETzo/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "Stop asking \"SQL or NoSQL?\" in your system design interviews! 🚫 \n\nLearn the three crucial factors you should focus on instead:\n1️⃣ Data Model\n2️⃣ Consistency Requirements\n3️⃣ Query Patterns\n\nReal examples using Postgres & DynamoDB included! Perfect for software engineers preparing for tech interviews.\n\n#SystemDesign #TechInterview #SoftwareEngineering #DatabaseDesign #Shorts #CodingInterview #PostgreSQL #DynamoDB #TechTips #Programming",
+          "community": {
+            "starRating": {
+              "count": "1762",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "34810"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:LjLx0fCd1k8",
+        "videoId": "LjLx0fCd1k8",
+        "title": "System Design Interview: Design Live Comments w/ a Ex-Meta Staff Engineer",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=LjLx0fCd1k8"
+        },
+        "author": {
+          "name": "Hello Interview - SWE Interview Preparation",
+          "uri": "https://www.youtube.com/channel/UC3kf-QFT6FZzDk9JsPg8Svg"
+        },
+        "published": "2025-01-12T16:00:30+00:00",
+        "updated": "2025-03-05T01:33:45+00:00",
+        "group": {
+          "title": "System Design Interview: Design Live Comments w/ a Ex-Meta Staff Engineer",
+          "content": {
+            "url": "https://www.youtube.com/v/LjLx0fCd1k8?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i1.ytimg.com/vi/LjLx0fCd1k8/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "00:00 - Intro\n01:31 - The Approach\n4:05 - Requirements \n11:15 - API & Core Entities\n17:16 - High Level Design\n26:19- Deep Dives\n55:45 - Conclusion\n\nA step-by-step breakdown of everyones first system design interview question, Design FB Live Comments.\n\nEvan, a former Meta Staff Engineer and current co-founder of Hello Interview, walks through the problem from the perspective of an interviewer.\n\nConnect with me on LinkedIn:  \nEvan: https://www.linkedin.com/in/evan-king-40072280/\n\nResources:\n1. Practice with our new Guided Practice: https://www.hellointerview.com/practice\n2. Detailed write up of the problem: https://www.hellointerview.com/learn/system-design/answer-keys/fb-live-comments\n3. System Design In a Hurry: https://www.hellointerview.com/learn/system-design/in-a-hurry/introduction\n4. Excalidraw used in the video: https://link.excalidraw.com/l/56zGeHiLyKZ/6xaHKVKAEq7\n5. Vote for the question you want us to do next: https://www.hellointerview.com/learn/system-design/in-a-hurry/vote\n\nPreparing for your upcoming interviews and want to practice with top FAANG interviewers like Evan? Book a mock interview at www.hellointerview.com. \n\nGood luck with your upcoming interviews!",
+          "community": {
+            "starRating": {
+              "count": "1224",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "45781"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:cr6p0n0N-VA",
+        "videoId": "cr6p0n0N-VA",
+        "title": "System Design Interview: Design Whatsapp w/ a Ex-Meta Senior Manager",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=cr6p0n0N-VA"
+        },
+        "author": {
+          "name": "Hello Interview - SWE Interview Preparation",
+          "uri": "https://www.youtube.com/channel/UC3kf-QFT6FZzDk9JsPg8Svg"
+        },
+        "published": "2024-12-20T19:00:21+00:00",
+        "updated": "2025-04-16T23:04:09+00:00",
+        "group": {
+          "title": "System Design Interview: Design Whatsapp w/ a Ex-Meta Senior Manager",
+          "content": {
+            "url": "https://www.youtube.com/v/cr6p0n0N-VA?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i4.ytimg.com/vi/cr6p0n0N-VA/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "00:00 Intro\n01:14 The Approach\n02:10 Requirements\n09:40 Core Entities\n12:29 API\n17:23 High-Level Design\n31:53 Deep Dives\n54:59 Conclusion\n\nA step-by-step breakdown of the popular FAANG+ system design interview question, Design Whatsapp, which is asked at top companies like Meta, Google, Amazon, Microsoft, and more.\n\nStefan, a former Meta senior manager and current co-founder of Hello Interview, walks through the problem from the perspective of a candidate and an interviewer who has observed a number of engineers solving this problem.\n\nResources:\n1. Detailed write up of the problem: https://www.hellointerview.com/learn/system-design/problem-breakdowns/whatsapp\n2. Real-Time Updates deep dive (connections, pub/sub, consistent hashing): https://www.hellointerview.com/learn/system-design/deep-dives/realtime-updates\n3. System Design In a Hurry: https://www.hellointerview.com/learn/system-design/in-a-hurry/introduction\n4. Vote for the question you want us to do next: https://www.hellointerview.com/learn/system-design/in-a-hurry/vote\n\nConnect with me on LinkedIn:  https://www.linkedin.com/in/stefanmai/\n\nPreparing for your upcoming interviews and want to practice with top FAANG interviewers like Stefan? Book a mock interview at www.hellointerview.com. \n\nGood luck with your upcoming interviews!",
+          "community": {
+            "starRating": {
+              "count": "1526",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "74144"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

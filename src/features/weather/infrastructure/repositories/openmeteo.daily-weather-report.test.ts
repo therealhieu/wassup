@@ -10,7 +10,7 @@ const HCMC_COORDINATES = {
 describe("OpenmeteoDailyWeatherReportRepository", () => {
 	it("should return the daily weather report", async () => {
 		const repository = new OpenmeteoDailyWeatherReportRepository();
-		const result = await repository.forecastDaily(
+		const result = await repository.fetchMany(
 			HCMC_COORDINATES.latitude,
 			HCMC_COORDINATES.longitude,
 			5

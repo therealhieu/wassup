@@ -11,7 +11,7 @@ ui:
           widgets:
             - type: weather
               location: Ho Chi Minh City
-        - size: 6
+        - size: 7
           widgets:
             - type: tabs
               labels:
@@ -46,3 +46,5 @@ ui:
                   hideTitle: true
                   sort: new
                   limit: 5
+            - type: youtube
+              channels: ["@GoogleDevelopers", "@hello_interview", "@TheCodingTrain"]

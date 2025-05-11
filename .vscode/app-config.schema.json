@@ -242,6 +242,23 @@
             "sort",
             "limit"
           ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "const": "youtube"
+            },
+            "channelId": {
+              "type": "string"
+            },
+            "username": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ]
         }
       ]
     }

@@ -4,7 +4,7 @@ import { RedditWidgetConfig } from "../infrastructure/config.schemas";
 import {
 	RedditWidgetInnerProps,
 	RedditWidgetInnerPropsSchema,
-} from "../presentation/RedditWidget.components";
+} from "../presentation/RedditWidgetInner";
 import { RedditService } from "./reddit";
 import { LRUCache } from "lru-cache";
 
@@ -22,7 +22,7 @@ export async function fetchRedditWidgetProps(
 		serviceCache.set(key, service);
 	}
 
-	const posts = await service.fetchPosts();
+	const posts = await service.fetchMany();
 
 	if (posts.isErr()) {
 		throw posts.error;

@@ -4,15 +4,16 @@ import { AirQualityConfigSchema } from "../features/air-quality/infrastructure/c
 import { WeatherWidgetConfigSchema } from "../features/weather/infrastructure/config.schemas";
 import { TabsWidgetConfigSchema } from "../features/tabs/infrastructure/config.schemas";
 import { RedditWidgetConfigSchema } from "../features/reddit/infrastructure/config.schemas";
+import { YoutubeWidgetConfigSchema } from "@/features/youtube/infrastructure/config.schemas";
 
-export const WidgetConfigSchema = z.lazy(() =>
-	z.union([
-		WeatherWidgetConfigSchema,
-		AirQualityConfigSchema,
-		TabsWidgetConfigSchema,
-		RedditWidgetConfigSchema,
-	])
-) as z.ZodSchema;
+
+export const WidgetConfigSchema = z.lazy(() => z.union([
+	WeatherWidgetConfigSchema,
+	AirQualityConfigSchema,
+	TabsWidgetConfigSchema,
+	RedditWidgetConfigSchema,
+	YoutubeWidgetConfigSchema
+]));
 
 export type WidgetConfig = z.infer<typeof WidgetConfigSchema>;
 

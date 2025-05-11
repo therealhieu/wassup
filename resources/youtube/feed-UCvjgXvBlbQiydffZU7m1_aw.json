@@ -1,0 +1,621 @@
+{
+  "feed": {
+    "entry": [
+      {
+        "id": "yt:video:c1BPd8omBro",
+        "videoId": "c1BPd8omBro",
+        "title": "Genuary 2025 Speed Run - All 31 Prompts!",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=c1BPd8omBro"
+        },
+        "author": {
+          "name": "The Coding Train",
+          "uri": "https://www.youtube.com/channel/UCvjgXvBlbQiydffZU7m1_aw"
+        },
+        "published": "2025-02-04T19:00:41+00:00",
+        "updated": "2025-02-11T14:19:57+00:00",
+        "group": {
+          "title": "Genuary 2025 Speed Run - All 31 Prompts!",
+          "content": {
+            "url": "https://www.youtube.com/v/c1BPd8omBro?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i4.ytimg.com/vi/c1BPd8omBro/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "What is Genuary if not 31 generative art prompts to be completed all in one sitting in February?! Code: https://thecodingtrain.com/tracks/livestreams/livestreams/genuary-2025\n\n💻 Github Repo: https://github.com/CodingTrain/genuary-2025\n\n🎥 Next: https://youtu.be/vfeUb7w8Hr8\n\nReferences:\n🔗 Genuary 2025: https://genuary.art/prompts#\n\nRelated Coding Challenges:\n🚂 https://youtu.be/sJ6pMLp_IaI\n🚂 https://youtu.be/3_0Ax95jIrk\n\nTimestamps:\n0:00:00 Welcome!\n0:31:21 Genuary 1 - Vertical or horizontal lines only\n0:39:54 Genuary 2 - Layers upon layers upon layers\n0:49:52 Genuary 3 - Exactly 42 lines of code\n0:53:42 Genuary 4 - Black on black\n0:58:20 Genuary 5 - Isometric Art (No vanishing points)\n1:03:00 Genuary 6 - Make a landscape using only primitive shapes\n1:06:59 Genuary 7 - Use software that is not intended to create art or images\n1:10:01 Genuary 8 - Draw one million of something\n1:17:12 Genuary 9 - The textile design patterns of public transport seating\n1:25:07 Genuary 10 - You can only use TAU in your code, no other number allowed\n1:26:28 Genuary 11 - Impossible day\n1:30:58 Genuary 12 - Subdivision\n1:35:15 Genuary 14 - Pure black and white. No gray\n1:39:14 Genuary 13 - Triangles and nothing else\n1:48:59 Genuary 15 - Design a rug\n1:56:36 Genuary 16 - Generative palette\n2:01:52 Genuary 17 - What happens if pi=4?\n2:23:42 Genuary 18 - What does wind look like?\n2:29:09 Genuary 19 - Op Art\n2:31:46 Genuary 20 - Generative Architecture\n2:36:25 Genuary 21 - Create a collision detection system (no libraries allowed)\n2:40:19 Genuary 22 - Gradients only\n2:43:33 Genuary 23 - Inspired by brutalism\n2:48:12 Genuary 24 - Geometric art - use either a circle, rectangle, or triangle\n2:52:27 Genuary 25 - One line that may or may not intersect itself\n2:54:58 Genuary 26 - Symmetry\n2:58:48 Genuary 27 - Make something interesting with no randomness or noise or trig\n3:02:59 Genuary 28 - Infinite Scroll\n3:07:00 Genuary 29 - Grid-based graphic design\n3:10:25 Genuary 30 - Abstract map\n3:14:11 Genuary 31 - Pixel sorting\n\n\nMusic from Epidemic Sound\n\n🚂 Website: https://thecodingtrain.com/\n👾 Share Your Creation! https://thecodingtrain.com/guides/passenger-showcase-guide\n🚩 Suggest Topics: https://github.com/CodingTrain/Suggestion-Box\n💡 GitHub: https://github.com/CodingTrain\n💬 Discord: https://thecodingtrain.com/discord\n💖 Membership: http://youtube.com/thecodingtrain/join\n🛒 Store: https://standard.tv/codingtrain\n🖋️ Twitter: https://twitter.com/thecodingtrain\n📸 Instagram: https://www.instagram.com/the.coding.train/\n\n🎥 https://www.youtube.com/playlist?list=PLRqwX-V7Uu6ZiZxtDDRCi6uhfTH4FilpH\n🎥 https://www.youtube.com/playlist?list=PLRqwX-V7Uu6Zy51Q-x9tMWIv9cueOFTFA\n\n🔗 p5.js: https://p5js.org\n🔗 p5.js Web Editor: https://editor.p5js.org/\n🔗 Processing: https://processing.org\n\n📄 Code of Conduct: https://github.com/CodingTrain/Code-of-Conduct\n\nThis description was auto-generated. If you see a problem, please open an issue: https://github.com/CodingTrain/thecodingtrain.com/issues/new\n\n#genuary #javascript #p5js",
+          "community": {
+            "starRating": {
+              "count": "512",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "17839"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:5iSAvzU2WYY",
+        "videoId": "5iSAvzU2WYY",
+        "title": "Coding the Overlapping Model (Wave Function Collapse)",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=5iSAvzU2WYY"
+        },
+        "author": {
+          "name": "The Coding Train",
+          "uri": "https://www.youtube.com/channel/UCvjgXvBlbQiydffZU7m1_aw"
+        },
+        "published": "2025-01-28T14:09:16+00:00",
+        "updated": "2025-03-10T16:55:03+00:00",
+        "group": {
+          "title": "Coding the Overlapping Model (Wave Function Collapse)",
+          "content": {
+            "url": "https://www.youtube.com/v/5iSAvzU2WYY?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i2.ytimg.com/vi/5iSAvzU2WYY/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "Wave Function Collapse is an algorithm for procedural image generation. In this long overdue follow-up to my tiled model video, I dive into the overlapping model, coding it step by step (complete with struggles and messy debugging interludes) in JavaScript with p5.js. Code: https://thecodingtrain.com/challenges/186-wfc-overlapping-model\n\n🚀 Watch this video ad-free on Nebula https://nebula.tv/videos/codingtrain-coding-challenge-186-wave-function-collapse\n\n💻 Github Repo: https://github.com/CodingTrain/Wave-Function-Collapse\n\np5.js Web Editor Sketches:\n🕹️ Wave Function Collapse: Overlapping Model: https://editor.p5js.org/codingtrain/sketches/SI0c2D_tQ\n🕹️ WFC Overlapping Model Refactored: https://editor.p5js.org/codingtrain/sketches/2sV4KtcoD\n🕹️ WFC Overlapping Model: Shannon entropy: https://editor.p5js.org/codingtrain/sketches/PX0Hn6TF8\n🕹️ WFC Overlapping Model: More tiles!: https://editor.p5js.org/codingtrain/sketches/z_N2TVjRH\n\n🎥 Previous: https://youtu.be/MazpwQNdJYQ?list=PLRqwX-V7Uu6ZiZxtDDRCi6uhfTH4FilpH\n🎥 All: https://www.youtube.com/playlist?list=PLRqwX-V7Uu6ZiZxtDDRCi6uhfTH4FilpH\n\nReferences:\n🗄 Wave Function Collapse GitHub Repo: https://github.com/mxgmn/WaveFunctionCollapse\n🗄 Model Synthesis: https://paulmerrell.org/model-synthesis/\n🗄 Procedural Generation with Wave Function Collapse: https://www.gridbugs.org/wave-function-collapse/\n🗄 Wave Function Collapse: https://github.com/CodingTrain/Wave-Function-Collapse\n🔗 p5.js copy(): https://p5js.org/reference/p5/copy/\n🔗 p5.js web editor console log GitHub issue: https://github.com/processing/p5.js-web-editor/issues/3178\n🔗 JavaScript concat() method: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat\n🔗 p5.js randomSeed(): https://p5js.org/reference/p5/randomSeed/\n\nVideos:\n🎥 https://youtu.be/nMUMZ5YRxHI\n🎥 https://www.youtube.com/watch?v=r5Iy3v1co0A\n🎥 https://youtu.be/qmnH5MT_luk\n🎥 https://youtu.be/mrYMzpbFz18\n\nCreative Works Featured:\n🎨 Townscaper: https://www.townscapergame.com/\n🎨 unity-wave-function-collapse: https://selfsame.itch.io/unitywfc\n🎨 Super Mario WFC: https://observablehq.com/@makio135/super-mario-wfc\n🎨 Zelda WFC: https://observablehq.com/@makio135/zelda-wfc\n🎨 Infinite procedurally generated city: https://marian42.de/article/wfc/\n\nRelated Coding Challenges:\n🚂 https://youtu.be/HyK_Q5rrcr4\n🚂 https://youtu.be/uQZLzhrzEs4\n🚂 https://youtu.be/rI_y2GAlQFM\n\nTimestamps:\n0:00:00 Introduction\n0:01:12 The Nature of Code book!\n0:02:20 WFC Resources and References\n0:08:19 Extracting tiles from a source image\n0:21:30 Calculating adjacency rules for tiles\n0:24:34 Checking for overlapping pixel colors\n0:32:20 Debugging tile adjacencies\n0:43:30 Creating a Cell class\n0:46:21 Incorporate code from WFC tile model\n0:50:50 Reduce entropy of neighboring tiles\n0:55:56 Rendering the center pixel for each tile\n0:58:05 Cross checking valid tile options\n1:01:57 Recursive entropy reduction\n1:05:32 Limit recursion depth\n1:06:32 Challenge complete?\n1:08:26 Bugs found between Day 1 and Day 2\n1:09:13 Starting Day 2\n1:10:02 Correcting pixel color if statement\n1:11:16 Refactoring redundant code\n1:17:26 Running out of tile options\n1:21:24 Optimizing the code\n1:23:47 Rendering average pixel color of remaining tile options\n1:26:23 How to handle redundant tiles?\n1:28:30 More tiles with rotations and reflections\n1:29:39 Additional performance optimizations\n1:31:40 Thanks for watching!\n\nEditing by Mathieu Blanchette\nAnimations by Jason Heglund\nMusic from Epidemic Sound\n\n🚂 Website: https://thecodingtrain.com/\n👾 Share Your Creation! https://thecodingtrain.com/guides/passenger-showcase-guide\n🚩 Suggest Topics: https://github.com/CodingTrain/Suggestion-Box\n💡 GitHub: https://github.com/CodingTrain\n💬 Discord: https://thecodingtrain.com/discord\n💖 Membership: http://youtube.com/thecodingtrain/join\n🛒 Store: https://standard.tv/codingtrain\n🖋️ Twitter: https://twitter.com/thecodingtrain\n📸 Instagram: https://www.instagram.com/the.coding.train/\n\n🎥 https://www.youtube.com/playlist?list=PLRqwX-V7Uu6ZiZxtDDRCi6uhfTH4FilpH\n🎥 https://www.youtube.com/playlist?list=PLRqwX-V7Uu6Zy51Q-x9tMWIv9cueOFTFA\n\n🔗 p5.js: https://p5js.org\n🔗 p5.js Web Editor: https://editor.p5js.org/\n🔗 Processing: https://processing.org\n\n📄 Code of Conduct: https://github.com/CodingTrain/Code-of-Conduct\n\nThis description was auto-generated. If you see a problem, please open an issue: https://github.com/CodingTrain/thecodingtrain.com/issues/new\n\n#wavefunctioncollapse #overlappingmodel #proceduralgeneration #p5js #javascript",
+          "community": {
+            "starRating": {
+              "count": "2601",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "71632"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:qNqKeMa9yBU",
+        "videoId": "qNqKeMa9yBU",
+        "title": "I would like to say hello to you",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=qNqKeMa9yBU"
+        },
+        "author": {
+          "name": "The Coding Train",
+          "uri": "https://www.youtube.com/channel/UCvjgXvBlbQiydffZU7m1_aw"
+        },
+        "published": "2025-01-21T18:29:41+00:00",
+        "updated": "2025-01-23T05:33:36+00:00",
+        "group": {
+          "title": "I would like to say hello to you",
+          "content": {
+            "url": "https://www.youtube.com/v/qNqKeMa9yBU?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i2.ytimg.com/vi/qNqKeMa9yBU/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "I've got a few things to tell you about! \n\n+ Well, I'm obligated to remind you about the Nature of Code book\n+ Severance Season 2 is out and I'm working on some experiments.\n+ Genuary!\n+ What should I work on in 2025?\n+ Wave Function Collapse the Overlapping Model is out now on Nebula! Support the coding train by signing up to watch! (It'll be on YouTube one week from today.)\n\nhttps://nebula.tv/videos/codingtrain-coding-challenge-186-wave-function-collapse\n\n🚂 Website: http://thecodingtrain.com/\n👾 Share Your Creation! https://thecodingtrain.com/Guides/community-contribution-guide.html\n🚩 Suggest Topics: https://github.com/CodingTrain/Rainbow-Topics\n💡 GitHub: https://github.com/CodingTrain\n💬 Discord: https://discord.gg/hPuGy2g\n💖 Membership: http://youtube.com/thecodingtrain/join\n🛒 Store: https://standard.tv/codingtrain\n📚 Books: https://www.amazon.com/shop/thecodingtrain\n🖋️ Twitter: https://twitter.com/thecodingtrain\n📸 Instagram: https://www.instagram.com/the.coding.train/\n\n🎥 Coding Challenges: https://www.youtube.com/playlist?list=PLRqwX-V7Uu6ZiZxtDDRCi6uhfTH4FilpH\n🎥 Intro to Programming: https://www.youtube.com/playlist?list=PLRqwX-V7Uu6Zy51Q-x9tMWIv9cueOFTFA\n\n🔗 p5.js: https://p5js.org\n🔗 p5.js Web Editor: https://editor.p5js.org/\n🔗 Processing: https://processing.org\n\n📄 Code of Conduct: https://github.com/CodingTrain/Code-of-Conduct",
+          "community": {
+            "starRating": {
+              "count": "604",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "18988"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:IF414I26_K8",
+        "videoId": "IF414I26_K8",
+        "title": "3D Pose Estimation with ml5.js",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=IF414I26_K8"
+        },
+        "author": {
+          "name": "The Coding Train",
+          "uri": "https://www.youtube.com/channel/UCvjgXvBlbQiydffZU7m1_aw"
+        },
+        "published": "2024-12-01T16:08:26+00:00",
+        "updated": "2025-03-05T01:10:35+00:00",
+        "group": {
+          "title": "3D Pose Estimation with ml5.js",
+          "content": {
+            "url": "https://www.youtube.com/v/IF414I26_K8?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i2.ytimg.com/vi/IF414I26_K8/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "Building on BodyPose in ml5.js, this video explores the 3D capabilities of the BlazePose model, visualizing poses in a 3D space using WEBGL in p5.js. Code: https://thecodingtrain.com/tracks/ml5js-beginners-guide/ml5/7-bodypose/blazePose\n\n🚀 Watch this video ad-free on Nebula https://nebula.tv/videos/codingtrain-3d-pose-estimation-with-ml5js\n\np5.js Web Editor Sketches:\n🕹️ BlazePose 3D: https://editor.p5js.org/codingtrain/sketches/ftALPDieT\n🕹️ BlazePose Lerp: https://editor.p5js.org/codingtrain/sketches/JMhDRpcxi_\n\n🎥 Previous: https://youtu.be/T99fNXTUUaQ?list=PLRqwX-V7Uu6YPSwT06y_AEYTqIwbeam3y\n🎥 Next: https://youtu.be/vfNHdVbE-l4?list=PLRqwX-V7Uu6YPSwT06y_AEYTqIwbeam3y\n🎥 All: https://www.youtube.com/playlist?list=PLRqwX-V7Uu6YPSwT06y_AEYTqIwbeam3y\n\nReferences:\n💻 ml5.js: BodyPose: https://docs.ml5js.org/#/reference/bodypose\n📄 On-device, Real-time Body Pose Tracking with MediaPipe BlazePose: https://research.google/blog/on-device-real-time-body-pose-tracking-with-mediapipe-blazepose/\n📄 3D Pose Detection with MediaPipe BlazePose GHUM and TensorFlow.js: https://blog.tensorflow.org/2021/08/3d-pose-detection-with-mediapipe-blazepose-ghum-tfjs.html\n📄 BlazePose GHUM Holistic:: https://arxiv.org/pdf/2206.11678\n\nVideos:\n🚂 https://youtu.be/T99fNXTUUaQ\n🚂 https://youtu.be/76fiD5DvzeQ\n🚂 https://youtu.be/o9sgjuh-CBM\n\nTimestamps:\n0:00 Introduction\n2:00 Incorporating BlazePose model\n2:37 What are the xyz values?\n4:30 Replace live camera with recorded video.\n5:49 Render with p5.js WEBGL\n7:48 Use scale() to expand range of xyz values\n9:00 Creating 3D scene\n9:58 Rotating scene.\n11:24 Using orbitControl()\n12:22 Using 3D shapes\n13:42 Goodbye!\n\nEditing by Mathieu Blanchette\nAnimations by Jason Heglund\nMusic from Epidemic Sound\n\n🚂 Website: https://thecodingtrain.com/\n👾 Share Your Creation! https://thecodingtrain.com/guides/passenger-showcase-guide\n🚩 Suggest Topics: https://github.com/CodingTrain/Suggestion-Box\n💡 GitHub: https://github.com/CodingTrain\n💬 Discord: https://thecodingtrain.com/discord\n💖 Membership: http://youtube.com/thecodingtrain/join\n🛒 Store: https://standard.tv/codingtrain\n🖋️ Twitter: https://twitter.com/thecodingtrain\n📸 Instagram: https://www.instagram.com/the.coding.train/\n\n🎥 https://www.youtube.com/playlist?list=PLRqwX-V7Uu6ZiZxtDDRCi6uhfTH4FilpH\n🎥 https://www.youtube.com/playlist?list=PLRqwX-V7Uu6Zy51Q-x9tMWIv9cueOFTFA\n\n🔗 p5.js: https://p5js.org\n🔗 p5.js Web Editor: https://editor.p5js.org/\n🔗 Processing: https://processing.org\n\n📄 Code of Conduct: https://github.com/CodingTrain/Code-of-Conduct\n\nThis description was auto-generated. If you see a problem, please open an issue: https://github.com/CodingTrain/thecodingtrain.com/issues/new\n\n#machinelearningml #webcam #posedetection #ml5js #movenet #blazepose #ml5js #javascript",
+          "community": {
+            "starRating": {
+              "count": "787",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "24179"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:R5UZsIwPbJA",
+        "videoId": "R5UZsIwPbJA",
+        "title": "Face Mesh Detection with ml5.js",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=R5UZsIwPbJA"
+        },
+        "author": {
+          "name": "The Coding Train",
+          "uri": "https://www.youtube.com/channel/UCvjgXvBlbQiydffZU7m1_aw"
+        },
+        "published": "2024-11-16T17:39:30+00:00",
+        "updated": "2025-03-05T02:31:22+00:00",
+        "group": {
+          "title": "Face Mesh Detection with ml5.js",
+          "content": {
+            "url": "https://www.youtube.com/v/R5UZsIwPbJA?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i3.ytimg.com/vi/R5UZsIwPbJA/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "In this video, I explore the FaceMesh model using ml5.js. I demonstrate how to track all 468 face landmark positions as well as texture map an image onto the triangular mesh with uv coordinates. Code: https://thecodingtrain.com/tracks/ml5js-beginners-guide/ml5/facemesh\n\n🚀 Watch this video ad-free on Nebula https://nebula.tv/videos/codingtrain-facemesh-with-ml5js\n\np5.js Web Editor Sketches:\n🕹️ FaceMesh - Keypoints: https://editor.p5js.org/codingtrain/sketches/KHm9CI2RJ\n🕹️ FaceMesh - Part: https://editor.p5js.org/codingtrain/sketches/HaGkT63qG\n🕹️ FaceMesh - Custom List (Lips): https://editor.p5js.org/codingtrain/sketches/CYL9bQtvc\n🕹️ FaceMesh - Centered Face: https://editor.p5js.org/codingtrain/sketches/DGEuFKf87\n🕹️ FaceMesh - Triangles: https://editor.p5js.org/codingtrain/sketches/EjIrb89WY\n🕹️ FaceMesh - Texture Map: https://editor.p5js.org/codingtrain/sketches/zUKp9n4MW\n🕹️ FaceMesh - 3D: https://editor.p5js.org/codingtrain/sketches/zUKp9n4MW\n🕹️ FaceMesh - Blow Bubbles: https://editor.p5js.org/codingtrain/sketches/Mf74RjP92\n🕹️ FaceMesh - Stretch and Skew: https://editor.p5js.org/codingtrain/sketches/tS6bxPzmE\n\n🎥 Previous: https://youtu.be/vfNHdVbE-l4?list=PLRqwX-V7Uu6YPSwT06y_AEYTqIwbeam3y\n🎥 Next: https://youtu.be/2h8VArJ3gnQ?list=PLRqwX-V7Uu6YPSwT06y_AEYTqIwbeam3y\n🎥 All: https://www.youtube.com/playlist?list=PLRqwX-V7Uu6YPSwT06y_AEYTqIwbeam3y\n\nReferences:\n💻 ml5.js: https://ml5js.org/\n🎹 Mouth Controlled Synteszier: https://jackbdu.com/blog/mouth-controlled-synthesizer/\n📄 Face and hand tracking in the browser with MediaPipe and TensorFlow.js: https://blog.tensorflow.org/2020/03/face-and-hand-tracking-in-browser-with-mediapipe-and-tensorflowjs.html\n📄 Real-time Facial Surface Geometry from Monocular Video on Mobile GPUs: https://arxiv.org/pdf/1907.06724\n📄 Face Mesh Model Card: https://drive.google.com/file/d/1VFC_wIpw4O7xBOiTgUldl79d9LA-LsnA/view\n▵ Face Mesh UV Keypoints Map: https://developers.google.com/static/ml-kit/vision/face-mesh-detection/images/uv_unwrap_full.png\n📄 Destructuring Assignment: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment\n☁️ Clouds From Plane Window: https://en.wikipedia.org/wiki/File:Cloud_From_Plane_Window.jpg\n\nVideos:\n🎥 https://youtu.be/FlBRSIz5AcQ\n🚂 https://youtu.be/nMUMZ5YRxHI\n\nRelated Coding Challenges:\n🚂 https://youtu.be/Bxdt6T_1qgc\n🚂 https://youtu.be/JunJzIe0hEo\n\nTimestamps:\n0:00 Introduction\n1:15 Technical background for the model\n2:30 Related projects and inspiration.\n3:01 Adapting handpose example to facemesh.\n5:29 Keypoints and parts of the facemesh.\n11:28 Face bounding box.\n13:36 What is a mesh? Rendering the triangles\n21:19 Texturing mapping with UV coordinates\n30:48 FaceMesh in 3D\n31:10 Goodbye!\n\nEditing by Mathieu Blanchette\nAnimations by Jason Heglund\nMusic from Epidemic Sound\n\n🚂 Website: https://thecodingtrain.com/\n👾 Share Your Creation! https://thecodingtrain.com/guides/passenger-showcase-guide\n🚩 Suggest Topics: https://github.com/CodingTrain/Suggestion-Box\n💡 GitHub: https://github.com/CodingTrain\n💬 Discord: https://thecodingtrain.com/discord\n💖 Membership: http://youtube.com/thecodingtrain/join\n🛒 Store: https://standard.tv/codingtrain\n🖋️ Twitter: https://twitter.com/thecodingtrain\n📸 Instagram: https://www.instagram.com/the.coding.train/\n\n🎥 https://www.youtube.com/playlist?list=PLRqwX-V7Uu6ZiZxtDDRCi6uhfTH4FilpH\n🎥 https://www.youtube.com/playlist?list=PLRqwX-V7Uu6Zy51Q-x9tMWIv9cueOFTFA\n\n🔗 p5.js: https://p5js.org\n🔗 p5.js Web Editor: https://editor.p5js.org/\n🔗 Processing: https://processing.org\n\n📄 Code of Conduct: https://github.com/CodingTrain/Code-of-Conduct\n\nThis description was auto-generated. If you see a problem, please open an issue: https://github.com/CodingTrain/thecodingtrain.com/issues/new\n\n#machinelearningml #facemesh #ml5js #texture #uvcoordinates #ml5js #javascript",
+          "community": {
+            "starRating": {
+              "count": "1220",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "28566"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:gAhB6DDXHmo",
+        "videoId": "gAhB6DDXHmo",
+        "title": "What’s new in Nature of Code?",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=gAhB6DDXHmo"
+        },
+        "author": {
+          "name": "The Coding Train",
+          "uri": "https://www.youtube.com/channel/UCvjgXvBlbQiydffZU7m1_aw"
+        },
+        "published": "2024-11-15T23:42:35+00:00",
+        "updated": "2025-03-05T23:16:42+00:00",
+        "group": {
+          "title": "What’s new in Nature of Code?",
+          "content": {
+            "url": "https://www.youtube.com/v/gAhB6DDXHmo?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i4.ytimg.com/vi/gAhB6DDXHmo/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "",
+          "community": {
+            "starRating": {
+              "count": "951",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "12898"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:GybQOJfmnKA",
+        "videoId": "GybQOJfmnKA",
+        "title": "Spooooooooky ml5.js!",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=GybQOJfmnKA"
+        },
+        "author": {
+          "name": "The Coding Train",
+          "uri": "https://www.youtube.com/channel/UCvjgXvBlbQiydffZU7m1_aw"
+        },
+        "published": "2024-10-31T11:41:42+00:00",
+        "updated": "2025-03-05T00:07:24+00:00",
+        "group": {
+          "title": "Spooooooooky ml5.js!",
+          "content": {
+            "url": "https://www.youtube.com/v/GybQOJfmnKA?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i4.ytimg.com/vi/GybQOJfmnKA/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "Get the code and mask diagram at https://thecodingtrain.com/spooky",
+          "community": {
+            "starRating": {
+              "count": "868",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "15647"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:vfNHdVbE-l4",
+        "videoId": "vfNHdVbE-l4",
+        "title": "Hand Pose Detection with ml5.js",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=vfNHdVbE-l4"
+        },
+        "author": {
+          "name": "The Coding Train",
+          "uri": "https://www.youtube.com/channel/UCvjgXvBlbQiydffZU7m1_aw"
+        },
+        "published": "2024-10-29T14:41:27+00:00",
+        "updated": "2025-03-05T23:30:35+00:00",
+        "group": {
+          "title": "Hand Pose Detection with ml5.js",
+          "content": {
+            "url": "https://www.youtube.com/v/vfNHdVbE-l4?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i3.ytimg.com/vi/vfNHdVbE-l4/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "In this video, I explore the HandPose model using ml5.js. I'll demonstrate how to track hand keypoints and create an interactive painting sketch using gestures. Code: https://thecodingtrain.com/tracks/ml5js-beginners-guide/ml5/hand-pose\n\n🚀 Watch this video ad-free on Nebula https://nebula.tv/videos/codingtrain-hand-pose-detection-with-ml5js\n\np5.js Web Editor Sketches:\n🕹️ HandPose - Keypoints: https://editor.p5js.org/codingtrain/sketches/o5wnL6esQ\n🕹️ HandPose - Painting: https://editor.p5js.org/codingtrain/sketches/LCEHJm6PA\n🕹️ Simple painting: https://editor.p5js.org/codingtrain/sketches/3VcKxx_GY\n🕹️ HandPose Painting - Stroke Weight: https://editor.p5js.org/codingtrain/sketches/-C3Og5Wzs\n🕹️ HandPose Painting - Color: https://editor.p5js.org/codingtrain/sketches/InzaVXI-R\n🕹️ HandPose - Thumbs up or Thumbs Down: https://editor.p5js.org/codingtrain/sketches/0_qPHtsF_\n🕹️ HandPose - Particles: https://editor.p5js.org/codingtrain/sketches/t7l5pYDDI\n\n🎥 Previous: https://youtu.be/T99fNXTUUaQ?list=PLRqwX-V7Uu6YPSwT06y_AEYTqIwbeam3y\n🎥 Next: https://youtu.be/2h8VArJ3gnQ?list=PLRqwX-V7Uu6YPSwT06y_AEYTqIwbeam3y\n🎥 All: https://www.youtube.com/playlist?list=PLRqwX-V7Uu6YPSwT06y_AEYTqIwbeam3y\n\nReferences:\n💻 ml5.js: https://ml5js.org/\n🏫 Introduction to ML for the Arts: https://github.com/ml5js/Intro-ML-Arts-IMA-F24\n📺 Jack B. Du's YouTube channel: https://www.youtube.com/channel/UCUP34ETx7nvIbd4ypkR02hg\n🎨 Jack B. Du's Instagram: https://www.instagram.com/jackbdu/\n💻 On-Device, Real-Time Hand Tracking with MediaPipe: https://research.google/blog/on-device-real-time-hand-tracking-with-mediapipe/\n📄 3D Hand Pose with MediaPipe and TensorFlow.js: https://blog.tensorflow.org/2021/11/3D-handpose.html\n\nTimestamps:\n0:00 Introduction\n1:23 Technical background of the model\n3:52 Convert BodyPose to HandPose\n5:54 Detecting more than one hand\n6:14 Detecting handedness (left or right)\n6:51 Creating a painting sketch with index and thumb\n10:19 Add a layer using createGraphics()\n12:40 Storing previous hand position to draw a line\n14:17 Exercise ideas for you!\n15:27 Goodbye!\n\nEditing by Mathieu Blanchette\nAnimations by Jason Heglund\nMusic from Epidemic Sound\n\n🚂 Website: https://thecodingtrain.com/\n👾 Share Your Creation! https://thecodingtrain.com/guides/passenger-showcase-guide\n🚩 Suggest Topics: https://github.com/CodingTrain/Suggestion-Box\n💡 GitHub: https://github.com/CodingTrain\n💬 Discord: https://thecodingtrain.com/discord\n💖 Membership: http://youtube.com/thecodingtrain/join\n🛒 Store: https://standard.tv/codingtrain\n🖋️ Twitter: https://twitter.com/thecodingtrain\n📸 Instagram: https://www.instagram.com/the.coding.train/\n\n🎥 https://www.youtube.com/playlist?list=PLRqwX-V7Uu6ZiZxtDDRCi6uhfTH4FilpH\n🎥 https://www.youtube.com/playlist?list=PLRqwX-V7Uu6Zy51Q-x9tMWIv9cueOFTFA\n\n🔗 p5.js: https://p5js.org\n🔗 p5.js Web Editor: https://editor.p5js.org/\n🔗 Processing: https://processing.org\n\n📄 Code of Conduct: https://github.com/CodingTrain/Code-of-Conduct\n\nThis description was auto-generated. If you see a problem, please open an issue: https://github.com/CodingTrain/thecodingtrain.com/issues/new\n\n#machinelearningml #webcam #posedetection #ml5js #handpose #ml5js #javascript",
+          "community": {
+            "starRating": {
+              "count": "1371",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "32320"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:T99fNXTUUaQ",
+        "videoId": "T99fNXTUUaQ",
+        "title": "Pose Estimation with ml5.js",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=T99fNXTUUaQ"
+        },
+        "author": {
+          "name": "The Coding Train",
+          "uri": "https://www.youtube.com/channel/UCvjgXvBlbQiydffZU7m1_aw"
+        },
+        "published": "2024-10-17T00:24:06+00:00",
+        "updated": "2025-03-05T00:34:15+00:00",
+        "group": {
+          "title": "Pose Estimation with ml5.js",
+          "content": {
+            "url": "https://www.youtube.com/v/T99fNXTUUaQ?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i1.ytimg.com/vi/T99fNXTUUaQ/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "Strike a pose! In this video, I explore the BodyPose model in ml5.js with MoveNet and BlazePose, showing how to track body keypoints and visualize 'skeleton' connections using live video. Code: https://thecodingtrain.com/tracks/ml5js-beginners-guide/ml5/7-bodypose/pose-detection\n\n🚀 Watch this video ad-free on Nebula https://nebula.tv/videos/codingtrain-pose-detection-with-ml5js\n\np5.js Web Editor Sketches:\n🕹️ BodyPose - single image: https://editor.p5js.org/codingtrain/sketches/WQrffEIsJ\n🕹️ BodyPose - Nose: https://editor.p5js.org/codingtrain/sketches/AWrwZ_rSv\n🕹️ BodyPose - Nose with Lerp: https://editor.p5js.org/codingtrain/sketches/9O6KbYyiX\n🕹️ BodyPose - More Parts: https://editor.p5js.org/codingtrain/sketches/uPd6s2iVO\n🕹️ BodyPose - Hat: https://editor.p5js.org/codingtrain/sketches/e_vqrMWcL\n🕹️ BodyPose - 3D BlazePose: https://editor.p5js.org/codingtrain/sketches/ftALPDieT\n\n🎥 Previous: https://youtu.be/fFzvwdkzr_c?list=PLRqwX-V7Uu6YPSwT06y_AEYTqIwbeam3y\n🎥 Next: https://youtu.be/FYgYyq-xqAw?list=PLRqwX-V7Uu6YPSwT06y_AEYTqIwbeam3y\n🎥 All: https://www.youtube.com/playlist?list=PLRqwX-V7Uu6YPSwT06y_AEYTqIwbeam3y\n\nReferences:\n💻 ml5.js: https://ml5js.org/\n🏫 Introduction to ML for the Arts: https://github.com/ml5js/Intro-ML-Arts-IMA-F24\n💻 Common objects in Context Dataset: https://cocodataset.org/#home\n🏫 Humans of AI: https://humans-of.ai\n💻 Next-Generation Pose Detection: https://blog.tensorflow.org/2021/05/next-generation-pose-detection-with-movenet-and-tensorflowjs.html\n📄 BlazePose Paper: https://arxiv.org/pdf/2006.10204\n💃 PoseNet Sketchbook: https://googlecreativelab.github.io/posenet-sketchbook/\n🏅 Olympic Form: https://charstiles.github.io/olympicForm/\n\nVideos:\n🎥 https://www.youtube.com/watch?v=8uLVnM36XUc\n\nTimestamps:\n0:00 Introduction\n0:45 What is the BodyPose model?\n3:28 Coco Dataset\n4:04 Creative Inspiration\n5:49 Start coding\n8:58 Working with specific keypoints\n15:39 Skeleton connections between the keypoints\n17:57 Using dist() function\n19:39 BlazePose\n20:56 Outro\n\nEditing by Mathieu Blanchette\nAnimations by Jason Heglund\nMusic from Epidemic Sound\n\n🚂 Website: https://thecodingtrain.com/\n👾 Share Your Creation! https://thecodingtrain.com/guides/passenger-showcase-guide\n🚩 Suggest Topics: https://github.com/CodingTrain/Suggestion-Box\n💡 GitHub: https://github.com/CodingTrain\n💬 Discord: https://thecodingtrain.com/discord\n💖 Membership: http://youtube.com/thecodingtrain/join\n🛒 Store: https://standard.tv/codingtrain\n🖋️ Twitter: https://twitter.com/thecodingtrain\n📸 Instagram: https://www.instagram.com/the.coding.train/\n\n🎥 https://www.youtube.com/playlist?list=PLRqwX-V7Uu6ZiZxtDDRCi6uhfTH4FilpH\n🎥 https://www.youtube.com/playlist?list=PLRqwX-V7Uu6Zy51Q-x9tMWIv9cueOFTFA\n\n🔗 p5.js: https://p5js.org\n🔗 p5.js Web Editor: https://editor.p5js.org/\n🔗 Processing: https://processing.org\n\n📄 Code of Conduct: https://github.com/CodingTrain/Code-of-Conduct\n\nThis description was auto-generated. If you see a problem, please open an issue: https://github.com/CodingTrain/thecodingtrain.com/issues/new\n\n#machinelearningml #webcam #posedetection #ml5js #movenet #blazepose #ml5js #javascript",
+          "community": {
+            "starRating": {
+              "count": "1048",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "32355"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:pbjR20eTLVs",
+        "videoId": "pbjR20eTLVs",
+        "title": "Image Classification with ml5.js",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=pbjR20eTLVs"
+        },
+        "author": {
+          "name": "The Coding Train",
+          "uri": "https://www.youtube.com/channel/UCvjgXvBlbQiydffZU7m1_aw"
+        },
+        "published": "2024-10-08T15:53:28+00:00",
+        "updated": "2025-03-05T03:08:13+00:00",
+        "group": {
+          "title": "Image Classification with ml5.js",
+          "content": {
+            "url": "https://www.youtube.com/v/pbjR20eTLVs?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i1.ytimg.com/vi/pbjR20eTLVs/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "This video covers image classification in ml5.js 1.0. I demonstrate both the default MobileNet model as well as how to train your own classifier with transfer leraning and teachable machine. Code: https://thecodingtrain.com/tracks/ml5js-beginners-guide/ml5/1-classification/image-classification\n\np5.js Web Editor Sketches:\n🕹️ Image Classification: https://editor.p5js.org/codingtrain/sketches/A2W-0ayI5\n🕹️ Image Classification with Webcam: https://editor.p5js.org/codingtrain/sketches/r9LjJqaw6\n🕹️ Image Classification - Drag and Drop: https://editor.p5js.org/codingtrain/sketches/v1sAlvSHR\n🕹️ Image Classification - Display label and confidence: https://editor.p5js.org/codingtrain/sketches/7zA6_MlIo\n🕹️ Image Classification - Tint: https://editor.p5js.org/codingtrain/sketches/uHN5htRpC\n\n🎥 Previous: https://youtu.be/jmznx0Q1fP0?list=PLRqwX-V7Uu6YPSwT06y_AEYTqIwbeam3y\n🎥 Next: https://youtu.be/QEzRxnuaZCk?list=PLRqwX-V7Uu6YPSwT06y_AEYTqIwbeam3y\n🎥 All: https://www.youtube.com/playlist?list=PLRqwX-V7Uu6YPSwT06y_AEYTqIwbeam3y\n\nReferences:\n💻 ml5.js: https://ml5js.org/\n🏫 Introduction to Machine Learning for the Arts: https://github.com/ml5js/Intro-ML-Arts-IMA-F24\n📄 MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications: https://arxiv.org/abs/1704.04861\n💻 Tensorflow.js port of MobileNet: https://github.com/tensorflow/tfjs-models/tree/master/mobilenet\n💻 Image-Net: https://image-net.org/\n🎤 https://www.youtube.com/watch?v=40riCqvRoMs\n🌐 Excavating AI: The Politics of Images in Machine Learning Training Sets: https://excavating.ai/\n🖼️ ml5 ImageClassifier: https://docs.ml5js.org/#/reference/image-classifier\n📱 Teachable Machine: https://teachablemachine.withgoogle.com/\n\nTimestamps:\n0:00 Introduction\n2:30 What is MobileNet?\n4:53 What is ImageNet?\n10:32 ml5.js Classifier Code!\n21:19 Incorporating Live Video\n24:51 Training your own model\n\nEditing by Mathieu Blanchette\nAnimations by Jason Heglund\nMusic from Epidemic Sound\n\n🚂 Website: https://thecodingtrain.com/\n👾 Share Your Creation! https://thecodingtrain.com/guides/passenger-showcase-guide\n🚩 Suggest Topics: https://github.com/CodingTrain/Suggestion-Box\n💡 GitHub: https://github.com/CodingTrain\n💬 Discord: https://thecodingtrain.com/discord\n💖 Membership: http://youtube.com/thecodingtrain/join\n🛒 Store: https://standard.tv/codingtrain\n🖋️ Twitter: https://twitter.com/thecodingtrain\n📸 Instagram: https://www.instagram.com/the.coding.train/\n\n🎥 https://www.youtube.com/playlist?list=PLRqwX-V7Uu6ZiZxtDDRCi6uhfTH4FilpH\n🎥 https://www.youtube.com/playlist?list=PLRqwX-V7Uu6Zy51Q-x9tMWIv9cueOFTFA\n\n🔗 p5.js: https://p5js.org\n🔗 p5.js Web Editor: https://editor.p5js.org/\n🔗 Processing: https://processing.org\n\n📄 Code of Conduct: https://github.com/CodingTrain/Code-of-Conduct\n\nThis description was auto-generated. If you see a problem, please open an issue: https://github.com/CodingTrain/thecodingtrain.com/issues/new\n\n#machinelearningml #webcam #imageclassification #ml5js #mobilenet #ml5js #javascript",
+          "community": {
+            "starRating": {
+              "count": "1129",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "30867"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:MazpwQNdJYQ",
+        "videoId": "MazpwQNdJYQ",
+        "title": "Coding Challenge 185: Unfolding Fractals",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=MazpwQNdJYQ"
+        },
+        "author": {
+          "name": "The Coding Train",
+          "uri": "https://www.youtube.com/channel/UCvjgXvBlbQiydffZU7m1_aw"
+        },
+        "published": "2024-08-18T13:57:10+00:00",
+        "updated": "2025-03-05T02:49:29+00:00",
+        "group": {
+          "title": "Coding Challenge 185: Unfolding Fractals",
+          "content": {
+            "url": "https://www.youtube.com/v/MazpwQNdJYQ?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i2.ytimg.com/vi/MazpwQNdJYQ/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "25% off The Nature of Code book with code CHOOCHOO at https://natureofcode.com (comes with exclusive sticker+bookmark).\n\nThe Dragon Curve fractal is created by repeatedly folding a strip of paper in half, then unfolding it to form a curve. In this challenge, I attempt to code an animation of the Dragon Curve forming with p5.js in JavaScript. Code: https://thecodingtrain.com/challenges/185-dragon-curve\n\n🚀 Watch this video ad-free on Nebula https://nebula.tv/videos/codingtrain-coding-challenge-184-dragon-curve\n\np5.js Web Editor Sketches:\n🕹️ Dragon curve animation: https://editor.p5js.org/codingtrain/sketches/LXDsoCSZs\n🕹️ Dragon curve color variation: https://editor.p5js.org/codingtrain/sketches/7nNd-f7iY\n🕹️ Dragon curve noise variation: https://editor.p5js.org/codingtrain/sketches/7r7ZIE4dc\n\n🎥 Previous: https://youtu.be/dJNFPv9Mj-Y?list=PLRqwX-V7Uu6ZiZxtDDRCi6uhfTH4FilpH\n🎥 All: https://www.youtube.com/playlist?list=PLRqwX-V7Uu6ZiZxtDDRCi6uhfTH4FilpH\n\nReferences:\n📕 The Nature of Code: https://natureofcode.com/\n🛒 Nature of Code shop: https://store.natureofcode.com/products/the-nature-of-code\n🔗 Dragon Curve: https://en.wikipedia.org/wiki/Dragon_curve\n🔗 concat() function: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat\n\nVideos:\n🎥 https://youtu.be/UBuPWdSbyf8\n🎥 https://www.youtube.com/watch?v=wCyC-K_PnRY\n\nRelated Coding Challenges:\n🚂 https://youtu.be/0jjeOYMjmDU\n🚂 https://youtu.be/E1B4UoSQMFw\n🚂 https://youtu.be/jPsZwrV9ld0\n🚂 https://youtu.be/i-k04yzfMpw\n🚂 https://youtu.be/dSK-MW-zuAc\n\nTimestamps:\n00:00 Introduction\n00:36 The Nature of Code book\n01:43 Explain algorithm\n03:38 Start coding\n05:05 Write rotate function\n07:05 Rotate all the segments\n11:30 We have the dragon curve!\n12:00 Add animation\n16:31 Add the starting positions for a and b\n21:43 Scale the lines\n24:08 Add a nextGeneration() function\n25:16 The reduction ratio\n26:44 Target zoom\n28:57 Challenge complete!\n29:57 What can you do?\n30:25 Outro\n\nEditing by Mathieu Blanchette\nAnimations by Jason Heglund\nMusic from Epidemic Sound\n\n🚂 Website: https://thecodingtrain.com/\n👾 Share Your Creation! https://thecodingtrain.com/guides/passenger-showcase-guide\n🚩 Suggest Topics: https://github.com/CodingTrain/Suggestion-Box\n💡 GitHub: https://github.com/CodingTrain\n💬 Discord: https://thecodingtrain.com/discord\n💖 Membership: http://youtube.com/thecodingtrain/join\n🛒 Store: https://standard.tv/codingtrain\n🖋️ Twitter: https://twitter.com/thecodingtrain\n📸 Instagram: https://www.instagram.com/the.coding.train/\n\n🎥 https://www.youtube.com/playlist?list=PLRqwX-V7Uu6ZiZxtDDRCi6uhfTH4FilpH\n🎥 https://www.youtube.com/playlist?list=PLRqwX-V7Uu6Zy51Q-x9tMWIv9cueOFTFA\n\n🔗 p5.js: https://p5js.org\n🔗 p5.js Web Editor: https://editor.p5js.org/\n🔗 Processing: https://processing.org\n\n📄 Code of Conduct: https://github.com/CodingTrain/Code-of-Conduct\n\nThis description was auto-generated. If you see a problem, please open an issue: https://github.com/CodingTrain/thecodingtrain.com/issues/new\n\n#fractals #dragoncurve #natureofcode #p5js #javascript",
+          "community": {
+            "starRating": {
+              "count": "2177",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "50183"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:vfeUb7w8Hr8",
+        "videoId": "vfeUb7w8Hr8",
+        "title": "Let's Build a Nature of Code 404 Page!",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=vfeUb7w8Hr8"
+        },
+        "author": {
+          "name": "The Coding Train",
+          "uri": "https://www.youtube.com/channel/UCvjgXvBlbQiydffZU7m1_aw"
+        },
+        "published": "2024-08-15T16:39:19+00:00",
+        "updated": "2025-01-23T02:43:56+00:00",
+        "group": {
+          "title": "Let's Build a Nature of Code 404 Page!",
+          "content": {
+            "url": "https://www.youtube.com/v/vfeUb7w8Hr8?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i3.ytimg.com/vi/vfeUb7w8Hr8/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "Let's build a \"404 Page Not Found\" page for The Nature of Code website! Use code CHOOCHOO for 25% off Nature of Code at https://natureofcode.com/.  Code: https://thecodingtrain.com/tracks/livestreams/livestreams/page-not-found\n\n\n\n🕹️ p5.js Web Editor Sketch: https://editor.p5js.org/codingtrain/sketches/ZcZjrgQHr\n\n🎥 Next: https://youtu.be/-_ivRdVjjzA\n\nReferences:\n📕 The Nature of Code: https://natureofcode.com/\n🛒 Nature of Code shop: https://store.natureofcode.com/products/the-nature-of-code\n\nRelated Coding Challenges:\n🚂 https://youtu.be/4hA7G3gup-4\n\nTimestamps:\n0:00:00 Count down starts\n0:08:00 Livestream starts\n0:19:50 Annual mailing\n0:20:45 NOC website\n0:21:38 Discount\n0:22:52 Purchase options\n1:09:54 404 Error page\n1:17:28 Start coding\n1:27:14 Add mouse interaction\n2:23:17 Outro\n\n\nMusic from Epidemic Sound\n\n🚂 Website: https://thecodingtrain.com/\n👾 Share Your Creation! https://thecodingtrain.com/guides/passenger-showcase-guide\n🚩 Suggest Topics: https://github.com/CodingTrain/Suggestion-Box\n💡 GitHub: https://github.com/CodingTrain\n💬 Discord: https://thecodingtrain.com/discord\n💖 Membership: http://youtube.com/thecodingtrain/join\n🛒 Store: https://standard.tv/codingtrain\n🖋️ Twitter: https://twitter.com/thecodingtrain\n📸 Instagram: https://www.instagram.com/the.coding.train/\n\n🎥 https://www.youtube.com/playlist?list=PLRqwX-V7Uu6ZiZxtDDRCi6uhfTH4FilpH\n🎥 https://www.youtube.com/playlist?list=PLRqwX-V7Uu6Zy51Q-x9tMWIv9cueOFTFA\n\n🔗 p5.js: https://p5js.org\n🔗 p5.js Web Editor: https://editor.p5js.org/\n🔗 Processing: https://processing.org\n\n📄 Code of Conduct: https://github.com/CodingTrain/Code-of-Conduct\n\nThis description was auto-generated. If you see a problem, please open an issue: https://github.com/CodingTrain/thecodingtrain.com/issues/new\n\n#thenatureofcode #steeringbehaviors #javascript\n=====================================================",
+          "community": {
+            "starRating": {
+              "count": "348",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "11564"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:2h8VArJ3gnQ",
+        "videoId": "2h8VArJ3gnQ",
+        "title": "ml5.js 1.0 and Guest Conductor Patt Vira",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=2h8VArJ3gnQ"
+        },
+        "author": {
+          "name": "The Coding Train",
+          "uri": "https://www.youtube.com/channel/UCvjgXvBlbQiydffZU7m1_aw"
+        },
+        "published": "2024-07-31T15:00:02+00:00",
+        "updated": "2025-03-05T00:52:39+00:00",
+        "group": {
+          "title": "ml5.js 1.0 and Guest Conductor Patt Vira",
+          "content": {
+            "url": "https://www.youtube.com/v/2h8VArJ3gnQ?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i3.ytimg.com/vi/2h8VArJ3gnQ/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "The ml5.js library recently celebrated it's 1.0 release! In this video, I provide an overview of the new release and cover how to use the FaceMesh model. Guest Conductor Patt Vira (http://youtube.com/@PattVira) takes over and demonstrates how to build a creative kinetic type visualization controlled by your mouth! Code: https://thecodingtrain.com/tracks/ml5js-beginners-guide/ml5/0-introduction/patt-vira\n\np5.js Web Editor Sketches:\n🕹️ FaceMesh (Lips): https://editor.p5js.org/codingtrain/sketches/LdEmvXdGI\n🕹️ Interactive Kinect Type: https://editor.p5js.org/codingtrain/sketches/CITZ-7eyA\n\n🎥 Previous: https://youtu.be/jmznx0Q1fP0?list=PLRqwX-V7Uu6YPSwT06y_AEYTqIwbeam3y\n🎥 Next: https://youtu.be/yNkAuWz5lnY?list=PLRqwX-V7Uu6YPSwT06y_AEYTqIwbeam3y\n🎥 All: https://www.youtube.com/playlist?list=PLRqwX-V7Uu6YPSwT06y_AEYTqIwbeam3y\n\nReferences:\n🎥 http://youtube.com/@PattVira\n🎥 https://youtu.be/X4XMhpRFKvU\n💻 ml5.js: https://ml5js.org/\n🏕 ITP Camp: https://tisch.nyu.edu/itp/camp\n💻 Tensorflow.js: https://www.tensorflow.org/js\n📕 The Nature of Code: https://natureofcode.com/\n\nTimestamps:\n0:00 Introducing Patt Vira!\n1:08 What is ml5.js?\n2:00 The Nature of Code book\n2:12 ml5.js overview\n4:27 Importing the ml5.js library\n5:38 How to use the FaceMesh model\n18:34 Guest Conductor Patt Vira!\n54:14 Thanks for watching!\n\nEditing by Patt Vira and Mathieu Blanchette\nVideography by Don Lee\nml5.js slides by Micaelle Lages and the ml5.js team\nITP Camp workshop photos by Parth Pawar, Chienn Tai, Alan Ren\nAnimations by Jason Heglund\nMusic from Epidemic Sound\n\n🚂 Website: https://thecodingtrain.com/\n👾 Share Your Creation! https://thecodingtrain.com/guides/passenger-showcase-guide\n🚩 Suggest Topics: https://github.com/CodingTrain/Suggestion-Box\n💡 GitHub: https://github.com/CodingTrain\n💬 Discord: https://thecodingtrain.com/discord\n💖 Membership: http://youtube.com/thecodingtrain/join\n🛒 Store: https://standard.tv/codingtrain\n🖋️ Twitter: https://twitter.com/thecodingtrain\n📸 Instagram: https://www.instagram.com/the.coding.train/\n\n🎥 https://www.youtube.com/playlist?list=PLRqwX-V7Uu6ZiZxtDDRCi6uhfTH4FilpH\n🎥 https://www.youtube.com/playlist?list=PLRqwX-V7Uu6Zy51Q-x9tMWIv9cueOFTFA\n\n🔗 p5.js: https://p5js.org\n🔗 p5.js Web Editor: https://editor.p5js.org/\n🔗 Processing: https://processing.org\n\n📄 Code of Conduct: https://github.com/CodingTrain/Code-of-Conduct\n\nThis description was auto-generated. If you see a problem, please open an issue: https://github.com/CodingTrain/thecodingtrain.com/issues/new\n\n#machinelearning #ml5js #facemesh #guestconductor #p5js #ml5js",
+          "community": {
+            "starRating": {
+              "count": "1025",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "27143"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:HGe-nD90GWs",
+        "videoId": "HGe-nD90GWs",
+        "title": "Use code CHOOCHOO for 25% off. Pre-ordering direct from me comes with a bonus bookmark and sticker!",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=HGe-nD90GWs"
+        },
+        "author": {
+          "name": "The Coding Train",
+          "uri": "https://www.youtube.com/channel/UCvjgXvBlbQiydffZU7m1_aw"
+        },
+        "published": "2024-07-30T06:51:38+00:00",
+        "updated": "2025-03-05T02:00:12+00:00",
+        "group": {
+          "title": "Use code CHOOCHOO for 25% off. Pre-ordering direct from me comes with a bonus bookmark and sticker!",
+          "content": {
+            "url": "https://www.youtube.com/v/HGe-nD90GWs?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i1.ytimg.com/vi/HGe-nD90GWs/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "",
+          "community": {
+            "starRating": {
+              "count": "620",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "9228"
+            }
+          }
+        }
+      },
+      {
+        "id": "yt:video:dJNFPv9Mj-Y",
+        "videoId": "dJNFPv9Mj-Y",
+        "title": "Coding Challenge 184: Collisions Without a Physics Library!",
+        "link": {
+          "rel": "alternate",
+          "href": "https://www.youtube.com/watch?v=dJNFPv9Mj-Y"
+        },
+        "author": {
+          "name": "The Coding Train",
+          "uri": "https://www.youtube.com/channel/UCvjgXvBlbQiydffZU7m1_aw"
+        },
+        "published": "2024-07-13T09:08:51+00:00",
+        "updated": "2025-04-28T23:19:08+00:00",
+        "group": {
+          "title": "Coding Challenge 184: Collisions Without a Physics Library!",
+          "content": {
+            "url": "https://www.youtube.com/v/dJNFPv9Mj-Y?version=3",
+            "type": "application/x-shockwave-flash",
+            "width": "640",
+            "height": "390"
+          },
+          "thumbnail": {
+            "url": "https://i1.ytimg.com/vi/dJNFPv9Mj-Y/hqdefault.jpg",
+            "width": "480",
+            "height": "360"
+          },
+          "description": "What happens when two circles collide in a p5.js canvas? In this video, I examine the math and implement idealized elastic collisions in a JavaScript physics simulation. This video supplements the Nature of Code book series in Chapter 6 which uses 3rd party physics libraries to handle collisions rather than a direct implementation. Code: https://thecodingtrain.com/challenges/184-elastic-collisions\n\n🚀 Watch this video ad-free on Nebula https://nebula.tv/videos/codingtrain-coding-challenge-184-elastic-collisions\n\np5.js Web Editor Sketches:\n🕹️ Elastic Collisions: https://editor.p5js.org/codingtrain/sketches/3DrBb8LCp\n🕹️ Elastic Collisions - Quadtree: https://editor.p5js.org/codingtrain/sketches/z8n19RFz9\n\n🎥 Previous: https://youtu.be/p7IGZTjC008?list=PLRqwX-V7Uu6ZiZxtDDRCi6uhfTH4FilpH\n🎥 All: https://www.youtube.com/playlist?list=PLRqwX-V7Uu6ZiZxtDDRCi6uhfTH4FilpH\n\nReferences:\n📕 The Nature of Code: https://natureofcode.com/\n🛒 Pre-order The Nature of Code: https://nostarch.com/nature-code\n🔗 Elastic Collision: https://en.wikipedia.org/wiki/Elastic_collision\n📃 2-Dimensional Elastic Collisions without Trigonometry: https://www.vobarian.com/collisions/2dcollisions2.pdf\n📃 Elastic Collisions Formula Derivation: https://dipamsen.github.io/notebook/collisions.pdf\n\nRelated Coding Challenges:\n🚂 https://youtu.be/IIrC5Qcb2G4\n🚂 https://youtu.be/OJxEcs0w_kE\n🚂 https://youtu.be/PoW8g67XNxA\n🚂 https://youtu.be/h5ZNcAPXxew\n\nTimestamps:\n0:00 Introduction\n0:20 The Nature of Code book\n1:22 Review background material\n4:15 Collision Resolution\n5:42 Start Coding\n8:48 Add collide() function\n10:17 Momentum and kinetic energy\n14:15 Line of impact\n16:44 Add the formulas\n21:25 Simplify the code\n22:57 Check for overlap\n24:31 Check the particle's kinetic enery\n25:48 Fix error\n27:30 Add more particles\n30:11 Optimizations\n30:50 Outro\n\nEditing by Mathieu Blanchette\nAnimations by Jason Heglund\nMusic from Epidemic Sound\n\n🚂 Website: https://thecodingtrain.com/\n👾 Share Your Creation! https://thecodingtrain.com/guides/passenger-showcase-guide\n🚩 Suggest Topics: https://github.com/CodingTrain/Suggestion-Box\n💡 GitHub: https://github.com/CodingTrain\n💬 Discord: https://thecodingtrain.com/discord\n💖 Membership: http://youtube.com/thecodingtrain/join\n🛒 Store: https://standard.tv/codingtrain\n🖋️ Twitter: https://twitter.com/thecodingtrain\n📸 Instagram: https://www.instagram.com/the.coding.train/\n\n🎥 https://www.youtube.com/playlist?list=PLRqwX-V7Uu6ZiZxtDDRCi6uhfTH4FilpH\n🎥 https://www.youtube.com/playlist?list=PLRqwX-V7Uu6Zy51Q-x9tMWIv9cueOFTFA\n\n🔗 p5.js: https://p5js.org\n🔗 p5.js Web Editor: https://editor.p5js.org/\n🔗 Processing: https://processing.org\n\n📄 Code of Conduct: https://github.com/CodingTrain/Code-of-Conduct\n\nThis description was auto-generated. If you see a problem, please open an issue: https://github.com/CodingTrain/thecodingtrain.com/issues/new\n\n#collisions #physicssimulation #p5js #javascript\n=====================================================",
+          "community": {
+            "starRating": {
+              "count": "5781",
+              "average": "5.00",
+              "min": "1",
+              "max": "5"
+            },
+            "statistics": {
+              "views": "163398"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

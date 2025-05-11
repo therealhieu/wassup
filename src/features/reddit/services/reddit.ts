@@ -1,25 +1,27 @@
+import { Result } from "neverthrow";
 import { RedditPostRepository } from "../domain/repositories/post";
-import { RedditConfig } from "../infrastructure/config.schemas";
-import { HttpRedditPostRepository } from "../infrastructure/repositories/http.post";
+import { RedditWidgetConfig } from "../infrastructure/config.schemas";
+import { HttpRedditPostRepository } from "../infrastructure/repositories/http.reddit-post-respository";
+import { RedditPost } from "../domain/entities/post";
 
 export class RedditService {
-	private readonly config: RedditConfig;
+	private readonly config: RedditWidgetConfig;
 	private readonly redditPostRepository: RedditPostRepository;
 
 	constructor(
-		config: RedditConfig,
+		config: RedditWidgetConfig,
 		redditPostRepository: RedditPostRepository
 	) {
 		this.config = config;
 		this.redditPostRepository = redditPostRepository;
 	}
 
-	static async fromConfig(config: RedditConfig) {
+	static async fromConfig(config: RedditWidgetConfig): Promise<RedditService> {
 		const redditPostRepository = new HttpRedditPostRepository();
 		return new RedditService(config, redditPostRepository);
 	}
 
-	public async fetchPosts() {
-		return this.redditPostRepository.fetchPosts(this.config);
+	public async fetchMany(): Promise<Result<RedditPost[], Error>> {
+		return this.redditPostRepository.fetchMany(this.config);
 	}
 }

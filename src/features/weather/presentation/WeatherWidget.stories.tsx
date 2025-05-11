@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { WeatherWidgetInner } from "./WeatherWidget.components";
 
 const meta: Meta<typeof WeatherWidgetInner> = {
-	title: "widgets/weather/WeatherWidget",
+	title: "features/weather/WeatherWidget",
 	component: WeatherWidgetInner,
 	parameters: {
 		layout: "centered",
