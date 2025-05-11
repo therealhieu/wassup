@@ -48,7 +48,7 @@ export class WeatherService {
 		);
 	}
 
-	public async getWeatherWidgetProps(
+	public async fetchWeatherWidgetProps(
 		config: WeatherWidgetConfig
 	): Promise<Result<WeatherWidgetInnerProps, Error>> {
 		const getGeocodeResult = await this.geocodeRepository.find(

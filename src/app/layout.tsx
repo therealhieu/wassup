@@ -8,7 +8,6 @@ import { DashboardAppBar } from "@/components/DashboardAppBar";
 import { getAppConfig } from "@/lib/actions";
 import { getIntialWidgetCache } from "@/lib/actions";
 import { AppStoreContextProvider } from "@/providers/AppStoreContextProvider";
-import { AppConfigSseProvider } from "@/providers/AppConfigSseProvider";
 import { ReactQueryProvider } from "@/providers/ReactQueryProvider";
 
 const geistSans = Geist({
@@ -63,9 +62,7 @@ export default async function RootLayout({
 						>
 							<DashboardAppBar />
 						</div>
-						<AppConfigSseProvider>
-							<ReactQueryProvider>{children}</ReactQueryProvider>
-						</AppConfigSseProvider>
+						<ReactQueryProvider>{children}</ReactQueryProvider>
 					</AppStoreContextProvider>
 				</AppRouterCacheProvider>
 			</body>

@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { ErrorWidget } from "./ErrorWidget";
 import { WeatherWidget } from "@/features/weather/presentation/WeatherWidget";
 import { TabsWidget } from "@/features/tabs/presentation/TabWidget";

@@ -16,7 +16,7 @@ describe('WeatherService', () => {
         }
 
         const service = initServiceResult.value;
-        const props = await service.getWeatherWidgetProps(config);
+        const props = await service.fetchWeatherWidgetProps(config);
 
         if (props.isErr()) {
             throw props.error;

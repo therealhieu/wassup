@@ -4,7 +4,7 @@ import {
 } from "./WeatherWidget.components";
 
 import { WeatherWidgetConfig } from "../infrastructure/config.schemas";
-import { getWeatherWidgetProps } from "../services/weather.actions";
+import { fetchWeatherWidgetProps } from "../services/weather.actions";
 import { useQuery } from "@tanstack/react-query";
 import { ErrorWidget } from "@/components/ErrorWidget";
 import { WeatherWidgetSkeleton } from "./WeatherWidgetSkeleton";
@@ -20,7 +20,7 @@ export const WeatherWidget = ({ config }: WeatherWidgetProps) => {
 		error,
 	} = useQuery<WeatherWidgetInnerProps, Error>({
 		queryKey: ["weather", config],
-		queryFn: async () => await getWeatherWidgetProps(config),
+		queryFn: async () => await fetchWeatherWidgetProps(config),
 	});
 
 	if (isLoading) {

@@ -7,7 +7,7 @@ import { LRUCache } from "lru-cache";
 
 const serviceCache = new LRUCache<string, WeatherService>({ max: 5 });
 
-export async function getWeatherWidgetProps(
+export async function fetchWeatherWidgetProps(
 	config: WeatherWidgetConfig
 ): Promise<WeatherWidgetInnerProps> {
 	const key = JSON.stringify(config);
@@ -22,7 +22,7 @@ export async function getWeatherWidgetProps(
 		serviceCache.set(key, service);
 	}
 
-	const getResult = await service.getWeatherWidgetProps(config);
+	const getResult = await service.fetchWeatherWidgetProps(config);
 
 	if (getResult.isErr()) {
 		throw getResult.error;

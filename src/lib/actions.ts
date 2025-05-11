@@ -4,11 +4,16 @@ import fs from "fs/promises";
 import path from "path";
 import yaml from "yaml";
 
-import { AppConfig, AppConfigSchema } from "../infrastructure/config.schemas";
+import { AppConfig, AppConfigSchema, WidgetConfig } from '../infrastructure/config.schemas';
 import { WidgetProps } from "./schemas";
 import { baseLogger } from "./logger";
-import { getWeatherWidgetProps } from "@/features/weather/services/weather.actions";
-import { getTabsWidgetProps } from "@/features/tabs/services/tabs.actions";
+import { fetchWeatherWidgetProps } from "@/features/weather/services/weather.actions";
+import { fetchTabsWidgetProps } from "@/features/tabs/services/tabs.actions";
+import { fetchRedditWidgetProps } from "@/features/reddit/services/reddit.actions";
+import { RedditWidgetConfig } from "@/features/reddit/infrastructure/config.schemas";
+import { WeatherWidgetConfig } from "@/features/weather/infrastructure/config.schemas";
+import { fetchYoutubeWidgetProps } from "@/features/youtube/services/youtube.actions";
+import { YoutubeWidgetConfig } from "@/features/youtube/infrastructure/config.schemas";
 
 const logger = baseLogger.getSubLogger({
 	name: "actions",
@@ -26,7 +31,7 @@ export async function getIntialWidgetCache(
 ): Promise<Record<string, WidgetProps | null>> {
 	const widgets = config.ui.pages.flatMap((page) =>
 		page.columns.flatMap((column) => column.widgets)
-	);
+	) as WidgetConfig[];
 
 	const widgetData: Record<string, WidgetProps | null> = {};
 
@@ -35,14 +40,22 @@ export async function getIntialWidgetCache(
 
 		switch (widgetConfig.type) {
 			case "weather":
-				const weatherWidgetProps = await getWeatherWidgetProps(
-					widgetConfig
+				const weatherWidgetProps = await fetchWeatherWidgetProps(
+					widgetConfig as WeatherWidgetConfig
 				);
 				widgetData[key] = weatherWidgetProps;
 				break;
 			case "tabs":
-				const tabsWidgetProps = await getTabsWidgetProps(widgetConfig);
+				const tabsWidgetProps = await fetchTabsWidgetProps(widgetConfig);
 				widgetData[key] = tabsWidgetProps;
+				break;
+			case "reddit":
+				const redditWidgetProps = await fetchRedditWidgetProps(widgetConfig as RedditWidgetConfig);
+				widgetData[key] = redditWidgetProps;
+				break;
+			case "youtube":
+				const youtubeWidgetProps = await fetchYoutubeWidgetProps(widgetConfig as YoutubeWidgetConfig);
+				widgetData[key] = youtubeWidgetProps;
 				break;
 			default:
 				widgetData[key] = null;
