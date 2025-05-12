@@ -11,6 +11,7 @@ import { AppStoreContextProvider } from "@/providers/AppStoreContextProvider";
 import { ReactQueryProvider } from "@/providers/ReactQueryProvider";
 import { SessionProvider } from "next-auth/react";
 import { baseLogger } from "@/lib/logger";
+import { AppTheme } from "../components/AppTheme";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -59,8 +60,10 @@ export default async function RootLayout({
 					>
 						<ReactQueryProvider>
 							<SessionProvider>
-								<DashboardAppBar />
-								{children}
+								<AppTheme>
+									<DashboardAppBar />
+									{children}
+								</AppTheme>
 							</SessionProvider>
 						</ReactQueryProvider>
 					</AppStoreContextProvider>
