@@ -1,8 +1,8 @@
 import { AppConfigSchema } from "@/infrastructure/config.schemas";
-import { z } from "zod";
 import fs from "fs";
+import { zodToJsonSchema } from "zod-to-json-schema";
 
-const jsonSchema = z.toJSONSchema(AppConfigSchema);
+const jsonSchema = zodToJsonSchema(AppConfigSchema);
 
 fs.writeFileSync(
 	".vscode/app-config.schema.json",

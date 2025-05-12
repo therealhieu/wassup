@@ -11,6 +11,15 @@ ui:
           widgets:
             - type: weather
               location: Ho Chi Minh City
+            - type: bookmark
+              title: Bookmarks
+              groups:
+                - title: DSA
+                  bookmarks:
+                    - https://www.neetcode.io
+                - title: System Design
+                  bookmarks:
+                    - https://www.hellointerview.com
         - size: 7
           widgets:
             - type: tabs

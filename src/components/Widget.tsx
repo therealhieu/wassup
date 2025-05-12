@@ -4,8 +4,7 @@ import { TabsWidget } from "@/features/tabs/presentation/TabWidget";
 import { RedditWidget } from "@/features/reddit/presentation/RedditWidget";
 import { YoutubeWidget } from "@/features/youtube/presentation/YoutubeWidget";
 import { WidgetConfig } from "@/infrastructure/config.schemas";
-import { WeatherWidgetInnerProps } from "@/features/weather/presentation/WeatherWidget.components";
-import { useAppStore } from "@/providers/AppStoreContextProvider";
+import { BookmarkWidget } from "@/features/bookmark/presentation/BookmarkWidget";
 
 interface WidgetComponentProps {
 	widgetConfig: WidgetConfig;
@@ -22,6 +21,8 @@ export function Widget({ widgetConfig }: WidgetComponentProps) {
 				return <RedditWidget config={widgetConfig} />;
 			case "youtube":
 				return <YoutubeWidget config={widgetConfig} />;
+			case "bookmark":
+				return <BookmarkWidget config={widgetConfig} />;
 			default: {
 				return (
 					<ErrorWidget

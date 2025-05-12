@@ -1,10 +1,11 @@
 import { z } from "zod";
 
-import { AirQualityConfigSchema } from "../features/air-quality/infrastructure/config";
-import { WeatherWidgetConfigSchema } from "../features/weather/infrastructure/config.schemas";
-import { TabsWidgetConfigSchema } from "../features/tabs/infrastructure/config.schemas";
-import { RedditWidgetConfigSchema } from "../features/reddit/infrastructure/config.schemas";
-import { YoutubeWidgetConfigSchema } from "@/features/youtube/infrastructure/config.schemas";
+import { AirQualityConfig, AirQualityConfigSchema } from "../features/air-quality/infrastructure/config";
+import { WeatherWidgetConfig, WeatherWidgetConfigSchema } from "../features/weather/infrastructure/config.schemas";
+import { TabsWidgetConfig, TabsWidgetConfigSchema } from "../features/tabs/infrastructure/config.schemas";
+import { RedditWidgetConfig, RedditWidgetConfigSchema } from "../features/reddit/infrastructure/config.schemas";
+import { YoutubeWidgetConfig, YoutubeWidgetConfigSchema } from "@/features/youtube/infrastructure/config.schemas";
+import { BookmarkWidgetConfig, BookmarkWidgetConfigSchema } from "@/features/bookmark/infrastructure/config.schemas";
 
 
 export const WidgetConfigSchema = z.lazy(() => z.union([
@@ -12,10 +13,11 @@ export const WidgetConfigSchema = z.lazy(() => z.union([
 	AirQualityConfigSchema,
 	TabsWidgetConfigSchema,
 	RedditWidgetConfigSchema,
-	YoutubeWidgetConfigSchema
+	YoutubeWidgetConfigSchema,
+	BookmarkWidgetConfigSchema,
 ]));
 
-export type WidgetConfig = z.infer<typeof WidgetConfigSchema>;
+export type WidgetConfig = WeatherWidgetConfig | AirQualityConfig | TabsWidgetConfig | RedditWidgetConfig | YoutubeWidgetConfig | BookmarkWidgetConfig;
 
 export const ColumnConfigSchema = z
 	.object({

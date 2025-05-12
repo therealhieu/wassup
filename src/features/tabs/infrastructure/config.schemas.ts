@@ -1,4 +1,4 @@
-import { WidgetConfigSchema } from "@/infrastructure/config.schemas";
+import { WidgetConfig, WidgetConfigSchema } from "@/infrastructure/config.schemas";
 import { z, ZodType } from "zod";
 
 export const TabsWidgetConfigSchema = z
@@ -12,4 +12,10 @@ export const TabsWidgetConfigSchema = z
 		path: ["labels", "tabs"],
 	}) as ZodType;
 
-export type TabsWidgetConfig = z.infer<typeof TabsWidgetConfigSchema>;
+export type TabsWidgetConfig = {
+	type: "tabs";
+	labels: string[];
+	tabs: WidgetConfig[];
+}
+
+

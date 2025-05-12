@@ -1,5 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 "use server";
 
 import fs from "fs/promises";
@@ -11,7 +9,7 @@ import { AppConfig, AppConfigSchema, WidgetConfig } from '../infrastructure/conf
 import { WidgetProps } from "./schemas";
 import { baseLogger } from "./logger";
 import { fetchWeatherWidgetProps } from "@/features/weather/services/weather.actions";
-import { fetchTabInnerProps, fetchTabsWidgetProps } from "@/features/tabs/services/tabs.actions";
+import { fetchTabsWidgetProps } from "@/features/tabs/services/tabs.actions";
 import { fetchRedditWidgetProps } from "@/features/reddit/services/reddit.actions";
 import { RedditWidgetConfig } from "@/features/reddit/infrastructure/config.schemas";
 import { WeatherWidgetConfig } from "@/features/weather/infrastructure/config.schemas";

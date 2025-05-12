@@ -12,12 +12,14 @@
       },
       "required": [
         "port"
-      ]
+      ],
+      "additionalProperties": false
     },
     "ui": {
       "type": "object",
       "properties": {
         "theme": {
+          "type": "string",
           "enum": [
             "light",
             "dark"
@@ -47,7 +49,253 @@
                     "widgets": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/$defs/__schema0"
+                        "anyOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "type": {
+                                "type": "string",
+                                "const": "weather"
+                              },
+                              "provider": {
+                                "type": "string",
+                                "enum": [
+                                  "openmeteo",
+                                  "weatherbit"
+                                ],
+                                "default": "openmeteo"
+                              },
+                              "geonames": {
+                                "type": "object",
+                                "properties": {
+                                  "outputPath": {
+                                    "type": "string",
+                                    "default": "resources/geonames"
+                                  },
+                                  "dataset": {
+                                    "type": "string",
+                                    "enum": [
+                                      "allCountries",
+                                      "cities5000",
+                                      "cities15000"
+                                    ],
+                                    "default": "cities15000"
+                                  }
+                                },
+                                "additionalProperties": false,
+                                "default": {
+                                  "outputPath": "resources/geonames",
+                                  "dataset": "cities15000"
+                                }
+                              },
+                              "location": {
+                                "type": "string"
+                              },
+                              "granularity": {
+                                "type": "string",
+                                "enum": [
+                                  "daily",
+                                  "hourly"
+                                ],
+                                "default": "daily"
+                              },
+                              "forecastDays": {
+                                "type": "number",
+                                "default": 5
+                              },
+                              "temperatureUnit": {
+                                "type": "string",
+                                "enum": [
+                                  "C",
+                                  "F"
+                                ],
+                                "default": "C"
+                              }
+                            },
+                            "required": [
+                              "type",
+                              "location"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "type": {
+                                "type": "string",
+                                "const": "air-quality"
+                              },
+                              "location": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "type",
+                              "location"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "type": {
+                                "type": "string",
+                                "const": "tabs"
+                              },
+                              "labels": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              },
+                              "tabs": {
+                                "type": "array",
+                                "items": {
+                                  "$ref": "#/properties/ui/properties/pages/items/properties/columns/items/properties/widgets/items"
+                                }
+                              }
+                            },
+                            "required": [
+                              "type",
+                              "labels",
+                              "tabs"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "type": {
+                                "type": "string",
+                                "const": "reddit"
+                              },
+                              "subreddit": {
+                                "type": "string"
+                              },
+                              "hideTitle": {
+                                "type": "boolean",
+                                "default": false
+                              },
+                              "sort": {
+                                "type": "string",
+                                "enum": [
+                                  "hot",
+                                  "new",
+                                  "top",
+                                  "rising"
+                                ]
+                              },
+                              "limit": {
+                                "type": "integer",
+                                "exclusiveMinimum": 0,
+                                "maximum": 20,
+                                "default": 5
+                              }
+                            },
+                            "required": [
+                              "type",
+                              "subreddit",
+                              "sort"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "type": {
+                                "type": "string",
+                                "const": "youtube"
+                              },
+                              "showTitle": {
+                                "type": "boolean",
+                                "default": true
+                              },
+                              "limit": {
+                                "type": "number",
+                                "minimum": 1,
+                                "maximum": 50,
+                                "default": 12
+                              },
+                              "channels": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "required": [
+                              "type",
+                              "channels"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "type": {
+                                "type": "string",
+                                "const": "bookmark"
+                              },
+                              "title": {
+                                "type": "string"
+                              },
+                              "bookmarks": {
+                                "type": "array",
+                                "items": {
+                                  "anyOf": [
+                                    {
+                                      "type": "string",
+                                      "format": "uri"
+                                    },
+                                    {
+                                      "type": "object",
+                                      "properties": {
+                                        "title": {
+                                          "type": "string"
+                                        },
+                                        "url": {
+                                          "type": "string",
+                                          "format": "uri"
+                                        }
+                                      },
+                                      "required": [
+                                        "title",
+                                        "url"
+                                      ],
+                                      "additionalProperties": false
+                                    }
+                                  ]
+                                }
+                              },
+                              "groups": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "title": {
+                                      "$ref": "#/properties/ui/properties/pages/items/properties/columns/items/properties/widgets/items/anyOf/5/properties/title"
+                                    },
+                                    "bookmarks": {
+                                      "$ref": "#/properties/ui/properties/pages/items/properties/columns/items/properties/widgets/items/anyOf/5/properties/bookmarks"
+                                    },
+                                    "groups": {
+                                      "$ref": "#/properties/ui/properties/pages/items/properties/columns/items/properties/widgets/items/anyOf/5/properties/groups"
+                                    }
+                                  },
+                                  "required": [
+                                    "title"
+                                  ],
+                                  "additionalProperties": false
+                                }
+                              }
+                            },
+                            "required": [
+                              "type",
+                              "title"
+                            ],
+                            "additionalProperties": false
+                          }
+                        ]
                       }
                     }
                   },
@@ -55,9 +303,7 @@
                     "size",
                     "widgets"
                   ],
-                  "additionalProperties": {
-                    "not": {}
-                  }
+                  "additionalProperties": false
                 }
               }
             },
@@ -66,9 +312,7 @@
               "path",
               "columns"
             ],
-            "additionalProperties": {
-              "not": {}
-            }
+            "additionalProperties": false
           }
         }
       },
@@ -76,191 +320,13 @@
         "theme",
         "pages"
       ],
-      "additionalProperties": {
-        "not": {}
-      }
+      "additionalProperties": false
     }
   },
   "required": [
     "server",
     "ui"
   ],
-  "additionalProperties": {
-    "not": {}
-  },
-  "$defs": {
-    "__schema0": {
-      "anyOf": [
-        {
-          "type": "object",
-          "properties": {
-            "type": {
-              "const": "weather"
-            },
-            "provider": {
-              "enum": [
-                "openmeteo",
-                "weatherbit"
-              ],
-              "default": "openmeteo"
-            },
-            "geonames": {
-              "type": "object",
-              "properties": {
-                "outputPath": {
-                  "type": "string",
-                  "default": "resources/geonames"
-                },
-                "dataset": {
-                  "enum": [
-                    "allCountries",
-                    "cities5000",
-                    "cities15000"
-                  ],
-                  "default": "cities15000"
-                }
-              },
-              "required": [
-                "outputPath",
-                "dataset"
-              ],
-              "default": {
-                "outputPath": "resources/geonames",
-                "dataset": "cities15000"
-              }
-            },
-            "location": {
-              "type": "string"
-            },
-            "granularity": {
-              "enum": [
-                "daily",
-                "hourly"
-              ],
-              "default": "daily"
-            },
-            "forecastDays": {
-              "type": "number",
-              "default": 5
-            },
-            "temperatureUnit": {
-              "enum": [
-                "C",
-                "F"
-              ],
-              "default": "C"
-            }
-          },
-          "required": [
-            "type",
-            "provider",
-            "geonames",
-            "location",
-            "granularity",
-            "forecastDays",
-            "temperatureUnit"
-          ],
-          "additionalProperties": {
-            "not": {}
-          }
-        },
-        {
-          "type": "object",
-          "properties": {
-            "type": {
-              "const": "air-quality"
-            },
-            "location": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "type",
-            "location"
-          ],
-          "additionalProperties": {
-            "not": {}
-          }
-        },
-        {
-          "type": "object",
-          "properties": {
-            "type": {
-              "const": "tabs"
-            },
-            "labels": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "tabs": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/__schema0"
-              }
-            }
-          },
-          "required": [
-            "type",
-            "labels",
-            "tabs"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "type": {
-              "const": "reddit"
-            },
-            "subreddit": {
-              "type": "string"
-            },
-            "hideTitle": {
-              "type": "boolean",
-              "default": false
-            },
-            "sort": {
-              "enum": [
-                "hot",
-                "new",
-                "top",
-                "rising"
-              ]
-            },
-            "limit": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 20,
-              "default": 5
-            }
-          },
-          "required": [
-            "type",
-            "subreddit",
-            "hideTitle",
-            "sort",
-            "limit"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "type": {
-              "const": "youtube"
-            },
-            "channelId": {
-              "type": "string"
-            },
-            "username": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "type"
-          ]
-        }
-      ]
-    }
-  }
+  "additionalProperties": false,
+  "$schema": "http://json-schema.org/draft-07/schema#"
 }

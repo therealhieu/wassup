@@ -2,8 +2,9 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { RedditWidgetInner } from "./RedditWidgetInner";
 
 const meta: Meta<typeof RedditWidgetInner> = {
-	component: RedditWidgetInner,
 	title: "features/reddit/RedditWidget",
+	component: RedditWidgetInner,
+	tags: ["autodocs"],
 };
 
 export default meta;
