@@ -1,8 +1,11 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 "use server";
 
 import fs from "fs/promises";
 import path from "path";
 import yaml from "yaml";
+import * as auth from "@/auth";
 
 import { AppConfig, AppConfigSchema, WidgetConfig } from '../infrastructure/config.schemas';
 import { WidgetProps } from "./schemas";
@@ -67,4 +70,17 @@ export async function getIntialWidgetCache(
 	);
 
 	return widgetData;
+}
+
+export async function signIn(provider: string) {
+	return auth.signIn(provider)
+}
+
+export async function signOut<R extends boolean>(options?: {
+	/** The relative path to redirect to after signing out. By default, the user is redirected to the current page. */
+	redirectTo?: string
+	/** If set to `false`, the `signOut` method will return the URL to redirect to instead of redirecting automatically. */
+	redirect?: R
+}) {
+	return auth.signOut(options)
 }

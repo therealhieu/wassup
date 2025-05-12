@@ -62,7 +62,7 @@ export class YoutubeService {
 
         this.channels = channels;
         logger.info(`Fetched ${channels.length} channels: ${channels.map(c => c.name).join(', ')}`);
-        logger.info(`Fetched channels: ${JSON.stringify(channels)}`);
+        logger.info(`Fetched channels: ${JSON.stringify(channels, null, 2)}`);
 
         return ok(undefined);
     }

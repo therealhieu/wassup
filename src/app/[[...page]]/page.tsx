@@ -8,6 +8,7 @@ import { useAppStore } from "@/providers/AppStoreContextProvider";
 
 export default function CatchAllPage() {
 	const pathname = usePathname() || "/";
+
 	const appConfig = useAppStore((state) => state.appConfig);
 
 	const pageConfig = appConfig.ui.pages.find(

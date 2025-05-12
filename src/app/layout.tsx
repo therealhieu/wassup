@@ -4,11 +4,13 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { Geist, Geist_Mono, Roboto } from "next/font/google";
 
 import type { Metadata } from "next";
-import { DashboardAppBar } from "@/components/DashboardAppBar";
+import { DashboardAppBar } from "@/components/app-bar/DashboardAppBar";
 import { getAppConfig } from "@/lib/actions";
 import { getIntialWidgetCache } from "@/lib/actions";
 import { AppStoreContextProvider } from "@/providers/AppStoreContextProvider";
 import { ReactQueryProvider } from "@/providers/ReactQueryProvider";
+import { auth } from "@/auth";
+import { SessionProvider } from "next-auth/react";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -40,6 +42,7 @@ export default async function RootLayout({
 	const initialConfig = await getAppConfig();
 	console.log("initialConfig", JSON.stringify(initialConfig, null, 2));
 	const initialWidgetData = await getIntialWidgetCache(initialConfig);
+	const session = await auth();
 
 	return (
 		<html lang="en">
@@ -53,16 +56,20 @@ export default async function RootLayout({
 							widgetCache: initialWidgetData,
 						}}
 					>
-						<div
-							style={{
-								maxWidth: "1200px",
-								margin: "0 auto",
-								padding: "8px 16px 0",
-							}}
-						>
-							<DashboardAppBar />
-						</div>
-						<ReactQueryProvider>{children}</ReactQueryProvider>
+						<ReactQueryProvider>
+							<SessionProvider>
+								<div
+									style={{
+										maxWidth: "1200px",
+										margin: "0 auto",
+										padding: "8px 16px 0",
+									}}
+								>
+									<DashboardAppBar />
+								</div>
+								{children}
+							</SessionProvider>
+						</ReactQueryProvider>
 					</AppStoreContextProvider>
 				</AppRouterCacheProvider>
 			</body>

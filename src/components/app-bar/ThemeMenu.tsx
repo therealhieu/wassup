@@ -1,7 +1,17 @@
-import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import {
+	InputBase,
+	MenuItem,
+	Select,
+	SelectChangeEvent,
+	styled,
+} from "@mui/material";
 import { DarkMode, LightMode } from "@mui/icons-material";
 import { useAppStore } from "@/providers/AppStoreContextProvider";
 import { THEME_OPTIONS } from "@/lib/constants";
+
+const StyledInput = styled(InputBase)(() => ({
+	"& .MuiInputBase-input": {},
+}));
 
 export const ThemeMenu = () => {
 	const theme = useAppStore((state) => state.appConfig.ui.theme);
@@ -15,8 +25,6 @@ export const ThemeMenu = () => {
 			}
 			size="small"
 			sx={{
-				minWidth: 120,
-				border: "1px solid white",
 				color: "text.primary",
 				"& .MuiSelect-select": {
 					display: "flex",
@@ -26,7 +34,11 @@ export const ThemeMenu = () => {
 				"& .MuiSvgIcon-root": {
 					color: "text.primary",
 				},
+				"&:hover": {
+					borderColor: "text.primary", // Added hover effect to match SignInButton
+				},
 			}}
+			input={<StyledInput />}
 		>
 			{THEME_OPTIONS.map((option) => (
 				<MenuItem
@@ -43,7 +55,6 @@ export const ThemeMenu = () => {
 					) : (
 						<DarkMode fontSize="small" />
 					)}
-					{option.charAt(0).toUpperCase() + option.slice(1)}
 				</MenuItem>
 			))}
 		</Select>
