@@ -45,7 +45,12 @@ export const RedditWidgetInner = ({
 							{post.title}
 						</Typography>
 						<Typography variant="caption" color="text.secondary">
-							Posted by u/{post.author} • {post.score} points •{" "}
+							{
+								new Date(post.created * 1000)
+									.toISOString()
+									.split("T")[0]
+							}{" "}
+							• u/{post.author} • {post.score} points •{" "}
 							{post.numComments} comments
 						</Typography>
 						{post.selftext && (

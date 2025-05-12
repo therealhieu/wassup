@@ -3,38 +3,43 @@
 import { WidgetProps } from "@/lib/schemas";
 import { TabsWidgetConfig } from "../infrastructure/config.schemas";
 import { fetchWeatherWidgetProps } from "@/features/weather/services/weather.actions";
-import { TabsWidgetProps } from "../presentation/TabWidget";
+import { getDataKey } from "@/lib/utils";
+import { fetchRedditWidgetProps } from "@/features/reddit/services/reddit.actions";
+import { fetchYoutubeWidgetProps } from "@/features/youtube/services/youtube.actions";
+
+
 
 export async function fetchTabsWidgetProps(
-	widgetConfig: TabsWidgetConfig
-): Promise<TabsWidgetProps> {
-	return {
-		config: widgetConfig,
-	};
-}
-
-export async function getTabsWidgetRecord(
 	tabsWidgetConfig: TabsWidgetConfig
 ): Promise<Record<string, WidgetProps | null>> {
-	const record: Record<string, WidgetProps | null> = {};
-	record[JSON.stringify(tabsWidgetConfig)] = await fetchTabsWidgetProps(
-		tabsWidgetConfig
-	);
+	let record: Record<string, WidgetProps | null> = {};
 
 	for (const tab of tabsWidgetConfig.tabs) {
-		const key = JSON.stringify(tab);
+		let innerRecord = {};
+
 		switch (tab.type) {
 			case "weather":
-				record[key] = await fetchWeatherWidgetProps(tab);
+				innerRecord = await fetchWeatherWidgetProps(tab);
+				break;
+			case "reddit":
+				innerRecord = await fetchRedditWidgetProps(tab);
+				break;
+			case "youtube":
+				innerRecord = await fetchYoutubeWidgetProps(tab);
 				break;
 			case "tabs":
-				const nestedRecord = await getTabsWidgetRecord(
+				innerRecord = await fetchTabsWidgetProps(
 					tab as TabsWidgetConfig
 				);
-				record[key] = nestedRecord[JSON.stringify(tab)];
 				break;
 			default:
-				record[key] = null;
+				throw new Error(`Unknown tab type: ${tab.type}`);
+		}
+
+		const key = getDataKey(tab);
+		record = {
+			...record,
+			[key]: innerRecord
 		}
 	}
 

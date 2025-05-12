@@ -11,7 +11,7 @@ import { AppConfig, AppConfigSchema, WidgetConfig } from '../infrastructure/conf
 import { WidgetProps } from "./schemas";
 import { baseLogger } from "./logger";
 import { fetchWeatherWidgetProps } from "@/features/weather/services/weather.actions";
-import { fetchTabsWidgetProps } from "@/features/tabs/services/tabs.actions";
+import { fetchTabInnerProps, fetchTabsWidgetProps } from "@/features/tabs/services/tabs.actions";
 import { fetchRedditWidgetProps } from "@/features/reddit/services/reddit.actions";
 import { RedditWidgetConfig } from "@/features/reddit/infrastructure/config.schemas";
 import { WeatherWidgetConfig } from "@/features/weather/infrastructure/config.schemas";
@@ -37,7 +37,7 @@ export async function getIntialwidgetData(
 		page.columns.flatMap((column) => column.widgets)
 	) as WidgetConfig[];
 
-	const widgetData: Record<string, WidgetProps | null> = {};
+	let widgetData: Record<string, WidgetProps | null> = {};
 
 	for (const widgetConfig of widgets) {
 		const key = getDataKey(widgetConfig);
@@ -51,7 +51,10 @@ export async function getIntialwidgetData(
 				break;
 			case "tabs":
 				const tabsWidgetProps = await fetchTabsWidgetProps(widgetConfig);
-				widgetData[key] = tabsWidgetProps;
+				widgetData = {
+					...widgetData,
+					...tabsWidgetProps
+				};
 				break;
 			case "reddit":
 				const redditWidgetProps = await fetchRedditWidgetProps(widgetConfig as RedditWidgetConfig);
