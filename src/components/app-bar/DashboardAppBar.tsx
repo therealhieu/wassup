@@ -20,38 +20,48 @@ export const DashboardAppBar = () => {
 	const { name, image } = session?.user || {};
 
 	return (
-		<AppBar
-			position="static"
-			sx={{
-				mb: 2,
-				borderRadius: "16px",
-				bgcolor: "background.default",
-				color: "text.primary",
+		<div
+			style={{
+				maxWidth: "800px",
+				margin: "0 auto",
+				padding: "8px 16px 0",
 			}}
 		>
-			<Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-				<RouterMenu />
-				<div style={{ display: "flex", gap: "0.5rem" }}>
-					<ThemeMenu />
-					{(() => {
-						switch (status) {
-							case "loading":
-								return null;
-							case "unauthenticated":
-								return <SignInButton />;
-							case "authenticated":
-								return (
-									<UserProfile
-										username={name || ""}
-										avatarUrl={image || ""}
-									/>
-								);
-							default:
-								return null;
-						}
-					})()}
-				</div>
-			</Toolbar>
-		</AppBar>
+			<AppBar
+				position="static"
+				sx={{
+					mb: 2,
+					borderRadius: "16px",
+					bgcolor: "background.default",
+					color: "text.primary",
+				}}
+			>
+				<Toolbar
+					sx={{ display: "flex", justifyContent: "space-between" }}
+				>
+					<RouterMenu />
+					<div style={{ display: "flex", gap: "0.5rem" }}>
+						<ThemeMenu />
+						{(() => {
+							switch (status) {
+								case "loading":
+									return null;
+								case "unauthenticated":
+									return <SignInButton />;
+								case "authenticated":
+									return (
+										<UserProfile
+											username={name || ""}
+											avatarUrl={image || ""}
+										/>
+									);
+								default:
+									return null;
+							}
+						})()}
+					</div>
+				</Toolbar>
+			</AppBar>
+		</div>
 	);
 };
