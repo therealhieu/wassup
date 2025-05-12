@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { AppConfigSliceSchema } from "./slices/app-config-slice.schemas";
-import { WidgetCacheSliceSchema } from "./slices/widget-cache-slice.schemas";
+import { widgetDataSliceSchema } from "./slices/widget-cache-slice.schemas";
 import { AppConfigSchema } from "@/infrastructure/config.schemas";
 import { WidgetPropsSchema } from "@/lib/schemas";
 
@@ -9,14 +9,14 @@ export type ThemeOption = z.infer<typeof ThemeOptionSchema>;
 
 export const AppStoreSchema = z.intersection(
 	AppConfigSliceSchema,
-	WidgetCacheSliceSchema
+	widgetDataSliceSchema
 );
 
 export type AppStore = z.infer<typeof AppStoreSchema>;
 
 export const AppStoreInitialStateSchema = z.object({
 	appConfig: AppConfigSchema,
-	widgetCache: z.record(z.string(), WidgetPropsSchema.nullable()),
+	widgetData: z.record(z.string(), WidgetPropsSchema.nullable()),
 });
 
 export type AppStoreInitialState = z.infer<typeof AppStoreInitialStateSchema>;

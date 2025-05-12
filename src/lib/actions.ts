@@ -17,6 +17,7 @@ import { RedditWidgetConfig } from "@/features/reddit/infrastructure/config.sche
 import { WeatherWidgetConfig } from "@/features/weather/infrastructure/config.schemas";
 import { fetchYoutubeWidgetProps } from "@/features/youtube/services/youtube.actions";
 import { YoutubeWidgetConfig } from "@/features/youtube/infrastructure/config.schemas";
+import { getDataKey } from "./utils";
 
 const logger = baseLogger.getSubLogger({
 	name: "actions",
@@ -29,7 +30,7 @@ export async function getAppConfig(): Promise<AppConfig> {
 	return AppConfigSchema.parse(obj);
 }
 
-export async function getIntialWidgetCache(
+export async function getIntialwidgetData(
 	config: AppConfig
 ): Promise<Record<string, WidgetProps | null>> {
 	const widgets = config.ui.pages.flatMap((page) =>
@@ -39,7 +40,7 @@ export async function getIntialWidgetCache(
 	const widgetData: Record<string, WidgetProps | null> = {};
 
 	for (const widgetConfig of widgets) {
-		const key = JSON.stringify(widgetConfig);
+		const key = getDataKey(widgetConfig);
 
 		switch (widgetConfig.type) {
 			case "weather":

@@ -6,7 +6,7 @@ import { Geist, Geist_Mono, Roboto } from "next/font/google";
 import type { Metadata } from "next";
 import { DashboardAppBar } from "@/components/app-bar/DashboardAppBar";
 import { getAppConfig } from "@/lib/actions";
-import { getIntialWidgetCache } from "@/lib/actions";
+import { getIntialwidgetData } from "@/lib/actions";
 import { AppStoreContextProvider } from "@/providers/AppStoreContextProvider";
 import { ReactQueryProvider } from "@/providers/ReactQueryProvider";
 import { SessionProvider } from "next-auth/react";
@@ -44,7 +44,7 @@ export default async function RootLayout({
 }>) {
 	const initialConfig = await getAppConfig();
 	logger.info("initialConfig", JSON.stringify(initialConfig, null, 2));
-	const initialWidgetData = await getIntialWidgetCache(initialConfig);
+	const initialWidgetData = await getIntialwidgetData(initialConfig);
 
 	return (
 		<html lang="en">
@@ -55,7 +55,7 @@ export default async function RootLayout({
 					<AppStoreContextProvider
 						initialState={{
 							appConfig: initialConfig,
-							widgetCache: initialWidgetData,
+							widgetData: initialWidgetData,
 						}}
 					>
 						<ReactQueryProvider>

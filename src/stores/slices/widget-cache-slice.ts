@@ -1,29 +1,29 @@
 import { WidgetProps } from "@/lib/schemas";
 import { StateCreator } from "zustand";
-import { WidgetCacheSlice } from "./widget-cache-slice.schemas";
+import { widgetDataSlice } from "./widget-cache-slice.schemas";
 
-export const createWidgetCacheSlice = (
-	initalWidgetCache: Record<string, WidgetProps | null>
-): StateCreator<WidgetCacheSlice> => {
+export const createwidgetDataSlice = (
+	initalwidgetData: Record<string, WidgetProps | null>
+): StateCreator<widgetDataSlice> => {
 	return (set) => ({
-		widgetCache: initalWidgetCache,
-		setWidgetCache: (widgetConfigJson: string, widgetProps: WidgetProps) =>
+		widgetData: initalwidgetData,
+		setwidgetData: (widgetConfigJson: string, widgetProps: WidgetProps) =>
 			set((state) => ({
-				widgetCache: {
-					...state.widgetCache,
+				widgetData: {
+					...state.widgetData,
 					[widgetConfigJson]: widgetProps,
 				},
 			})),
-		removeWidgetCache: (widgetConfigJson: string) =>
+		removewidgetData: (widgetConfigJson: string) =>
 			set((state) => {
-				const newEntries = Object.entries(state.widgetCache).filter(
+				const newEntries = Object.entries(state.widgetData).filter(
 					([key]) => key !== widgetConfigJson
 				);
 				return {
-					widgetCache: Object.fromEntries(newEntries),
+					widgetData: Object.fromEntries(newEntries),
 				};
 			}),
 
-		clearWidgetCache: () => set({ widgetCache: {} }),
+		clearwidgetData: () => set({ widgetData: {} }),
 	});
 };

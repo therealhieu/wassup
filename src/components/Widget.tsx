@@ -1,11 +1,11 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 import { ErrorWidget } from "./ErrorWidget";
 import { WeatherWidget } from "@/features/weather/presentation/WeatherWidget";
 import { TabsWidget } from "@/features/tabs/presentation/TabWidget";
 import { RedditWidget } from "@/features/reddit/presentation/RedditWidget";
 import { YoutubeWidget } from "@/features/youtube/presentation/YoutubeWidget";
 import { WidgetConfig } from "@/infrastructure/config.schemas";
+import { WeatherWidgetInnerProps } from "@/features/weather/presentation/WeatherWidget.components";
+import { useAppStore } from "@/providers/AppStoreContextProvider";
 
 interface WidgetComponentProps {
 	widgetConfig: WidgetConfig;
