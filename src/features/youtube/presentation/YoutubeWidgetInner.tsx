@@ -58,13 +58,10 @@ export const YoutubeWidgetInner = (props: YoutubeWidgetInnerProps) => {
 		<Grid container spacing={1} sx={{ boxShadow: 1, padding: 1 }}>
 			{config.showTitle && (
 				<Grid size={{ xs: 12 }}>
-					<Typography
-						variant="h5"
-						align="left"
-						sx={{ mb: 2, m: 0, fontStyle: "italic" }}
-						component="h2"
-					>
-						YouTube{" "}
+					<Typography variant="h5" gutterBottom>
+						YouTube
+					</Typography>
+					<Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
 						{channels.map((channel, index) => {
 							const channelName =
 								channel.name.length > 20
@@ -75,13 +72,7 @@ export const YoutubeWidgetInner = (props: YoutubeWidgetInnerProps) => {
 								<Chip
 									key={channel.id}
 									label={channelName}
-									size="small"
 									color={currentChipColor(index) as ChipColor}
-									variant={
-										selectedChannel === channel.name
-											? "filled"
-											: "outlined"
-									}
 									onClick={() =>
 										setSelectedChannel(
 											selectedChannel ===
@@ -90,17 +81,15 @@ export const YoutubeWidgetInner = (props: YoutubeWidgetInnerProps) => {
 												: channel.channelUrl
 										)
 									}
-									sx={{
-										mr: 0.5,
-										mb: 0.5,
-										"&:hover": {
-											cursor: "pointer",
-										},
-									}}
+									variant={
+										selectedChannel === channel.channelUrl
+											? "filled"
+											: "outlined"
+									}
 								/>
 							);
 						})}
-					</Typography>
+					</Box>
 				</Grid>
 			)}
 			<Box
