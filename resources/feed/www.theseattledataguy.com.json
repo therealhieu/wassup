@@ -1,0 +1,221 @@
+{
+  "?xml": {
+    "version": "1.0",
+    "encoding": "UTF-8"
+  },
+  "rss": {
+    "channel": {
+      "title": "Seattle Data Guy",
+      "link": [
+        {
+          "href": "https://www.theseattledataguy.com/feed/",
+          "rel": "self",
+          "type": "application/rss+xml"
+        },
+        "https://www.theseattledataguy.com/"
+      ],
+      "description": "Data Engineer, Scientist, Speaker and All Around Data Guy",
+      "lastBuildDate": "Fri, 09 May 2025 22:17:25 +0000",
+      "language": "en-US",
+      "updatePeriod": "hourly",
+      "updateFrequency": 1,
+      "generator": "https://wordpress.org/?v=6.7.1",
+      "image": {
+        "url": "https://i0.wp.com/www.theseattledataguy.com/wp-content/uploads/2017/02/cropped-cropped-Seattle-Data-Guy-Logo.jpg?fit=32%2C32&#038;ssl=1",
+        "title": "Seattle Data Guy",
+        "link": "https://www.theseattledataguy.com/",
+        "width": 32,
+        "height": 32
+      },
+      "site": 131097565,
+      "item": [
+        {
+          "title": "6 Real-World ETL Use Cases with Estuary Flow",
+          "link": "https://www.theseattledataguy.com/6-real-world-etl-use-cases-with-estuary-flow/",
+          "comments": [
+            "https://www.theseattledataguy.com/6-real-world-etl-use-cases-with-estuary-flow/#respond",
+            0
+          ],
+          "creator": "research@theseattledataguy.com",
+          "pubDate": "Fri, 09 May 2025 22:17:25 +0000",
+          "category": [
+            "data engineering",
+            "Big Data",
+            "Consulting",
+            "Data Science"
+          ],
+          "guid": {
+            "#text": "https://www.theseattledataguy.com/?p=3313",
+            "isPermaLink": "false"
+          },
+          "description": "<p>After working in data for over a decade, one thing that remains the same is the need to create data pipelines. Whether you call them ETLs/ELTs or something else, companies need to move and process data for analytics. The question becomes how companies are actually building their data pipelines. What ETL tools are they actually&#8230; <br /> <a class=\"button small blue\" href=\"https://www.theseattledataguy.com/6-real-world-etl-use-cases-with-estuary-flow/\">Read more</a></p>\n<p>The post <a href=\"https://www.theseattledataguy.com/6-real-world-etl-use-cases-with-estuary-flow/\">6 Real-World ETL Use Cases with Estuary Flow</a> appeared first on <a href=\"https://www.theseattledataguy.com\">Seattle Data Guy</a>.</p>\n",
+          "commentRss": "https://www.theseattledataguy.com/6-real-world-etl-use-cases-with-estuary-flow/feed/",
+          "post-id": 3313
+        },
+        {
+          "title": "How To Migrate From SQL Server To Snowflake",
+          "link": "https://www.theseattledataguy.com/how-to-migrate-from-sql-server-to-snowflake/",
+          "comments": [
+            "https://www.theseattledataguy.com/how-to-migrate-from-sql-server-to-snowflake/#respond",
+            0
+          ],
+          "creator": "research@theseattledataguy.com",
+          "pubDate": "Mon, 28 Apr 2025 01:13:57 +0000",
+          "category": "data engineering",
+          "guid": {
+            "#text": "https://www.theseattledataguy.com/?p=3300",
+            "isPermaLink": "false"
+          },
+          "description": "<p>Over the past three years our teams have noticed a pattern. Many companies looking to migrate to the cloud go from SQL Server to Snowflake. There are many reasons this makes sense. One of the reasons and common benefits was that teams found it far easier to manage that SQL Server and in almost every&#8230; <br /> <a class=\"button small blue\" href=\"https://www.theseattledataguy.com/how-to-migrate-from-sql-server-to-snowflake/\">Read more</a></p>\n<p>The post <a href=\"https://www.theseattledataguy.com/how-to-migrate-from-sql-server-to-snowflake/\">How To Migrate From SQL Server To Snowflake</a> appeared first on <a href=\"https://www.theseattledataguy.com\">Seattle Data Guy</a>.</p>\n",
+          "commentRss": "https://www.theseattledataguy.com/how-to-migrate-from-sql-server-to-snowflake/feed/",
+          "post-id": 3300
+        },
+        {
+          "title": "What Is BigQuery And How Do You Load Data Into It?",
+          "link": "https://www.theseattledataguy.com/what-is-bigquery-and-how-do-you-load-data-into-it/",
+          "comments": [
+            "https://www.theseattledataguy.com/what-is-bigquery-and-how-do-you-load-data-into-it/#respond",
+            0
+          ],
+          "creator": "research@theseattledataguy.com",
+          "pubDate": "Tue, 22 Apr 2025 04:41:22 +0000",
+          "category": [
+            "data engineering consulting",
+            "Big Data",
+            "data engineering"
+          ],
+          "guid": {
+            "#text": "https://www.theseattledataguy.com/?p=3226",
+            "isPermaLink": "false"
+          },
+          "description": "<p>If you work in data, then you’ve likely used BigQuery and you’ve likely used it without really thinking about how it operates under the hood. On the surface BigQuery is Google Cloud’s fully-managed, serverless data warehouse. It’s the Redshift of GCP except we like it a little more. The question becomes, how does it work?&#8230; <br /> <a class=\"button small blue\" href=\"https://www.theseattledataguy.com/what-is-bigquery-and-how-do-you-load-data-into-it/\">Read more</a></p>\n<p>The post <a href=\"https://www.theseattledataguy.com/what-is-bigquery-and-how-do-you-load-data-into-it/\">What Is BigQuery And How Do You Load Data Into It?</a> appeared first on <a href=\"https://www.theseattledataguy.com\">Seattle Data Guy</a>.</p>\n",
+          "commentRss": "https://www.theseattledataguy.com/what-is-bigquery-and-how-do-you-load-data-into-it/feed/",
+          "post-id": 3226
+        },
+        {
+          "title": "How To Set Up Your Data Infrastructure In 2025 – Part 1",
+          "link": "https://www.theseattledataguy.com/how-to-set-up-your-data-infrastructure-in-2025-part-1/",
+          "comments": [
+            "https://www.theseattledataguy.com/how-to-set-up-your-data-infrastructure-in-2025-part-1/#respond",
+            0
+          ],
+          "creator": "research@theseattledataguy.com",
+          "pubDate": "Tue, 15 Apr 2025 20:01:26 +0000",
+          "category": [
+            "data engineering",
+            "analytics",
+            "Big Data"
+          ],
+          "guid": {
+            "#text": "https://www.theseattledataguy.com/?p=3257",
+            "isPermaLink": "false"
+          },
+          "description": "<p>Planning out your data infrastructure in 2025 can feel wildly different than it did even five years ago. The ecosystem is louder, flashier, and more fragmented. Everyone is talking about AI, chatbots, LLMs, vector databases, and whether your data stack is &#8220;AI-ready.&#8221; Vendors promise magic, just plug in their tool and watch your insights appear.&#8230; <br /> <a class=\"button small blue\" href=\"https://www.theseattledataguy.com/how-to-set-up-your-data-infrastructure-in-2025-part-1/\">Read more</a></p>\n<p>The post <a href=\"https://www.theseattledataguy.com/how-to-set-up-your-data-infrastructure-in-2025-part-1/\">How To Set Up Your Data Infrastructure In 2025 – Part 1</a> appeared first on <a href=\"https://www.theseattledataguy.com\">Seattle Data Guy</a>.</p>\n",
+          "commentRss": "https://www.theseattledataguy.com/how-to-set-up-your-data-infrastructure-in-2025-part-1/feed/",
+          "post-id": 3257
+        },
+        {
+          "title": "Best Automation Tools In 2025 for Data Pipelines, Integrations, and More",
+          "link": "https://www.theseattledataguy.com/best-automation-tools-in-2025-for-data-pipelines-integrations-and-more/",
+          "creator": "research@theseattledataguy.com",
+          "pubDate": "Mon, 31 Mar 2025 19:34:42 +0000",
+          "category": [
+            "big data",
+            "data engineering",
+            "Uncategorized",
+            "automation",
+            "data loading",
+            "elt",
+            "et"
+          ],
+          "guid": {
+            "#text": "https://www.theseattledataguy.com/?p=3216",
+            "isPermaLink": "false"
+          },
+          "description": "<p>Since I started working in tech, one goal that kept coming up was workflow automation. Whether automating a report or setting up retraining pipelines for machine learning models, the idea was always the same: do less manual work and get more consistent results. But automation isn’t just for analytics. RevOps teams want to streamline processes&#8230; <br /> <a class=\"button small blue\" href=\"https://www.theseattledataguy.com/best-automation-tools-in-2025-for-data-pipelines-integrations-and-more/\">Read more</a></p>\n<p>The post <a href=\"https://www.theseattledataguy.com/best-automation-tools-in-2025-for-data-pipelines-integrations-and-more/\">Best Automation Tools In 2025 for Data Pipelines, Integrations, and More</a> appeared first on <a href=\"https://www.theseattledataguy.com\">Seattle Data Guy</a>.</p>\n",
+          "post-id": 3216
+        },
+        {
+          "title": "Alternatives to Talend – How To Migrate Away From Talend For Your Data Pipelines",
+          "link": "https://www.theseattledataguy.com/alternatives-to-talend-how-to-migrate-away-from-talend-for-your-data-pipelines/",
+          "creator": "research@theseattledataguy.com",
+          "pubDate": "Wed, 19 Mar 2025 22:14:32 +0000",
+          "category": [
+            "data engineering",
+            "analytics",
+            "Big Data",
+            "data pipelines",
+            "elt",
+            "etl"
+          ],
+          "guid": {
+            "#text": "https://www.theseattledataguy.com/?p=3206",
+            "isPermaLink": "false"
+          },
+          "description": "<p>Data integration is critical for organizations of all sizes and industries—and one of the leading providers of data integration tools is Talend, which offers the flagship product Talend Studio. In 2023, Talend was acquired by Qlik, combining the two companies’ data integration and analytics tools under one roof. In January 2024, Talend discontinued Talend Open&#8230; <br /> <a class=\"button small blue\" href=\"https://www.theseattledataguy.com/alternatives-to-talend-how-to-migrate-away-from-talend-for-your-data-pipelines/\">Read more</a></p>\n<p>The post <a href=\"https://www.theseattledataguy.com/alternatives-to-talend-how-to-migrate-away-from-talend-for-your-data-pipelines/\">Alternatives to Talend – How To Migrate Away From Talend For Your Data Pipelines</a> appeared first on <a href=\"https://www.theseattledataguy.com\">Seattle Data Guy</a>.</p>\n",
+          "post-id": 3206
+        },
+        {
+          "title": "What Is PDFMiner And Should You Use It &#8211; How To Extract Data From PDFs",
+          "link": "https://www.theseattledataguy.com/what-is-pdfminer-and-should-you-use-it-how-to-extract-data-from-pdfs/",
+          "creator": "research@theseattledataguy.com",
+          "pubDate": "Sat, 18 Jan 2025 23:25:02 +0000",
+          "category": [
+            "data engineering",
+            "data warehouse"
+          ],
+          "guid": {
+            "#text": "https://www.theseattledataguy.com/?p=3172",
+            "isPermaLink": "false"
+          },
+          "description": "<p>PDF files are one of the most popular file formats today. Because they can preserve the visual layout of documents and are compatible with a wide range of devices and operating systems, PDFs are used for everything from business forms and educational material to creative designs. However, PDF files also present multiple challenges when it&#8230; <br /> <a class=\"button small blue\" href=\"https://www.theseattledataguy.com/what-is-pdfminer-and-should-you-use-it-how-to-extract-data-from-pdfs/\">Read more</a></p>\n<p>The post <a href=\"https://www.theseattledataguy.com/what-is-pdfminer-and-should-you-use-it-how-to-extract-data-from-pdfs/\">What Is PDFMiner And Should You Use It &#8211; How To Extract Data From PDFs</a> appeared first on <a href=\"https://www.theseattledataguy.com\">Seattle Data Guy</a>.</p>\n",
+          "post-id": 3172
+        },
+        {
+          "title": "The Basics of SFTP: Authentication, Encryption, and File Management",
+          "link": "https://www.theseattledataguy.com/the-basics-of-sftp-authentication-encryption-and-file-management/",
+          "creator": "research@theseattledataguy.com",
+          "pubDate": "Mon, 23 Dec 2024 23:25:37 +0000",
+          "category": "data engineering",
+          "guid": {
+            "#text": "https://www.theseattledataguy.com/?p=3151",
+            "isPermaLink": "false"
+          },
+          "description": "<p>If you&#8217;re looking to pass hundreds of GBs of data quickly, you&#8217;re likely not going to use a REST API. That&#8217;s why every day, companies share data sets of users, patient claims, financial transactions, and more via SFTP. If you’ve been in the industry for a while, you’ve probably come across automated SFTP jobs that&#8230; <br /> <a class=\"button small blue\" href=\"https://www.theseattledataguy.com/the-basics-of-sftp-authentication-encryption-and-file-management/\">Read more</a></p>\n<p>The post <a href=\"https://www.theseattledataguy.com/the-basics-of-sftp-authentication-encryption-and-file-management/\">The Basics of SFTP: Authentication, Encryption, and File Management</a> appeared first on <a href=\"https://www.theseattledataguy.com\">Seattle Data Guy</a>.</p>\n",
+          "post-id": 3151
+        },
+        {
+          "title": "Alternatives to Azure Document Intelligence Studio: Exploring Powerful Document Analysis Tools",
+          "link": "https://www.theseattledataguy.com/alternatives-to-azure-document-intelligence-studio-exploring-powerful-document-analysis-tools/",
+          "creator": "research@theseattledataguy.com",
+          "pubDate": "Fri, 13 Dec 2024 00:13:09 +0000",
+          "category": [
+            "Uncategorized",
+            "data engineering",
+            "pdf"
+          ],
+          "guid": {
+            "#text": "https://www.theseattledataguy.com/?p=3141",
+            "isPermaLink": "false"
+          },
+          "description": "<p>Document Intelligence Studio is a data extraction tool that can pull unstructured data from diverse documents, including invoices, contracts, bank statements, pay stubs, and health insurance cards. The cloud-based tool from Microsoft Azure comes with several prebuilt models designed to extract data from popular document types. However, you can also use labeled datasets to train&#8230; <br /> <a class=\"button small blue\" href=\"https://www.theseattledataguy.com/alternatives-to-azure-document-intelligence-studio-exploring-powerful-document-analysis-tools/\">Read more</a></p>\n<p>The post <a href=\"https://www.theseattledataguy.com/alternatives-to-azure-document-intelligence-studio-exploring-powerful-document-analysis-tools/\">Alternatives to Azure Document Intelligence Studio: Exploring Powerful Document Analysis Tools</a> appeared first on <a href=\"https://www.theseattledataguy.com\">Seattle Data Guy</a>.</p>\n",
+          "post-id": 3141
+        },
+        {
+          "title": "Preparing Your Data Infrastructure for 2025: Lessons from the Past, Strategies for the Future",
+          "link": "https://www.theseattledataguy.com/preparing-your-data-infrastructure-for-2025-lessons-from-the-past-strategies-for-the-future/",
+          "creator": "research@theseattledataguy.com",
+          "pubDate": "Tue, 03 Dec 2024 23:06:34 +0000",
+          "category": "Uncategorized",
+          "guid": {
+            "#text": "https://www.theseattledataguy.com/?p=3129",
+            "isPermaLink": "false"
+          },
+          "description": "<p>When I broke into the data world, everyone wanted to hire data scientists that would let their companies become more data driven. There were statistics about the exabytes of data that we were creating and the value it would provide. However, a few years into my career, the data world started to make a pivot&#8230; <br /> <a class=\"button small blue\" href=\"https://www.theseattledataguy.com/preparing-your-data-infrastructure-for-2025-lessons-from-the-past-strategies-for-the-future/\">Read more</a></p>\n<p>The post <a href=\"https://www.theseattledataguy.com/preparing-your-data-infrastructure-for-2025-lessons-from-the-past-strategies-for-the-future/\">Preparing Your Data Infrastructure for 2025: Lessons from the Past, Strategies for the Future</a> appeared first on <a href=\"https://www.theseattledataguy.com\">Seattle Data Guy</a>.</p>\n",
+          "post-id": 3129
+        }
+      ]
+    },
+    "version": "2.0"
+  }
+}

@@ -1,23 +1,48 @@
 import { z } from "zod";
 
-import { AirQualityConfig, AirQualityConfigSchema } from "../features/air-quality/infrastructure/config";
-import { WeatherWidgetConfig, WeatherWidgetConfigSchema } from "../features/weather/infrastructure/config.schemas";
-import { TabsWidgetConfig, TabsWidgetConfigSchema } from "../features/tabs/infrastructure/config.schemas";
-import { RedditWidgetConfig, RedditWidgetConfigSchema } from "../features/reddit/infrastructure/config.schemas";
-import { YoutubeWidgetConfig, YoutubeWidgetConfigSchema } from "@/features/youtube/infrastructure/config.schemas";
-import { BookmarkWidgetConfig, BookmarkWidgetConfigSchema } from "@/features/bookmark/infrastructure/config.schemas";
-
-
-export const WidgetConfigSchema = z.lazy(() => z.union([
+import {
+	WeatherWidgetConfig,
 	WeatherWidgetConfigSchema,
-	AirQualityConfigSchema,
+} from "../features/weather/infrastructure/config.schemas";
+import {
+	TabsWidgetConfig,
 	TabsWidgetConfigSchema,
+} from "../features/tabs/infrastructure/config.schemas";
+import {
+	RedditWidgetConfig,
 	RedditWidgetConfigSchema,
+} from "../features/reddit/infrastructure/config.schemas";
+import {
+	YoutubeWidgetConfig,
 	YoutubeWidgetConfigSchema,
+} from "@/features/youtube/infrastructure/config.schemas";
+import {
+	BookmarkWidgetConfig,
 	BookmarkWidgetConfigSchema,
-]));
+} from "@/features/bookmark/infrastructure/config.schemas";
+import {
+	FeedWidgetConfig,
+	FeedWidgetConfigSchema,
+} from "@/features/feed/infrastructure/config.schemas";
 
-export type WidgetConfig = WeatherWidgetConfig | AirQualityConfig | TabsWidgetConfig | RedditWidgetConfig | YoutubeWidgetConfig | BookmarkWidgetConfig;
+export const WidgetConfigSchema = z.lazy(() =>
+	z.union([
+		WeatherWidgetConfigSchema,
+		TabsWidgetConfigSchema,
+		RedditWidgetConfigSchema,
+		YoutubeWidgetConfigSchema,
+		BookmarkWidgetConfigSchema,
+		FeedWidgetConfigSchema,
+	])
+);
+
+export type WidgetConfig =
+	| WeatherWidgetConfig
+	| TabsWidgetConfig
+	| RedditWidgetConfig
+	| YoutubeWidgetConfig
+	| BookmarkWidgetConfig
+	| FeedWidgetConfig;
 
 export const ColumnConfigSchema = z
 	.object({

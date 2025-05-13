@@ -123,23 +123,6 @@
                             "properties": {
                               "type": {
                                 "type": "string",
-                                "const": "air-quality"
-                              },
-                              "location": {
-                                "type": "string"
-                              }
-                            },
-                            "required": [
-                              "type",
-                              "location"
-                            ],
-                            "additionalProperties": false
-                          },
-                          {
-                            "type": "object",
-                            "properties": {
-                              "type": {
-                                "type": "string",
                                 "const": "tabs"
                               },
                               "labels": {
@@ -265,7 +248,8 @@
                                       "additionalProperties": false
                                     }
                                   ]
-                                }
+                                },
+                                "default": []
                               },
                               "groups": {
                                 "type": "array",
@@ -273,25 +257,51 @@
                                   "type": "object",
                                   "properties": {
                                     "title": {
-                                      "$ref": "#/properties/ui/properties/pages/items/properties/columns/items/properties/widgets/items/anyOf/5/properties/title"
+                                      "$ref": "#/properties/ui/properties/pages/items/properties/columns/items/properties/widgets/items/anyOf/4/properties/title"
                                     },
                                     "bookmarks": {
-                                      "$ref": "#/properties/ui/properties/pages/items/properties/columns/items/properties/widgets/items/anyOf/5/properties/bookmarks"
+                                      "$ref": "#/properties/ui/properties/pages/items/properties/columns/items/properties/widgets/items/anyOf/4/properties/bookmarks"
                                     },
                                     "groups": {
-                                      "$ref": "#/properties/ui/properties/pages/items/properties/columns/items/properties/widgets/items/anyOf/5/properties/groups"
+                                      "$ref": "#/properties/ui/properties/pages/items/properties/columns/items/properties/widgets/items/anyOf/4/properties/groups"
                                     }
                                   },
                                   "required": [
                                     "title"
                                   ],
                                   "additionalProperties": false
-                                }
+                                },
+                                "default": []
                               }
                             },
                             "required": [
                               "type",
                               "title"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "type": {
+                                "type": "string",
+                                "const": "feed"
+                              },
+                              "urls": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string",
+                                  "format": "uri"
+                                }
+                              },
+                              "limit": {
+                                "type": "number",
+                                "default": 10
+                              }
+                            },
+                            "required": [
+                              "type",
+                              "urls"
                             ],
                             "additionalProperties": false
                           }

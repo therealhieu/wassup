@@ -5,7 +5,11 @@ import path from "path";
 import yaml from "yaml";
 import * as auth from "@/auth";
 
-import { AppConfig, AppConfigSchema, WidgetConfig } from '../infrastructure/config.schemas';
+import {
+	AppConfig,
+	AppConfigSchema,
+	WidgetConfig,
+} from "../infrastructure/config.schemas";
 import { WidgetProps } from "./schemas";
 import { baseLogger } from "./logger";
 import { fetchWeatherWidgetProps } from "@/features/weather/services/weather.actions";
@@ -16,6 +20,8 @@ import { WeatherWidgetConfig } from "@/features/weather/infrastructure/config.sc
 import { fetchYoutubeWidgetProps } from "@/features/youtube/services/youtube.actions";
 import { YoutubeWidgetConfig } from "@/features/youtube/infrastructure/config.schemas";
 import { getDataKey } from "./utils";
+import { FeedWidgetConfig } from "@/features/feed/infrastructure/config.schemas";
+import { fetchFeedWidgetProps } from "@/features/feed/services/rss.actions";
 
 const logger = baseLogger.getSubLogger({
 	name: "actions",
@@ -48,19 +54,31 @@ export async function getIntialwidgetData(
 				widgetData[key] = weatherWidgetProps;
 				break;
 			case "tabs":
-				const tabsWidgetProps = await fetchTabsWidgetProps(widgetConfig);
+				const tabsWidgetProps = await fetchTabsWidgetProps(
+					widgetConfig
+				);
 				widgetData = {
 					...widgetData,
-					...tabsWidgetProps
+					...tabsWidgetProps,
 				};
 				break;
 			case "reddit":
-				const redditWidgetProps = await fetchRedditWidgetProps(widgetConfig as RedditWidgetConfig);
+				const redditWidgetProps = await fetchRedditWidgetProps(
+					widgetConfig as RedditWidgetConfig
+				);
 				widgetData[key] = redditWidgetProps;
 				break;
 			case "youtube":
-				const youtubeWidgetProps = await fetchYoutubeWidgetProps(widgetConfig as YoutubeWidgetConfig);
+				const youtubeWidgetProps = await fetchYoutubeWidgetProps(
+					widgetConfig as YoutubeWidgetConfig
+				);
 				widgetData[key] = youtubeWidgetProps;
+				break;
+			case "feed":
+				const feedWidgetProps = await fetchFeedWidgetProps(
+					widgetConfig as FeedWidgetConfig
+				);
+				widgetData[key] = feedWidgetProps;
 				break;
 			default:
 				widgetData[key] = null;
@@ -75,14 +93,14 @@ export async function getIntialwidgetData(
 }
 
 export async function signIn(provider: string) {
-	return auth.signIn(provider)
+	return auth.signIn(provider);
 }
 
 export async function signOut<R extends boolean>(options?: {
 	/** The relative path to redirect to after signing out. By default, the user is redirected to the current page. */
-	redirectTo?: string
+	redirectTo?: string;
 	/** If set to `false`, the `signOut` method will return the URL to redirect to instead of redirecting automatically. */
-	redirect?: R
+	redirect?: R;
 }) {
-	return auth.signOut(options)
+	return auth.signOut(options);
 }

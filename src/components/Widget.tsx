@@ -5,6 +5,7 @@ import { RedditWidget } from "@/features/reddit/presentation/RedditWidget";
 import { YoutubeWidget } from "@/features/youtube/presentation/YoutubeWidget";
 import { WidgetConfig } from "@/infrastructure/config.schemas";
 import { BookmarkWidget } from "@/features/bookmark/presentation/BookmarkWidget";
+import { FeedWidget } from "@/features/feed/presentation/FeedWidget";
 
 interface WidgetComponentProps {
 	widgetConfig: WidgetConfig;
@@ -23,6 +24,8 @@ export function Widget({ widgetConfig }: WidgetComponentProps) {
 				return <YoutubeWidget config={widgetConfig} />;
 			case "bookmark":
 				return <BookmarkWidget config={widgetConfig} />;
+			case "feed":
+				return <FeedWidget config={widgetConfig} />;
 			default: {
 				return (
 					<ErrorWidget

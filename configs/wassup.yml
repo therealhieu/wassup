@@ -56,4 +56,19 @@ ui:
                   sort: new
                   limit: 5
             - type: youtube
-              channels: ["@GoogleDevelopers", "@hello_interview", "@TheCodingTrain"]
+              channels:
+                [
+                  "@CMUDatabaseGroup",
+                  "@hello_interview",
+                  "@jordanhasnolife5163",
+                  "@ALifeEngineered",
+                  "@Fireship",
+                ]
+        - size: 3
+          widgets:
+            - type: feed
+              urls:
+                # - https://www.dataengineeringweekly.com/feed
+                - https://netflixtechblog.com/feed
+                - https://www.blef.fr/blog/rss
+                - https://www.theseattledataguy.com/feed/

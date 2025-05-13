@@ -1,0 +1,102 @@
+[
+  {
+    "title": "Data Engineering Weekly #220",
+    "feedUrl": "https://www.dataengineeringweekly.com/p/data-engineering-weekly-220",
+    "thumbnailUrl": "https://substackcdn.com/image/fetch/w_1200,h_600,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F6f51c1bf-abc9-4cd3-ad69-22cc8e3f1ef2_1080x1080.png",
+    "publishedAt": "Sun, 11 May 2025 20:38:04 GMT",
+    "description": "The Weekly Data Engineering Newsletter",
+    "categories": [],
+    "source": "dataengineeringweekly",
+    "author": "Ananth Packkildurai"
+  },
+  {
+    "title": "Data Engineering Weekly #219",
+    "feedUrl": "https://www.dataengineeringweekly.com/p/data-engineering-weekly-219",
+    "thumbnailUrl": "https://substackcdn.com/image/fetch/w_1200,h_600,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F6f51c1bf-abc9-4cd3-ad69-22cc8e3f1ef2_1080x1080.png",
+    "publishedAt": "Sun, 04 May 2025 22:34:30 GMT",
+    "description": "The Weekly Data Engineering Newsletter",
+    "categories": [],
+    "source": "dataengineeringweekly",
+    "author": "Ananth Packkildurai"
+  },
+  {
+    "title": "Data Engineering Weekly #218",
+    "feedUrl": "https://www.dataengineeringweekly.com/p/data-engineering-weekly-218",
+    "thumbnailUrl": "https://substackcdn.com/image/fetch/w_1200,h_600,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F6f51c1bf-abc9-4cd3-ad69-22cc8e3f1ef2_1080x1080.png",
+    "publishedAt": "Mon, 28 Apr 2025 02:51:28 GMT",
+    "description": "The Weekly Data Engineering Newsletter",
+    "categories": [],
+    "source": "dataengineeringweekly",
+    "author": "Ananth Packkildurai"
+  },
+  {
+    "title": "AI and Data in Production: Insights from Avinash Narasimha [AI Solutions Leader at Koch Industries] ",
+    "feedUrl": "https://www.dataengineeringweekly.com/p/ai-and-data-in-production-insights",
+    "thumbnailUrl": "https://substackcdn.com/image/fetch/w_1200,h_600,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F6f51c1bf-abc9-4cd3-ad69-22cc8e3f1ef2_1080x1080.png",
+    "publishedAt": "Fri, 25 Apr 2025 03:41:06 GMT",
+    "description": "In our latest episode of Data Engineering Weekly, co-hosted by Aswin, we explored the practical realities of AI deployment and data readiness with our distinguished guest, Avinash Narasimha, AI Solutions Leader at Koch Industries.",
+    "categories": [],
+    "source": "dataengineeringweekly",
+    "author": "Ananth Packkildurai"
+  },
+  {
+    "title": "Data Engineering Weekly #217",
+    "feedUrl": "https://www.dataengineeringweekly.com/p/data-engineering-weekly-217",
+    "thumbnailUrl": "https://substackcdn.com/image/fetch/w_1200,h_600,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F6f51c1bf-abc9-4cd3-ad69-22cc8e3f1ef2_1080x1080.png",
+    "publishedAt": "Sun, 20 Apr 2025 21:35:24 GMT",
+    "description": "The Weekly Data Engineering Newsletter",
+    "categories": [],
+    "source": "dataengineeringweekly",
+    "author": "Ananth Packkildurai"
+  },
+  {
+    "title": "Data Engineering Weekly #216",
+    "feedUrl": "https://www.dataengineeringweekly.com/p/data-engineering-weekly-216",
+    "thumbnailUrl": "https://substackcdn.com/image/fetch/w_1200,h_600,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F6f51c1bf-abc9-4cd3-ad69-22cc8e3f1ef2_1080x1080.png",
+    "publishedAt": "Mon, 14 Apr 2025 00:41:04 GMT",
+    "description": "The Weekly Data Engineering Newsletter",
+    "categories": [],
+    "source": "dataengineeringweekly",
+    "author": "Ananth Packkildurai"
+  },
+  {
+    "title": "Towards Composable Data Infrastructure",
+    "feedUrl": "https://www.dataengineeringweekly.com/p/towards-composable-data-infrastructure",
+    "thumbnailUrl": "https://substackcdn.com/image/fetch/w_1200,h_600,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc221cef5-9bd8-484c-96c6-ae55bc3a3276_469x311.jpeg",
+    "publishedAt": "Fri, 11 Apr 2025 19:07:23 GMT",
+    "description": "A Case for Federated Data Catalog",
+    "categories": [],
+    "source": "dataengineeringweekly",
+    "author": "Ananth Packkildurai"
+  },
+  {
+    "title": "Data Engineering Weekly #215",
+    "feedUrl": "https://www.dataengineeringweekly.com/p/data-engineering-weekly-215",
+    "thumbnailUrl": "https://substackcdn.com/image/fetch/w_1200,h_600,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F6f51c1bf-abc9-4cd3-ad69-22cc8e3f1ef2_1080x1080.png",
+    "publishedAt": "Sun, 06 Apr 2025 23:05:45 GMT",
+    "description": "The Weekly Data Engineering Newsletter",
+    "categories": [],
+    "source": "dataengineeringweekly",
+    "author": "Ananth Packkildurai"
+  },
+  {
+    "title": "Data Engineering Weekly #214",
+    "feedUrl": "https://www.dataengineeringweekly.com/p/data-engineering-weekly-214",
+    "thumbnailUrl": "https://substackcdn.com/image/fetch/w_1200,h_600,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F6f51c1bf-abc9-4cd3-ad69-22cc8e3f1ef2_1080x1080.png",
+    "publishedAt": "Sun, 30 Mar 2025 22:45:53 GMT",
+    "description": "The Weekly Data Engineering Newsletter",
+    "categories": [],
+    "source": "dataengineeringweekly",
+    "author": "Ananth Packkildurai"
+  },
+  {
+    "title": "Data Engineering Weekly #213",
+    "feedUrl": "https://www.dataengineeringweekly.com/p/data-engineering-weekly-213",
+    "thumbnailUrl": "https://substackcdn.com/image/fetch/w_1200,h_600,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F6f51c1bf-abc9-4cd3-ad69-22cc8e3f1ef2_1080x1080.png",
+    "publishedAt": "Sun, 23 Mar 2025 21:09:07 GMT",
+    "description": "The Weekly Data Engineering Newsletter",
+    "categories": [],
+    "source": "dataengineeringweekly",
+    "author": "Ananth Packkildurai"
+  }
+]
