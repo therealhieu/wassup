@@ -20,6 +20,8 @@ export const Default: Story = {
 				"https://blog.example.com/feed",
 			],
 			limit: 3,
+			showTitle: true,
+			scrollAfterRow: 3,
 		},
 		feeds: [
 			{
@@ -67,6 +69,8 @@ export const MultipleSourcesEmpty: Story = {
 				"https://blog.example.com/feed",
 			],
 			limit: 10,
+			showTitle: true,
+			scrollAfterRow: 3,
 		},
 		feeds: [],
 	},

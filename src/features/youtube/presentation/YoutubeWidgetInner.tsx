@@ -42,13 +42,9 @@ export const YoutubeWidgetInner = (props: YoutubeWidgetInnerProps) => {
 			videosContainerRef.current &&
 			filteredVideos.length > config.scrollAfterRow
 		) {
-			const rowHeight =
-				videosContainerRef.current.children[
-					config.scrollAfterRow
-				]?.getBoundingClientRect().top || 0;
-			const containerTop =
-				videosContainerRef.current.getBoundingClientRect().top;
-			const scrollPosition = rowHeight - containerTop;
+			const rowHeight = 300; // Fixed height per row
+			const totalRows = Math.ceil(config.scrollAfterRow);
+			const scrollPosition = rowHeight * totalRows;
 
 			videosContainerRef.current.style.maxHeight = `${scrollPosition}px`;
 			videosContainerRef.current.style.overflowY = "auto";
@@ -107,7 +103,13 @@ export const YoutubeWidgetInner = (props: YoutubeWidgetInnerProps) => {
 					</Typography>
 				</Grid>
 			)}
-			<Box ref={videosContainerRef} sx={{ width: "100%" }}>
+			<Box
+				ref={videosContainerRef}
+				sx={{
+					width: "100%",
+					overflowX: "hidden",
+				}}
+			>
 				<Grid container spacing={1}>
 					{filteredVideos.map((video) => (
 						<Grid

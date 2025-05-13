@@ -50,7 +50,7 @@ export const FeedWidgetInner = ({ config, feeds }: FeedWidgetInnerProps) => {
 	}, [filteredFeeds.length, config.scrollAfterRow]);
 
 	return (
-		<Stack spacing={0.5} sx={{ boxShadow: 1, padding: 1 }}>
+		<Stack spacing={1} sx={{ boxShadow: 1, padding: 1 }}>
 			{config.showTitle && (
 				<Typography variant="h5" gutterBottom>
 					Feeds

@@ -34,8 +34,10 @@ export const FeedItem = ({
 			sx={{
 				maxWidth: "100%",
 				boxShadow: 0,
+				marginBottom: 0.5,
+				marginTop: 0.5,
 				"&:hover": {
-					boxShadow: 2,
+					boxShadow: 4,
 				},
 			}}
 		>
@@ -77,7 +79,7 @@ export const FeedItem = ({
 							}
 							sx={{ p: 1 }}
 						/>
-						<Box sx={{ py: 0, px: 1 }}>
+						<Box sx={{ py: 1, px: 1 }}>
 							<Typography
 								variant={isMobile ? "caption" : "subtitle2"}
 								color="text.secondary"

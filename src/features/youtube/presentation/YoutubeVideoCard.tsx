@@ -10,10 +10,8 @@ export const YoutubeVideoCard = (props: YoutubeVideoCardProps) => {
 		<Card
 			sx={{
 				p: 2,
-				transition: "transform 0.2s ease-in-out",
 				"&:hover": {
-					transform: "scale(1.02)",
-					boxShadow: 3,
+					boxShadow: 6,
 				},
 				height: "100%",
 			}}
