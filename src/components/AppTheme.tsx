@@ -13,6 +13,11 @@ export interface AppThemeProviderProps {
 export const AppTheme = ({ children }: AppThemeProviderProps) => {
 	const theme = useAppStore((state) => {
 		const current = state.appConfig.ui.theme;
+
+		if (!current) {
+			return appThemes.light;
+		}
+
 		return appThemes[current];
 	});
 

@@ -197,13 +197,17 @@
                                 "type": "number",
                                 "minimum": 1,
                                 "maximum": 50,
-                                "default": 12
+                                "default": 16
                               },
                               "channels": {
                                 "type": "array",
                                 "items": {
                                   "type": "string"
                                 }
+                              },
+                              "scrollAfterRow": {
+                                "type": "number",
+                                "default": 3
                               }
                             },
                             "required": [
@@ -296,7 +300,15 @@
                               },
                               "limit": {
                                 "type": "number",
-                                "default": 10
+                                "default": 15
+                              },
+                              "showTitle": {
+                                "type": "boolean",
+                                "default": true
+                              },
+                              "scrollAfterRow": {
+                                "type": "number",
+                                "default": 6
                               }
                             },
                             "required": [

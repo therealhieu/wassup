@@ -39,3 +39,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 - [ ] Specify which widget can load on server side
 - [ ] Remove ergonomic ways to cache
 - [ ] Move the integration tests to the correct place
+- [ ] Responsive

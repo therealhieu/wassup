@@ -1,4 +1,3 @@
-import { ErrorWidget } from "./ErrorWidget";
 import { WeatherWidget } from "@/features/weather/presentation/WeatherWidget";
 import { TabsWidget } from "@/features/tabs/presentation/TabWidget";
 import { RedditWidget } from "@/features/reddit/presentation/RedditWidget";
@@ -6,6 +5,7 @@ import { YoutubeWidget } from "@/features/youtube/presentation/YoutubeWidget";
 import { WidgetConfig } from "@/infrastructure/config.schemas";
 import { BookmarkWidget } from "@/features/bookmark/presentation/BookmarkWidget";
 import { FeedWidget } from "@/features/feed/presentation/FeedWidget";
+import { SkeletonWidget } from "@/features/skeleton/presentation/SkeleteonWidget";
 
 interface WidgetComponentProps {
 	widgetConfig: WidgetConfig;
@@ -26,17 +26,8 @@ export function Widget({ widgetConfig }: WidgetComponentProps) {
 				return <BookmarkWidget config={widgetConfig} />;
 			case "feed":
 				return <FeedWidget config={widgetConfig} />;
-			default: {
-				return (
-					<ErrorWidget
-						error={
-							new Error(
-								`Unsupported widget type: ${widgetConfig.type}`
-							)
-						}
-					/>
-				);
-			}
+			case "skeleton":
+				return <SkeletonWidget config={widgetConfig} />;
 		}
 	})();
 

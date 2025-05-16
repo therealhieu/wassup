@@ -1,15 +1,8 @@
 "use server";
 
-import fs from "fs/promises";
-import path from "path";
-import yaml from "yaml";
 import * as auth from "@/auth";
 
-import {
-	AppConfig,
-	AppConfigSchema,
-	WidgetConfig,
-} from "../infrastructure/config.schemas";
+import { AppConfig, WidgetConfig } from "../infrastructure/config.schemas";
 import { WidgetProps } from "./schemas";
 import { baseLogger } from "./logger";
 import { fetchWeatherWidgetProps } from "@/features/weather/services/weather.actions";
@@ -27,21 +20,14 @@ const logger = baseLogger.getSubLogger({
 	name: "actions",
 });
 
-export async function getAppConfig(): Promise<AppConfig> {
-	const filePath = path.resolve(process.cwd(), "configs", "wassup.yml");
-	const txt = await fs.readFile(filePath, "utf8");
-	const obj = yaml.parse(txt);
-	return AppConfigSchema.parse(obj);
-}
-
 export async function getIntialwidgetData(
 	config: AppConfig
-): Promise<Record<string, WidgetProps | null>> {
+): Promise<Record<string, WidgetProps>> {
 	const widgets = config.ui.pages.flatMap((page) =>
 		page.columns.flatMap((column) => column.widgets)
 	) as WidgetConfig[];
 
-	let widgetData: Record<string, WidgetProps | null> = {};
+	let widgetData: Record<string, WidgetProps> = {};
 
 	for (const widgetConfig of widgets) {
 		const key = getDataKey(widgetConfig);
@@ -80,8 +66,6 @@ export async function getIntialwidgetData(
 				);
 				widgetData[key] = feedWidgetProps;
 				break;
-			default:
-				widgetData[key] = null;
 		}
 	}
 

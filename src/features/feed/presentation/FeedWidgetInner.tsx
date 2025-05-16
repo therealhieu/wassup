@@ -1,14 +1,16 @@
 import { Stack, Chip, Box, Typography } from "@mui/material";
-import { Feed } from "../domain/entities/feed";
+import { FeedSchema } from "../domain/entities/feed";
 import { FeedItem } from "./FeedItem";
-import { FeedWidgetConfig } from "../infrastructure/config.schemas";
+import { FeedWidgetConfigSchema } from "../infrastructure/config.schemas";
 import { getSourceFromUrl } from "../lib/utils";
 import { useState, useRef, useEffect } from "react";
+import { z } from "zod";
 
-export type FeedWidgetInnerProps = {
-	config: FeedWidgetConfig;
-	feeds: Feed[];
-};
+export const FeedWidgetInnerPropsSchema = z.object({
+	config: FeedWidgetConfigSchema,
+	feeds: z.array(FeedSchema),
+});
+export type FeedWidgetInnerProps = z.infer<typeof FeedWidgetInnerPropsSchema>;
 
 export const FeedWidgetInner = ({ config, feeds }: FeedWidgetInnerProps) => {
 	const sources = config.urls.map((url) => getSourceFromUrl(url));

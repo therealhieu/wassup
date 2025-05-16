@@ -8,6 +8,7 @@ import { z } from "zod";
 
 import { TabsWidgetConfigSchema } from "../infrastructure/config.schemas";
 import { Widget } from "@/components/Widget";
+import { WidgetConfig } from "@/infrastructure/config.schemas";
 
 export const TabsWidgetPropsSchema = z.object({
 	config: TabsWidgetConfigSchema,
@@ -26,7 +27,7 @@ export const TabsWidget = ({ config }: TabsWidgetProps) => {
 		<TabContext value={value}>
 			<Box sx={{ borderBottom: 1, borderColor: "divider" }}>
 				<TabList onChange={handleChange} aria-label="widget tabs">
-					{config.labels.map((label, index) => (
+					{config.labels.map((label: string, index: number) => (
 						<Tab
 							key={index}
 							label={label}
@@ -36,15 +37,17 @@ export const TabsWidget = ({ config }: TabsWidgetProps) => {
 				</TabList>
 			</Box>
 
-			{config.tabs.map((widgetConfig, widgetIndex) => (
-				<TabPanel
-					value={widgetIndex.toString()}
-					key={widgetIndex}
-					style={{ padding: 0 }}
-				>
-					<Widget key={widgetIndex} widgetConfig={widgetConfig} />
-				</TabPanel>
-			))}
+			{config.tabs.map(
+				(widgetConfig: WidgetConfig, widgetIndex: number) => (
+					<TabPanel
+						value={widgetIndex.toString()}
+						key={widgetIndex}
+						style={{ padding: 0 }}
+					>
+						<Widget key={widgetIndex} widgetConfig={widgetConfig} />
+					</TabPanel>
+				)
+			)}
 		</TabContext>
 	);
 };

@@ -7,12 +7,10 @@ import { getDataKey } from "@/lib/utils";
 import { fetchRedditWidgetProps } from "@/features/reddit/services/reddit.actions";
 import { fetchYoutubeWidgetProps } from "@/features/youtube/services/youtube.actions";
 
-
-
 export async function fetchTabsWidgetProps(
 	tabsWidgetConfig: TabsWidgetConfig
-): Promise<Record<string, WidgetProps | null>> {
-	let record: Record<string, WidgetProps | null> = {};
+): Promise<Record<string, WidgetProps>> {
+	let record: Record<string, WidgetProps> = {};
 
 	for (const tab of tabsWidgetConfig.tabs) {
 		let innerRecord = {};
@@ -39,8 +37,8 @@ export async function fetchTabsWidgetProps(
 		const key = getDataKey(tab);
 		record = {
 			...record,
-			[key]: innerRecord
-		}
+			[key]: innerRecord,
+		};
 	}
 
 	return record;

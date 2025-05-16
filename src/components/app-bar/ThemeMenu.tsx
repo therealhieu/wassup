@@ -21,7 +21,7 @@ export const ThemeMenu = () => {
 		<Select
 			value={theme}
 			onChange={(e: SelectChangeEvent<string>) => {
-				setTheme(e.target.value as typeof theme);
+				setTheme(e.target.value as "light" | "dark");
 			}}
 			size="small"
 			sx={{

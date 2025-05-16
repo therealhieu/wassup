@@ -24,6 +24,10 @@ import {
 	FeedWidgetConfig,
 	FeedWidgetConfigSchema,
 } from "@/features/feed/infrastructure/config.schemas";
+import {
+	SkeletonWidgetConfig,
+	SkeletonWidgetConfigSchema,
+} from "@/features/skeleton/infrastructure/config.schemas";
 
 export const WidgetConfigSchema = z.lazy(() =>
 	z.union([
@@ -33,6 +37,7 @@ export const WidgetConfigSchema = z.lazy(() =>
 		YoutubeWidgetConfigSchema,
 		BookmarkWidgetConfigSchema,
 		FeedWidgetConfigSchema,
+		SkeletonWidgetConfigSchema,
 	])
 );
 
@@ -42,7 +47,8 @@ export type WidgetConfig =
 	| RedditWidgetConfig
 	| YoutubeWidgetConfig
 	| BookmarkWidgetConfig
-	| FeedWidgetConfig;
+	| FeedWidgetConfig
+	| SkeletonWidgetConfig;
 
 export const ColumnConfigSchema = z
 	.object({
@@ -80,7 +86,6 @@ export type UiConfig = z.infer<typeof UiConfigSchema>;
 
 export const AppConfigSchema = z
 	.object({
-		server: ServerConfigSchema,
 		ui: UiConfigSchema,
 	})
 	.strict();

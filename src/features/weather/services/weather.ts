@@ -8,6 +8,10 @@ import { WeatherWidgetConfig } from "../infrastructure/config.schemas";
 import { OpenmeteoDailyWeatherReportRepository } from "../infrastructure/repositories/openmeteo.daily-weather-report";
 import { WeatherWidgetInnerProps } from "../presentation/WeatherWidget.components";
 
+const logger = baseLogger.getSubLogger({
+	name: "WeatherService",
+});
+
 export class WeatherService {
 	private dailyWeatherRepository: DailyWeatherReportRepository;
 	private geocodeRepository: GeocodeRepository;
