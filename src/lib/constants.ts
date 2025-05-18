@@ -124,8 +124,8 @@ export const DEFAULT_CONFIG: AppConfig = AppConfigSchema.parse({
 						widgets: [
 							{
 								type: "feed",
-								limit: 20,
-								scrollAfterRow: 10,
+								limit: 10,
+								scrollAfterRow: 7,
 								urls: [
 									"https://blog.det.life/feed",
 									"https://netflixtechblog.com/feed",

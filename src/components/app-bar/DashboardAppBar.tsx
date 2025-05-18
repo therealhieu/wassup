@@ -7,6 +7,7 @@ import SignInButton from "./SignInButton";
 import { useSession } from "next-auth/react";
 import UserProfile from "./UserProfile";
 import { RouterMenu } from "./RouterMenu";
+import { OpenConfigEditorButton } from "./OpenConfigEditorButton";
 
 export const PageInfoSchema = z.object({
 	title: z.string(),
@@ -42,6 +43,7 @@ export const DashboardAppBar = () => {
 					<RouterMenu />
 					<div style={{ display: "flex", gap: "0.5rem" }}>
 						<ThemeMenu />
+						<OpenConfigEditorButton />
 						{(() => {
 							switch (status) {
 								case "loading":

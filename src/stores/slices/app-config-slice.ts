@@ -4,16 +4,16 @@ import { StateCreator } from "zustand";
 import { ThemeOption } from "../app-store.schemas";
 
 export const createAppConfigSlice = (
-	initalAppConfig: AppConfig | undefined
+	initalAppConfig: AppConfig
 ): StateCreator<AppConfigSlice> => {
 	return (set) => ({
-		appConfig: initalAppConfig || undefined,
+		appConfig: initalAppConfig,
 		setAppConfig: (appConfig: AppConfig) => set({ appConfig }),
 		setTheme: (theme: ThemeOption) =>
 			set((state) => ({
 				appConfig: {
-					...state.appConfig!,
-					ui: { ...state.appConfig!.ui, theme },
+					...state.appConfig,
+					ui: { ...state.appConfig.ui, theme },
 				},
 			})),
 	});

@@ -2,6 +2,7 @@
 
 import { createAppStore } from "@/stores/app-store";
 import { AppStore, AppStoreInitialState } from "@/stores/app-store.schemas";
+import { Session } from "next-auth";
 import { createContext, useContext, useRef } from "react";
 import { useStore } from "zustand";
 
@@ -11,16 +12,18 @@ export const AppStoreContext = createContext<AppStoreApi | null>(null);
 export interface AppStoreProviderProps {
 	children: React.ReactNode;
 	initialState: AppStoreInitialState;
+	session: Session | null;
 }
 
 export const AppStoreContextProvider = ({
 	children,
 	initialState,
+	session,
 }: AppStoreProviderProps) => {
 	const storeRef = useRef<AppStoreApi | null>(null);
 
 	if (!storeRef.current) {
-		storeRef.current = createAppStore(initialState);
+		storeRef.current = createAppStore(initialState, session);
 	}
 
 	return (

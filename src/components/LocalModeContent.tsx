@@ -4,6 +4,7 @@ import { AppConfigSchema } from "@/infrastructure/config.schemas";
 import React, { useEffect } from "react";
 import { useAppStore } from "@/providers/AppStoreContextProvider";
 import { DEFAULT_CONFIG } from "@/lib/constants";
+import { STORAGE_NAME } from "@/stores/app-store";
 
 export type LocalModeWrapperProps = {
 	children: React.ReactNode;
@@ -14,7 +15,7 @@ export const LocalModeContent = ({ children }: LocalModeWrapperProps) => {
 
 	useEffect(() => {
 		const loadData = async () => {
-			const savedConfig = localStorage.getItem("appConfig");
+			const savedConfig = localStorage.getItem(STORAGE_NAME);
 
 			if (savedConfig) {
 				try {
