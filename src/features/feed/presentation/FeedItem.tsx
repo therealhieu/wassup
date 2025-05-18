@@ -40,6 +40,7 @@ export const FeedItem = ({
 					boxShadow: 4,
 				},
 			}}
+			title={title}
 		>
 			<Link href={feedUrl} underline="none" color="inherit">
 				<Box sx={{ display: "flex" }}>
