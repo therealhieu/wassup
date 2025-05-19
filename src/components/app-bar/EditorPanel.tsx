@@ -6,19 +6,21 @@ import {
 	DialogActions,
 	DialogContent,
 	Alert,
+	Box,
 } from "@mui/material";
 import { ConfigEditor } from "./ConfigEditor";
 import { useAppStore } from "@/providers/AppStoreContextProvider";
 import * as yaml2 from "yaml";
 import { AppConfigSchema } from "@/infrastructure/config.schemas";
 import { useState } from "react";
+import { GuidesPanel } from "./GuidesPanel";
 
-interface ConfigPanelProps {
+interface EditorPanelProps {
 	open: boolean;
 	onClose?: () => void;
 }
 
-export function ConfigPanel({ open, onClose }: ConfigPanelProps) {
+export function EditorPanel({ open, onClose }: EditorPanelProps) {
 	const appConfig = useAppStore((state) => state.appConfig);
 	const setAppConfig = useAppStore((state) => state.setAppConfig);
 	const [editorValue, setEditorValue] = useState(yaml2.stringify(appConfig));
@@ -44,7 +46,7 @@ export function ConfigPanel({ open, onClose }: ConfigPanelProps) {
 	return (
 		<Dialog
 			open={open}
-			maxWidth="md"
+			maxWidth="xl"
 			fullWidth
 			onClose={onClose}
 			slotProps={{
@@ -55,15 +57,24 @@ export function ConfigPanel({ open, onClose }: ConfigPanelProps) {
 				},
 			}}
 		>
-			<DialogContent sx={{ flex: 1, p: 2 }}>
-				<ConfigEditor value={editorValue} onChange={setEditorValue} />
-				{error && (
-					<Alert severity="error" sx={{ mt: 2 }}>
-						{error}
-					</Alert>
-				)}
+			<DialogContent sx={{ flex: 1, p: 2, display: "flex", gap: 2 }}>
+				<Box sx={{ width: "50%" }}>
+					<ConfigEditor
+						value={editorValue}
+						onChange={setEditorValue}
+					/>
+					{error && (
+						<Alert severity="error" sx={{ mt: 2 }}>
+							{error}
+						</Alert>
+					)}
+				</Box>
+				<Box style={{ width: "50%" }}>
+					<GuidesPanel open={true} />
+				</Box>
 			</DialogContent>
 			<DialogActions sx={{ p: 2 }}>
+				<Box sx={{ flex: 1 }} />
 				<Button onClick={onClose}>Cancel</Button>
 				<Button
 					onClick={handleApply}

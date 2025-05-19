@@ -3,7 +3,7 @@
 import { IconButton } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { useState } from "react";
-import { ConfigPanel } from "./ConfigPanel";
+import { EditorPanel } from "./EditorPanel";
 
 export const OpenConfigEditorButton = () => {
 	const [open, setOpen] = useState(false);
@@ -19,7 +19,7 @@ export const OpenConfigEditorButton = () => {
 			>
 				<SettingsIcon />
 			</IconButton>
-			<ConfigPanel open={open} onClose={() => setOpen(false)} />
+			<EditorPanel open={open} onClose={() => setOpen(false)} />
 		</>
 	);
 };

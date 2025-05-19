@@ -1,13 +1,11 @@
 "use client";
 
-import { AppConfigSchema } from "@/infrastructure/config.schemas";
 import { useEffect, useRef, useCallback } from "react";
 import { useDebouncedCallback } from "use-debounce";
-import zodToJsonSchema from "zod-to-json-schema";
 import { configureMonacoYaml, JSONSchema } from "monaco-yaml";
 import * as monaco from "monaco-editor";
-
-const schema = zodToJsonSchema(AppConfigSchema) as JSONSchema;
+import { APP_CONFIG_JSONSCHEMA } from "@/lib/constants";
+import { Box } from "@mui/material";
 
 configureMonacoYaml(monaco, {
 	enableSchemaRequest: true,
@@ -18,7 +16,7 @@ configureMonacoYaml(monaco, {
 		{
 			uri: "app://schemas/app-config.json",
 			fileMatch: ["*.yaml", "*.yml"],
-			schema,
+			schema: APP_CONFIG_JSONSCHEMA as JSONSchema,
 		},
 	],
 });
@@ -121,8 +119,8 @@ export function ConfigEditor({ value, onChange }: ConfigEditorProps) {
 	}, [value]);
 
 	return (
-		<div style={{ height: 700, border: "1px solid #ccc", borderRadius: 4 }}>
+		<Box style={{ height: 700, border: "1px solid #ccc", borderRadius: 4 }}>
 			<div ref={editorRef} style={{ height: "100%" }} />
-		</div>
+		</Box>
 	);
 }

@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { ConfigPanel } from "./ConfigPanel";
+import { EditorPanel } from "./EditorPanel";
 import { AppStoreContextProvider } from "@/providers/AppStoreContextProvider";
 import { DEFAULT_CONFIG } from "@/lib/constants";
 
-const meta: Meta<typeof ConfigPanel> = {
-	title: "Components/AppBar/ConfigPanel",
-	component: ConfigPanel,
+const meta: Meta<typeof EditorPanel> = {
+	title: "Components/AppBar/EditorPanel",
+	component: EditorPanel,
 	parameters: {
 		layout: "centered",
 	},
@@ -22,7 +22,7 @@ const meta: Meta<typeof ConfigPanel> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof ConfigPanel>;
+type Story = StoryObj<typeof EditorPanel>;
 
 export const Default: Story = {
 	args: {

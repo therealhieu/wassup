@@ -1,5 +1,6 @@
 import { AppConfig, AppConfigSchema } from "@/infrastructure/config.schemas";
 import { toSkeletonConfig } from "./utils";
+import zodToJsonSchema from "zod-to-json-schema";
 
 export const THEME_OPTIONS = ["light", "dark"] as const;
 
@@ -142,3 +143,4 @@ export const DEFAULT_CONFIG: AppConfig = AppConfigSchema.parse({
 });
 
 export const SKELETON_CONFIG = toSkeletonConfig(DEFAULT_CONFIG);
+export const APP_CONFIG_JSONSCHEMA = zodToJsonSchema(AppConfigSchema);

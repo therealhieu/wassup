@@ -20,7 +20,7 @@ export const toSkeletonConfig = (config: AppConfig): AppConfig => {
 							({
 								type: "skeleton",
 								derivedFrom: widget.type,
-							} as SkeletonWidgetConfig)
+							}) as SkeletonWidgetConfig,
 					),
 				})),
 			})),
