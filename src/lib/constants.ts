@@ -37,6 +37,7 @@ export const DEFAULT_CONFIG: AppConfig = AppConfigSchema.parse({
 									{
 										title: "Data",
 										bookmarks: [
+											"https://blog.dataengineerthings.org/",
 											"https://blog.det.life/a-non-beginner-data-engineering-roadmap-2025-edition-2b39d865dd0b",
 										],
 									},
@@ -128,10 +129,35 @@ export const DEFAULT_CONFIG: AppConfig = AppConfigSchema.parse({
 								limit: 10,
 								scrollAfterRow: 7,
 								urls: [
-									"https://blog.det.life/feed",
-									"https://netflixtechblog.com/feed",
+									// "https://netflixtechblog.com/feed",
 									"https://www.blef.fr/blog/rss/",
 									"https://www.theseattledataguy.com/feed/",
+									"https://blog.cloudflare.com/rss/",
+									"https://eng.uber.com/rss/",
+									// "https://aws.amazon.com/blogs/big-data/feed/",
+								],
+							},
+						],
+					},
+				],
+			},
+			{
+				title: "Sports",
+				path: "/sports",
+				columns: [
+					{
+						size: 2,
+						widgets: [],
+					},
+					{
+						size: 7,
+						widgets: [
+							{
+								type: "youtube",
+								channels: [
+									"@skysportspremierleague",
+									"@chelseafc",
+									"@YounesTalksFootball",
 								],
 							},
 						],

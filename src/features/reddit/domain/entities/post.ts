@@ -6,7 +6,14 @@ export const RedditPostSchema = z.object({
 	author: z.string(),
 	subreddit: z.string(),
 	selftext: z.string().optional(),
-	url: z.string().url(),
+	url: z.string().transform((val) => {
+		// Handle relative Reddit URLs by converting to absolute URLs
+		if (val.startsWith('/r/')) {
+			return `https://www.reddit.com${val}`;
+		}
+		// For invalid URLs, just return as-is rather than failing
+		return val;
+	}),
 	permalink: z.string(),
 	score: z.number().int(),
 	upvoteRatio: z.number(),

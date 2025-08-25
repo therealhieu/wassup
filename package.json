@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "./scripts/dev.sh",
     "build": "next build",
     "build-no-lint": "next build --no-lint",
     "start": "next start",
@@ -41,7 +41,7 @@
     "monaco-editor": "^0.52.2",
     "monaco-yaml": "^5.4.0",
     "neverthrow": "^8.2.0",
-    "next": "15.4.0-canary.38",
+    "next": "^15.1.6",
     "next-auth": "^5.0.0-beta.28",
     "openmeteo": "^1.2.0",
     "react": "^19.0.0",

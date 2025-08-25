@@ -10,6 +10,11 @@ const nextConfig: NextConfig = {
 			},
 		],
 	},
+	experimental: {
+		// Enable Web Workers in Next.js 15
+		workerThreads: false,
+		cpus: 1,
+	},
 };
 
 export default nextConfig;

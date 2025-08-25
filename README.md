@@ -2,21 +2,56 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+This project uses **Bun** as the preferred package manager for better performance.
+
+First, install dependencies:
 
 ```bash
+bun install
+```
+
+Then, run the development server:
+
+```bash
+bun run dev
+# or alternatively
 npm run dev
 # or
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
+
+### Why Bun?
+
+- ⚡ **Faster installs** - Up to 25x faster than npm
+- 🔧 **Built-in bundler** - No need for separate build tools
+- 🧪 **Native test runner** - Integrated testing with Vitest compatibility
+- 📦 **Better monorepo support** - Superior workspace management
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+### Common Development Commands
+
+```bash
+# Development
+bun run dev          # Start development server
+bun run build        # Build for production
+bun run build-no-lint # Build without linting (faster)
+bun run start        # Start production server
+
+# Testing
+bun test             # Run unit tests
+bun run storybook    # Start Storybook
+
+# Package management
+bun add <package>    # Add dependency
+bun add -d <package> # Add dev dependency
+bun update           # Update all packages
+bun update <package> # Update specific package
+```
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 

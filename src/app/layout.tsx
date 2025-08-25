@@ -11,6 +11,7 @@ import { AppTheme } from "../components/AppTheme";
 import { AuthSnackBar } from "@/components/AuthSnackBar";
 import { auth } from "@/auth";
 import { AppStoreContextProvider } from "@/providers/AppStoreContextProvider";
+import { MonacoProvider } from "@/providers/MonacoProvider";
 import { DEFAULT_CONFIG, SKELETON_CONFIG } from "@/lib/constants";
 import { Session } from "next-auth";
 
@@ -68,11 +69,13 @@ export default async function RootLayout({
 								initialState={initialState}
 								session={session}
 							>
-								<AppTheme>
-									<AuthSnackBar />
-									<DashboardAppBar />
-									{children}
-								</AppTheme>
+								<MonacoProvider>
+									<AppTheme>
+										<AuthSnackBar />
+										<DashboardAppBar />
+										{children}
+									</AppTheme>
+								</MonacoProvider>
 							</AppStoreContextProvider>
 						</SessionProvider>
 					</ReactQueryProvider>

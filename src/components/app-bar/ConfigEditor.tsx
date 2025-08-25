@@ -2,44 +2,8 @@
 
 import { useEffect, useRef, useCallback } from "react";
 import { useDebouncedCallback } from "use-debounce";
-import { configureMonacoYaml, JSONSchema } from "monaco-yaml";
-import * as monaco from "monaco-editor";
-import { APP_CONFIG_JSONSCHEMA } from "@/lib/constants";
-import { Box } from "@mui/material";
-
-configureMonacoYaml(monaco, {
-	enableSchemaRequest: true,
-	validate: true,
-	hover: true,
-	completion: true,
-	schemas: [
-		{
-			uri: "app://schemas/app-config.json",
-			fileMatch: ["*.yaml", "*.yml"],
-			schema: APP_CONFIG_JSONSCHEMA as JSONSchema,
-		},
-	],
-});
-
-if (typeof window !== "undefined") {
-	window.MonacoEnvironment = {
-		getWorker(_, label) {
-			switch (label) {
-				case "yaml":
-					return new Worker(
-						new URL("monaco-yaml/yaml.worker", import.meta.url),
-					);
-				default:
-					return new Worker(
-						new URL(
-							"monaco-editor/esm/vs/editor/editor.worker",
-							import.meta.url,
-						),
-					);
-			}
-		},
-	};
-}
+import { Box, CircularProgress, Typography } from "@mui/material";
+import { useMonaco } from "@/providers/MonacoProvider";
 
 export interface ConfigEditorProps {
 	value: string;
@@ -48,8 +12,11 @@ export interface ConfigEditorProps {
 
 export function ConfigEditor({ value, onChange }: ConfigEditorProps) {
 	const editorRef = useRef<HTMLDivElement>(null);
-	const monacoRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
+	const monacoRef = useRef<
+		import("monaco-editor").editor.IStandaloneCodeEditor | null
+	>(null);
 	const valueRef = useRef(value); // track last external value
+	const { monaco, isLoaded, error } = useMonaco();
 
 	const debouncedOnChange = useDebouncedCallback(
 		(newValue: string) => {
@@ -69,47 +36,78 @@ export function ConfigEditor({ value, onChange }: ConfigEditorProps) {
 	}, [debouncedOnChange]);
 
 	useEffect(() => {
-		if (!editorRef.current) return;
+		if (!monaco || !isLoaded || !editorRef.current) return;
 
-		const uri = monaco.Uri.parse("inmemory://model.yaml");
-		const model =
-			monaco.editor.getModel(uri) ||
-			monaco.editor.createModel(value, "yaml", uri);
+		// Dispose existing editor if it exists
+		if (monacoRef.current) {
+			monacoRef.current.dispose();
+			monacoRef.current = null;
+		}
 
-		const editor = monaco.editor.create(editorRef.current, {
-			model,
-			automaticLayout: true,
-			minimap: { enabled: true },
-			wordWrap: "on",
-			quickSuggestions: {
-				other: true,
-				comments: true,
-				strings: true,
-			},
-			suggestOnTriggerCharacters: true,
-			acceptSuggestionOnEnter: "on",
-			tabCompletion: "on",
-			suggest: {
-				showWords: true,
-				showProperties: true,
-				showValues: true,
-				preview: true,
-				previewMode: "prefix",
-				insertMode: "insert",
-				snippetsPreventQuickSuggestions: false,
-			},
-		});
+		// Wait a bit to ensure YAML language service is registered
+		const timer = setTimeout(() => {
+			if (!editorRef.current) return;
 
-		editor.onDidChangeModelContent(handleChange);
-		monacoRef.current = editor;
+			// Try to trigger language feature registration
+			const languages = monaco.languages.getLanguages();
+			const yamlLang = languages.find((l) => l.id === "yaml");
+			if (yamlLang) {
+				console.log("YAML language registered:", yamlLang);
+			}
+
+			// Create Monaco editor when Monaco is available
+			const uri = monaco.Uri.parse("inmemory://app-config.yaml");
+			let model = monaco.editor.getModel(uri);
+			if (!model) {
+				model = monaco.editor.createModel(value, "yaml", uri);
+			}
+			// Don't modify existing models - they should maintain their content
+
+			const editor = monaco.editor.create(editorRef.current, {
+				model,
+				automaticLayout: true,
+				minimap: { enabled: true },
+				wordWrap: "on",
+				fontSize: 14,
+				tabSize: 2,
+				insertSpaces: true,
+				detectIndentation: false,
+				quickSuggestions: {
+					other: true,
+					comments: true,
+					strings: true,
+				},
+				suggestOnTriggerCharacters: true,
+				acceptSuggestionOnEnter: "on",
+				tabCompletion: "on",
+				parameterHints: {
+					enabled: true,
+				},
+				suggest: {
+					showWords: true,
+					showProperties: true,
+					showValues: true,
+					preview: true,
+					previewMode: "prefix",
+					insertMode: "insert",
+					snippetsPreventQuickSuggestions: false,
+				},
+			});
+
+			editor.onDidChangeModelContent(handleChange);
+			monacoRef.current = editor;
+		}, 100); // Small delay to ensure YAML service is ready
 
 		return () => {
-			// Clean up editor and debounced onChange when component unmounts
-			editor.dispose();
-			debouncedOnChange.flush();
+			clearTimeout(timer);
+			if (monacoRef.current) {
+				monacoRef.current.dispose();
+				monacoRef.current = null;
+				debouncedOnChange.flush();
+			}
 		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [monaco, isLoaded, handleChange]); // Re-run when Monaco becomes available
 
 	useEffect(() => {
 		if (value !== valueRef.current && monacoRef.current) {
@@ -117,6 +115,53 @@ export function ConfigEditor({ value, onChange }: ConfigEditorProps) {
 			monacoRef.current.getModel()?.setValue(value);
 		}
 	}, [value]);
+
+	if (!isLoaded) {
+		return (
+			<Box
+				style={{
+					height: 700,
+					border: "1px solid #ccc",
+					borderRadius: 4,
+				}}
+				display="flex"
+				alignItems="center"
+				justifyContent="center"
+				flexDirection="column"
+				gap={2}
+			>
+				<CircularProgress />
+				<Typography variant="body2" color="text.secondary">
+					Loading Monaco Editor...
+				</Typography>
+			</Box>
+		);
+	}
+
+	if (error) {
+		return (
+			<Box
+				style={{
+					height: 700,
+					border: "1px solid #ccc",
+					borderRadius: 4,
+				}}
+				display="flex"
+				alignItems="center"
+				justifyContent="center"
+				flexDirection="column"
+				gap={2}
+			>
+				<Typography variant="body1" color="error">
+					{error}
+				</Typography>
+				<Typography variant="body2" color="text.secondary">
+					Try refreshing the page. If the issue persists, check
+					browser console for errors.
+				</Typography>
+			</Box>
+		);
+	}
 
 	return (
 		<Box style={{ height: 700, border: "1px solid #ccc", borderRadius: 4 }}>
