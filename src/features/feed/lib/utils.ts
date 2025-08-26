@@ -14,23 +14,46 @@ export const getSourceFromUrl = (url: string): string => {
 export const getPreviewImageFromUrl = async (
 	url: string
 ): Promise<string | null> => {
+	// Default fallback image - using a generic icon
+	const DEFAULT_THUMBNAIL = "/globe.svg";
+	
 	try {
-		const response = await fetch(url);
+		logger.debug(`Fetching preview image from URL: ${url}`);
+		
+		const response = await fetch(url, {
+			headers: {
+				'User-Agent': 'Mozilla/5.0 (compatible; RSS Reader)',
+				'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+			},
+			// Add timeout to prevent hanging requests
+			signal: AbortSignal.timeout(10000) // 10 second timeout
+		});
+		
 		if (!response.ok) {
-			throw new Error(`Failed to fetch URL: ${response.statusText}`);
+			logger.warn(`Failed to fetch URL: ${response.status} ${response.statusText} for ${url}`);
+			return DEFAULT_THUMBNAIL;
 		}
+		
+		const contentType = response.headers.get('content-type');
+		if (!contentType || !contentType.includes('text/html')) {
+			logger.warn(`URL returned non-HTML content type: ${contentType} for ${url}`);
+			return DEFAULT_THUMBNAIL;
+		}
+		
 		const html = await response.text();
 		const $ = cheerio.load(html);
 
 		// Try to find og:image first (preferred for social media previews)
 		const ogImage = $('meta[property="og:image"]').attr("content");
-		if (ogImage) {
+		if (ogImage && ogImage.trim()) {
+			logger.debug(`Found og:image: ${ogImage}`);
 			return ogImage;
 		}
 
 		// Try twitter:image next
 		const twitterImage = $('meta[name="twitter:image"]').attr("content");
-		if (twitterImage) {
+		if (twitterImage && twitterImage.trim()) {
+			logger.debug(`Found twitter:image: ${twitterImage}`);
 			return twitterImage;
 		}
 
@@ -38,19 +61,22 @@ export const getPreviewImageFromUrl = async (
 		const articleImage = $('meta[property="article:image"]').attr(
 			"content"
 		);
-		if (articleImage) {
+		if (articleImage && articleImage.trim()) {
+			logger.debug(`Found article:image: ${articleImage}`);
 			return articleImage;
 		}
 
 		// Try schema.org image
 		const schemaImage = $('meta[itemprop="image"]').attr("content");
-		if (schemaImage) {
+		if (schemaImage && schemaImage.trim()) {
+			logger.debug(`Found schema image: ${schemaImage}`);
 			return schemaImage;
 		}
 
 		// Try link[rel="image_src"]
 		const linkImage = $('link[rel="image_src"]').attr("href");
-		if (linkImage) {
+		if (linkImage && linkImage.trim()) {
+			logger.debug(`Found link image: ${linkImage}`);
 			return linkImage;
 		}
 
@@ -65,13 +91,27 @@ export const getPreviewImageFromUrl = async (
 			.filter(
 				(img) =>
 					img.src &&
+					img.src.trim() &&
 					(!img.width || img.width > 100) &&
 					(!img.height || img.height > 100)
 			);
 
-		return images[0]?.src || null;
+		if (images[0]?.src) {
+			logger.debug(`Found fallback image: ${images[0].src}`);
+			return images[0].src;
+		}
+		
+		logger.info(`No preview image found for ${url}, using default thumbnail`);
+		return DEFAULT_THUMBNAIL;
 	} catch (error) {
-		logger.error("Error fetching preview image:", error);
-		return null;
+		// Log the specific error but don't let it propagate
+		if (error instanceof Error) {
+			logger.warn(`Error fetching preview image for ${url}: ${error.message}`);
+		} else {
+			logger.warn(`Unknown error fetching preview image for ${url}:`, error);
+		}
+		
+		// Always return default thumbnail instead of null to ensure consistent UX
+		return DEFAULT_THUMBNAIL;
 	}
 };

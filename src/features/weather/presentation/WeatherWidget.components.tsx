@@ -307,7 +307,7 @@ export const WeatherWidgetInner = ({
 	const forecastReports = reports.slice(1);
 
 	return (
-		<Card sx={{ width: "100%" }}>
+		<Card sx={{ width: "100%" }} data-testid="weather-widget">
 			<Box sx={{ border: "none" }}>
 				<TodayWeather location={location} report={todayReport} />
 			</Box>

@@ -4,6 +4,11 @@ import { useEffect, useRef, useCallback } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { Box, CircularProgress, Typography } from "@mui/material";
 import { useMonaco } from "@/providers/MonacoProvider";
+import { baseLogger } from "@/lib/logger";
+
+const logger = baseLogger.getSubLogger({
+	name: "ConfigEditor",
+});
 
 export interface ConfigEditorProps {
 	value: string;
@@ -52,7 +57,7 @@ export function ConfigEditor({ value, onChange }: ConfigEditorProps) {
 			const languages = monaco.languages.getLanguages();
 			const yamlLang = languages.find((l) => l.id === "yaml");
 			if (yamlLang) {
-				console.log("YAML language registered:", yamlLang);
+				logger.info("YAML language registered:", yamlLang);
 			}
 
 			// Create Monaco editor when Monaco is available
@@ -164,7 +169,10 @@ export function ConfigEditor({ value, onChange }: ConfigEditorProps) {
 	}
 
 	return (
-		<Box style={{ height: 700, border: "1px solid #ccc", borderRadius: 4 }}>
+		<Box
+			style={{ height: 700, border: "1px solid #ccc", borderRadius: 4 }}
+			data-testid="config-editor"
+		>
 			<div ref={editorRef} style={{ height: "100%" }} />
 		</Box>
 	);

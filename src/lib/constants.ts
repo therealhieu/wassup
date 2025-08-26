@@ -3,6 +3,12 @@ import { toSkeletonConfig } from "./utils";
 import zodToJsonSchema from "zod-to-json-schema";
 
 export const THEME_OPTIONS = ["light", "dark"] as const;
+export const BLANK_CONFIG = AppConfigSchema.parse({
+	ui: {
+		theme: "light",
+		pages: [],
+	},
+});
 
 export const DEFAULT_CONFIG: AppConfig = AppConfigSchema.parse({
 	ui: {

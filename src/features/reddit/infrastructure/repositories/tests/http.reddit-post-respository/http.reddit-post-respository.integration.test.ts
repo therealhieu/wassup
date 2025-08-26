@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { HttpRedditPostRepository } from "./http.reddit-post-respository";
+import { HttpRedditPostRepository } from "../../http.reddit-post-respository";
 
 describe("HttpRedditPostRepository", () => {
 	describe("fetchMany", () => {

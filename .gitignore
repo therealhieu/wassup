@@ -48,3 +48,4 @@ resources/geonames/*
 .playwright
 .serena/cache
 dev.log
+.cursor

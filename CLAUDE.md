@@ -8,15 +8,26 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Development Commands
 
+### Environment Setup
+- Development server loads environment variables from `.env.local`
+- Default Supabase configuration for local development:
+  - URL: `http://127.0.0.1:54321`
+  - Requires Supabase CLI for local development
+
 ### Core Development
-- `bun run dev` - Start development server with Turbopack (Next.js 15)
+- `bun run dev` - Start development server with Turbopack (Next.js 15.5)
 - `bun run build` - Build for production
 - `bun run build-no-lint` - Build without linting (faster)
 - `bun run start` - Start production server
-- `bun run lint` - Run ESLint
+- `bun run lint` - Run ESLint CLI (migrated from next lint for Next.js 16 compatibility)
 
 ### Testing & Quality
-- `bun test` - Run unit tests with Vitest
+- `bun test` - Run all tests with Vitest
+- `bun run test:unit` - Run unit tests only
+- `bun run test:integration` - Run integration tests only
+- `bun run test:e2e` - Run E2E tests with Playwright (Firefox)
+- `bun run test:storage` - Run specific storage E2E tests
+- `bun run test:coverage` - Run tests with coverage report
 - `bun run storybook` - Start Storybook development server on port 6006
 - `bun run build-storybook` - Build Storybook
 
@@ -24,6 +35,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `bun run watch-config` - Watch configuration changes
 
 ### Package Management
+**Note: Bun is the preferred package manager for this project** (25x faster installs than npm)
 - `bun install` - Install dependencies
 - `bun add <package>` - Add new dependency
 - `bun add -d <package>` - Add dev dependency
@@ -82,26 +94,33 @@ src/features/{widget-type}/
 
 ## Testing Strategy
 
-### Unit Tests (Vitest)
-- Configuration: `vitest.config.ts`
-- Integrated with Storybook test addon
-- Runs in browser environment using Playwright
-- Repository tests: `*.test.ts` files in infrastructure folders
+### Test Projects Structure
+The testing setup uses Vitest with multiple project configurations:
 
-### Component Testing (Storybook)
-- Stories for all widget components: `*.stories.tsx`
-- Includes both main components and skeleton loading states
-- Test addon integration for automated story testing
+#### Unit Tests
+- **Files**: `*.{test,spec}.ts` and `*.unit.test.ts`
+- **Excludes**: Integration and E2E tests
+- **Environment**: Node.js with Supabase environment variables
 
-### Browser Testing (Playwright)
-- Available as dev dependency for E2E testing
-- Integrated with Vitest browser testing
+#### Integration Tests  
+- **Files**: `*.integration.test.ts`
+- **Environment**: Node.js with Supabase environment variables
+
+#### E2E Tests
+- **Files**: `*.e2e.test.ts`
+- **Browser**: Firefox via Playwright (headless)
+- **Environment**: Full browser environment with Supabase
+
+#### Storybook Tests
+- **Integration**: Storybook experimental test addon
+- **Browser**: Chromium via Playwright
+- **Coverage**: Automated story testing and interaction testing
 
 ## Key Technical Details
 
 ### Framework Stack
-- **Next.js 15** with App Router and Turbopack
-- **React 19** with concurrent features
+- **Next.js 15.5** with App Router and Turbopack
+- **React 19.1** with concurrent features
 - **TypeScript 5** for type safety
 - **Material-UI v7** for UI components
 - **Tailwind CSS v4** for styling
@@ -119,6 +138,11 @@ src/features/{widget-type}/
 ### Error Handling
 - `neverthrow` library for functional error handling
 - Type-safe error propagation throughout the application
+
+### Database & Storage
+- **Supabase** for backend services and database
+- Local development uses Supabase CLI on `http://127.0.0.1:54321`
+- Browser storage using IndexedDB via `idb-keyval` for client-side caching
 
 ## Development Patterns
 
@@ -140,8 +164,13 @@ src/features/{widget-type}/
 - Concrete implementations in infrastructure layer
 - Enables testing with mock repositories and clean separation of concerns
 
-## Current TODOs
-- Specify which widgets can load server-side
-- Remove ergonomic caching methods  
-- Move integration tests to correct locations
-- Implement responsive design
+## Memories
+
+### MCPs
+- Use postgres mcp to query local supabase
+- Use playwright mcp when need to perform UI operations
+- Use the mui-mcp server to answer any MUI questions
+  - call the "useMuiDocs" tool to fetch the docs of the package relevant in the question
+  - call the "fetchDocs" tool to fetch any additional docs if needed using ONLY the URLs present in the returned content.
+  - repeat steps 1-2 until you have fetched all relevant docs for the given question
+  - use the fetched content to answer the question

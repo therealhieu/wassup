@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { OpenmeteoDailyWeatherReportRepository } from "./openmeteo.daily-weather-report";
+import { OpenmeteoDailyWeatherReportRepository } from "../../openmeteo.daily-weather-report";
 
 const HCMC_COORDINATES = {
 	latitude: 10.875,

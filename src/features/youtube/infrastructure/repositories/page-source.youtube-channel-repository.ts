@@ -114,4 +114,10 @@ export class PageSourceYoutubeChannelRepository
 			})
 		);
 	}
+
+	async findByUsername(username: string): Promise<Result<YoutubeChannel, Error>> {
+		// Convert username to @username format that findByName expects
+		const name = username.startsWith('@') ? username : `@${username}`;
+		return this.findByName(name);
+	}
 }

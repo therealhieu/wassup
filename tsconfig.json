@@ -25,6 +25,10 @@
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": [
     "node_modules",
-    "src/components/Widget.tsx"
+    "src/components/Widget.tsx",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/tests/**/*",
+    "src/lib/storage/tests/**/*"
   ]
 }

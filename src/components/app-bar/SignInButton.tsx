@@ -29,6 +29,7 @@ export default function SignIn() {
 				onClick={handleClick}
 				disableElevation
 				color="inherit"
+				data-testid="sign-in-button"
 				// sx={{
 				// 	backgroundColor: "white",
 				// 	color: "text.secondary",
@@ -41,11 +42,11 @@ export default function SignIn() {
 				Sign in
 			</Button>
 			<Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-				<MenuItem onClick={() => handleSignIn("google")}>
+				<MenuItem onClick={() => handleSignIn("google")} data-testid="sign-in-google">
 					<GoogleIcon sx={{ mr: 1 }} />
 					Sign in with Google
 				</MenuItem>
-				<MenuItem onClick={() => handleSignIn("github")}>
+				<MenuItem onClick={() => handleSignIn("github")} data-testid="sign-in-github">
 					<GitHubIcon sx={{ mr: 1 }} />
 					Sign in with GitHub
 				</MenuItem>

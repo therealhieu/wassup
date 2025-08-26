@@ -1,25 +1,14 @@
 import { create } from "zustand";
 import { createAppConfigSlice } from "./slices/app-config-slice";
 import { AppStore, AppStoreInitialState } from "./app-store.schemas";
-import { persist, createJSONStorage, StateStorage } from "zustand/middleware";
+import { persist, createJSONStorage } from "zustand/middleware";
 import { Session } from "next-auth";
+import { createStorage, STORAGE_NAME } from "@/lib/storage";
+import { baseLogger } from "@/lib/logger";
 
-export const remoteStorage: StateStorage = {
-	getItem: async (name: string): Promise<string | null> => {
-		console.log(name, "has been retrieved");
-		throw new Error("Not implemented");
-	},
-	setItem: async (name: string, value: string): Promise<void> => {
-		console.log(name, "with value", value, "has been saved");
-		throw new Error("Not implemented");
-	},
-	removeItem: async (name: string): Promise<void> => {
-		console.log(name, "has been deleted");
-		throw new Error("Not implemented");
-	},
-};
-
-export const STORAGE_NAME = "app-store-storage";
+const logger = baseLogger.getSubLogger({
+	name: "AppStore",
+});
 
 export const createAppStore = (
 	initialState: AppStoreInitialState,
@@ -34,11 +23,16 @@ export const createAppStore = (
 			}),
 			{
 				name: STORAGE_NAME,
-				storage: createJSONStorage(() =>
-					session ? remoteStorage : localStorage
-				),
+				storage: createJSONStorage(() => createStorage(session)),
 				onRehydrateStorage: () => (state) => {
-					console.log("rehydrated", state);
+					if (state) {
+						logger.info("✅ Store rehydrated successfully from storage", { 
+							hasConfig: !!state.appConfig,
+							isAuthenticated: !!session?.user?.id
+						});
+					} else {
+						logger.warn("⚠️ Failed to rehydrate store from storage");
+					}
 				},
 			}
 		)

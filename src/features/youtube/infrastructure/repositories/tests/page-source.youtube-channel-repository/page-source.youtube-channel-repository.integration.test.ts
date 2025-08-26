@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { PageSourceYoutubeChannelRepository } from "./page-source.youtube-channel-repository";
+import { PageSourceYoutubeChannelRepository } from "../../page-source.youtube-channel-repository";
 
 describe("PageSourceYoutubeChannelRepository", () => {
 	it("should find a channel by username", async () => {
@@ -13,7 +13,7 @@ describe("PageSourceYoutubeChannelRepository", () => {
 		expect(channel.value).toEqual(
 			expect.objectContaining({
 				id: expect.any(String),
-				username: expect.any(String),
+				name: expect.any(String),
 				rssUrl: expect.any(String),
 			})
 		);

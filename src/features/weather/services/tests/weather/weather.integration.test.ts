@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { WeatherService } from "./weather";
-import { WeatherWidgetConfigSchema } from "../infrastructure/config.schemas";
+import { WeatherService } from "../../weather";
+import { WeatherWidgetConfigSchema } from "../../../infrastructure/config.schemas";
 
 describe('WeatherService', () => {
     it('should return the weather widget props', async () => {

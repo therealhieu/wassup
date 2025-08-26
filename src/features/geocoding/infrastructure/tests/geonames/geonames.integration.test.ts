@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { GeonamesConfigSchema } from "./geonames.schemas";
-import { GeonamesGeocodeRepository } from "./geonames";
+import { GeonamesConfigSchema } from "../../geonames.schemas";
+import { GeonamesGeocodeRepository } from "../../geonames";
 import path from "path";
 import fs from "fs";
 import { baseLogger as logger } from "@/lib/logger";

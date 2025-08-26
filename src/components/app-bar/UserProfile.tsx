@@ -43,6 +43,7 @@ export const UserProfile = ({
 			<IconButton
 				onClick={handleClick}
 				size="small"
+				data-testid="user-profile-button"
 				aria-controls={open ? "user-menu" : undefined}
 				aria-haspopup="true"
 				aria-expanded={open ? "true" : undefined}
@@ -59,7 +60,7 @@ export const UserProfile = ({
 				transformOrigin={{ horizontal: "right", vertical: "top" }}
 				anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
 			>
-				<MenuItem onClick={handleLogout}>
+				<MenuItem onClick={handleLogout} data-testid="logout-button">
 					<Typography>Logout</Typography>
 				</MenuItem>
 			</Menu>

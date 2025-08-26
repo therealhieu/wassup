@@ -10,9 +10,9 @@ import { SessionProvider } from "next-auth/react";
 import { AppTheme } from "../components/AppTheme";
 import { AuthSnackBar } from "@/components/AuthSnackBar";
 import { auth } from "@/auth";
-import { AppStoreContextProvider } from "@/providers/AppStoreContextProvider";
+import { ClientAppStoreProvider } from "@/providers/ClientAppStoreProvider";
 import { MonacoProvider } from "@/providers/MonacoProvider";
-import { DEFAULT_CONFIG, SKELETON_CONFIG } from "@/lib/constants";
+import { BLANK_CONFIG } from "@/lib/constants";
 import { Session } from "next-auth";
 
 const geistSans = Geist({
@@ -40,12 +40,15 @@ export const metadata: Metadata = {
 const getInitialState = async (session: Session | null) => {
 	if (!session) {
 		return {
-			appConfig: SKELETON_CONFIG,
+			appConfig: BLANK_CONFIG,
 		};
 	}
-	const config = DEFAULT_CONFIG;
+
+	// For logged-in users, we'll return DEFAULT_CONFIG initially
+	// The actual config will be loaded from Supabase during store initialization
+	// via the persist middleware in createAppStore
 	return {
-		appConfig: config,
+		appConfig: BLANK_CONFIG,
 	};
 };
 
@@ -65,10 +68,7 @@ export default async function RootLayout({
 				<AppRouterCacheProvider>
 					<ReactQueryProvider>
 						<SessionProvider>
-							<AppStoreContextProvider
-								initialState={initialState}
-								session={session}
-							>
+							<ClientAppStoreProvider initialState={initialState}>
 								<MonacoProvider>
 									<AppTheme>
 										<AuthSnackBar />
@@ -76,7 +76,7 @@ export default async function RootLayout({
 										{children}
 									</AppTheme>
 								</MonacoProvider>
-							</AppStoreContextProvider>
+							</ClientAppStoreProvider>
 						</SessionProvider>
 					</ReactQueryProvider>
 				</AppRouterCacheProvider>

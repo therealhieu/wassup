@@ -4,7 +4,7 @@ import { AppConfigSchema } from "@/infrastructure/config.schemas";
 import React, { useEffect } from "react";
 import { useAppStore } from "@/providers/AppStoreContextProvider";
 import { DEFAULT_CONFIG } from "@/lib/constants";
-import { STORAGE_NAME } from "@/stores/app-store";
+import { STORAGE_NAME } from "@/lib/storage";
 
 export type LocalModeWrapperProps = {
 	children: React.ReactNode;
