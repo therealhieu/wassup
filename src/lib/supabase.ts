@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import { dbLogger } from '@/lib/logger';
 
 // Environment variables are required for Supabase connection
 // Create a .env.local file with the following variables:
@@ -25,7 +26,7 @@ if (!supabaseUrl || !supabaseKey) {
 
 // Log Supabase configuration (without exposing the full key)
 const isUsingServiceRole = supabaseKey === supabaseServiceKey;
-console.log('Supabase configuration:', {
+dbLogger.info('Supabase configuration initialized', {
   url: supabaseUrl,
   keyPrefix: supabaseKey.substring(0, 10) + '...',
   keyType: isUsingServiceRole ? 'service_role' : 'anon'
@@ -50,15 +51,15 @@ const testSupabaseConnection = async () => {
   try {
     const { error } = await supabase.from('user_configs').select('count').limit(1);
     if (error) {
-      console.error('Supabase connection test failed:', {
+      dbLogger.error('Supabase connection test failed:', {
         message: error.message,
         code: error.code
       });
     } else {
-      console.log('✅ Supabase connection successful');
+      dbLogger.info('✅ Supabase connection successful');
     }
   } catch (e) {
-    console.error('Failed to test Supabase connection:', e);
+    dbLogger.error('Failed to test Supabase connection:', e);
   }
 };
 
