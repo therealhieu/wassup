@@ -4,6 +4,7 @@
     "": {
       "name": "wassup",
       "dependencies": {
+        "@auth/supabase-adapter": "^1.10.0",
         "@emotion/cache": "^11.14.0",
         "@emotion/react": "^11.14.0",
         "@emotion/styled": "^11.14.0",
@@ -36,8 +37,8 @@
         "next": "^15.5.0",
         "next-auth": "^5.0.0-beta.28",
         "openmeteo": "^1.2.0",
-        "react": "19.1.1",
-        "react-dom": "19.1.1",
+        "react": "^19.1.1",
+        "react-dom": "^19.1.1",
         "styled-components": "^6.1.18",
         "ts-pattern": "^5.7.0",
         "tslog": "^4.9.3",
@@ -64,8 +65,8 @@
         "@tailwindcss/postcss": "^4",
         "@types/adm-zip": "^0.5.7",
         "@types/node": "^20",
-        "@types/react": "19.1.11",
-        "@types/react-dom": "19.1.7",
+        "@types/react": "^19.1.11",
+        "@types/react-dom": "^19.1.7",
         "@types/unzipper": "^0.10.11",
         "@vitest/browser": "^3.1.2",
         "@vitest/coverage-v8": "^3.1.2",
@@ -89,6 +90,8 @@
     "@ampproject/remapping": ["@ampproject/remapping@2.3.0", "", { "dependencies": { "@jridgewell/gen-mapping": "^0.3.5", "@jridgewell/trace-mapping": "^0.3.24" } }, "sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw=="],
 
     "@auth/core": ["@auth/core@0.40.0", "", { "dependencies": { "@panva/hkdf": "^1.2.1", "jose": "^6.0.6", "oauth4webapi": "^3.3.0", "preact": "10.24.3", "preact-render-to-string": "6.5.11" }, "peerDependencies": { "@simplewebauthn/browser": "^9.0.1", "@simplewebauthn/server": "^9.0.2", "nodemailer": "^6.8.0" }, "optionalPeers": ["@simplewebauthn/browser", "@simplewebauthn/server", "nodemailer"] }, "sha512-n53uJE0RH5SqZ7N1xZoMKekbHfQgjd0sAEyUbE+IYJnmuQkbvuZnXItCU7d+i7Fj8VGOgqvNO7Mw4YfBTlZeQw=="],
+
+    "@auth/supabase-adapter": ["@auth/supabase-adapter@1.10.0", "", { "dependencies": { "@auth/core": "0.40.0" }, "peerDependencies": { "@supabase/supabase-js": "^2.43.1" } }, "sha512-Gix/dTRBjuj3/zqbMKVhu8z8j93QI3baZS0Fs5VIqpBoeSIxIAyXKJnZBy24B7Uazecp1VUIolbyt5yrR18gFw=="],
 
     "@babel/code-frame": ["@babel/code-frame@7.27.1", "", { "dependencies": { "@babel/helper-validator-identifier": "^7.27.1", "js-tokens": "^4.0.0", "picocolors": "^1.1.1" } }, "sha512-cjQ7ZlQ0Mv3b47hABuTevyTuYN4i+loJKGeV9flcCgIK37cCXRh+L1bd3iBHlynerhQ7BhCkn2BPbQUL+rGqFg=="],
 

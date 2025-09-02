@@ -27,20 +27,20 @@ export const HEADERS = {
     'Expires': '0',
   },
   BROWSER_LIKE: {
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
     'Accept-Language': 'en-US,en;q=0.9',
-    'Accept-Encoding': 'gzip, deflate, br',
-    'DNT': '1',
-    'Connection': 'keep-alive',
-    'Upgrade-Insecure-Requests': '1',
+    'Cache-Control': 'no-cache',
+    'Pragma': 'no-cache',
   },
   RSS_FEED: {
     'Accept': 'application/rss+xml, application/xml, text/xml, application/atom+xml, text/html, */*',
     'Accept-Language': 'en-US,en;q=0.9',
-    'Accept-Encoding': 'gzip, deflate, br',
     'Cache-Control': 'no-cache',
     'Pragma': 'no-cache',
+  },
+  NODE_ONLY: {
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    'Accept-Encoding': 'gzip, deflate, br',
     'DNT': '1',
     'Connection': 'keep-alive',
     'Upgrade-Insecure-Requests': '1',
@@ -108,28 +108,82 @@ export const API_ROUTES = {
 /**
  * Create fetch options with common defaults
  */
-export const createFetchOptions = (options: RequestInit = {}): RequestInit => ({
-  method: 'GET',
-  headers: {
-    ...HEADERS.JSON,
-    ...HEADERS.BROWSER_LIKE,
-  },
-  redirect: 'follow',
-  ...options,
-});
+export const createFetchOptions = (options: RequestInit = {}): RequestInit => {
+  const method = options.method || 'GET';
+  const hasBody = options.body !== undefined;
+  
+  // Start with browser-like headers
+  let headers = getRuntimeHeaders(HEADERS.BROWSER_LIKE);
+  
+  // Only add Content-Type when body is present or method is not GET
+  if (hasBody || method !== 'GET') {
+    headers = { ...headers, ...HEADERS.JSON };
+  }
+  
+  // Merge with provided headers (caller headers override defaults)
+  if (options.headers) {
+    if (options.headers instanceof Headers) {
+      options.headers.forEach((value, key) => {
+        headers[key] = value;
+      });
+    } else if (Array.isArray(options.headers)) {
+      // Handle array format [["key", "value"], ...]
+      options.headers.forEach(([key, value]) => {
+        headers[key] = value;
+      });
+    } else {
+      // Handle plain object format
+      headers = { ...headers, ...options.headers };
+    }
+  }
+  
+  return {
+    method,
+    headers,
+    redirect: 'follow',
+    credentials: 'same-origin', // Include cookies for same-origin requests (auth)
+    ...options,
+  };
+};
 
 /**
  * Create fetch options for RSS feeds
  */
-export const createRssFetchOptions = (userAgent?: string, signal?: AbortSignal): RequestInit => ({
-  method: 'GET',
-  headers: {
-    ...HEADERS.RSS_FEED,
-    'User-Agent': userAgent || USER_AGENTS[0],
-  },
-  redirect: 'follow',
-  signal,
-});
+export const createRssFetchOptions = (userAgent?: string, signal?: AbortSignal): RequestInit => {
+  const baseHeaders = HEADERS.RSS_FEED;
+  const runtimeHeaders = getRuntimeHeaders(baseHeaders);
+  
+  return {
+    method: 'GET',
+    headers: {
+      ...runtimeHeaders,
+      ...(userAgent && isNodeRuntime() ? { 'User-Agent': userAgent } : {}),
+    },
+    redirect: 'follow',
+    signal,
+  };
+};
+
+/**
+ * Runtime detection utilities
+ */
+export const isNodeRuntime = (): boolean => {
+  return typeof process !== 'undefined' && process?.versions?.node !== undefined;
+};
+
+export const isBrowserRuntime = (): boolean => {
+  return typeof window !== 'undefined';
+};
+
+/**
+ * Get runtime-appropriate headers
+ */
+export const getRuntimeHeaders = (baseHeaders: Record<string, string>): Record<string, string> => {
+  if (isNodeRuntime()) {
+    return { ...baseHeaders, ...HEADERS.NODE_ONLY };
+  }
+  return baseHeaders;
+};
 
 /**
  * Create abort controller with timeout

@@ -23,10 +23,11 @@ export class RssFeedRepository {
 			try {
 				// Add random delay to mimic human browsing
 				if (attempt > 0) {
-					const delay = Math.min(
-						RETRY_CONFIG.BASE_DELAY * Math.pow(2, attempt) + Math.random() * 100,
-						RETRY_CONFIG.MAX_DELAY
-					);
+					const base = RETRY_CONFIG.EXPONENTIAL_BACKOFF
+						? RETRY_CONFIG.BASE_DELAY * Math.pow(2, attempt)
+						: RETRY_CONFIG.BASE_DELAY;
+					const jitter = Math.random() * 100;
+					const delay = Math.min(base + jitter, RETRY_CONFIG.MAX_DELAY);
 					await new Promise(resolve => setTimeout(resolve, delay));
 				}
 

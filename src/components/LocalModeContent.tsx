@@ -3,7 +3,7 @@
 import { AppConfigSchema } from "@/infrastructure/config.schemas";
 import React, { useEffect } from "react";
 import { useAppStore } from "@/providers/AppStoreContextProvider";
-import { DEFAULT_CONFIG } from "@/lib/constants";
+import { BLANK_CONFIG } from "@/lib/constants";
 import { STORAGE_NAME } from "@/lib/storage";
 
 export type LocalModeWrapperProps = {
@@ -20,7 +20,7 @@ export const LocalModeContent = ({ children }: LocalModeWrapperProps) => {
 			if (savedConfig) {
 				try {
 					const parsedConfig = AppConfigSchema.parse(
-						JSON.parse(savedConfig)
+						JSON.parse(savedConfig),
 					);
 					setAppConfig(parsedConfig);
 					return;
@@ -29,12 +29,12 @@ export const LocalModeContent = ({ children }: LocalModeWrapperProps) => {
 				}
 			}
 
-			const config = DEFAULT_CONFIG;
+			const config = BLANK_CONFIG;
 			setAppConfig(config);
 		};
 
 		loadData().catch((err) =>
-			console.error("Failed to load initial data:", err)
+			console.error("Failed to load initial data:", err),
 		);
 	}, [setAppConfig]);
 

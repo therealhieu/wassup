@@ -20,7 +20,7 @@ export const AppStoreContext = createContext<AppStoreApi | null>(null);
 export interface AppStoreProviderProps {
 	children: React.ReactNode;
 	initialState: AppStoreInitialState;
-	session: Session | null;
+	session: Session | null | undefined; // undefined = loading, null = no session, Session = authenticated
 }
 
 export const AppStoreContextProvider = ({
@@ -30,18 +30,39 @@ export const AppStoreContextProvider = ({
 }: AppStoreProviderProps) => {
 	const sessionRef = useRef<Session | null>(session);
 	const [migrationComplete, setMigrationComplete] = useState(false);
+	const [isSessionLoading, setIsSessionLoading] = useState(
+		session === undefined,
+	);
 
 	// Create store using useMemo to avoid hooks rule violation
 	// Only recreate store when user ID changes, not on every session object change
 	const store = useMemo(() => {
-		console.log("🏗️ Creating store with session:", !!session);
+		console.log(
+			"🏗️ Creating store with session:",
+			!!session,
+			"userId:",
+			session?.user?.id,
+		);
 		// When creating the store, the persist middleware will attempt to rehydrate
 		// from the appropriate storage (Supabase for logged-in users)
 		return createAppStore(initialState, session);
 	}, [initialState, session?.user?.id]); // Only recreate when user ID changes
 
+	// Handle session loading state
+	useEffect(() => {
+		if (session !== undefined) {
+			setIsSessionLoading(false);
+		}
+	}, [session]);
+
 	// Handle user data migration in a separate effect
 	useEffect(() => {
+		// Skip migration if session is still loading
+		if (session === undefined) {
+			console.log("⏳ Session still loading, skipping migration check");
+			return;
+		}
+
 		const handleMigration = async () => {
 			const hadUserId = !!sessionRef.current?.user?.id;
 			const hasUserId = !!session?.user?.id;
@@ -50,14 +71,16 @@ export const AppStoreContextProvider = ({
 				hadUserId,
 				hasUserId,
 				userId: session?.user?.id,
+				sessionStatus: session ? "authenticated" : "unauthenticated",
 			});
 
-			// If user just logged in (didn't have userId, now has one)
-			if (!hadUserId && hasUserId && session?.user?.id) {
-				console.log("🔄 User logged in, migrating data...");
+			// Always attempt migration if user is logged in
+			// The migrateUserData function will handle checking if sync is needed
+			if (hasUserId && session?.user?.id) {
+				console.log("🔄 User is logged in, checking for migration...");
 				try {
 					await migrateUserData(session.user.id);
-					console.log("✅ Migration completed");
+					console.log("✅ Migration check completed");
 				} catch (error) {
 					console.error("❌ Migration failed:", error);
 				}
@@ -68,10 +91,10 @@ export const AppStoreContextProvider = ({
 		};
 
 		handleMigration();
-	}, [session?.user?.id]); // Only run migration when user ID changes
+	}, [session]); // Run when session changes (including from undefined to null/object)
 
-	// Show loading state while migration is in progress
-	if (!migrationComplete) {
+	// Show loading state while session is loading or migration is in progress
+	if (isSessionLoading || !migrationComplete) {
 		return (
 			<AppStoreContext.Provider value={null}>
 				<div>Loading store...</div>

@@ -79,9 +79,24 @@ export const createSuccessResponse = (data?: any, status = 200): NextResponse =>
 };
 
 /**
+ * Result types for parseRequestBody function
+ */
+export interface ParseRequestSuccess<T = any> {
+  success: true;
+  data: T;
+}
+
+export interface ParseRequestFailure {
+  success: false;
+  error: ApiErrorResponse;
+}
+
+export type ParseRequestResult<T = any> = ParseRequestSuccess<T> | ParseRequestFailure;
+
+/**
  * Validate request body and parse JSON
  */
-export const parseRequestBody = async (request: Request): Promise<any> => {
+export const parseRequestBody = async <T = any>(request: Request): Promise<ParseRequestResult<T>> => {
   try {
     const body = await request.json();
     return { success: true, data: body };

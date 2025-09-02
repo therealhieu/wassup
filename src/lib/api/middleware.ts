@@ -7,6 +7,19 @@ export interface AuthenticatedRequest extends NextRequest {
 }
 
 /**
+ * Creates an AuthenticatedRequest wrapper without mutating the original request
+ */
+function createAuthenticatedRequest(request: NextRequest, userId: string): AuthenticatedRequest {
+  // Create a new object that delegates to the original request
+  const authenticatedRequest = Object.create(request);
+  
+  // Add userId property
+  authenticatedRequest.userId = userId;
+  
+  return authenticatedRequest as AuthenticatedRequest;
+}
+
+/**
  * Middleware to validate authentication
  */
 export async function withAuth(
@@ -24,9 +37,7 @@ export async function withAuth(
       );
     }
 
-    const authenticatedRequest = Object.assign(request, {
-      userId: session.user.id
-    }) as AuthenticatedRequest;
+    const authenticatedRequest = createAuthenticatedRequest(request, session.user.id);
 
     return await handler(authenticatedRequest);
   } catch (error) {
@@ -57,19 +68,6 @@ export function withErrorHandler(
   };
 }
 
-/**
- * Compose middleware functions
- */
-export function compose<T extends NextRequest>(
-  ...middlewares: Array<(req: T, next: (req: T) => Promise<NextResponse>) => Promise<NextResponse>>
-) {
-  return (handler: (req: T) => Promise<NextResponse>) => {
-    return middlewares.reduceRight(
-      (next, middleware) => (req: T) => middleware(req, next),
-      handler
-    );
-  };
-}
 
 /**
  * Combined middleware for authenticated API routes

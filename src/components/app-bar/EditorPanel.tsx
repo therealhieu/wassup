@@ -57,6 +57,10 @@ export function EditorPanel({ open, onClose }: EditorPanelProps) {
 		try {
 			const object = yaml2.parse(editorValue);
 			const config = AppConfigSchema.parse(object);
+			console.log("📝 EditorPanel: Applying config change", { 
+				configPreview: JSON.stringify(config).substring(0, 200) + '...',
+				hasPages: config.ui.pages.length 
+			});
 			setAppConfig(config);
 			setHasUserChanges(false); // Reset flag after successful apply
 			setError(null);

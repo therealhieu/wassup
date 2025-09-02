@@ -10,10 +10,14 @@ interface ClientAppStoreProviderProps {
 }
 
 export const ClientAppStoreProvider = ({ children, initialState }: ClientAppStoreProviderProps) => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+  
+  // Pass session as null explicitly when loading, to distinguish from undefined
+  // This helps AppStoreContextProvider know when session is still loading vs no session
+  const sessionToPass = status === "loading" ? undefined : session;
   
   return (
-    <AppStoreContextProvider initialState={initialState} session={session}>
+    <AppStoreContextProvider initialState={initialState} session={sessionToPass}>
       {children}
     </AppStoreContextProvider>
   );

@@ -12,7 +12,7 @@ const logger = baseLogger.getSubLogger({
 
 export const createAppStore = (
 	initialState: AppStoreInitialState,
-	session: Session | null
+	session: Session | null | undefined
 ) => {
 	const { appConfig } = initialState;
 
@@ -24,14 +24,19 @@ export const createAppStore = (
 			{
 				name: STORAGE_NAME,
 				storage: createJSONStorage(() => createStorage(session)),
-				onRehydrateStorage: () => (state) => {
-					if (state) {
+				partialize: (state) => ({ appConfig: state.appConfig }), // Only persist appConfig
+				onRehydrateStorage: () => (state, error) => {
+					if (error) {
+						logger.error("❌ Failed to rehydrate store from storage:", error);
+					} else if (state) {
 						logger.info("✅ Store rehydrated successfully from storage", { 
 							hasConfig: !!state.appConfig,
 							isAuthenticated: !!session?.user?.id
 						});
 					} else {
-						logger.warn("⚠️ Failed to rehydrate store from storage");
+						logger.info("ℹ️ No stored state found, using initial config", {
+							isAuthenticated: !!session?.user?.id
+						});
 					}
 				},
 			}

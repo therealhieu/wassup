@@ -12,6 +12,11 @@ export interface AppThemeProviderProps {
 
 export const AppTheme = ({ children }: AppThemeProviderProps) => {
 	const theme = useAppStore((state) => {
+		// Handle missing ui property (for backward compatibility with old configs)
+		if (!state.appConfig.ui) {
+			return appThemes.light;
+		}
+
 		const current = state.appConfig.ui.theme;
 
 		if (!current) {

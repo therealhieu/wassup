@@ -10,98 +10,79 @@ const logger = baseLogger.getSubLogger({
 
 export const STORAGE_NAME = 'app-store-storage';
 
-// Migration function - sync local data to Supabase if needed
+// Migration function - prioritize local storage, sync to cloud if needed
 const migrateToSupabase = async (userId: string) => {
   try {
+    logger.info('🚀 Starting migration for user:', userId);
     const supabaseStorage = createSupabaseStorage(userId);
     
-    // First check if there's a config in Supabase
-    const existingConfig = await supabaseStorage.getItem(STORAGE_NAME);
+    // First check for local storage config (local wins for new users)
+    // Only check localStorage if we're in browser environment
+    const localData = (typeof window !== 'undefined' && typeof localStorage !== 'undefined') 
+      ? localStorage.getItem(STORAGE_NAME) 
+      : null;
     
-    if (existingConfig) {
-      // If Supabase has config, use it (cloud wins)
-      logger.info('Existing config found in Supabase, using cloud data');
+    logger.info('📦 Local storage check:', { hasLocalData: !!localData, dataLength: localData?.length });
+    
+    if (localData) {
+      // Local config exists, check if we need to sync to cloud
+      logger.info('Local config found, checking cloud sync status');
       
-      // Update local storage with the cloud config
-      if (typeof localStorage !== 'undefined') {
-        localStorage.setItem(STORAGE_NAME, existingConfig);
-        logger.info('Updated localStorage with Supabase config');
+      try {
+        const existingCloudConfig = await supabaseStorage.getItem(STORAGE_NAME);
+        logger.info('☁️ Cloud config check:', { hasCloudConfig: !!existingCloudConfig });
+        
+        if (!existingCloudConfig) {
+          // No cloud config, sync local to cloud (first login)
+          logger.info('First login detected - syncing local config to cloud');
+          await supabaseStorage.setItem(STORAGE_NAME, localData);
+          logger.info('✓ Synced local config to Supabase on first login');
+        } else {
+          // Cloud config exists, use cloud config (existing user)
+          logger.info('Existing user - using cloud config, updating localStorage');
+          if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+            localStorage.setItem(STORAGE_NAME, existingCloudConfig);
+            logger.info('✓ Updated localStorage with cloud config');
+          }
+        }
+      } catch (cloudError: any) {
+        if (cloudError?.code === '42501') {
+          logger.warn('RLS prevents cloud operations, continuing with localStorage only');
+        } else {
+          logger.warn('Failed to sync with cloud, continuing with localStorage');
+          logger.error('Cloud sync error:', cloudError);
+        }
       }
     } else {
-      // No config in Supabase, check if we have local data to sync
-      const localData = typeof localStorage !== 'undefined' ? localStorage.getItem(STORAGE_NAME) : null;
+      // No local config, check cloud
+      logger.info('No local config found, checking cloud');
       
-      if (localData) {
-        // Try to sync local data to Supabase
-        logger.info('No config in Supabase but found local data, attempting to sync to cloud');
-        try {
-          await supabaseStorage.setItem(STORAGE_NAME, localData);
-          logger.info('✓ Synced local config to Supabase');
-        } catch (syncError: any) {
-          if (syncError?.code === '42501') {
-            logger.warn('RLS prevents syncing to Supabase, using localStorage only');
-          } else {
-            logger.warn('Failed to sync local data to Supabase, continuing with localStorage');
-            logger.error('Sync error:', syncError);
-          }
-        }
-      } else {
-        // No config anywhere, create a default one
-        logger.info('No config found anywhere, creating default configuration');
+      try {
+        const existingCloudConfig = await supabaseStorage.getItem(STORAGE_NAME);
         
-        const { DEFAULT_CONFIG } = await import('@/lib/constants');
-        const initialConfig = {
-          state: {
-            appConfig: DEFAULT_CONFIG
+        if (existingCloudConfig) {
+          // Cloud config exists, update local storage
+          logger.info('Cloud config found, updating localStorage');
+          if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+            localStorage.setItem(STORAGE_NAME, existingCloudConfig);
+            logger.info('✓ Updated localStorage with cloud config');
           }
-        };
-        const configString = JSON.stringify(initialConfig);
-        
-        // Try to create in Supabase first
-        try {
-          await supabaseStorage.setItem(STORAGE_NAME, configString);
-          logger.info('✓ Created default config in Supabase');
-        } catch (createError: any) {
-          if (createError?.code === '42501') {
-            logger.warn('RLS prevents creating config in Supabase, using localStorage only');
-          } else {
-            logger.warn('Failed to create config in Supabase, falling back to localStorage');
-            logger.error('Create error:', createError);
-          }
+        } else {
+          // No config anywhere - user will start with empty state
+          logger.info('No config found in either localStorage or cloud');
         }
-        
-        // Always ensure localStorage has the config
-        if (typeof localStorage !== 'undefined') {
-          localStorage.setItem(STORAGE_NAME, configString);
-          logger.info('✓ Created default config in localStorage');
-        }
+      } catch (cloudError: any) {
+        logger.warn('Failed to check cloud config, user starts with empty state');
+        logger.error('Cloud check error:', cloudError);
       }
     }
   } catch (error) {
     logger.error('Error during migration:', error);
-    
-    // Ensure there's always a fallback config in localStorage
-    if (typeof localStorage !== 'undefined') {
-      const existingLocal = localStorage.getItem(STORAGE_NAME);
-      if (!existingLocal) {
-        try {
-          const { DEFAULT_CONFIG } = await import('@/lib/constants');
-          const initialConfig = {
-            state: {
-              appConfig: DEFAULT_CONFIG
-            }
-          };
-          localStorage.setItem(STORAGE_NAME, JSON.stringify(initialConfig));
-          logger.info('✓ Created fallback config in localStorage after migration error');
-        } catch (fallbackError) {
-          logger.error('Failed to create fallback config:', fallbackError);
-        }
-      }
-    }
+    // No fallback config creation - user starts with empty state if migration fails
   }
 };
 
-export const createStorage = (session: Session | null): StateStorage => {
+export const createStorage = (session: Session | null | undefined): StateStorage => {
   if (session?.user?.id) {
     return createSupabaseStorage(session.user.id);
   }

@@ -67,7 +67,7 @@ export default async function RootLayout({
 			>
 				<AppRouterCacheProvider>
 					<ReactQueryProvider>
-						<SessionProvider>
+						<SessionProvider session={session}>
 							<ClientAppStoreProvider initialState={initialState}>
 								<MonacoProvider>
 									<AppTheme>
