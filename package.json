@@ -12,14 +12,12 @@
     "test:unit": "vitest --project unit",
     "test:integration": "vitest --project integration",
     "test:e2e": "vitest --project e2e",
-    "test:storage": "vitest --project e2e src/lib/storage/tests/storage.e2e.test.ts",
     "test:coverage": "vitest --coverage",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "watch-config": "bun run scripts/watch-config.ts"
   },
   "dependencies": {
-    "@auth/supabase-adapter": "^1.10.0",
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
@@ -31,7 +29,6 @@
     "@mui/material-nextjs": "^7.0.2",
     "@openmeteo/sdk": "^1.20.0",
     "@rollup/rollup-darwin-x64": "4.48.1",
-    "@supabase/supabase-js": "^2.56.0",
     "@tanstack/query-sync-storage-persister": "^5.76.1",
     "@tanstack/react-query": "^5.75.5",
     "@tanstack/react-query-persist-client": "^5.76.1",
@@ -90,7 +87,6 @@
     "eslint-plugin-storybook": "^0.12.0",
     "playwright": "^1.52.0",
     "storybook": "^8.6.12",
-    "supabase": "^2.34.3",
     "tailwindcss": "^4",
     "typescript": "^5",
     "vitest": "^3.1.2"

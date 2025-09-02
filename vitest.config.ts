@@ -1,7 +1,6 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { defineConfig } from "vitest/config";
-import { loadEnv } from "vite";
 import { storybookTest } from "@storybook/experimental-addon-test/vitest-plugin";
 const dirname =
 	typeof __dirname !== "undefined"
@@ -10,18 +9,13 @@ const dirname =
 
 // More info at: https://storybook.js.org/docs/writing-tests/test-addon
 export default defineConfig(({ mode }) => {
-	const env = loadEnv(mode, process.cwd(), '');
-	
-	return {
-	resolve: {
-		alias: {
-			"@": path.resolve(dirname, "./src"),
-		},
-	},
-	define: {
-		'process.env.NEXT_PUBLIC_SUPABASE_URL': JSON.stringify(env.NEXT_PUBLIC_SUPABASE_URL || 'http://127.0.0.1:54321'),
-		'process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY': JSON.stringify(env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0'),
-	},
+    return {
+  resolve: {
+    alias: {
+      "@": path.resolve(dirname, "./src"),
+    },
+    },
+    define: {},
 	test: {
 		silent: false,
 		projects: [
@@ -31,20 +25,14 @@ export default defineConfig(({ mode }) => {
 					include: ["**/*.{test,spec}.ts", "**/*.unit.test.ts"],
 					exclude: ["**/*.integration.test.ts", "**/*.e2e.test.ts"],
 				},
-				define: {
-					'process.env.NEXT_PUBLIC_SUPABASE_URL': JSON.stringify(env.NEXT_PUBLIC_SUPABASE_URL || 'http://127.0.0.1:54321'),
-					'process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY': JSON.stringify(env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0'),
-				},
+        define: {},
 			},
 			{
 				test: {
 					name: "integration",
 					include: ["**/*.integration.test.ts"],
 				},
-				define: {
-					'process.env.NEXT_PUBLIC_SUPABASE_URL': JSON.stringify(env.NEXT_PUBLIC_SUPABASE_URL || 'http://127.0.0.1:54321'),
-					'process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY': JSON.stringify(env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0'),
-				},
+        define: {},
 			},
 			{
 				test: {
@@ -61,10 +49,7 @@ export default defineConfig(({ mode }) => {
 						],
 					},
 				},
-				define: {
-					'process.env.NEXT_PUBLIC_SUPABASE_URL': JSON.stringify(env.NEXT_PUBLIC_SUPABASE_URL || 'http://127.0.0.1:54321'),
-					'process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY': JSON.stringify(env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0'),
-				},
+        define: {},
 			},
 			{
 				extends: true,
@@ -89,10 +74,7 @@ export default defineConfig(({ mode }) => {
 					},
 					setupFiles: [".storybook/vitest.setup.ts"],
 				},
-				define: {
-					'process.env.NEXT_PUBLIC_SUPABASE_URL': JSON.stringify(env.NEXT_PUBLIC_SUPABASE_URL || 'http://127.0.0.1:54321'),
-					'process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY': JSON.stringify(env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0'),
-				},
+        define: {},
 			},
 		],
 	},

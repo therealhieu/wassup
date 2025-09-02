@@ -4,16 +4,16 @@ import { apiLogger } from '@/lib/logger';
 export interface ApiError {
   message: string;
   code?: string;
-  details?: any;
+  details?: unknown;
   statusCode: number;
 }
 
 export class ApiErrorResponse extends Error {
   public readonly statusCode: number;
   public readonly code?: string;
-  public readonly details?: any;
+  public readonly details?: unknown;
 
-  constructor(message: string, statusCode: number, code?: string, details?: any) {
+  constructor(message: string, statusCode: number, code?: string, details?: unknown) {
     super(message);
     this.statusCode = statusCode;
     this.code = code;
@@ -28,32 +28,14 @@ export class ApiErrorResponse extends Error {
 export const createErrorResponse = (error: ApiError): NextResponse => {
   const response = {
     error: error.message,
-    ...(error.code && { code: error.code }),
-    ...(error.details && { details: error.details })
-  };
+    ...(error.code ? { code: error.code } : {}),
+    ...(error.details != null ? { details: error.details } : {}),
+  } as const;
 
   return NextResponse.json(response, { status: error.statusCode });
 };
 
-/**
- * Handle Supabase errors and convert to API errors
- */
-export const handleSupabaseError = (error: any, operation: string): NextResponse => {
-  const errorInfo = {
-    message: error.message,
-    details: error.details,
-    hint: error.hint,
-    code: error.code
-  };
-
-  apiLogger.error(`Supabase error during ${operation}:`, errorInfo);
-
-  return createErrorResponse({
-    message: `Failed to ${operation}`,
-    details: error.message,
-    statusCode: 500
-  });
-};
+// Centralized API error helpers
 
 /**
  * Common API error types
@@ -65,7 +47,7 @@ export const ApiErrors = {
   badRequest: (message = 'Invalid request') => new ApiErrorResponse(message, 400),
   conflict: (message = 'Resource conflict') => new ApiErrorResponse(message, 409),
   internalServer: (message = 'Internal server error') => new ApiErrorResponse(message, 500),
-  validationError: (details: any) => new ApiErrorResponse('Validation failed', 400, 'VALIDATION_ERROR', details),
+  validationError: (details: unknown) => new ApiErrorResponse('Validation failed', 400, 'VALIDATION_ERROR', details),
   jsonParseError: () => new ApiErrorResponse('Invalid JSON format', 400, 'JSON_PARSE_ERROR'),
   missingField: (field: string) => new ApiErrorResponse(`Missing required field: ${field}`, 400, 'MISSING_FIELD')
 };
@@ -73,7 +55,7 @@ export const ApiErrors = {
 /**
  * Success response helper
  */
-export const createSuccessResponse = (data?: any, status = 200): NextResponse => {
+export const createSuccessResponse = (data?: unknown, status = 200): NextResponse => {
   const response = data === undefined ? { success: true } : data;
   return NextResponse.json(response, { status });
 };
@@ -81,7 +63,7 @@ export const createSuccessResponse = (data?: any, status = 200): NextResponse =>
 /**
  * Result types for parseRequestBody function
  */
-export interface ParseRequestSuccess<T = any> {
+export interface ParseRequestSuccess<T = unknown> {
   success: true;
   data: T;
 }
@@ -91,12 +73,12 @@ export interface ParseRequestFailure {
   error: ApiErrorResponse;
 }
 
-export type ParseRequestResult<T = any> = ParseRequestSuccess<T> | ParseRequestFailure;
+export type ParseRequestResult<T = unknown> = ParseRequestSuccess<T> | ParseRequestFailure;
 
 /**
  * Validate request body and parse JSON
  */
-export const parseRequestBody = async <T = any>(request: Request): Promise<ParseRequestResult<T>> => {
+export const parseRequestBody = async <T = unknown>(request: Request): Promise<ParseRequestResult<T>> => {
   try {
     const body = await request.json();
     return { success: true, data: body };
@@ -109,7 +91,7 @@ export const parseRequestBody = async <T = any>(request: Request): Promise<Parse
 /**
  * Validate required fields in request body
  */
-export const validateRequiredFields = (body: any, fields: string[]): { success: boolean; error?: ApiErrorResponse } => {
+export const validateRequiredFields = (body: Record<string, unknown>, fields: string[]): { success: boolean; error?: ApiErrorResponse } => {
   const missingFields = fields.filter(field => !body[field]);
   
   if (missingFields.length > 0) {

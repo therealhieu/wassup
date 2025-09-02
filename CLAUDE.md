@@ -10,9 +10,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### Environment Setup
 - Development server loads environment variables from `.env.local`
-- Default Supabase configuration for local development:
-  - URL: `http://127.0.0.1:54321`
-  - Requires Supabase CLI for local development
 
 ### Core Development
 - `bun run dev` - Start development server with Turbopack (Next.js 15.5)
@@ -26,7 +23,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `bun run test:unit` - Run unit tests only
 - `bun run test:integration` - Run integration tests only
 - `bun run test:e2e` - Run E2E tests with Playwright (Firefox)
-- `bun run test:storage` - Run specific storage E2E tests
 - `bun run test:coverage` - Run tests with coverage report
 - `bun run storybook` - Start Storybook development server on port 6006
 - `bun run build-storybook` - Build Storybook
@@ -100,16 +96,16 @@ The testing setup uses Vitest with multiple project configurations:
 #### Unit Tests
 - **Files**: `*.{test,spec}.ts` and `*.unit.test.ts`
 - **Excludes**: Integration and E2E tests
-- **Environment**: Node.js with Supabase environment variables
+- **Environment**: Node.js
 
 #### Integration Tests  
 - **Files**: `*.integration.test.ts`
-- **Environment**: Node.js with Supabase environment variables
+- **Environment**: Node.js
 
 #### E2E Tests
 - **Files**: `*.e2e.test.ts`
 - **Browser**: Firefox via Playwright (headless)
-- **Environment**: Full browser environment with Supabase
+- **Environment**: Full browser environment
 
 #### Storybook Tests
 - **Integration**: Storybook experimental test addon
@@ -139,10 +135,9 @@ The testing setup uses Vitest with multiple project configurations:
 - `neverthrow` library for functional error handling
 - Type-safe error propagation throughout the application
 
-### Database & Storage
-- **Supabase** for backend services and database
-- Local development uses Supabase CLI on `http://127.0.0.1:54321`
-- Browser storage using IndexedDB via `idb-keyval` for client-side caching
+### Storage
+- Browser storage using localStorage (persisted via Zustand persist)
+- Optionally add IndexedDB via `idb-keyval` for client-side caching in the future
 
 ## Development Patterns
 
@@ -167,7 +162,6 @@ The testing setup uses Vitest with multiple project configurations:
 ## Memories
 
 ### MCPs
-- Use postgres mcp to query local supabase
 - Use playwright mcp when need to perform UI operations
 - Use the mui-mcp server to answer any MUI questions
   - call the "useMuiDocs" tool to fetch the docs of the package relevant in the question

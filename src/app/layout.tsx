@@ -44,9 +44,8 @@ const getInitialState = async (session: Session | null) => {
 		};
 	}
 
-	// For logged-in users, we'll return DEFAULT_CONFIG initially
-	// The actual config will be loaded from Supabase during store initialization
-	// via the persist middleware in createAppStore
+    // For logged-in users, we still use local storage only.
+    // Remote sync is not enabled in this build.
 	return {
 		appConfig: BLANK_CONFIG,
 	};

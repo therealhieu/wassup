@@ -101,7 +101,6 @@ export const STORAGE_KEYS = {
  * API route patterns
  */
 export const API_ROUTES = {
-  USER_CONFIG: '/api/user-config',
   FETCH_TITLE: '/api/fetch-title',
 } as const;
 
