@@ -5,7 +5,6 @@ import {
 } from "@/features/weather/domain/entities/daily-weather-report";
 import { DailyWeatherReportRepository } from "@/features/weather/domain/repositories/daily-weather-report";
 import { baseLogger } from "@/lib/logger";
-import { err, ok, Result, ResultAsync } from "neverthrow";
 import { fetchWeatherApi } from "openmeteo";
 import { z } from "zod";
 
@@ -28,7 +27,8 @@ const logger = baseLogger.getSubLogger({
 });
 
 export class OpenmeteoDailyWeatherReportRepository
-	implements DailyWeatherReportRepository {
+	implements DailyWeatherReportRepository
+{
 	private url = "https://api.open-meteo.com/v1/forecast";
 	private cache = new Map<string, DailyForecastCacheValue>();
 
@@ -36,34 +36,25 @@ export class OpenmeteoDailyWeatherReportRepository
 		latitude: number,
 		longitude: number,
 		forecastDays: number
-	): Promise<Result<DailyWeatherReportList, Error>> {
-		const cacheKey = JSON.stringify({
-			latitude,
-			longitude,
-			forecastDays,
-		});
+	): Promise<DailyWeatherReportList> {
+		const cacheKey = JSON.stringify({ latitude, longitude, forecastDays });
 
 		if (this.cache.has(cacheKey)) {
 			const currentDate = new Date();
 			const cachedValue = this.cache.get(cacheKey)!;
-			const cachedDate = cachedValue.createdAt;
 
-			if (currentDate.getDate() > cachedDate.getDate()) {
-				logger.info(
-					`Cache expired for daily forecast for ${latitude}, ${longitude} with forecast_days ${forecastDays}`
-				);
+			if (currentDate.getDate() > cachedValue.createdAt.getDate()) {
+				logger.info(`Cache expired for lat=${latitude} lon=${longitude}`);
 				this.cache.delete(cacheKey);
 			} else {
-				logger.info(
-					`Cache hit for daily forecast for ${latitude}, ${longitude} with forecast_days ${forecastDays}`
-				);
-				return ok(cachedValue.value);
+				logger.info(`Cache hit for lat=${latitude} lon=${longitude}`);
+				return cachedValue.value;
 			}
 		}
 
 		const params = {
-			latitude: latitude,
-			longitude: longitude,
+			latitude,
+			longitude,
 			daily: [
 				"weather_code",
 				"temperature_2m_max",
@@ -77,31 +68,16 @@ export class OpenmeteoDailyWeatherReportRepository
 			forecast_days: forecastDays,
 		};
 
-		const fetchResult = await ResultAsync.fromPromise(
-			fetchWeatherApi(this.url, params),
-			(err: unknown) =>
-				new Error("Failed to fetch weather data", { cause: err })
-		);
-
-		if (fetchResult.isErr()) {
-			return err(fetchResult.error);
-		}
-
-		const responses = fetchResult.value;
+		const responses = await fetchWeatherApi(this.url, params);
 		const response = responses[0];
-
-		// Attributes for timezone and location
 		const utcOffsetSeconds = response.utcOffsetSeconds();
-
 		const daily = response.daily()!;
 
-		// Note: The order of weather variables in the URL query and the indices below need to match!
 		const weatherData = {
 			daily: {
 				time: [
 					...Array(
-						(Number(daily.timeEnd()) - Number(daily.time())) /
-						daily.interval()
+						(Number(daily.timeEnd()) - Number(daily.time())) / daily.interval()
 					),
 				].map(
 					(_, i) =>
@@ -109,7 +85,7 @@ export class OpenmeteoDailyWeatherReportRepository
 							(Number(daily.time()) +
 								i * daily.interval() +
 								utcOffsetSeconds) *
-							1000
+								1000
 						)
 				),
 				weatherCode: daily.variables(0)!.valuesArray()!,
@@ -124,14 +100,12 @@ export class OpenmeteoDailyWeatherReportRepository
 		};
 
 		const dailyReports: DailyWeatherReportList = [];
-
 		for (let i = 0; i < weatherData.daily.time.length; i++) {
 			const report = DailyWeatherReportSchema.parse({
 				date: weatherData.daily.time[i],
 				temperatureMax: weatherData.daily.temperature2mMax[i],
 				temperatureMin: weatherData.daily.temperature2mMin[i],
-				precipitationProbability:
-					weatherData.daily.precipitationProbabilityMax[i],
+				precipitationProbability: weatherData.daily.precipitationProbabilityMax[i],
 				precipitationHours: weatherData.daily.precipitationHours[i],
 				windSpeed: 0,
 				uvIndex: weatherData.daily.uvIndexMax[i],
@@ -141,16 +115,12 @@ export class OpenmeteoDailyWeatherReportRepository
 			dailyReports.push(report);
 		}
 
-		const cacheValue: DailyForecastCacheValue = {
-			createdAt: z.date().parse(new Date()),
+		this.cache.set(cacheKey, {
+			createdAt: new Date(),
 			value: dailyReports,
-		};
+		});
+		logger.info(`Cache set for lat=${latitude} lon=${longitude} days=${forecastDays}`);
 
-		this.cache.set(cacheKey, cacheValue);
-		logger.info(
-			`Cache set for daily forecast for ${latitude}, ${longitude} with forecast_days ${forecastDays}`
-		);
-
-		return ok(dailyReports);
+		return dailyReports;
 	}
 }

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { ThemeProvider } from "@mui/material/styles";
-import { useAppStore } from "@/providers/AppStoreContextProvider";
+import { useAppConfig } from "@/providers/AppConfigProvider";
 import { CssBaseline } from "@mui/material";
 import { appThemes } from "@/themes";
 
@@ -11,20 +11,8 @@ export interface AppThemeProviderProps {
 }
 
 export const AppTheme = ({ children }: AppThemeProviderProps) => {
-	const theme = useAppStore((state) => {
-		// Handle missing ui property (for backward compatibility with old configs)
-		if (!state.appConfig.ui) {
-			return appThemes.light;
-		}
-
-		const current = state.appConfig.ui.theme;
-
-		if (!current) {
-			return appThemes.light;
-		}
-
-		return appThemes[current];
-	});
+	const { config } = useAppConfig();
+	const theme = appThemes[config.ui.theme] ?? appThemes.light;
 
 	return (
 		<ThemeProvider theme={theme}>

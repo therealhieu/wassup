@@ -76,8 +76,8 @@ export const FeedWidgetInner = ({ config, feeds }: FeedWidgetInnerProps) => {
 				))}
 			</Box>
 			<Box ref={feedsContainerRef}>
-				{filteredFeeds.map((feed) => (
-					<FeedItem key={feed.feedUrl} {...feed} />
+				{filteredFeeds.map((feed, index) => (
+					<FeedItem key={`${feed.feedUrl}-${index}`} {...feed} />
 				))}
 			</Box>
 		</Stack>

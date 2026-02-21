@@ -3,31 +3,24 @@
 import { LRUCache } from "lru-cache";
 import { YoutubeWidgetConfig } from "../infrastructure/config.schemas";
 import { YoutubeWidgetInnerProps } from "../presentation/YoutubeWidgetInner";
-import { YoutubeService } from "./youtube";
+import { YoutubeService, YoutubeWidgetData } from "./youtube";
 
-const serviceCache = new LRUCache<string, YoutubeService>({ max: 20 });
+// Cache the fetched data (channels + videos), not the service instance
+const dataCache = new LRUCache<string, YoutubeWidgetData>({
+	max: 20,
+	ttl: 1000 * 60 * 5, // 5 minutes
+});
 
 export async function fetchYoutubeWidgetProps(
-    config: YoutubeWidgetConfig
+	config: YoutubeWidgetConfig
 ): Promise<YoutubeWidgetInnerProps> {
-    const key = JSON.stringify(config);
-    let service = serviceCache.get(key);
+	const key = JSON.stringify(config);
+	let data = dataCache.get(key);
 
-    if (!service) {
-        const youtubeService = await YoutubeService.fromConfig(config);
-        service = youtubeService;
-        serviceCache.set(key, service);
-    }
+	if (!data) {
+		data = await YoutubeService.create(config).fetch();
+		dataCache.set(key, data);
+	}
 
-    const videos = await service.fetchVideos();
-
-    if (videos.isErr()) {
-        throw videos.error;
-    }
-
-    return {
-        config: config,
-        channels: service.channels,
-        videos: videos.value,
-    } as YoutubeWidgetInnerProps;
+	return { config, ...data };
 }

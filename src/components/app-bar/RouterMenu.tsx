@@ -1,15 +1,17 @@
-import { useAppStore } from "@/providers/AppStoreContextProvider";
+"use client";
+
+import { useAppConfig } from "@/providers/AppConfigProvider";
 import { Button, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 
 export const RouterMenu = () => {
 	const router = useRouter();
-	const appConfig = useAppStore((state) => state.appConfig);
+	const { config } = useAppConfig();
 
 	return (
 		<div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
 			<Typography variant="h6">Wassup</Typography>
-			{appConfig.ui.pages.map((page) => (
+			{config.ui.pages.map((page) => (
 				<Button
 					key={page.path}
 					color="inherit"

@@ -1,8 +1,16 @@
 import { baseLogger } from "@/lib/logger";
 import * as cheerio from "cheerio";
+import { LRUCache } from "lru-cache";
 
 const logger = baseLogger.getSubLogger({
 	name: "FeedUtils",
+});
+
+// Cache OG image results to avoid re-fetching the same article pages
+const THUMBNAIL_NO_RESULT = "__none__";
+const thumbnailCache = new LRUCache<string, string>({
+	max: 500,
+	ttl: 1000 * 60 * 60, // 1 hour
 });
 
 export const getSourceFromUrl = (url: string): string => {
@@ -12,6 +20,20 @@ export const getSourceFromUrl = (url: string): string => {
 };
 
 export const getPreviewImageFromUrl = async (
+	url: string
+): Promise<string | null> => {
+	// Check cache first
+	const cached = thumbnailCache.get(url);
+	if (cached !== undefined) {
+		return cached === THUMBNAIL_NO_RESULT ? null : cached;
+	}
+
+	const result = await fetchPreviewImage(url);
+	thumbnailCache.set(url, result ?? THUMBNAIL_NO_RESULT);
+	return result;
+};
+
+const fetchPreviewImage = async (
 	url: string
 ): Promise<string | null> => {
 	// Default fallback image - using a generic icon

@@ -1,14 +1,7 @@
 import { AppConfig, AppConfigSchema } from "@/infrastructure/config.schemas";
-import { toSkeletonConfig } from "./utils";
 import zodToJsonSchema from "zod-to-json-schema";
 
 export const THEME_OPTIONS = ["light", "dark"] as const;
-export const BLANK_CONFIG = AppConfigSchema.parse({
-	ui: {
-		theme: "light",
-		pages: [],
-	},
-});
 
 export const DEFAULT_CONFIG: AppConfig = AppConfigSchema.parse({
 	ui: {
@@ -135,12 +128,10 @@ export const DEFAULT_CONFIG: AppConfig = AppConfigSchema.parse({
 								limit: 10,
 								scrollAfterRow: 7,
 								urls: [
-									// "https://netflixtechblog.com/feed",
 									"https://www.blef.fr/blog/rss/",
 									"https://www.theseattledataguy.com/feed/",
 									"https://blog.cloudflare.com/rss/",
 									"https://eng.uber.com/rss/",
-									// "https://aws.amazon.com/blogs/big-data/feed/",
 								],
 							},
 						],
@@ -174,5 +165,4 @@ export const DEFAULT_CONFIG: AppConfig = AppConfigSchema.parse({
 	},
 });
 
-export const SKELETON_CONFIG = toSkeletonConfig(DEFAULT_CONFIG);
 export const APP_CONFIG_JSONSCHEMA = zodToJsonSchema(AppConfigSchema);

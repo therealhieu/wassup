@@ -5,27 +5,21 @@ import { FeedWidgetInnerProps } from "../presentation/FeedWidgetInner";
 import { RssFeedService } from "./rss";
 import { LRUCache } from "lru-cache";
 
-const serviceCache = new LRUCache<string, RssFeedService>({ max: 20 });
+const dataCache = new LRUCache<string, FeedWidgetInnerProps>({
+	max: 20,
+	ttl: 1000 * 60 * 5, // 5 minutes
+});
 
 export async function fetchFeedWidgetProps(
 	config: FeedWidgetConfig
 ): Promise<FeedWidgetInnerProps> {
 	const key = JSON.stringify(config);
-	let service = serviceCache.get(key);
+	const cached = dataCache.get(key);
+	if (cached) return cached;
 
-	if (!service) {
-		service = RssFeedService.fromConfig(config);
-		serviceCache.set(key, service);
-	}
-
+	const service = RssFeedService.fromConfig(config);
 	const feeds = await service.fetchMany();
-
-	if (feeds.isErr()) {
-		throw feeds.error;
-	}
-
-	return {
-		config,
-		feeds: feeds.value,
-	};
+	const data: FeedWidgetInnerProps = { config, feeds };
+	dataCache.set(key, data);
+	return data;
 }

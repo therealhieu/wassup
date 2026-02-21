@@ -1,44 +1,43 @@
 "use server";
 
-import { WidgetProps } from "@/lib/schemas";
 import { TabsWidgetConfig } from "../infrastructure/config.schemas";
+import { WidgetConfig } from "@/infrastructure/config.schemas";
 import { fetchWeatherWidgetProps } from "@/features/weather/services/weather.actions";
 import { getDataKey } from "@/lib/utils";
 import { fetchRedditWidgetProps } from "@/features/reddit/services/reddit.actions";
 import { fetchYoutubeWidgetProps } from "@/features/youtube/services/youtube.actions";
+import { fetchFeedWidgetProps } from "@/features/feed/services/rss.actions";
+
+// Record keyed by getDataKey(widgetConfig) → fetched widget props
+type WidgetDataRecord = Record<string, unknown>;
 
 export async function fetchTabsWidgetProps(
 	tabsWidgetConfig: TabsWidgetConfig
-): Promise<Record<string, WidgetProps>> {
-	let record: Record<string, WidgetProps> = {};
+): Promise<WidgetDataRecord> {
+	const record: WidgetDataRecord = {};
 
-	for (const tab of tabsWidgetConfig.tabs) {
-		let innerRecord = {};
-
+	for (const tab of tabsWidgetConfig.tabs as WidgetConfig[]) {
+		const key = getDataKey(tab);
 		switch (tab.type) {
 			case "weather":
-				innerRecord = await fetchWeatherWidgetProps(tab);
+				record[key] = await fetchWeatherWidgetProps(tab);
 				break;
 			case "reddit":
-				innerRecord = await fetchRedditWidgetProps(tab);
+				record[key] = await fetchRedditWidgetProps(tab);
 				break;
 			case "youtube":
-				innerRecord = await fetchYoutubeWidgetProps(tab);
+				record[key] = await fetchYoutubeWidgetProps(tab);
+				break;
+			case "feed":
+				record[key] = await fetchFeedWidgetProps(tab);
 				break;
 			case "tabs":
-				innerRecord = await fetchTabsWidgetProps(
-					tab as TabsWidgetConfig
-				);
+				Object.assign(record, await fetchTabsWidgetProps(tab));
 				break;
-			default:
-				throw new Error(`Unknown tab type: ${tab.type}`);
+			case "bookmark":
+				// Static — no data to fetch
+				break;
 		}
-
-		const key = getDataKey(tab);
-		record = {
-			...record,
-			[key]: innerRecord,
-		};
 	}
 
 	return record;

@@ -5,31 +5,25 @@ import {
 	RedditWidgetInnerProps,
 	RedditWidgetInnerPropsSchema,
 } from "../presentation/RedditWidgetInner";
-import { RedditService } from "./reddit";
+import { HttpRedditPostRepository } from "../infrastructure/repositories/http.reddit-post-respository";
 import { LRUCache } from "lru-cache";
 
-const serviceCache = new LRUCache<string, RedditService>({ max: 20 });
+const repository = new HttpRedditPostRepository();
+
+const dataCache = new LRUCache<string, RedditWidgetInnerProps>({
+	max: 20,
+	ttl: 1000 * 60 * 5, // 5 minutes
+});
 
 export async function fetchRedditWidgetProps(
 	config: RedditWidgetConfig
 ): Promise<RedditWidgetInnerProps> {
 	const key = JSON.stringify(config);
-	let service = serviceCache.get(key);
+	const cached = dataCache.get(key);
+	if (cached) return cached;
 
-	if (!service) {
-		const redditService = await RedditService.fromConfig(config);
-		service = redditService;
-		serviceCache.set(key, service);
-	}
-
-	const posts = await service.fetchMany();
-
-	if (posts.isErr()) {
-		throw posts.error;
-	}
-
-	return RedditWidgetInnerPropsSchema.parse({
-		config,
-		posts: posts.value,
-	});
+	const posts = await repository.fetchMany(config);
+	const data = RedditWidgetInnerPropsSchema.parse({ config, posts });
+	dataCache.set(key, data);
+	return data;
 }

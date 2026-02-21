@@ -6,7 +6,7 @@ import {
 	styled,
 } from "@mui/material";
 import { DarkMode, LightMode } from "@mui/icons-material";
-import { useAppStore } from "@/providers/AppStoreContextProvider";
+import { useAppConfig } from "@/providers/AppConfigProvider";
 import { THEME_OPTIONS } from "@/lib/constants";
 
 const StyledInput = styled(InputBase)(() => ({
@@ -14,8 +14,8 @@ const StyledInput = styled(InputBase)(() => ({
 }));
 
 export const ThemeMenu = () => {
-	const theme = useAppStore((state) => state.appConfig.ui.theme);
-	const setTheme = useAppStore((state) => state.setTheme);
+	const { config, setTheme } = useAppConfig();
+	const theme = config.ui.theme;
 
 	return (
 		<Select
@@ -35,7 +35,7 @@ export const ThemeMenu = () => {
 					color: "text.primary",
 				},
 				"&:hover": {
-					borderColor: "text.primary", // Added hover effect to match SignInButton
+					borderColor: "text.primary",
 				},
 			}}
 			input={<StyledInput />}

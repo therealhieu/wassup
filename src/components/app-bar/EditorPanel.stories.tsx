@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { EditorPanel } from "./EditorPanel";
-import { AppStoreContextProvider } from "@/providers/AppStoreContextProvider";
-import { DEFAULT_CONFIG } from "@/lib/constants";
+import { AppConfigProvider } from "@/providers/AppConfigProvider";
 
 const meta: Meta<typeof EditorPanel> = {
 	title: "Components/AppBar/EditorPanel",
@@ -11,12 +10,9 @@ const meta: Meta<typeof EditorPanel> = {
 	},
 	decorators: [
 		(Story) => (
-			<AppStoreContextProvider
-				initialState={{ appConfig: DEFAULT_CONFIG }}
-				session={null}
-			>
+			<AppConfigProvider>
 				<Story />
-			</AppStoreContextProvider>
+			</AppConfigProvider>
 		),
 	],
 };

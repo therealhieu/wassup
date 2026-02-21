@@ -1,16 +1,12 @@
 import { GeocodeRepository } from "@/features/geocoding/domain/repositories/geocode";
 import { GeonamesGeocodeRepository } from "@/features/geocoding/infrastructure/geonames";
 import { baseLogger } from "@/lib/logger";
-import { err, ok, Result } from "neverthrow";
-
 import { DailyWeatherReportRepository } from "../domain/repositories/daily-weather-report";
 import { WeatherWidgetConfig } from "../infrastructure/config.schemas";
 import { OpenmeteoDailyWeatherReportRepository } from "../infrastructure/repositories/openmeteo.daily-weather-report";
 import { WeatherWidgetInnerProps } from "../presentation/WeatherWidget.components";
 
-const logger = baseLogger.getSubLogger({
-	name: "WeatherService",
-});
+const logger = baseLogger.getSubLogger({ name: "WeatherService" });
 
 export class WeatherService {
 	private dailyWeatherRepository: DailyWeatherReportRepository;
@@ -24,67 +20,31 @@ export class WeatherService {
 		this.geocodeRepository = geocodeRepository;
 	}
 
-	static async fromConfig(
-		config: WeatherWidgetConfig
-	): Promise<Result<WeatherService, Error>> {
-		const { granularity, provider, geonames } = config;
-
-		if (granularity !== "daily") {
-			const errorMessage = `Unsupported granularity: ${granularity}`;
-			logger.error(errorMessage);
-			return err(new Error(errorMessage));
-		}
-
-		if (provider !== "openmeteo") {
-			const errorMessage = `Unsupported provider: ${provider}`;
-			logger.error(errorMessage);
-			return err(new Error(errorMessage));
-		}
-
-		const geocodeRepository = new GeonamesGeocodeRepository(geonames);
+	static async fromConfig(config: WeatherWidgetConfig): Promise<WeatherService> {
+		const geocodeRepository = new GeonamesGeocodeRepository(config.geonames);
 		await geocodeRepository.fetchData();
-
-		const dailyWeatherRepository =
-			new OpenmeteoDailyWeatherReportRepository();
-
-		return ok(
-			new WeatherService(dailyWeatherRepository, geocodeRepository)
-		);
+		const dailyWeatherRepository = new OpenmeteoDailyWeatherReportRepository();
+		return new WeatherService(dailyWeatherRepository, geocodeRepository);
 	}
 
 	public async fetchWeatherWidgetProps(
 		config: WeatherWidgetConfig
-	): Promise<Result<WeatherWidgetInnerProps, Error>> {
-		const getGeocodeResult = await this.geocodeRepository.find(
-			config.location
-		);
-
-		if (getGeocodeResult.isErr()) {
-			return err(getGeocodeResult.error);
-		}
-
-		if (getGeocodeResult.value == null) {
-			return err(new Error("Geocode not found"));
+	): Promise<WeatherWidgetInnerProps> {
+		const geocode = await this.geocodeRepository.find(config.location);
+		if (!geocode) {
+			throw new Error(`Location not found: ${config.location}`);
 		}
 
 		const { forecastDays } = config;
-		const { name, latitude, longitude } = getGeocodeResult.value;
+		const { name, latitude, longitude } = geocode;
 
-		const forecastResult = await this.dailyWeatherRepository.fetchMany(
+		const reports = await this.dailyWeatherRepository.fetchMany(
 			latitude,
 			longitude,
 			forecastDays
 		);
 
-		if (forecastResult.isErr()) {
-			return err(forecastResult.error);
-		}
-
-		const reports = forecastResult.value;
-
-		return ok({
-			location: name,
-			reports: reports,
-		});
+		logger.info(`Fetched ${reports.length} weather reports for ${name}`);
+		return { location: name, reports };
 	}
 }

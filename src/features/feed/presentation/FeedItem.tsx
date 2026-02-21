@@ -86,9 +86,8 @@ export const FeedItem = ({
 								color="text.secondary"
 								gutterBottom
 							>
-								{`${formattedDate} • ${source}${
-									author ? ` • ${author}` : ""
-								}`}
+								{`${formattedDate} • ${source}${author ? ` • ${author}` : ""
+									}`}
 							</Typography>
 							{description && (
 								<Typography
@@ -115,9 +114,9 @@ export const FeedItem = ({
 										gap: 0.5,
 									}}
 								>
-									{categories.map((category) => (
+									{categories.map((category, index) => (
 										<Chip
-											key={category}
+											key={index}
 											label={category}
 											size="small"
 											sx={{

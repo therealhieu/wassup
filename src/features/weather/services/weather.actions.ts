@@ -5,28 +5,20 @@ import { WeatherService } from "./weather";
 import { WeatherWidgetInnerProps } from "../presentation/WeatherWidget.components";
 import { LRUCache } from "lru-cache";
 
-const serviceCache = new LRUCache<string, WeatherService>({ max: 5 });
+const dataCache = new LRUCache<string, WeatherWidgetInnerProps>({
+	max: 5,
+	ttl: 1000 * 60 * 5, // 5 minutes
+});
 
 export async function fetchWeatherWidgetProps(
 	config: WeatherWidgetConfig
 ): Promise<WeatherWidgetInnerProps> {
 	const key = JSON.stringify(config);
-	let service = serviceCache.get(key);
+	const cached = dataCache.get(key);
+	if (cached) return cached;
 
-	if (!service) {
-		const initServiceResult = await WeatherService.fromConfig(config);
-		if (initServiceResult.isErr()) {
-			throw initServiceResult.error;
-		}
-		service = initServiceResult.value;
-		serviceCache.set(key, service);
-	}
-
-	const getResult = await service.fetchWeatherWidgetProps(config);
-
-	if (getResult.isErr()) {
-		throw getResult.error;
-	}
-
-	return getResult.value;
+	const service = await WeatherService.fromConfig(config);
+	const data = await service.fetchWeatherWidgetProps(config);
+	dataCache.set(key, data);
+	return data;
 }
