@@ -1,34 +1,58 @@
 import { Stack, Chip, Box, Typography } from "@mui/material";
-import { FeedSchema } from "../domain/entities/feed";
+import { Feed } from "../domain/entities/feed";
 import { FeedItem } from "./FeedItem";
-import { FeedWidgetConfigSchema } from "../infrastructure/config.schemas";
+import { FeedWidgetConfig } from "../infrastructure/config.schemas";
 import { getSourceFromUrl } from "../lib/utils";
-import { useState, useRef, useEffect } from "react";
-import { z } from "zod";
+import { useState, useRef, useEffect, useMemo } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { fetchThumbnailUrls } from "../services/thumbnail.actions";
 
-export const FeedWidgetInnerPropsSchema = z.object({
-	config: FeedWidgetConfigSchema,
-	feeds: z.array(FeedSchema),
-});
-export type FeedWidgetInnerProps = z.infer<typeof FeedWidgetInnerPropsSchema>;
+const CHIP_COLORS = [
+	"primary",
+	"secondary",
+	"error",
+	"warning",
+	"info",
+	"success",
+] as const;
+
+export interface FeedWidgetInnerProps {
+	config: FeedWidgetConfig;
+	feeds: Feed[];
+}
 
 export const FeedWidgetInner = ({ config, feeds }: FeedWidgetInnerProps) => {
 	const sources = config.urls.map((url) => getSourceFromUrl(url));
 	const [selectedSource, setSelectedSource] = useState<string | null>(null);
 	const feedsContainerRef = useRef<HTMLDivElement>(null);
 
-	const colors = [
-		"primary",
-		"secondary",
-		"error",
-		"warning",
-		"info",
-		"success",
-	] as const;
+	// Collect URLs missing thumbnails for a single batched fetch
+	const missingThumbnailUrls = useMemo(
+		() => feeds.filter((f) => !f.thumbnailUrl).map((f) => f.feedUrl),
+		[feeds]
+	);
+
+	const { data: resolvedThumbnails } = useQuery({
+		queryKey: ["thumbnails", ...missingThumbnailUrls],
+		queryFn: () => fetchThumbnailUrls(missingThumbnailUrls),
+		enabled: missingThumbnailUrls.length > 0,
+		staleTime: 1000 * 60 * 60, // 1 hour — matches server-side thumbnail cache
+	});
+
+	// Merge embedded + lazily resolved thumbnails
+	const enrichedFeeds: Feed[] = useMemo(
+		() =>
+			feeds.map((feed) => ({
+				...feed,
+				thumbnailUrl:
+					feed.thumbnailUrl ?? resolvedThumbnails?.[feed.feedUrl] ?? undefined,
+			})),
+		[feeds, resolvedThumbnails]
+	);
 
 	const filteredFeeds = selectedSource
-		? feeds.filter((feed) => feed.source === selectedSource)
-		: feeds;
+		? enrichedFeeds.filter((feed) => feed.source === selectedSource)
+		: enrichedFeeds;
 
 	useEffect(() => {
 		if (
@@ -63,7 +87,7 @@ export const FeedWidgetInner = ({ config, feeds }: FeedWidgetInnerProps) => {
 					<Chip
 						key={source}
 						label={source}
-						color={colors[index % colors.length]}
+						color={CHIP_COLORS[index % CHIP_COLORS.length]}
 						onClick={() =>
 							setSelectedSource(
 								source === selectedSource ? null : source
@@ -76,8 +100,8 @@ export const FeedWidgetInner = ({ config, feeds }: FeedWidgetInnerProps) => {
 				))}
 			</Box>
 			<Box ref={feedsContainerRef}>
-				{filteredFeeds.map((feed, index) => (
-					<FeedItem key={`${feed.feedUrl}-${index}`} {...feed} />
+				{filteredFeeds.map((feed) => (
+					<FeedItem key={feed.feedUrl} {...feed} />
 				))}
 			</Box>
 		</Stack>

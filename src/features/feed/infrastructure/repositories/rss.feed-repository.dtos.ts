@@ -1,7 +1,15 @@
 import z from "zod";
 import { Z } from "zod-class";
 import { Feed, FeedSchema } from "../../domain/entities/feed";
-import { getPreviewImageFromUrl, getSourceFromUrl } from "../../lib/utils";
+import { getSourceFromUrl } from "../../lib/utils";
+
+// Schema for enclosure element (e.g. <enclosure url="..." type="image/jpeg" />)
+const EnclosureSchema = z
+	.object({
+		url: z.string(),
+		type: z.string().optional(),
+	})
+	.optional();
 
 // Base schema for raw RSS item data - handles creator as string OR array
 const RawRssFeedItemSchema = z.object({
@@ -12,6 +20,15 @@ const RawRssFeedItemSchema = z.object({
 	pubDate: z.string(),
 	category: z.array(z.string()).optional().or(z.string().optional()),
 	description: z.string().optional(),
+	// Media fields for thumbnail extraction (1a optimization)
+	enclosure: EnclosureSchema,
+	// media:thumbnail → "thumbnail" after removeNSPrefix
+	thumbnail: z
+		.union([
+			z.object({ url: z.string() }),
+			z.string(),
+		])
+		.optional(),
 });
 
 // Helper function to normalize creator field (string or array)
@@ -22,7 +39,26 @@ const normalizeCreator = (creator: string | string[] | undefined): string | unde
 	return undefined;
 };
 
-// Transformed schema that normalizes creator field
+/**
+ * Extract embedded thumbnail URL from RSS item fields.
+ * Priority: media:thumbnail > enclosure (image type only)
+ */
+const extractEmbeddedThumbnail = (data: z.infer<typeof RawRssFeedItemSchema>): string | undefined => {
+	// 1. media:thumbnail (parsed as "thumbnail" after removeNSPrefix)
+	if (data.thumbnail) {
+		if (typeof data.thumbnail === 'string') return data.thumbnail;
+		if (typeof data.thumbnail === 'object' && 'url' in data.thumbnail) return data.thumbnail.url;
+	}
+
+	// 2. enclosure with image type
+	if (data.enclosure?.url && data.enclosure.type?.startsWith("image/")) {
+		return data.enclosure.url;
+	}
+
+	return undefined;
+};
+
+// Transformed schema that normalizes creator field and extracts thumbnail
 export const RssFeedItemSchema = RawRssFeedItemSchema.transform((data) => {
 	// Prefer dc:creator over creator when available, handle both string and array
 	const dcCreator = normalizeCreator(data["dc:creator"]);
@@ -36,6 +72,7 @@ export const RssFeedItemSchema = RawRssFeedItemSchema.transform((data) => {
 		pubDate: data.pubDate,
 		category: data.category,
 		description: data.description,
+		thumbnailUrl: extractEmbeddedThumbnail(data),
 	};
 });
 
@@ -50,12 +87,10 @@ export const RssFeedSchema = z.object({
 });
 
 export class RssFeed extends Z.class(RssFeedSchema.shape) {
-	private url: string;
 	private source: string;
 
 	constructor(rss: z.infer<typeof RssFeedSchema>, url: string) {
 		super(rss);
-		this.url = url;
 		this.source = getSourceFromUrl(url);
 	}
 
@@ -65,22 +100,23 @@ export class RssFeed extends Z.class(RssFeedSchema.shape) {
 		return new RssFeed(feed, url);
 	}
 
-	public async toFeeds(): Promise<Feed[]> {
-		return Promise.all(
-			this.rss.channel.item.map(async (item) => {
-				const thumbnailUrl = await getPreviewImageFromUrl(item.link);
-				
-				return FeedSchema.parse({
-					title: item.title,
-					feedUrl: item.link,
-					thumbnailUrl: thumbnailUrl || undefined, // Convert null to undefined
-					author: item.creator,
-					publishedAt: item.pubDate,
-					categories: item.category,
-					source: this.source,
-					description: item.description,
-				});
-			})
-		);
+	/**
+	 * Convert RSS items to Feed entities synchronously.
+	 * Uses embedded thumbnails from RSS XML (1a) — no OG scraping (1c).
+	 * Missing thumbnails are resolved lazily on the client.
+	 */
+	public toFeeds(): Feed[] {
+		return this.rss.channel.item.map((item) => {
+			return FeedSchema.parse({
+				title: item.title,
+				feedUrl: item.link,
+				thumbnailUrl: item.thumbnailUrl,
+				author: item.creator,
+				publishedAt: item.pubDate,
+				categories: item.category,
+				source: this.source,
+				description: item.description,
+			});
+		});
 	}
 }

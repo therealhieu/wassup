@@ -14,29 +14,50 @@ type WidgetDataRecord = Record<string, unknown>;
 export async function fetchTabsWidgetProps(
 	tabsWidgetConfig: TabsWidgetConfig
 ): Promise<WidgetDataRecord> {
-	const record: WidgetDataRecord = {};
+	const tabs = tabsWidgetConfig.tabs as WidgetConfig[];
 
-	for (const tab of tabsWidgetConfig.tabs as WidgetConfig[]) {
+	const fetchTab = async (
+		tab: WidgetConfig
+	): Promise<[string, unknown] | null> => {
 		const key = getDataKey(tab);
 		switch (tab.type) {
 			case "weather":
-				record[key] = await fetchWeatherWidgetProps(tab);
-				break;
+				return [key, await fetchWeatherWidgetProps(tab)];
 			case "reddit":
-				record[key] = await fetchRedditWidgetProps(tab);
-				break;
+				return [key, await fetchRedditWidgetProps(tab)];
 			case "youtube":
-				record[key] = await fetchYoutubeWidgetProps(tab);
-				break;
+				return [key, await fetchYoutubeWidgetProps(tab)];
 			case "feed":
-				record[key] = await fetchFeedWidgetProps(tab);
-				break;
-			case "tabs":
-				Object.assign(record, await fetchTabsWidgetProps(tab));
-				break;
+				return [key, await fetchFeedWidgetProps(tab)];
+			case "tabs": {
+				const nested = await fetchTabsWidgetProps(tab);
+				return [key, nested];
+			}
 			case "bookmark":
 				// Static — no data to fetch
-				break;
+				return null;
+			default:
+				return null;
+		}
+	};
+
+	const results = await Promise.allSettled(tabs.map(fetchTab));
+
+	const record: WidgetDataRecord = {};
+	for (const result of results) {
+		if (result.status === "fulfilled" && result.value) {
+			const [key, value] = result.value;
+			// Nested tabs return a WidgetDataRecord — merge it in
+			if (
+				typeof value === "object" &&
+				value !== null &&
+				!Array.isArray(value) &&
+				tabs.find((t) => getDataKey(t) === key)?.type === "tabs"
+			) {
+				Object.assign(record, value);
+			} else {
+				record[key] = value;
+			}
 		}
 	}
 

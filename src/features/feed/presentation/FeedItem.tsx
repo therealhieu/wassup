@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Feed } from "../domain/entities/feed";
 import {
 	Card,
@@ -14,7 +15,7 @@ import {
 
 export type FeedItemProps = Feed;
 
-export const FeedItem = ({
+export const FeedItem = memo(({
 	title,
 	feedUrl,
 	thumbnailUrl,
@@ -135,4 +136,4 @@ export const FeedItem = ({
 			</Link>
 		</Card>
 	);
-};
+});

@@ -73,7 +73,7 @@ export class RssFeedRepository {
 				}
 
 				const rssFeeds = RssFeed.parseExt(json, this.url, this.limit);
-				const feeds = await rssFeeds.toFeeds();
+				const feeds = rssFeeds.toFeeds();
 				feedLogger.info(`Fetched RSS feed: ${this.url} (attempt ${attempt + 1})`);
 				return feeds;
 			} catch (e) {
