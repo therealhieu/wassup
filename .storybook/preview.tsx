@@ -1,7 +1,7 @@
-import { themes } from '@storybook/theming';
+import { themes } from 'storybook/theming';
 import React from 'react';
 
-import type { Preview } from '@storybook/react'
+import type { Preview } from '@storybook/nextjs'
 
 const preview: Preview = {
   parameters: {

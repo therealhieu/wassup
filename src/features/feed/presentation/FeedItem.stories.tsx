@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { FeedItem } from "./FeedItem";
 
 const meta: Meta<typeof FeedItem> = {

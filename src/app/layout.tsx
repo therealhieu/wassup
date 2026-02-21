@@ -1,6 +1,5 @@
 import "./globals.css";
 
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { Geist, Geist_Mono, Roboto } from "next/font/google";
 
 import type { Metadata } from "next";
@@ -41,18 +40,15 @@ export default function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} antialiased`}
 			>
-				<AppRouterCacheProvider>
-					<ReactQueryProvider>
-						<AppConfigProvider>
-							<AppTheme>
-								<DashboardAppBar />
-								{children}
-							</AppTheme>
-						</AppConfigProvider>
-					</ReactQueryProvider>
-				</AppRouterCacheProvider>
+				<ReactQueryProvider>
+					<AppConfigProvider>
+						<AppTheme>
+							<DashboardAppBar />
+							{children}
+						</AppTheme>
+					</AppConfigProvider>
+				</ReactQueryProvider>
 			</body>
 		</html>
 	);
 }
-

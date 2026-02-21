@@ -1,5 +1,5 @@
 import { BookmarkWidgetInner } from "./BookmarkWidgetInner";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 const meta: Meta<typeof BookmarkWidgetInner> = {
 	title: "Features/bookmark/BookmarkWidgetInner",

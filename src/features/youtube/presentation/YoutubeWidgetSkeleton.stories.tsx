@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { YoutubeWidgetSkeleton } from "./YoutubeWidgetSkeleton";
 
 const meta: Meta<typeof YoutubeWidgetSkeleton> = {
