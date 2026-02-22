@@ -21,9 +21,10 @@ export default defineConfig(() => {
 			silent: false,
 			projects: [
 				{
+					extends: true as const,
 					test: {
 						name: "unit",
-						include: ["**/*.{test,spec}.ts", "**/*.unit.test.ts"],
+						include: ["**/*.{test,spec}.ts", "**/*.{test,spec}.tsx", "**/*.unit.test.ts"],
 						exclude: [
 							...configDefaults.exclude,
 							"**/*.integration.test.ts",
@@ -32,6 +33,7 @@ export default defineConfig(() => {
 					},
 				},
 				{
+					extends: true as const,
 					test: {
 						name: "integration",
 						include: ["**/*.integration.test.ts"],

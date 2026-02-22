@@ -4,6 +4,8 @@ import { AppBar, Toolbar } from "@mui/material";
 import { ThemeMenu } from "./ThemeMenu";
 import { RouterMenu } from "./RouterMenu";
 import { OpenConfigEditorButton } from "./OpenConfigEditorButton";
+import { PresetSelector } from "./PresetSelector";
+import { LoginButton } from "@/components/auth/LoginButton";
 
 export const DashboardAppBar = () => {
 	return (
@@ -25,12 +27,15 @@ export const DashboardAppBar = () => {
 			>
 				<Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
 					<RouterMenu />
-					<div style={{ display: "flex", gap: "0.5rem" }}>
+					<div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
+						<PresetSelector />
 						<ThemeMenu />
 						<OpenConfigEditorButton />
+						<LoginButton />
 					</div>
 				</Toolbar>
 			</AppBar>
 		</div>
 	);
 };
+

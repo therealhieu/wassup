@@ -7,6 +7,7 @@ import { DashboardAppBar } from "@/components/app-bar/DashboardAppBar";
 import { ReactQueryProvider } from "@/providers/ReactQueryProvider";
 import { AppTheme } from "../components/AppTheme";
 import { AppConfigProvider } from "@/providers/AppConfigProvider";
+import { SessionProvider } from "@/providers/SessionProvider";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -40,14 +41,16 @@ export default function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} antialiased`}
 			>
-				<ReactQueryProvider>
-					<AppConfigProvider>
-						<AppTheme>
-							<DashboardAppBar />
-							{children}
-						</AppTheme>
-					</AppConfigProvider>
-				</ReactQueryProvider>
+				<SessionProvider>
+					<ReactQueryProvider>
+						<AppConfigProvider>
+							<AppTheme>
+								<DashboardAppBar />
+								{children}
+							</AppTheme>
+						</AppConfigProvider>
+					</ReactQueryProvider>
+				</SessionProvider>
 			</body>
 		</html>
 	);

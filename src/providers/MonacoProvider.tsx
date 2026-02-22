@@ -42,7 +42,10 @@ export function MonacoProvider({ children }: MonacoProviderProps) {
 		const initializeMonaco = async () => {
 			while (retryCount < maxRetries && mounted) {
 				try {
-					// Configure Monaco Environment with local workers
+					// Configure Monaco Environment with pre-bundled workers from public/
+					// Turbopack doesn't support `new Worker(new URL(...))`, so we serve
+					// pre-bundled workers from the public directory and use a blob URL
+					// wrapper to import them, bypassing module MIME type issues.
 					if (
 						typeof window !== "undefined" &&
 						!(window as unknown as { MonacoEnvironment?: unknown })
@@ -52,21 +55,20 @@ export function MonacoProvider({ children }: MonacoProviderProps) {
 							window as unknown as { MonacoEnvironment?: unknown }
 						).MonacoEnvironment = {
 							getWorker(_: string, label: string) {
-								if (label === "yaml") {
-									return new Worker(
-										new URL(
-											"monaco-yaml/yaml.worker",
-											import.meta.url,
-										),
-										{ type: "module" },
-									);
-								}
+								const workerPath =
+									label === "yaml"
+										? "/monaco-yaml.worker.js"
+										: "/monaco-editor.worker.js";
+								const workerUrl =
+									window.location.origin + workerPath;
+								const blob = new Blob(
+									[
+										`importScripts("${workerUrl}");`,
+									],
+									{ type: "text/javascript" },
+								);
 								return new Worker(
-									new URL(
-										"monaco-editor/esm/vs/editor/editor.worker",
-										import.meta.url,
-									),
-									{ type: "module" },
+									URL.createObjectURL(blob),
 								);
 							},
 						};
@@ -117,6 +119,42 @@ export function MonacoProvider({ children }: MonacoProviderProps) {
 						],
 						yamlVersion: "1.2",
 					});
+
+					// Register widget snippet completions
+					const { WIDGET_SNIPPETS } = await import(
+						"@/lib/widget-snippets"
+					);
+					monacoInstance.languages.registerCompletionItemProvider(
+						"yaml",
+						{
+							provideCompletionItems(model, position) {
+								const word =
+									model.getWordUntilPosition(position);
+								const range = {
+									startLineNumber: position.lineNumber,
+									startColumn: word.startColumn,
+									endLineNumber: position.lineNumber,
+									endColumn: position.column,
+								};
+								return {
+									suggestions: WIDGET_SNIPPETS.map(
+										(snippet) => ({
+											label: snippet.label,
+											kind: monacoInstance.languages
+												.CompletionItemKind.Snippet,
+											insertTextRules:
+												monacoInstance.languages
+													.CompletionItemInsertTextRule
+													.InsertAsSnippet,
+											insertText: snippet.insertText,
+											documentation: snippet.description,
+											range,
+										}),
+									),
+								};
+							},
+						},
+					);
 
 					if (!mounted) return;
 

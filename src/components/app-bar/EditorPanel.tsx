@@ -7,6 +7,7 @@ import {
 	DialogContent,
 	Alert,
 	Box,
+	TextField,
 } from "@mui/material";
 import { ConfigEditor } from "./ConfigEditor";
 import { useAppConfig } from "@/providers/AppConfigProvider";
@@ -22,7 +23,9 @@ interface EditorPanelProps {
 }
 
 export function EditorPanel({ open, onClose }: EditorPanelProps) {
-	const { config, setConfig } = useAppConfig();
+	const { config, presets, activePresetId, updatePreset } = useAppConfig();
+	const activePreset = presets.find((p) => p.id === activePresetId);
+	const [presetName, setPresetName] = useState(activePreset?.name ?? "");
 	const [editorValue, setEditorValue] = useState(() => yaml2.stringify(config));
 	const [error, setError] = useState<string | null>(null);
 	const [hasUserChanges, setHasUserChanges] = useState(false);
@@ -30,11 +33,12 @@ export function EditorPanel({ open, onClose }: EditorPanelProps) {
 	// Reset state when dialog opens
 	useEffect(() => {
 		if (open) {
+			setPresetName(activePreset?.name ?? "");
 			setEditorValue(yaml2.stringify(config));
 			setHasUserChanges(false);
 			setError(null);
 		}
-	}, [open, config]);
+	}, [open, config, activePreset?.name]);
 
 	// Sync editor with store changes (e.g. theme toggle) — only if user hasn't started editing
 	useEffect(() => {
@@ -50,13 +54,24 @@ export function EditorPanel({ open, onClose }: EditorPanelProps) {
 
 	const handleApply = () => {
 		try {
+			const trimmedName = presetName.trim();
+			if (!trimmedName) {
+				setError("Preset name cannot be empty");
+				return;
+			}
+
 			const object = yaml2.parse(editorValue);
 			const result = AppConfigSchema.safeParse(object);
 			if (!result.success) {
 				setError(result.error.issues.map((i) => i.message).join("; "));
 				return;
 			}
-			setConfig(result.data);
+
+			updatePreset(activePresetId, {
+				name: trimmedName,
+				config: result.data,
+			});
+
 			setHasUserChanges(false);
 			setError(null);
 			onClose?.();
@@ -86,13 +101,23 @@ export function EditorPanel({ open, onClose }: EditorPanelProps) {
 		>
 			<MonacoProvider>
 				<DialogContent sx={{ flex: 1, p: 2, display: "flex", gap: 2 }}>
-					<Box sx={{ width: "50%" }}>
+					<Box sx={{ width: "50%", display: "flex", flexDirection: "column", gap: 1 }}>
+						<TextField
+							label="Preset Name"
+							value={presetName}
+							onChange={(e) => {
+								setPresetName(e.target.value);
+								setHasUserChanges(true);
+							}}
+							size="small"
+							fullWidth
+						/>
 						<ConfigEditor
 							value={editorValue}
 							onChange={handleEditorChange}
 						/>
 						{error && (
-							<Alert severity="error" sx={{ mt: 2 }}>
+							<Alert severity="error" sx={{ mt: 1 }}>
 								{error}
 							</Alert>
 						)}

@@ -53,7 +53,7 @@ export type WidgetConfig =
 export const ColumnConfigSchema = z
 	.object({
 		size: z.number().min(1).max(12),
-		widgets: z.array(WidgetConfigSchema),
+		widgets: z.array(WidgetConfigSchema).max(20),
 	})
 	.strict();
 
@@ -61,9 +61,9 @@ export type ColumnConfig = z.infer<typeof ColumnConfigSchema>;
 
 export const PageConfigSchema = z
 	.object({
-		title: z.string(),
-		path: z.string(),
-		columns: z.array(ColumnConfigSchema),
+		title: z.string().max(100),
+		path: z.string().max(256),
+		columns: z.array(ColumnConfigSchema).max(12),
 	})
 	.strict();
 
@@ -72,7 +72,7 @@ export type PageConfig = z.infer<typeof PageConfigSchema>;
 export const UiConfigSchema = z
 	.object({
 		theme: z.enum(["light", "dark"]),
-		pages: z.array(PageConfigSchema),
+		pages: z.array(PageConfigSchema).max(50),
 	})
 	.strict();
 
@@ -85,3 +85,18 @@ export const AppConfigSchema = z
 	.strict();
 
 export type AppConfig = z.infer<typeof AppConfigSchema>;
+
+export const PresetSchema = z.object({
+	id: z.string(),
+	name: z.string().min(1).max(100),
+	config: AppConfigSchema,
+});
+
+export type Preset = z.infer<typeof PresetSchema>;
+
+export const AppStateSchema = z.object({
+	activePresetId: z.string(),
+	presets: z.array(PresetSchema).min(1).max(50),
+});
+
+export type AppState = z.infer<typeof AppStateSchema>;
