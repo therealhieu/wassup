@@ -23,32 +23,10 @@ const mockAuth = vi.mocked(auth);
 const mockFindUnique = vi.mocked(prisma.userConfig.findUnique);
 const mockUpsert = vi.mocked(prisma.userConfig.upsert);
 
-const VALID_APP_STATE = {
-	activePresetId: "p1",
-	presets: [
-		{
-			id: "p1",
-			name: "Test Preset",
-			config: {
-				ui: {
-					theme: "dark",
-					pages: [
-						{
-							title: "Home",
-							path: "/",
-							columns: [{ size: 12, widgets: [] }],
-						},
-					],
-				},
-			},
-		},
-	],
-};
-
 const VALID_HEADERS = {
 	"Content-Type": "application/json",
-	"Origin": "http://localhost",
-	"Host": "localhost",
+	Origin: "http://localhost",
+	Host: "localhost",
 };
 
 // ── Tests ────────────────────────────────────────────────────────────────────
@@ -68,7 +46,7 @@ describe("GET /api/config", () => {
 		expect(body.error).toBe("Unauthorized");
 	});
 
-	it("should return null state for new user", async () => {
+	it("should return null encryptedData for new user", async () => {
 		mockAuth.mockResolvedValue({
 			user: { id: "user-1" },
 			expires: "2099-01-01",
@@ -79,10 +57,11 @@ describe("GET /api/config", () => {
 
 		expect(response.status).toBe(200);
 		const body = await response.json();
-		expect(body.state).toBeNull();
+		expect(body.encryptedData).toBeNull();
+		expect(body.salt).toBeNull();
 	});
 
-	it("should return saved state for existing user", async () => {
+	it("should return encrypted data and salt for existing user", async () => {
 		mockAuth.mockResolvedValue({
 			user: { id: "user-1" },
 			expires: "2099-01-01",
@@ -90,7 +69,8 @@ describe("GET /api/config", () => {
 		mockFindUnique.mockResolvedValue({
 			id: "cfg-1",
 			userId: "user-1",
-			data: JSON.stringify(VALID_APP_STATE),
+			data: "encrypted-ciphertext-base64",
+			salt: "salt-base64",
 			updatedAt: new Date(),
 		});
 
@@ -98,7 +78,8 @@ describe("GET /api/config", () => {
 
 		expect(response.status).toBe(200);
 		const body = await response.json();
-		expect(body.state).toEqual(VALID_APP_STATE);
+		expect(body.encryptedData).toBe("encrypted-ciphertext-base64");
+		expect(body.salt).toBe("salt-base64");
 	});
 });
 
@@ -112,15 +93,15 @@ describe("PUT /api/config", () => {
 
 		const request = new Request("http://localhost/api/config", {
 			method: "PUT",
-			body: JSON.stringify({ state: {} }),
-			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ encryptedData: "test", salt: "test" }),
+			headers: VALID_HEADERS,
 		});
 		const response = await PUT(request);
 
 		expect(response.status).toBe(401);
 	});
 
-	it("should return 400 for invalid state", async () => {
+	it("should return 400 for non-string encryptedData", async () => {
 		mockAuth.mockResolvedValue({
 			user: { id: "user-1" },
 			expires: "2099-01-01",
@@ -128,17 +109,33 @@ describe("PUT /api/config", () => {
 
 		const request = new Request("http://localhost/api/config", {
 			method: "PUT",
-			body: JSON.stringify({ state: { invalid: true } }),
+			body: JSON.stringify({ encryptedData: 123, salt: "test" }),
 			headers: VALID_HEADERS,
 		});
 		const response = await PUT(request);
 
 		expect(response.status).toBe(400);
 		const body = await response.json();
-		expect(body.error).toBe("Invalid state");
+		expect(body.error).toBe("Invalid payload");
 	});
 
-	it("should upsert valid state and return ok", async () => {
+	it("should return 400 for missing salt", async () => {
+		mockAuth.mockResolvedValue({
+			user: { id: "user-1" },
+			expires: "2099-01-01",
+		} as never);
+
+		const request = new Request("http://localhost/api/config", {
+			method: "PUT",
+			body: JSON.stringify({ encryptedData: "test", salt: 123 }),
+			headers: VALID_HEADERS,
+		});
+		const response = await PUT(request);
+
+		expect(response.status).toBe(400);
+	});
+
+	it("should upsert encrypted data and return ok", async () => {
 		mockAuth.mockResolvedValue({
 			user: { id: "user-1" },
 			expires: "2099-01-01",
@@ -146,13 +143,17 @@ describe("PUT /api/config", () => {
 		mockUpsert.mockResolvedValue({
 			id: "cfg-1",
 			userId: "user-1",
-			data: "{}",
+			data: "encrypted-data",
+			salt: "salt-data",
 			updatedAt: new Date(),
 		});
 
 		const request = new Request("http://localhost/api/config", {
 			method: "PUT",
-			body: JSON.stringify({ state: VALID_APP_STATE }),
+			body: JSON.stringify({
+				encryptedData: "encrypted-data",
+				salt: "salt-data",
+			}),
 			headers: VALID_HEADERS,
 		});
 		const response = await PUT(request);
@@ -163,7 +164,15 @@ describe("PUT /api/config", () => {
 		expect(mockUpsert).toHaveBeenCalledWith(
 			expect.objectContaining({
 				where: { userId: "user-1" },
-				create: expect.objectContaining({ userId: "user-1" }),
+				create: expect.objectContaining({
+					userId: "user-1",
+					data: "encrypted-data",
+					salt: "salt-data",
+				}),
+				update: expect.objectContaining({
+					data: "encrypted-data",
+					salt: "salt-data",
+				}),
 			}),
 		);
 	});
@@ -176,11 +185,14 @@ describe("PUT /api/config", () => {
 
 		const request = new Request("http://localhost/api/config", {
 			method: "PUT",
-			body: JSON.stringify({ state: VALID_APP_STATE }),
+			body: JSON.stringify({
+				encryptedData: "test",
+				salt: "test",
+			}),
 			headers: {
 				"Content-Type": "application/json",
-				"Origin": "http://evil.com",
-				"Host": "localhost",
+				Origin: "http://evil.com",
+				Host: "localhost",
 			},
 		});
 		const response = await PUT(request);

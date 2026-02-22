@@ -1,6 +1,6 @@
 # Wassup — Widget Reference
 
-All widgets are specified under `columns[].widgets[]` in the YAML config. Every widget must have a `type` field.
+All widgets are specified under `columns[].widgets[]` in the config. Every widget must have a `type` field.
 
 ---
 
@@ -20,9 +20,8 @@ Displays a multi-day weather forecast.
 | Field | Type | Default | Notes |
 |-------|------|---------|-------|
 | `location` | string | *required* | Geocoded city name |
-| `forecastDays` | number | `5` | Days ahead |
+| `forecastDays` | number | `5` | Days ahead (1–14) |
 | `temperatureUnit` | `"C"` \| `"F"` | `"C"` | |
-| `geonames` | object | auto | `{ outputPath, dataset }` — Geonames API config |
 
 ---
 
@@ -95,6 +94,42 @@ Aggregates posts from multiple RSS/Atom feeds with round-robin balancing.
 | `scrollAfterRow` | number | `6` | |
 
 Thumbnails are fetched via OG image scraping (LRU cached, 1h TTL).
+
+---
+
+## `github`
+
+Displays trending GitHub repositories filtered by language, topics, and date range.
+
+**Data source:** GitHub Search API (public, no key required).
+
+```yaml
+- type: github
+  language: typescript
+  topics:
+    - llm
+    - ai-agents
+  dateRange: 90d
+  createdAfter: "2024-01-01"
+  limit: 25
+  minStars: 100
+  sort:
+    field: velocity
+    direction: desc
+```
+
+| Field | Type | Default | Notes |
+|-------|------|---------|-------|
+| `language` | string | — | Optional language filter |
+| `topics` | string[] | — | Optional topic filters |
+| `createdAfter` | string | `"2024-01-01"` | ISO date string |
+| `createdBefore` | string | — | Optional upper bound |
+| `dateRange` | `"7d"` \| `"30d"` \| `"90d"` | `"90d"` | Lookback window |
+| `limit` | number | `25` | 1–50 |
+| `minStars` | number | — | Minimum star count |
+| `maxStars` | number | — | Maximum star count |
+| `sort.field` | `"stars"` \| `"velocity"` \| `"forks"` \| `"createdAt"` | `"velocity"` | |
+| `sort.direction` | `"asc"` \| `"desc"` | `"desc"` | |
 
 ---
 

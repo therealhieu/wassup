@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { AppStateSchema } from "@/infrastructure/config.schemas";
 import { createRateLimiter } from "@/lib/rate-limit";
 import { validateOrigin } from "@/lib/csrf";
 
 // 30 requests per minute per user
 const limiter = createRateLimiter(30, 60_000);
+const MAX_PAYLOAD_SIZE = 500_000; // 500KB
 
 export async function GET() {
 	const session = await auth();
@@ -26,9 +26,10 @@ export async function GET() {
 		where: { userId: session.user.id },
 	});
 
-	// Return raw JSON — client-side migrateToAppState handles both shapes
+	// Server is a blind vault — returns opaque ciphertext + salt
 	return NextResponse.json({
-		state: record ? JSON.parse(record.data) : null,
+		encryptedData: record?.data ?? null,
+		salt: record?.salt ?? null,
 	});
 }
 
@@ -54,21 +55,26 @@ export async function PUT(request: Request) {
 	}
 
 	const body = await request.json();
-	const parsed = AppStateSchema.safeParse(body.state);
+	const { encryptedData, salt } = body;
 
-	if (!parsed.success) {
+	// Cannot validate structure — data is ciphertext. Only validate shape/size.
+	if (
+		typeof encryptedData !== "string" ||
+		typeof salt !== "string" ||
+		encryptedData.length > MAX_PAYLOAD_SIZE ||
+		salt.length > 100
+	) {
 		return NextResponse.json(
-			{ error: "Invalid state", details: parsed.error.flatten() },
+			{ error: "Invalid payload" },
 			{ status: 400 },
 		);
 	}
 
 	await prisma.userConfig.upsert({
 		where: { userId: session.user.id },
-		create: { userId: session.user.id, data: JSON.stringify(parsed.data) },
-		update: { data: JSON.stringify(parsed.data) },
+		create: { userId: session.user.id, data: encryptedData, salt },
+		update: { data: encryptedData, salt },
 	});
 
 	return NextResponse.json({ ok: true });
 }
-

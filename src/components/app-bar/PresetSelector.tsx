@@ -273,17 +273,17 @@ export function PresetSelector() {
                 {activePreset?.name ?? "Select Preset"}
             </Button>
 
-            <Menu
-                anchorEl={anchorEl}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
+            <DndContext
+                sensors={sensors}
+                collisionDetection={closestCenter}
+                onDragStart={handleDragStart}
+                onDragEnd={handleDragEnd}
+                onDragCancel={handleDragCancel}
             >
-                <DndContext
-                    sensors={sensors}
-                    collisionDetection={closestCenter}
-                    onDragStart={handleDragStart}
-                    onDragEnd={handleDragEnd}
-                    onDragCancel={handleDragCancel}
+                <Menu
+                    anchorEl={anchorEl}
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
                 >
                     <SortableContext
                         items={presets.map((p) => p.id)}
@@ -301,31 +301,31 @@ export function PresetSelector() {
                             />
                         ))}
                     </SortableContext>
-                </DndContext>
 
-                <Divider />
+                    <Divider />
 
-                <MenuItem onClick={handleCreate}>
-                    <ListItemIcon>
-                        <AddIcon fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText primary="New Preset" />
-                </MenuItem>
+                    <MenuItem onClick={handleCreate}>
+                        <ListItemIcon>
+                            <AddIcon fontSize="small" />
+                        </ListItemIcon>
+                        <ListItemText primary="New Preset" />
+                    </MenuItem>
 
-                <MenuItem onClick={handleImportClick}>
-                    <ListItemIcon>
-                        <FileUploadIcon fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText primary="Import Preset…" />
-                </MenuItem>
+                    <MenuItem onClick={handleImportClick}>
+                        <ListItemIcon>
+                            <FileUploadIcon fontSize="small" />
+                        </ListItemIcon>
+                        <ListItemText primary="Import Preset…" />
+                    </MenuItem>
 
-                <MenuItem onClick={handleExport}>
-                    <ListItemIcon>
-                        <FileDownloadIcon fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText primary="Export Current" />
-                </MenuItem>
-            </Menu>
+                    <MenuItem onClick={handleExport}>
+                        <ListItemIcon>
+                            <FileDownloadIcon fontSize="small" />
+                        </ListItemIcon>
+                        <ListItemText primary="Export Current" />
+                    </MenuItem>
+                </Menu>
+            </DndContext>
 
             {/* Hidden file input for import */}
             <input

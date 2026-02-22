@@ -4,7 +4,8 @@
 
 ```bash
 bun install
-cp .env.local.example .env.local   # Fill in env vars
+cp .env.local.example .env.local   # Fill in env vars (GitHub OAuth, etc.)
+bunx prisma migrate dev            # Initialize SQLite database
 bun run dev                        # Starts Next.js with Turbopack on :2506
 ```
 
@@ -12,10 +13,16 @@ bun run dev                        # Starts Next.js with Turbopack on :2506
 
 | Command | Purpose |
 |---------|---------|
-| `bun run dev` | Dev server (Turbopack) |
-| `bun run build-no-lint` | Production build (skip lint) |
+| `bun run dev` | Dev server (Turbopack, port 2506) |
+| `bun run build` | Production build |
 | `bun test` | Run all tests |
-| `bun run storybook` | Visual component development |
+| `bun run test:unit` | Unit tests only |
+| `bun run test:integration` | Integration tests only |
+| `bun run test:e2e` | E2E tests (Playwright) |
+| `bun run test:coverage` | Tests with coverage |
+| `bun run storybook` | Storybook dev server (port 6006) |
+| `bun run build-storybook` | Build static Storybook |
+| `bun run watch-config` | Watch config file changes |
 
 ## File Naming Conventions
 
@@ -49,6 +56,16 @@ export async function fetchWidgetProps(config) {
 }
 ```
 
+## Widget Registry Pattern
+
+All widget types are registered in `src/lib/widget-registry.ts` with:
+
+- `type` / `label` — identifier and display name
+- `schema` — Zod schema for validation
+- `fields` — field definitions driving the visual config editor forms
+
+The registry powers the `SchemaForm` component, default value generation, and widget summary text.
+
 ## External API Dependencies
 
 | API | Auth | Notes |
@@ -58,3 +75,16 @@ export async function fetchWidgetProps(config) {
 | Reddit JSON | None | Unofficial — be conservative |
 | YouTube RSS | None | Unofficial — may change |
 | RSS/Atom feeds | Varies | Some feeds block scrapers |
+| GitHub Search API | None | Public search endpoint, rate-limited |
+
+## Database
+
+SQLite via Prisma with `better-sqlite3` driver. Schema at `prisma/schema.prisma`.
+
+| Model | Purpose |
+|-------|---------|
+| `User` | NextAuth user record |
+| `Account` | OAuth provider link |
+| `Session` | Server-side session |
+| `VerificationToken` | Email verification |
+| `UserConfig` | Encrypted user config (ciphertext + PBKDF2 salt) |

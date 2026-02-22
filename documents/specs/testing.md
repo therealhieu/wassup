@@ -34,9 +34,26 @@ src/path/to/tests/
 
 ### E2E Tests (`.e2e.test.ts`)
 
-- Full browser automation with Playwright
+- Full browser automation with Playwright (via Vitest browser mode)
 - Test complete user workflows
-- Sequential execution
+- Browser: Firefox (headless)
+
+### Storybook Tests
+
+- Storybook 10 visual component tests via `@storybook/addon-vitest`
+- Browser: Chromium (headless via Playwright)
+- Tests derived from story files (`*.stories.tsx`)
+
+## Vitest Project Configuration
+
+Tests are organized as Vitest projects in `vitest.config.ts`:
+
+| Project | Include Pattern | Browser |
+|---------|----------------|---------|
+| `unit` | `**/*.{test,spec}.{ts,tsx}`, `**/*.unit.test.ts` | No |
+| `integration` | `**/*.integration.test.ts` | No |
+| `e2e` | `**/*.e2e.test.ts` | Firefox (Playwright) |
+| `storybook` | Auto-detected from `.storybook` config | Chromium (Playwright) |
 
 ## Commands
 
@@ -45,8 +62,7 @@ bun test                  # All tests
 bun run test:unit         # Unit only
 bun run test:integration  # Integration only
 bun run test:e2e          # E2E only
-bun test --coverage       # With coverage
-bun test --watch          # Watch mode
+bun run test:coverage     # With coverage
 ```
 
 ## Best Practices
@@ -58,6 +74,7 @@ bun test --watch          # Watch mode
    - Integration: mock only external APIs, use real internal modules
    - E2E: real services
 4. **Test data**: Use fixtures in `fixtures/` folders, factory functions for generation
+5. **Mock class naming**: Prefer `Mock` prefix in class names (e.g., `MockWeatherRepository`)
 
 ## Execution Strategy
 
@@ -65,4 +82,4 @@ bun test --watch          # Watch mode
 |---------|-------|
 | Development | Unit tests (fast feedback) |
 | Pre-commit | Unit + integration |
-| CI/CD | Full suite including E2E |
+| CI/CD | Full suite including E2E + Storybook |

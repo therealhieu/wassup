@@ -2,7 +2,9 @@ import { PrismaClient } from "@/generated/prisma/client";
 import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
 
 function createPrismaClient(): PrismaClient {
-	const url = process.env.DATABASE_URL?.replace("file:", "") ?? "./prisma/dev.db";
+	const raw = process.env.DATABASE_URL;
+	if (!raw) throw new Error("DATABASE_URL environment variable is required");
+	const url = raw.replace("file:", "");
 	const adapter = new PrismaBetterSqlite3({ url });
 	return new PrismaClient({ adapter });
 }

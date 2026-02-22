@@ -16,6 +16,8 @@ import { DEFAULT_APP_STATE } from "@/lib/constants";
 import { BLANK_CONFIG } from "@/lib/presets";
 import { migrateToAppState } from "@/lib/migration";
 import { baseLogger } from "@/lib/logger";
+import { useEncryptedSync } from "@/hooks/useEncryptedSync";
+import { PassphraseDialog } from "@/components/PassphraseDialog";
 
 const STORAGE_KEY_ANONYMOUS = "wassup-state";
 const STORAGE_KEY_PREFIX = "wassup-state-";
@@ -210,24 +212,19 @@ export function AppConfigProvider({ children }: { children: ReactNode }) {
 	const [state, dispatch] = useReducer(reducer, DEFAULT_APP_STATE);
 	const isHydrated = useRef(false);
 
+	// Encryption hook
+	const encryption = useEncryptedSync();
+
 	// Derived: active preset's config
 	const activePreset = state.presets.find(
 		(p) => p.id === state.activePresetId,
 	);
 	const config = activePreset?.config ?? state.presets[0].config;
 
-	// Debounced server sync (authenticated only)
+	// Debounced server sync — encrypts before sending
 	const syncToServer = useDebouncedCallback(
 		async (appState: AppState) => {
-			try {
-				await fetch("/api/config", {
-					method: "PUT",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({ state: appState }),
-				});
-			} catch (err) {
-				logger.error("Failed to sync state to server", err);
-			}
+			await encryption.syncEncryptedState(appState);
 		},
 		1000,
 	);
@@ -240,32 +237,38 @@ export function AppConfigProvider({ children }: { children: ReactNode }) {
 		dispatch({ type: "SET_STATE", payload: local });
 
 		if (isAuthenticated) {
-			fetch("/api/config")
-				.then((res) => res.json())
-				.then(({ state: serverState }) => {
-					if (serverState) {
-						const migrated = migrateToAppState(serverState);
-						dispatch({ type: "SET_STATE", payload: migrated });
-						saveToStorage(userId, migrated);
-					}
-				})
-				.catch(() => {
-					/* server unavailable — localStorage is fine */
-				})
-				.finally(() => {
-					isHydrated.current = true;
-				});
+			encryption.hydrateFromServer(userId, dispatch, isHydrated);
 		} else {
 			isHydrated.current = true;
 		}
-	}, [status, userId, isAuthenticated]);
+	}, [status, userId, isAuthenticated, encryption.hydrateFromServer]);
 
-	// Write-through: localStorage (always) + server (if authed)
+	// Clean up passphrase cache on sign-out
+	useEffect(() => {
+		if (status === "unauthenticated" && encryption.passphrase) {
+			encryption.clearPassphrase();
+		}
+	}, [status, encryption.passphrase, encryption.clearPassphrase]);
+
+	// Passphrase submit handler
+	const handlePassphraseSubmit = useCallback(
+		async (enteredPassphrase: string) => {
+			await encryption.handlePassphraseSubmit(
+				enteredPassphrase,
+				userId,
+				dispatch,
+				isHydrated,
+			);
+		},
+		[encryption.handlePassphraseSubmit, userId],
+	);
+
+	// Write-through: localStorage (always) + encrypted server sync (if authed)
 	useEffect(() => {
 		if (!isHydrated.current) return;
 		saveToStorage(userId, state);
-		if (isAuthenticated) syncToServer(state);
-	}, [state, userId, isAuthenticated, syncToServer]);
+		if (isAuthenticated && encryption.passphrase) syncToServer(state);
+	}, [state, userId, isAuthenticated, encryption.passphrase, syncToServer]);
 
 	// Stable callbacks
 	const setConfig = useCallback(
@@ -339,6 +342,12 @@ export function AppConfigProvider({ children }: { children: ReactNode }) {
 
 	return (
 		<AppConfigContext.Provider value={value}>
+			<PassphraseDialog
+				open={encryption.showPassphraseDialog}
+				isNewUser={encryption.isNewEncryptionUser}
+				error={encryption.passphraseError}
+				onSubmit={handlePassphraseSubmit}
+			/>
 			{children}
 		</AppConfigContext.Provider>
 	);
