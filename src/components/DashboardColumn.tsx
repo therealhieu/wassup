@@ -1,11 +1,12 @@
 import { ColumnConfig, WidgetConfig } from "@/infrastructure/config.schemas";
 import { Widget } from "./Widget";
+import { memo } from "react";
 
 interface DashboardColumnProps {
 	columnConfig: ColumnConfig;
 }
 
-export function DashboardColumn({ columnConfig }: DashboardColumnProps) {
+export const DashboardColumn = memo(function DashboardColumn({ columnConfig }: DashboardColumnProps) {
 	return (
 		<div>
 			{columnConfig.widgets.map(
@@ -18,4 +19,4 @@ export function DashboardColumn({ columnConfig }: DashboardColumnProps) {
 			)}
 		</div>
 	);
-}
+});

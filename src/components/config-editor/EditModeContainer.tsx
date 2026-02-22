@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
     Box,
     Button,
@@ -94,11 +94,11 @@ export function EditModeContainer({ onExitEditMode, initialPath }: EditModeConta
 
     // ── Page handlers ────────────────────────────────────────────────
 
-    const updateCurrentPage = (updated: PageConfig) => {
+    const updateCurrentPage = useCallback((updated: PageConfig) => {
         setDraftPages((pages) =>
             pages.map((p, i) => (i === activePageIndex ? updated : p)),
         );
-    };
+    }, [activePageIndex]);
 
     const handleAddPage = () => {
         const existingPaths = draftPages.map((p) => p.path);

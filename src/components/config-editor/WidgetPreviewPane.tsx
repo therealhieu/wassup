@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type ReactElement } from "react";
+import { useState, useMemo, type ReactElement } from "react";
 import { Box, ToggleButton, ToggleButtonGroup, Typography, Alert } from "@mui/material";
 import type { WidgetConfig } from "@/infrastructure/config.schemas";
 import { Widget } from "@/components/Widget";
@@ -149,6 +149,8 @@ interface WidgetPreviewPaneProps {
 export function WidgetPreviewPane({ config }: WidgetPreviewPaneProps) {
     const [mode, setMode] = useState<"mock" | "real">("mock");
 
+    const mockPreview = useMemo(() => renderMockPreview(config), [config]);
+
     return (
         <Box>
             <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 1 }}>
@@ -174,7 +176,7 @@ export function WidgetPreviewPane({ config }: WidgetPreviewPaneProps) {
                 }
             >
                 {mode === "mock" ? (
-                    renderMockPreview(config)
+                    mockPreview
                 ) : (
                     <Widget widgetConfig={config} />
                 )}

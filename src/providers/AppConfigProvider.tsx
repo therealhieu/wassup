@@ -85,7 +85,9 @@ type Action =
 		payload: { id: string; name?: string; config?: AppConfig };
 	}
 	| { type: "CREATE_PRESET"; payload: Preset }
-	| { type: "DELETE_PRESET"; payload: string };
+	| { type: "DELETE_PRESET"; payload: string }
+	| { type: "REORDER_PRESETS"; payload: string[] }
+	| { type: "IMPORT_PRESET"; payload: Preset };
 
 function reducer(state: AppState, action: Action): AppState {
 	switch (action.type) {
@@ -159,6 +161,21 @@ function reducer(state: AppState, action: Action): AppState {
 						: state.activePresetId,
 			};
 		}
+
+		case "REORDER_PRESETS": {
+			const idOrder = action.payload;
+			const ordered = idOrder
+				.map((id) => state.presets.find((p) => p.id === id))
+				.filter((p): p is Preset => p !== undefined);
+			return { ...state, presets: ordered };
+		}
+
+		case "IMPORT_PRESET":
+			return {
+				...state,
+				activePresetId: action.payload.id,
+				presets: [...state.presets, action.payload],
+			};
 	}
 }
 
@@ -180,6 +197,8 @@ interface AppConfigContextValue {
 	) => void;
 	createPreset: () => void;
 	deletePreset: (id: string) => void;
+	reorderPresets: (orderedIds: string[]) => void;
+	importPreset: (preset: Omit<Preset, "id">) => void;
 }
 
 const AppConfigContext = createContext<AppConfigContextValue | null>(null);
@@ -287,6 +306,23 @@ export function AppConfigProvider({ children }: { children: ReactNode }) {
 		[],
 	);
 
+	const reorderPresets = useCallback(
+		(orderedIds: string[]) =>
+			dispatch({ type: "REORDER_PRESETS", payload: orderedIds }),
+		[],
+	);
+
+	const importPreset = useCallback(
+		(preset: Omit<Preset, "id">) => {
+			const newPreset: Preset = {
+				...preset,
+				id: crypto.randomUUID(),
+			};
+			dispatch({ type: "IMPORT_PRESET", payload: newPreset });
+		},
+		[],
+	);
+
 	const value: AppConfigContextValue = {
 		config,
 		setConfig,
@@ -297,6 +333,8 @@ export function AppConfigProvider({ children }: { children: ReactNode }) {
 		updatePreset,
 		createPreset,
 		deletePreset,
+		reorderPresets,
+		importPreset,
 	};
 
 	return (

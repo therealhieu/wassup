@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import {
     Dialog,
     DialogTitle,
@@ -88,11 +88,10 @@ export function WidgetFormDialog({
         onSubmit(result.data as WidgetConfig);
     };
 
-    // Build preview config
-    const previewConfig = {
-        type: selectedType,
-        ...formValues,
-    } as WidgetConfig;
+    const previewConfig = useMemo(
+        () => ({ type: selectedType, ...formValues }) as WidgetConfig,
+        [selectedType, formValues],
+    );
 
     return (
         <Dialog open={open} maxWidth="lg" fullWidth onClose={onClose}>

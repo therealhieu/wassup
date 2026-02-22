@@ -6,12 +6,13 @@ import { WidgetConfig } from "@/infrastructure/config.schemas";
 import { BookmarkWidget } from "@/features/bookmark/presentation/BookmarkWidget";
 import { FeedWidget } from "@/features/feed/presentation/FeedWidget";
 import { GithubWidget } from "@/features/github/presentation/GithubWidget";
+import { memo } from "react";
 
 interface WidgetComponentProps {
 	widgetConfig: WidgetConfig;
 }
 
-export function Widget({ widgetConfig }: WidgetComponentProps) {
+export const Widget = memo(function Widget({ widgetConfig }: WidgetComponentProps) {
 	const widgetElement = (() => {
 		switch (widgetConfig.type) {
 			case "weather":
@@ -32,4 +33,4 @@ export function Widget({ widgetConfig }: WidgetComponentProps) {
 	})();
 
 	return <div style={{ marginBottom: 10 }}>{widgetElement}</div>;
-}
+});

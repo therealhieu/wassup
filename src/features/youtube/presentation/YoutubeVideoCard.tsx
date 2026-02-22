@@ -2,9 +2,10 @@ import { YoutubeVideo } from "../domain/entities/video";
 import { Card, CardContent, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
+import { memo } from "react";
 
 type YoutubeVideoCardProps = YoutubeVideo;
-export const YoutubeVideoCard = (props: YoutubeVideoCardProps) => {
+export const YoutubeVideoCard = memo(function YoutubeVideoCard(props: YoutubeVideoCardProps) {
 	const { title, url, thumbnailUrl, authorName, views, publishedAt } = props;
 	return (
 		<Card
@@ -22,7 +23,6 @@ export const YoutubeVideoCard = (props: YoutubeVideoCardProps) => {
 					alt={title}
 					width={320}
 					height={180}
-					priority
 					style={{ borderRadius: 4, width: "100%", height: "auto" }}
 					quality={100}
 				/>
@@ -64,4 +64,4 @@ export const YoutubeVideoCard = (props: YoutubeVideoCardProps) => {
 			</CardContent>
 		</Card>
 	);
-};
+});
