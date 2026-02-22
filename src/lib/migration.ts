@@ -6,7 +6,7 @@ import {
 import { SEED_PRESETS } from "@/lib/presets";
 
 const FALLBACK_APP_STATE: AppState = {
-	activePresetId: "hieu",
+	activePresetId: "general-swe",
 	presets: SEED_PRESETS,
 };
 

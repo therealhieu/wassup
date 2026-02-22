@@ -9,7 +9,7 @@ import zodToJsonSchema from "zod-to-json-schema";
 export const THEME_OPTIONS = ["light", "dark"] as const;
 
 export const DEFAULT_APP_STATE: AppState = {
-	activePresetId: "hieu",
+	activePresetId: "general-swe",
 	presets: SEED_PRESETS,
 };
 

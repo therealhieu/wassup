@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
     Button,
     Menu,
@@ -16,6 +16,7 @@ import {
     DialogActions,
     Alert,
     Snackbar,
+    InputBase,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
@@ -24,6 +25,7 @@ import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import CheckIcon from "@mui/icons-material/Check";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { useAppConfig } from "@/providers/AppConfigProvider";
 import { PresetSchema } from "@/infrastructure/config.schemas";
 import {
@@ -51,6 +53,7 @@ interface SortablePresetItemProps {
     canDelete: boolean;
     onSelect: () => void;
     onDelete: (e: React.MouseEvent) => void;
+    onRename: (newName: string) => void;
 }
 
 function SortablePresetItem({
@@ -60,7 +63,12 @@ function SortablePresetItem({
     canDelete,
     onSelect,
     onDelete,
+    onRename,
 }: SortablePresetItemProps) {
+    const [isEditing, setIsEditing] = useState(false);
+    const [editValue, setEditValue] = useState(name);
+    const inputRef = useRef<HTMLInputElement>(null);
+
     const {
         attributes,
         listeners,
@@ -69,6 +77,35 @@ function SortablePresetItem({
         transition,
         isDragging,
     } = useSortable({ id: presetId });
+
+    useEffect(() => {
+        if (isEditing) {
+            inputRef.current?.focus();
+            inputRef.current?.select();
+        }
+    }, [isEditing]);
+
+    const handleEditClick = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        setEditValue(name);
+        setIsEditing(true);
+    };
+
+    const handleCommit = () => {
+        const trimmed = editValue.trim();
+        if (trimmed && trimmed !== name) {
+            onRename(trimmed);
+        }
+        setIsEditing(false);
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === "Enter") handleCommit();
+        if (e.key === "Escape") {
+            setEditValue(name);
+            setIsEditing(false);
+        }
+    };
 
     const style = {
         transform: CSS.Transform.toString(transform),
@@ -81,7 +118,7 @@ function SortablePresetItem({
             ref={setNodeRef}
             style={style}
             selected={isActive}
-            onClick={onSelect}
+            onClick={isEditing ? undefined : onSelect}
             sx={{ gap: 1 }}
         >
             <DragIndicatorIcon
@@ -90,9 +127,30 @@ function SortablePresetItem({
                 {...listeners}
                 {...attributes}
             />
-            <ListItemText primary={name} />
+            {isEditing ? (
+                <InputBase
+                    inputRef={inputRef}
+                    value={editValue}
+                    onChange={(e) => setEditValue(e.target.value)}
+                    onBlur={handleCommit}
+                    onKeyDown={handleKeyDown}
+                    size="small"
+                    sx={{ flex: 1, fontSize: "inherit" }}
+                />
+            ) : (
+                <ListItemText primary={name} />
+            )}
             {isActive && (
                 <CheckIcon fontSize="small" color="primary" sx={{ ml: 1 }} />
+            )}
+            {!isEditing && (
+                <IconButton
+                    size="small"
+                    onClick={handleEditClick}
+                    edge="end"
+                >
+                    <EditOutlinedIcon fontSize="small" />
+                </IconButton>
             )}
             {canDelete && (
                 <IconButton
@@ -123,6 +181,7 @@ export function PresetSelector() {
         deletePreset,
         reorderPresets,
         importPreset,
+        updatePreset,
     } = useAppConfig();
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -298,6 +357,11 @@ export function PresetSelector() {
                                 canDelete={presets.length > 1}
                                 onSelect={() => handleSelect(p.id)}
                                 onDelete={(e) => handleDeleteClick(e, p.id)}
+                                onRename={(newName) =>
+                                    updatePreset(p.id, {
+                                        name: newName,
+                                    })
+                                }
                             />
                         ))}
                     </SortableContext>
