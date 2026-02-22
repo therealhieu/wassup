@@ -307,10 +307,7 @@ export const SEED_PRESETS: Preset[] = [
 										type: "tabs",
 										labels: [
 											"AI / LLM",
-											"DevTools",
-											"Rust",
 											"Platform",
-											"Security",
 										],
 										tabs: [
 											{
@@ -328,44 +325,10 @@ export const SEED_PRESETS: Preset[] = [
 											{
 												type: "github",
 												topics: [
-													"developer-tools",
-													"cli",
-													"devops",
-													"dx",
-												],
-												createdAfter: "2024-01-01",
-												dateRange: "90d",
-												limit: 20,
-											},
-											{
-												type: "github",
-												topics: [
-													"rust",
-													"systems-programming",
-													"wasm",
-												],
-												createdAfter: "2024-01-01",
-												dateRange: "90d",
-												limit: 20,
-											},
-											{
-												type: "github",
-												topics: [
 													"kubernetes",
 													"docker",
 													"platform-engineering",
 													"infrastructure",
-												],
-												createdAfter: "2024-01-01",
-												dateRange: "90d",
-												limit: 20,
-											},
-											{
-												type: "github",
-												topics: [
-													"security",
-													"cybersecurity",
-													"devsecops",
 												],
 												createdAfter: "2024-01-01",
 												dateRange: "90d",

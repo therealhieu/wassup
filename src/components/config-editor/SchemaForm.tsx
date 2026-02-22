@@ -14,11 +14,13 @@ import {
     Typography,
     FormHelperText,
 } from "@mui/material";
+import Divider from "@mui/material/Divider";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import type { WidgetFieldDefinition } from "@/lib/widget-registry";
+import type { WidgetConfig } from "@/infrastructure/config.schemas";
 import type { ZodIssue } from "zod";
-import { buildDefaults } from "@/lib/widget-registry";
+import { buildDefaults, WIDGET_REGISTRY, WIDGET_TYPES } from "@/lib/widget-registry";
 
 interface SchemaFormProps {
     fields: WidgetFieldDefinition[];
@@ -38,6 +40,18 @@ export function SchemaForm({ fields, values, onChange, errors }: SchemaFormProps
     const updateField = (name: string, value: unknown) => {
         onChange({ ...values, [name]: value });
     };
+
+    // Tabs widget: render unified TabsEditorField instead of individual fields
+    const hasNestedWidget = fields.some((f) => f.type === "nested-widget");
+    if (hasNestedWidget) {
+        return (
+            <TabsEditorField
+                labels={(values.labels as string[]) ?? []}
+                tabs={(values.tabs as WidgetConfig[]) ?? []}
+                onChange={(labels, tabs) => onChange({ ...values, labels, tabs })}
+            />
+        );
+    }
 
     return (
         <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 1 }}>
@@ -157,11 +171,8 @@ function FieldRenderer({ field, value, error, onChange }: FieldRendererProps) {
             );
 
         case "nested-widget":
-            return (
-                <Typography variant="body2" color="text.secondary" sx={{ fontStyle: "italic" }}>
-                    Tab widgets are configured after adding — edit each tab individually.
-                </Typography>
-            );
+            // Handled by TabsEditorField in SchemaForm — should not reach here
+            return null;
 
         default:
             return null;
@@ -263,6 +274,125 @@ function NestedObjectField({
                 errors={[]}
             />
             {error && <FormHelperText error>{error}</FormHelperText>}
+        </Box>
+    );
+}
+
+// ── Tabs Editor Field ────────────────────────────────────────────────
+
+function stripType(config: WidgetConfig): Record<string, unknown> {
+    const { type: _, ...rest } = config;
+    return rest as Record<string, unknown>;
+}
+
+function TabsEditorField({
+    labels,
+    tabs,
+    onChange,
+}: {
+    labels: string[];
+    tabs: WidgetConfig[];
+    onChange: (labels: string[], tabs: WidgetConfig[]) => void;
+}) {
+    const updateLabel = (idx: number, value: string) => {
+        const next = [...labels];
+        next[idx] = value;
+        onChange(next, tabs);
+    };
+
+    const updateTabType = (idx: number, newType: string) => {
+        const entry = WIDGET_REGISTRY[newType];
+        if (!entry) return;
+        const next = [...tabs];
+        next[idx] = { type: newType, ...buildDefaults(entry.fields) } as WidgetConfig;
+        onChange(labels, next);
+    };
+
+    const updateTabConfig = (idx: number, values: Record<string, unknown>) => {
+        const next = [...tabs];
+        next[idx] = { type: tabs[idx].type, ...values } as WidgetConfig;
+        onChange(labels, next);
+    };
+
+    const addTab = () => {
+        const defaultType = "reddit";
+        const entry = WIDGET_REGISTRY[defaultType];
+        onChange(
+            [...labels, "New Tab"],
+            [...tabs, { type: defaultType, ...buildDefaults(entry.fields) } as WidgetConfig],
+        );
+    };
+
+    const deleteTab = (idx: number) => {
+        if (labels.length <= 1) return;
+        onChange(
+            labels.filter((_, i) => i !== idx),
+            tabs.filter((_, i) => i !== idx),
+        );
+    };
+
+    return (
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 1, mt: 1 }}>
+            {labels.map((label, i) => (
+                <Box key={i}>
+                    {i > 0 && <Divider sx={{ my: 1 }} />}
+
+                    {/* Label + delete */}
+                    <Box sx={{ display: "flex", gap: 1, alignItems: "center", mb: 1 }}>
+                        <TextField
+                            label="Label"
+                            value={label}
+                            onChange={(e) => updateLabel(i, e.target.value)}
+                            size="small"
+                            fullWidth
+                        />
+                        <IconButton
+                            size="small"
+                            onClick={() => deleteTab(i)}
+                            disabled={labels.length <= 1}
+                            sx={{ "&:hover": { color: "error.main" } }}
+                        >
+                            <DeleteIcon fontSize="small" />
+                        </IconButton>
+                    </Box>
+
+                    {/* Widget type */}
+                    <FormControl size="small" fullWidth sx={{ mb: 1 }}>
+                        <InputLabel>Widget Type</InputLabel>
+                        <Select
+                            value={tabs[i]?.type ?? "reddit"}
+                            onChange={(e) => updateTabType(i, e.target.value)}
+                            label="Widget Type"
+                        >
+                            {WIDGET_TYPES.filter((t) => t !== "tabs").map((type) => (
+                                <MenuItem key={type} value={type}>
+                                    {WIDGET_REGISTRY[type].label}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+
+                    {/* Child widget config fields */}
+                    {tabs[i] && WIDGET_REGISTRY[tabs[i].type] && (
+                        <Box sx={{ pl: 2, borderLeft: 2, borderColor: "divider" }}>
+                            <SchemaForm
+                                fields={WIDGET_REGISTRY[tabs[i].type].fields}
+                                values={stripType(tabs[i])}
+                                onChange={(updated) => updateTabConfig(i, updated)}
+                                errors={[]}
+                            />
+                        </Box>
+                    )}
+                </Box>
+            ))}
+            <Button
+                size="small"
+                startIcon={<AddIcon />}
+                onClick={addTab}
+                sx={{ alignSelf: "flex-start", mt: 1 }}
+            >
+                Add Tab
+            </Button>
         </Box>
     );
 }

@@ -60,6 +60,13 @@ export function buildDefaults(
 			result[field.name] = field.min ?? 1;
 		} else if (field.type === "nested-object" && field.nestedFields) {
 			result[field.name] = buildDefaults(field.nestedFields);
+		} else if (field.type === "nested-widget") {
+			// Default: one Reddit widget tab (avoids circular ref with "tabs")
+			const defaultType = "reddit";
+			const defaultEntry = WIDGET_REGISTRY[defaultType];
+			result[field.name] = [
+				{ type: defaultType, ...buildDefaults(defaultEntry.fields) },
+			];
 		} else {
 			result[field.name] = "";
 		}
