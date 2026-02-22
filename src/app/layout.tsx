@@ -8,6 +8,7 @@ import { ReactQueryProvider } from "@/providers/ReactQueryProvider";
 import { AppTheme } from "../components/AppTheme";
 import { AppConfigProvider } from "@/providers/AppConfigProvider";
 import { SessionProvider } from "@/providers/SessionProvider";
+import { EditModeProvider } from "@/providers/EditModeProvider";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -45,8 +46,10 @@ export default function RootLayout({
 					<ReactQueryProvider>
 						<AppConfigProvider>
 							<AppTheme>
-								<DashboardAppBar />
-								{children}
+								<EditModeProvider>
+									<DashboardAppBar />
+									{children}
+								</EditModeProvider>
 							</AppTheme>
 						</AppConfigProvider>
 					</ReactQueryProvider>

@@ -1,13 +1,16 @@
 "use client";
 
-import { AppBar, Toolbar } from "@mui/material";
+import { AppBar, Toolbar, IconButton } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
 import { ThemeMenu } from "./ThemeMenu";
 import { RouterMenu } from "./RouterMenu";
-import { OpenConfigEditorButton } from "./OpenConfigEditorButton";
 import { PresetSelector } from "./PresetSelector";
 import { LoginButton } from "@/components/auth/LoginButton";
+import { useEditMode } from "@/providers/EditModeProvider";
 
 export const DashboardAppBar = () => {
+	const { isEditMode, enterEditMode } = useEditMode();
+
 	return (
 		<div
 			style={{
@@ -30,7 +33,15 @@ export const DashboardAppBar = () => {
 					<div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
 						<PresetSelector />
 						<ThemeMenu />
-						<OpenConfigEditorButton />
+						{!isEditMode && (
+							<IconButton
+								onClick={enterEditMode}
+								color="inherit"
+								title="Edit dashboard"
+							>
+								<EditIcon />
+							</IconButton>
+						)}
 						<LoginButton />
 					</div>
 				</Toolbar>

@@ -18,6 +18,9 @@
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.1",
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@fontsource/material-icons": "^5.2.7",
@@ -38,8 +41,6 @@
     "cross-fetch": "^4.1.0",
     "fast-xml-parser": "^5.3.7",
     "lru-cache": "^11.2.6",
-    "monaco-editor": "^0.55.1",
-    "monaco-yaml": "^5.4.1",
     "next": "^16.1.6",
     "next-auth": "^5.0.0-beta.30",
     "openmeteo": "^1.2.3",
@@ -49,7 +50,6 @@
     "ts-pattern": "^5.9.0",
     "tslog": "^4.10.2",
     "use-debounce": "^10.1.0",
-    "yaml": "^2.8.2",
     "zod": "^3.25.76",
     "zod-class": "^0.0.18",
     "zod-to-json-schema": "^3.25.1"
