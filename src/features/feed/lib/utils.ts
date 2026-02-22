@@ -13,6 +13,33 @@ const thumbnailCache = new LRUCache<string, string>({
 	ttl: 1000 * 60 * 60, // 1 hour
 });
 
+const HEAD_MAX_BYTES = 64 * 1024; // 64KB — more than enough for <head>
+
+/**
+ * Read only the `<head>` section of an HTML response to extract meta tags.
+ * Stops reading as soon as `</head>` is found, avoiding full-page downloads.
+ */
+async function readUntilHeadClose(response: Response): Promise<string> {
+	const reader = response.body?.getReader();
+	if (!reader) return response.text();
+
+	const decoder = new TextDecoder();
+	let html = "";
+
+	try {
+		while (html.length < HEAD_MAX_BYTES) {
+			const { done, value } = await reader.read();
+			if (done) break;
+			html += decoder.decode(value, { stream: true });
+			if (html.includes("</head>")) break;
+		}
+	} finally {
+		reader.cancel();
+	}
+
+	return html;
+}
+
 export const getSourceFromUrl = (url: string): string => {
 	const hostname = new URL(url).hostname;
 	const parts = hostname.split(".");
@@ -62,7 +89,7 @@ const fetchPreviewImage = async (
 			return DEFAULT_THUMBNAIL;
 		}
 		
-		const html = await response.text();
+		const html = await readUntilHeadClose(response);
 		const $ = cheerio.load(html);
 
 		// Try to find og:image first (preferred for social media previews)
@@ -102,27 +129,6 @@ const fetchPreviewImage = async (
 			return linkImage;
 		}
 
-		// Fallback to first image in content that's not tiny
-		const images = $("img")
-			.map((_, img) => ({
-				src: $(img).attr("src"),
-				width: parseInt($(img).attr("width") || "0"),
-				height: parseInt($(img).attr("height") || "0"),
-			}))
-			.get()
-			.filter(
-				(img) =>
-					img.src &&
-					img.src.trim() &&
-					(!img.width || img.width > 100) &&
-					(!img.height || img.height > 100)
-			);
-
-		if (images[0]?.src) {
-			logger.debug(`Found fallback image: ${images[0].src}`);
-			return images[0].src;
-		}
-		
 		logger.info(`No preview image found for ${url}, using default thumbnail`);
 		return DEFAULT_THUMBNAIL;
 	} catch (error) {

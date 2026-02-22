@@ -19,7 +19,7 @@ export const WeatherWidget = ({ config }: WeatherWidgetProps) => {
 		isLoading,
 		error,
 	} = useQuery<WeatherWidgetInnerProps, Error>({
-		queryKey: ["weather", config],
+		queryKey: ["weather", config.location, config.forecastDays, config.temperatureUnit],
 		queryFn: () => fetchWeatherWidgetProps(config),
 		staleTime: 1000 * 60 * 5, // 5 minutes
 	});

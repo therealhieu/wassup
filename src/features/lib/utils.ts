@@ -11,7 +11,7 @@ export async function getTitle(url: string): Promise<string> {
         window.location.origin;
 
     const proxy = `${host}/api/fetch-title?url=${encodeURIComponent(url)}`;
-    const res = await fetch(proxy, { cache: "no-store" });
+    const res = await fetch(proxy, { cache: "force-cache" });
     const json = (await res.json()) as { title?: string };
     const title = json.title || url;
 

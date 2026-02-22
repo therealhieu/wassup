@@ -25,7 +25,10 @@ export interface FeedWidgetInnerProps {
 }
 
 export const FeedWidgetInner = ({ config, feeds }: FeedWidgetInnerProps) => {
-	const sources = config.urls.map((url) => getSourceFromUrl(url));
+	const sources = useMemo(
+		() => config.urls.map((url) => getSourceFromUrl(url)),
+		[config.urls]
+	);
 	const [selectedSource, setSelectedSource] = useState<string | null>(null);
 	const feedsContainerRef = useRef<HTMLDivElement>(null);
 	const widgetRef = useRef<HTMLDivElement>(null);
@@ -37,7 +40,8 @@ export const FeedWidgetInner = ({ config, feeds }: FeedWidgetInnerProps) => {
 		if (!el) return;
 
 		const observer = new ResizeObserver(([entry]) => {
-			setIsCompact(entry.contentRect.width < THUMBNAIL_MIN_WIDTH);
+			const compact = entry.contentRect.width < THUMBNAIL_MIN_WIDTH;
+			setIsCompact((prev) => (prev === compact ? prev : compact));
 		});
 		observer.observe(el);
 		return () => observer.disconnect();
@@ -50,7 +54,7 @@ export const FeedWidgetInner = ({ config, feeds }: FeedWidgetInnerProps) => {
 	);
 
 	const { data: resolvedThumbnails } = useQuery({
-		queryKey: ["thumbnails", ...missingThumbnailUrls],
+		queryKey: ["thumbnails", missingThumbnailUrls.join(",")],
 		queryFn: () => fetchThumbnailUrls(missingThumbnailUrls),
 		enabled: missingThumbnailUrls.length > 0 && !isCompact,
 		staleTime: 1000 * 60 * 60, // 1 hour — matches server-side thumbnail cache
@@ -68,9 +72,13 @@ export const FeedWidgetInner = ({ config, feeds }: FeedWidgetInnerProps) => {
 		[feeds, resolvedThumbnails, isCompact]
 	);
 
-	const filteredFeeds = selectedSource
-		? enrichedFeeds.filter((feed) => feed.source === selectedSource)
-		: enrichedFeeds;
+	const filteredFeeds = useMemo(
+		() =>
+			selectedSource
+				? enrichedFeeds.filter((feed) => feed.source === selectedSource)
+				: enrichedFeeds,
+		[enrichedFeeds, selectedSource]
+	);
 
 	useEffect(() => {
 		if (

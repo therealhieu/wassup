@@ -4,7 +4,7 @@ import { YoutubeVideoCard } from "./YoutubeVideoCard";
 import { Chip, Grid, Typography, Box } from "@mui/material";
 import { YoutubeWidgetConfigSchema } from "../infrastructure/config.schemas";
 import { YoutubeChannelSchema } from "../domain/entities/channel";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 
 export const YoutubeWidgetInnerPropsSchema = z.object({
 	config: YoutubeWidgetConfigSchema,
@@ -24,18 +24,21 @@ const chipColors = [
 	"warning",
 ] as ChipColor[];
 
+const getChipColor = (index: number): ChipColor =>
+	chipColors[index % chipColors.length];
+
 export const YoutubeWidgetInner = (props: YoutubeWidgetInnerProps) => {
 	const { config, channels, videos } = props;
 	const [selectedChannel, setSelectedChannel] = useState<string | null>(null);
 	const videosContainerRef = useRef<HTMLDivElement>(null);
 
-	const currentChipColor = (index: number) => {
-		return chipColors[index % chipColors.length];
-	};
-
-	const filteredVideos = selectedChannel
-		? videos.filter((video) => video.authorUrl === selectedChannel)
-		: videos;
+	const filteredVideos = useMemo(
+		() =>
+			selectedChannel
+				? videos.filter((video) => video.authorUrl === selectedChannel)
+				: videos,
+		[videos, selectedChannel]
+	);
 
 	useEffect(() => {
 		if (
@@ -72,7 +75,7 @@ export const YoutubeWidgetInner = (props: YoutubeWidgetInnerProps) => {
 								<Chip
 									key={channel.id}
 									label={channelName}
-									color={currentChipColor(index) as ChipColor}
+									color={getChipColor(index)}
 									onClick={() =>
 										setSelectedChannel(
 											selectedChannel ===

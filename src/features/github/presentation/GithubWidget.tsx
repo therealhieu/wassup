@@ -27,7 +27,7 @@ export const GithubWidget = ({ config }: GithubWidgetProps) => {
         [string, string]
     >([config.createdAfter, lastDateValue]);
 
-    const effectiveConfig = {
+    const effectiveConfig = useMemo(() => ({
         ...config,
         dateRange,
         minStars: starRange[0],
@@ -37,7 +37,7 @@ export const GithubWidget = ({ config }: GithubWidgetProps) => {
             createdAfterRange[1] === lastDateValue
                 ? undefined
                 : createdAfterRange[1],
-    };
+    }), [config, dateRange, starRange, createdAfterRange, lastDateValue]);
 
     const {
         data: props,

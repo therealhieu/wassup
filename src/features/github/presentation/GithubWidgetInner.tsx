@@ -104,6 +104,9 @@ export function generateDateMarks(startDate: string): {
     return { marks, values };
 }
 
+const getVelocity = (repo: GithubRepository): number =>
+    repo.recentStars ?? repo.starsPerDay;
+
 export const GithubWidgetInner = ({
     config,
     repositories,
@@ -160,8 +163,7 @@ export const GithubWidgetInner = ({
         [repositories]
     );
 
-    const getVelocity = (repo: GithubRepository): number =>
-        repo.recentStars ?? repo.starsPerDay;
+
 
     const filtered = useMemo(() => {
         let result = repositories;

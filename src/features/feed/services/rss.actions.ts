@@ -5,6 +5,12 @@ import { FeedWidgetConfig } from "../infrastructure/config.schemas";
 import { RssFeedRepository } from "../infrastructure/repositories/rss.feed-repository";
 import { FeedWidgetInnerProps } from "../presentation/FeedWidgetInner";
 import { RssFeedService } from "./rss";
+import { LRUCache } from "lru-cache";
+
+const feedCache = new LRUCache<string, Feed[]>({
+	max: 50,
+	ttl: 1000 * 60 * 5, // 5 minutes
+});
 
 /**
  * Fetch feeds from a single RSS URL.
@@ -14,8 +20,14 @@ export async function fetchSingleFeed(
 	url: string,
 	limit: number
 ): Promise<Feed[]> {
+	const key = `${url}|${limit}`;
+	const cached = feedCache.get(key);
+	if (cached) return cached;
+
 	const repo = new RssFeedRepository(url, limit);
-	return repo.fetchMany();
+	const feeds = await repo.fetchMany();
+	feedCache.set(key, feeds);
+	return feeds;
 }
 
 /**
