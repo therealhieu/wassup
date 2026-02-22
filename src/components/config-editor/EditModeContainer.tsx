@@ -1,12 +1,20 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import {
     Box,
     Button,
     Alert,
     Grid,
 } from "@mui/material";
+import {
+    DndContext,
+    DragOverlay,
+    closestCenter,
+    type DragStartEvent,
+    type DragOverEvent,
+    type DragEndEvent,
+} from "@dnd-kit/core";
 import type {
     AppConfig,
     PageConfig,
@@ -19,6 +27,7 @@ import { EditablePageTabBar } from "./EditablePageTabBar";
 import { ColumnLayoutEditor } from "./ColumnLayoutEditor";
 import { EditableColumn } from "./EditableColumn";
 import { WidgetFormDialog } from "./WidgetFormDialog";
+import { WidgetCard } from "./WidgetCard";
 
 interface EditModeContainerProps {
     onExitEditMode: () => void;
@@ -32,6 +41,36 @@ function arrayMove<T>(arr: T[], from: number, to: number): T[] {
     const [removed] = result.splice(from, 1);
     result.splice(to, 0, removed);
     return result;
+}
+
+function findContainer(
+    widgetIds: string[][],
+    id: string,
+): { colIdx: number; widgetIdx: number } | null {
+    for (let colIdx = 0; colIdx < widgetIds.length; colIdx++) {
+        const widgetIdx = widgetIds[colIdx].indexOf(id);
+        if (widgetIdx !== -1) return { colIdx, widgetIdx };
+    }
+    return null;
+}
+
+function parseColumnId(id: string): number | null {
+    const match = String(id).match(/^column-(\d+)$/);
+    return match ? Number(match[1]) : null;
+}
+
+function useStableWidgetIds() {
+    const idMapRef = useRef(new WeakMap<WidgetConfig, string>());
+    const counterRef = useRef(0);
+
+    const getWidgetId = useCallback((widget: WidgetConfig): string => {
+        if (!idMapRef.current.has(widget)) {
+            idMapRef.current.set(widget, `widget-${counterRef.current++}`);
+        }
+        return idMapRef.current.get(widget)!;
+    }, []);
+
+    return getWidgetId;
 }
 
 function slugifyPath(title: string, existingPaths: string[]): string {
@@ -91,6 +130,26 @@ export function EditModeContainer({ onExitEditMode, initialPath }: EditModeConta
     );
 
     const currentPage = draftPages[activePageIndex];
+
+    // ── Drag state ───────────────────────────────────────────────────
+
+    const getWidgetId = useStableWidgetIds();
+    const widgetIds = currentPage.columns.map((col) =>
+        col.widgets.map((w) => getWidgetId(w))
+    );
+
+    const [activeId, setActiveId] = useState<string | null>(null);
+    const lastOverRef = useRef<string | null>(null);
+    const columnsSnapshotRef = useRef<ColumnConfig[] | null>(null);
+
+    const activeWidget = useMemo(() => {
+        if (!activeId) return undefined;
+        for (const col of currentPage.columns) {
+            const widget = col.widgets.find((w) => getWidgetId(w) === activeId);
+            if (widget) return widget;
+        }
+        return undefined;
+    }, [activeId, currentPage.columns, getWidgetId]);
 
     // ── Page handlers ────────────────────────────────────────────────
 
@@ -219,20 +278,98 @@ export function EditModeContainer({ onExitEditMode, initialPath }: EditModeConta
         });
     };
 
-    const handleReorderWidget = (
-        colIdx: number,
+    const handleMoveWidget = useCallback((
+        fromCol: number,
         fromIdx: number,
+        toCol: number,
         toIdx: number,
     ) => {
+        if (fromCol === toCol && fromIdx === toIdx) return;
+
         updateCurrentPage({
             ...currentPage,
-            columns: currentPage.columns.map((col, ci) =>
-                ci === colIdx
-                    ? { ...col, widgets: arrayMove(col.widgets, fromIdx, toIdx) }
-                    : col,
-            ),
+            columns: currentPage.columns.map((col, ci) => {
+                if (fromCol === toCol && ci === fromCol) {
+                    return { ...col, widgets: arrayMove(col.widgets, fromIdx, toIdx) };
+                }
+                if (ci === fromCol) {
+                    return {
+                        ...col,
+                        widgets: col.widgets.filter((_, i) => i !== fromIdx),
+                    };
+                }
+                if (ci === toCol) {
+                    const movedWidget = currentPage.columns[fromCol].widgets[fromIdx];
+                    const newWidgets = [...col.widgets];
+                    newWidgets.splice(toIdx, 0, movedWidget);
+                    return { ...col, widgets: newWidgets };
+                }
+                return col;
+            }),
         });
-    };
+    }, [currentPage, updateCurrentPage]);
+
+    // ── Drag event handlers ──────────────────────────────────────────
+
+    const handleDragStart = useCallback((event: DragStartEvent) => {
+        setActiveId(event.active.id as string);
+        lastOverRef.current = null;
+        columnsSnapshotRef.current = currentPage.columns;
+    }, [currentPage.columns]);
+
+    const handleDragOver = useCallback((event: DragOverEvent) => {
+        const { active, over } = event;
+        if (!over) return;
+
+        const overId = over.id as string;
+        if (overId === lastOverRef.current) return;
+        lastOverRef.current = overId;
+
+        const from = findContainer(widgetIds, active.id as string);
+        if (!from) return;
+
+        // Over a widget in a different column
+        const to = findContainer(widgetIds, overId);
+        if (to && from.colIdx !== to.colIdx) {
+            handleMoveWidget(from.colIdx, from.widgetIdx, to.colIdx, to.widgetIdx);
+            return;
+        }
+
+        // Over an empty column droppable
+        const targetColIdx = parseColumnId(overId);
+        if (targetColIdx !== null && targetColIdx !== from.colIdx) {
+            handleMoveWidget(from.colIdx, from.widgetIdx, targetColIdx, 0);
+        }
+    }, [widgetIds, handleMoveWidget]);
+
+    const handleDragEnd = useCallback((event: DragEndEvent) => {
+        setActiveId(null);
+        lastOverRef.current = null;
+        columnsSnapshotRef.current = null;
+
+        const { active, over } = event;
+        if (!over || active.id === over.id) return;
+
+        const from = findContainer(widgetIds, active.id as string);
+        const to = findContainer(widgetIds, over.id as string);
+        if (!from || !to) return;
+
+        if (from.colIdx === to.colIdx) {
+            handleMoveWidget(from.colIdx, from.widgetIdx, to.colIdx, to.widgetIdx);
+        }
+    }, [widgetIds, handleMoveWidget]);
+
+    const handleDragCancel = useCallback(() => {
+        setActiveId(null);
+        lastOverRef.current = null;
+        if (columnsSnapshotRef.current) {
+            updateCurrentPage({
+                ...currentPage,
+                columns: columnsSnapshotRef.current,
+            });
+            columnsSnapshotRef.current = null;
+        }
+    }, [currentPage, updateCurrentPage]);
 
     const handleWidgetFormSubmit = (widgetConfig: WidgetConfig) => {
         if (editingWidgetTarget) {
@@ -336,25 +473,43 @@ export function EditModeContainer({ onExitEditMode, initialPath }: EditModeConta
             />
 
             {/* Editable columns grid */}
-            <Grid container spacing={2}>
-                {currentPage.columns.map((col, colIdx) => (
-                    <Grid key={colIdx} size={col.size}>
-                        <EditableColumn
-                            columnConfig={col}
-                            onAddWidget={() => handleAddWidget(colIdx)}
-                            onEditWidget={(widgetIdx) =>
-                                handleEditWidget(colIdx, widgetIdx)
-                            }
-                            onRemoveWidget={(widgetIdx) =>
-                                handleRemoveWidget(colIdx, widgetIdx)
-                            }
-                            onReorderWidget={(fromIdx, toIdx) =>
-                                handleReorderWidget(colIdx, fromIdx, toIdx)
-                            }
+            <DndContext
+                collisionDetection={closestCenter}
+                onDragStart={handleDragStart}
+                onDragOver={handleDragOver}
+                onDragEnd={handleDragEnd}
+                onDragCancel={handleDragCancel}
+            >
+                <Grid container spacing={2}>
+                    {currentPage.columns.map((col, colIdx) => (
+                        <Grid key={colIdx} size={col.size}>
+                            <EditableColumn
+                                columnId={`column-${colIdx}`}
+                                widgetIds={widgetIds[colIdx]}
+                                columnConfig={col}
+                                onAddWidget={() => handleAddWidget(colIdx)}
+                                onEditWidget={(widgetIdx) =>
+                                    handleEditWidget(colIdx, widgetIdx)
+                                }
+                                onRemoveWidget={(widgetIdx) =>
+                                    handleRemoveWidget(colIdx, widgetIdx)
+                                }
+                            />
+                        </Grid>
+                    ))}
+                </Grid>
+
+                <DragOverlay dropAnimation={null}>
+                    {activeId && activeWidget ? (
+                        <WidgetCard
+                            id={activeId}
+                            config={activeWidget}
+                            onEdit={() => { }}
+                            onDelete={() => { }}
                         />
-                    </Grid>
-                ))}
-            </Grid>
+                    ) : null}
+                </DragOverlay>
+            </DndContext>
 
             {/* Widget form dialog */}
             <WidgetFormDialog

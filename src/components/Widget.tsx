@@ -6,6 +6,7 @@ import { WidgetConfig } from "@/infrastructure/config.schemas";
 import { BookmarkWidget } from "@/features/bookmark/presentation/BookmarkWidget";
 import { FeedWidget } from "@/features/feed/presentation/FeedWidget";
 import { GithubWidget } from "@/features/github/presentation/GithubWidget";
+import { HackerNewsWidget } from "@/features/hackernews/presentation/HackerNewsWidget";
 import { memo } from "react";
 
 interface WidgetComponentProps {
@@ -29,6 +30,8 @@ export const Widget = memo(function Widget({ widgetConfig }: WidgetComponentProp
 				return <FeedWidget config={widgetConfig} />;
 			case "github":
 				return <GithubWidget config={widgetConfig} />;
+			case "hackernews":
+				return <HackerNewsWidget config={widgetConfig} />;
 		}
 	})();
 

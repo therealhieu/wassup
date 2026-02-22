@@ -1,10 +1,6 @@
 "use client";
 
-import {
-    DndContext,
-    closestCenter,
-    type DragEndEvent,
-} from "@dnd-kit/core";
+import { useDroppable } from "@dnd-kit/core";
 import {
     SortableContext,
     verticalListSortingStrategy,
@@ -15,52 +11,40 @@ import type { ColumnConfig, WidgetConfig } from "@/infrastructure/config.schemas
 import { WidgetCard } from "./WidgetCard";
 
 interface EditableColumnProps {
+    columnId: string;
+    widgetIds: string[];
     columnConfig: ColumnConfig;
     onAddWidget: () => void;
     onEditWidget: (index: number) => void;
     onRemoveWidget: (index: number) => void;
-    onReorderWidget: (fromIndex: number, toIndex: number) => void;
 }
 
 export function EditableColumn({
+    columnId,
+    widgetIds,
     columnConfig,
     onAddWidget,
     onEditWidget,
     onRemoveWidget,
-    onReorderWidget,
 }: EditableColumnProps) {
-    const widgetIds = columnConfig.widgets.map(
-        (w: WidgetConfig, i: number) => `${w.type}-${i}`,
-    );
-
-    const handleDragEnd = (event: DragEndEvent) => {
-        const { active, over } = event;
-        if (!over || active.id === over.id) return;
-        const from = widgetIds.indexOf(active.id as string);
-        const to = widgetIds.indexOf(over.id as string);
-        if (from !== -1 && to !== -1) {
-            onReorderWidget(from, to);
-        }
-    };
+    const { setNodeRef } = useDroppable({ id: columnId });
 
     return (
-        <Box sx={{ minHeight: 100 }}>
-            <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCenter}>
-                <SortableContext
-                    items={widgetIds}
-                    strategy={verticalListSortingStrategy}
-                >
-                    {columnConfig.widgets.map((widget: WidgetConfig, idx: number) => (
-                        <WidgetCard
-                            key={widgetIds[idx]}
-                            id={widgetIds[idx]}
-                            config={widget}
-                            onEdit={() => onEditWidget(idx)}
-                            onDelete={() => onRemoveWidget(idx)}
-                        />
-                    ))}
-                </SortableContext>
-            </DndContext>
+        <Box ref={setNodeRef} sx={{ minHeight: 100 }}>
+            <SortableContext
+                items={widgetIds}
+                strategy={verticalListSortingStrategy}
+            >
+                {columnConfig.widgets.map((widget: WidgetConfig, idx: number) => (
+                    <WidgetCard
+                        key={widgetIds[idx]}
+                        id={widgetIds[idx]}
+                        config={widget}
+                        onEdit={() => onEditWidget(idx)}
+                        onDelete={() => onRemoveWidget(idx)}
+                    />
+                ))}
+            </SortableContext>
             <Button
                 fullWidth
                 variant="outlined"

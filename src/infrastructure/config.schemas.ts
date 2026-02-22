@@ -28,6 +28,10 @@ import {
 	GithubWidgetConfig,
 	GithubWidgetConfigSchema,
 } from "@/features/github/infrastructure/config.schemas";
+import {
+	HackerNewsWidgetConfig,
+	HackerNewsWidgetConfigSchema,
+} from "@/features/hackernews/infrastructure/config.schemas";
 
 export const WidgetConfigSchema = z.lazy(() =>
 	z.union([
@@ -38,6 +42,7 @@ export const WidgetConfigSchema = z.lazy(() =>
 		BookmarkWidgetConfigSchema,
 		FeedWidgetConfigSchema,
 		GithubWidgetConfigSchema,
+		HackerNewsWidgetConfigSchema,
 	])
 );
 
@@ -48,7 +53,8 @@ export type WidgetConfig =
 	| YoutubeWidgetConfig
 	| BookmarkWidgetConfig
 	| FeedWidgetConfig
-	| GithubWidgetConfig;
+	| GithubWidgetConfig
+	| HackerNewsWidgetConfig;
 
 export const ColumnConfigSchema = z
 	.object({

@@ -130,6 +130,7 @@ function renderMockPreview(config: WidgetConfig): ReactElement | null {
         case "bookmark":
             return <BookmarkWidgetInner config={config} />;
         case "github":
+        case "hackernews":
         case "tabs":
             return (
                 <Alert severity="info" sx={{ mt: 1 }}>

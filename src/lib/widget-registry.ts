@@ -5,6 +5,7 @@ import { YoutubeWidgetConfigSchema } from "@/features/youtube/infrastructure/con
 import { FeedWidgetConfigSchema } from "@/features/feed/infrastructure/config.schemas";
 import { BookmarkWidgetConfigSchema } from "@/features/bookmark/infrastructure/config.schemas";
 import { GithubWidgetConfigSchema } from "@/features/github/infrastructure/config.schemas";
+import { HackerNewsWidgetConfigSchema } from "@/features/hackernews/infrastructure/config.schemas";
 import { TabsWidgetConfigSchema } from "@/features/tabs/infrastructure/config.schemas";
 import { WidgetConfig } from "@/infrastructure/config.schemas";
 
@@ -84,6 +85,8 @@ export function getWidgetSummary(config: WidgetConfig): string {
 			return config.language ?? "All languages";
 		case "tabs":
 			return `${config.labels.length} tab${config.labels.length !== 1 ? "s" : ""}`;
+		case "hackernews":
+			return config.query ?? `${config.sort} stories`;
 	}
 }
 
@@ -317,6 +320,42 @@ export const WIDGET_REGISTRY: Record<string, WidgetTypeRegistryEntry> = {
 				name: "tabs",
 				label: "Tab Widgets",
 				type: "nested-widget",
+			},
+		],
+	},
+	hackernews: {
+		type: "hackernews",
+		label: "Hacker News",
+		schema: HackerNewsWidgetConfigSchema,
+		fields: [
+			{
+				name: "sort",
+				label: "Sort",
+				type: "select",
+				options: ["top", "best", "new", "ask", "show"],
+				defaultValue: "top",
+			},
+			{
+				name: "query",
+				label: "Search Query",
+				type: "text",
+				placeholder: "rust OR llm OR kubernetes",
+				helpText:
+					"Optional. Filter stories by topic (supports AND/OR).",
+			},
+			{
+				name: "limit",
+				label: "Limit",
+				type: "number",
+				min: 1,
+				max: 30,
+				defaultValue: 10,
+			},
+			{
+				name: "hideTitle",
+				label: "Hide Title",
+				type: "boolean",
+				defaultValue: false,
 			},
 		],
 	},

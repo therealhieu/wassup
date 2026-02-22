@@ -181,3 +181,29 @@ Container widget that renders other widgets in a tab switcher.
 |-------|------|---------|-------|
 | `labels` | string[] | *required* | Tab header text |
 | `tabs` | widget[] | *required* | Must match `labels` length |
+
+---
+
+## `hackernews`
+
+Displays stories from Hacker News, optionally filtered by topic.
+
+**Data source:** Firebase HN API (global feeds) + Algolia HN Search API (topic search). Both free, no key required.
+
+```yaml
+- type: hackernews
+  sort: top
+  limit: 15
+  query: "rust OR llm"
+  hideTitle: false
+```
+
+| Field | Type | Default | Notes |
+|-------|------|---------|-------|
+| `sort` | `"top"` \| `"best"` \| `"new"` \| `"ask"` \| `"show"` | `"top"` | Feed type |
+| `query` | string | — | Optional topic filter (supports AND/OR) |
+| `limit` | number | `10` | Max 30 |
+| `hideTitle` | boolean | `false` | Useful inside tabs |
+
+When `query` is absent, fetches from Firebase global feeds. When present, uses Algolia full-text search.
+
