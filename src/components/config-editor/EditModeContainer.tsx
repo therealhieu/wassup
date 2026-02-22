@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
     Box,
     Button,
@@ -72,6 +72,13 @@ export function EditModeContainer({ onExitEditMode, initialPath }: EditModeConta
         return idx >= 0 ? idx : 0;
     });
     const [error, setError] = useState<string | null>(null);
+
+    // Sync draft when preset changes
+    useEffect(() => {
+        setDraftPages(config.ui.pages);
+        setActivePageIndex(0);
+        setError(null);
+    }, [activePresetId]); // eslint-disable-line react-hooks/exhaustive-deps
 
     // Widget form dialog state
     const [widgetDialogOpen, setWidgetDialogOpen] = useState(false);
