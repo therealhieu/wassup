@@ -45,6 +45,12 @@ const VALID_APP_STATE = {
 	],
 };
 
+const VALID_HEADERS = {
+	"Content-Type": "application/json",
+	"Origin": "http://localhost",
+	"Host": "localhost",
+};
+
 // ── Tests ────────────────────────────────────────────────────────────────────
 
 describe("GET /api/config", () => {
@@ -123,7 +129,7 @@ describe("PUT /api/config", () => {
 		const request = new Request("http://localhost/api/config", {
 			method: "PUT",
 			body: JSON.stringify({ state: { invalid: true } }),
-			headers: { "Content-Type": "application/json" },
+			headers: VALID_HEADERS,
 		});
 		const response = await PUT(request);
 
@@ -147,7 +153,7 @@ describe("PUT /api/config", () => {
 		const request = new Request("http://localhost/api/config", {
 			method: "PUT",
 			body: JSON.stringify({ state: VALID_APP_STATE }),
-			headers: { "Content-Type": "application/json" },
+			headers: VALID_HEADERS,
 		});
 		const response = await PUT(request);
 
@@ -160,5 +166,27 @@ describe("PUT /api/config", () => {
 				create: expect.objectContaining({ userId: "user-1" }),
 			}),
 		);
+	});
+
+	it("should return 403 when Origin does not match Host (CSRF)", async () => {
+		mockAuth.mockResolvedValue({
+			user: { id: "user-1" },
+			expires: "2099-01-01",
+		} as never);
+
+		const request = new Request("http://localhost/api/config", {
+			method: "PUT",
+			body: JSON.stringify({ state: VALID_APP_STATE }),
+			headers: {
+				"Content-Type": "application/json",
+				"Origin": "http://evil.com",
+				"Host": "localhost",
+			},
+		});
+		const response = await PUT(request);
+
+		expect(response.status).toBe(403);
+		const body = await response.json();
+		expect(body.error).toBe("CSRF validation failed");
 	});
 });

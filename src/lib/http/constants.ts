@@ -16,11 +16,6 @@ export const HEADERS = {
   JSON: {
     'Content-Type': 'application/json',
   },
-  CORS: {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-  },
   NO_CACHE: {
     'Cache-Control': 'no-cache, no-store, must-revalidate',
     'Pragma': 'no-cache',
@@ -52,7 +47,12 @@ export const HEADERS = {
     'Sec-Ch-Ua-Mobile': '?0',
     'Sec-Ch-Ua-Platform': '"macOS"',
   },
-} as const;
+  CORS: {
+    'Access-Control-Allow-Origin': process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+  },
+} satisfies Record<string, Record<string, string>>;
 
 /**
  * User agents for different scenarios
