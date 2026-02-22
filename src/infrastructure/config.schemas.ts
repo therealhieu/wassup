@@ -24,6 +24,10 @@ import {
 	FeedWidgetConfig,
 	FeedWidgetConfigSchema,
 } from "@/features/feed/infrastructure/config.schemas";
+import {
+	GithubWidgetConfig,
+	GithubWidgetConfigSchema,
+} from "@/features/github/infrastructure/config.schemas";
 
 export const WidgetConfigSchema = z.lazy(() =>
 	z.union([
@@ -33,6 +37,7 @@ export const WidgetConfigSchema = z.lazy(() =>
 		YoutubeWidgetConfigSchema,
 		BookmarkWidgetConfigSchema,
 		FeedWidgetConfigSchema,
+		GithubWidgetConfigSchema,
 	])
 );
 
@@ -42,7 +47,8 @@ export type WidgetConfig =
 	| RedditWidgetConfig
 	| YoutubeWidgetConfig
 	| BookmarkWidgetConfig
-	| FeedWidgetConfig;
+	| FeedWidgetConfig
+	| GithubWidgetConfig;
 
 export const ColumnConfigSchema = z
 	.object({

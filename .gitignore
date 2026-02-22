@@ -49,3 +49,4 @@ resources/geonames/*
 .serena/cache
 dev.log
 .cursor
+.env*

@@ -114,6 +114,30 @@ const WIDGET_DOCS: WidgetDoc[] = [
         ],
     },
     {
+        title: "GitHub Trending",
+        example: `- type: github
+  language: python
+  topics:
+    - llm
+    - ai-agents
+  createdAfter: "2024-01-01"
+  dateRange: 90d
+  minStars: 1000
+  maxStars: 50000
+  limit: 30`,
+        fields: [
+            { name: "language", type: "string", note: "filter by language" },
+            { name: "topics", type: "string[]", note: "OR-matched topics" },
+            { name: "createdAfter", type: "string", defaultValue: "2024-01-01", note: "YYYY-MM-DD" },
+            { name: "dateRange", type: '"7d" | "30d" | "90d"', defaultValue: "90d", note: "velocity window" },
+            { name: "limit", type: "number", defaultValue: "25", note: "max 50" },
+            { name: "minStars", type: "number", note: "min star count filter" },
+            { name: "maxStars", type: "number", note: "max star count filter" },
+            { name: "sort.field", type: '"stars" | "velocity" | "forks" | "createdAt"', defaultValue: "velocity" },
+            { name: "sort.direction", type: '"asc" | "desc"', defaultValue: "desc" },
+        ],
+    },
+    {
         title: "Bookmark",
         example: `- type: bookmark
   title: Bookmarks

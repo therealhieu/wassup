@@ -74,7 +74,13 @@ export const FeedItem = memo(({
 							title={
 								<Typography
 									variant={isMobile ? "body1" : "h6"}
-									noWrap
+									sx={{
+										overflow: "hidden",
+										textOverflow: "ellipsis",
+										display: "-webkit-box",
+										WebkitLineClamp: 2,
+										WebkitBoxOrient: "vertical",
+									}}
 								>
 									{title}
 								</Typography>

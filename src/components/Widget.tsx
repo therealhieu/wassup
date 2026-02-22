@@ -5,6 +5,7 @@ import { YoutubeWidget } from "@/features/youtube/presentation/YoutubeWidget";
 import { WidgetConfig } from "@/infrastructure/config.schemas";
 import { BookmarkWidget } from "@/features/bookmark/presentation/BookmarkWidget";
 import { FeedWidget } from "@/features/feed/presentation/FeedWidget";
+import { GithubWidget } from "@/features/github/presentation/GithubWidget";
 
 interface WidgetComponentProps {
 	widgetConfig: WidgetConfig;
@@ -25,6 +26,8 @@ export function Widget({ widgetConfig }: WidgetComponentProps) {
 				return <BookmarkWidget config={widgetConfig} />;
 			case "feed":
 				return <FeedWidget config={widgetConfig} />;
+			case "github":
+				return <GithubWidget config={widgetConfig} />;
 		}
 	})();
 

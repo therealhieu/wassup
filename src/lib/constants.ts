@@ -139,8 +139,31 @@ export const DEFAULT_CONFIG: AppConfig = AppConfigSchema.parse({
 				],
 			},
 			{
-				title: "Sports",
-				path: "/sports",
+				title: "AI",
+				path: "/ai",
+				columns: [
+					{
+						size: 12,
+						widgets: [
+							{
+								type: "github",
+								topics: [
+									"llm",
+									"ai-agents",
+									"rag",
+									"machine-learning",
+								],
+								createdAfter: "2024-01-01",
+								dateRange: "90d",
+								limit: 30,
+							},
+						],
+					},
+				],
+			},
+			{
+			title: "Sports",
+			path: "/sports",
 				columns: [
 					{
 						size: 2,

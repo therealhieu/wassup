@@ -7,6 +7,7 @@ import { getDataKey } from "@/lib/utils";
 import { fetchRedditWidgetProps } from "@/features/reddit/services/reddit.actions";
 import { fetchYoutubeWidgetProps } from "@/features/youtube/services/youtube.actions";
 import { fetchFeedWidgetProps } from "@/features/feed/services/rss.actions";
+import { fetchGithubWidgetProps } from "@/features/github/services/github.actions";
 
 // Record keyed by getDataKey(widgetConfig) → fetched widget props
 type WidgetDataRecord = Record<string, unknown>;
@@ -36,6 +37,8 @@ export async function fetchTabsWidgetProps(
 			case "bookmark":
 				// Static — no data to fetch
 				return null;
+			case "github":
+				return [key, await fetchGithubWidgetProps(tab)];
 			default:
 				return null;
 		}

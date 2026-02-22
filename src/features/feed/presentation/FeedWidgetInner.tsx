@@ -16,6 +16,9 @@ const CHIP_COLORS = [
 	"success",
 ] as const;
 
+/** Below this width (px), thumbnails are hidden to save space */
+const THUMBNAIL_MIN_WIDTH = 400;
+
 export interface FeedWidgetInnerProps {
 	config: FeedWidgetConfig;
 	feeds: Feed[];
@@ -25,6 +28,20 @@ export const FeedWidgetInner = ({ config, feeds }: FeedWidgetInnerProps) => {
 	const sources = config.urls.map((url) => getSourceFromUrl(url));
 	const [selectedSource, setSelectedSource] = useState<string | null>(null);
 	const feedsContainerRef = useRef<HTMLDivElement>(null);
+	const widgetRef = useRef<HTMLDivElement>(null);
+	const [isCompact, setIsCompact] = useState(false);
+
+	// Track container width to decide whether to show thumbnails
+	useEffect(() => {
+		const el = widgetRef.current;
+		if (!el) return;
+
+		const observer = new ResizeObserver(([entry]) => {
+			setIsCompact(entry.contentRect.width < THUMBNAIL_MIN_WIDTH);
+		});
+		observer.observe(el);
+		return () => observer.disconnect();
+	}, []);
 
 	// Collect URLs missing thumbnails for a single batched fetch
 	const missingThumbnailUrls = useMemo(
@@ -35,19 +52,20 @@ export const FeedWidgetInner = ({ config, feeds }: FeedWidgetInnerProps) => {
 	const { data: resolvedThumbnails } = useQuery({
 		queryKey: ["thumbnails", ...missingThumbnailUrls],
 		queryFn: () => fetchThumbnailUrls(missingThumbnailUrls),
-		enabled: missingThumbnailUrls.length > 0,
+		enabled: missingThumbnailUrls.length > 0 && !isCompact,
 		staleTime: 1000 * 60 * 60, // 1 hour — matches server-side thumbnail cache
 	});
 
-	// Merge embedded + lazily resolved thumbnails
+	// Merge embedded + lazily resolved thumbnails (skip when compact)
 	const enrichedFeeds: Feed[] = useMemo(
 		() =>
 			feeds.map((feed) => ({
 				...feed,
-				thumbnailUrl:
-					feed.thumbnailUrl ?? resolvedThumbnails?.[feed.feedUrl] ?? undefined,
+				thumbnailUrl: isCompact
+					? undefined
+					: (feed.thumbnailUrl ?? resolvedThumbnails?.[feed.feedUrl] ?? undefined),
 			})),
-		[feeds, resolvedThumbnails]
+		[feeds, resolvedThumbnails, isCompact]
 	);
 
 	const filteredFeeds = selectedSource
@@ -76,7 +94,7 @@ export const FeedWidgetInner = ({ config, feeds }: FeedWidgetInnerProps) => {
 	}, [filteredFeeds.length, config.scrollAfterRow]);
 
 	return (
-		<Stack spacing={1} sx={{ boxShadow: 1, padding: 1 }}>
+		<Stack ref={widgetRef} spacing={1} sx={{ boxShadow: 1, padding: 1 }}>
 			{config.showTitle && (
 				<Typography variant="h5" gutterBottom>
 					Feeds
