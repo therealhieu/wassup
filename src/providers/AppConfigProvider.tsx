@@ -241,14 +241,14 @@ export function AppConfigProvider({ children }: { children: ReactNode }) {
 		} else {
 			isHydrated.current = true;
 		}
-	}, [status, userId, isAuthenticated, encryption.hydrateFromServer]);
+	}, [status, userId, isAuthenticated, encryption]);
 
 	// Clean up passphrase cache on sign-out
 	useEffect(() => {
 		if (status === "unauthenticated" && encryption.passphrase) {
 			encryption.clearPassphrase();
 		}
-	}, [status, encryption.passphrase, encryption.clearPassphrase]);
+	}, [status, encryption]);
 
 	// Passphrase submit handler
 	const handlePassphraseSubmit = useCallback(
@@ -260,7 +260,7 @@ export function AppConfigProvider({ children }: { children: ReactNode }) {
 				isHydrated,
 			);
 		},
-		[encryption.handlePassphraseSubmit, userId],
+		[encryption, userId],
 	);
 
 	// Write-through: localStorage (always) + encrypted server sync (if authed)

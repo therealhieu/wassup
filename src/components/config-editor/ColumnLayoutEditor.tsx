@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Box, TextField, Chip, Stack, FormHelperText } from "@mui/material";
 
 const LAYOUT_PRESETS = ["12", "6-6", "4-4-4", "3-6-3", "2-8-2"];
@@ -20,14 +20,18 @@ interface ColumnLayoutEditorProps {
 }
 
 export function ColumnLayoutEditor({ sizes, onChange }: ColumnLayoutEditorProps) {
-    const [inputValue, setInputValue] = useState(sizes.join("-"));
+    const sizesKey = sizes.join("-");
+    const [inputValue, setInputValue] = useState(sizesKey);
     const [error, setError] = useState<string | null>(null);
 
     // Sync input when parent sizes change (e.g. switching pages)
-    useEffect(() => {
-        setInputValue(sizes.join("-"));
+    // Uses React's "adjust state during render" pattern with state (not refs)
+    const [prevSizesKey, setPrevSizesKey] = useState(sizesKey);
+    if (prevSizesKey !== sizesKey) {
+        setPrevSizesKey(sizesKey);
+        setInputValue(sizesKey);
         setError(null);
-    }, [sizes]);
+    }
 
     // Presets are hardcoded and known-valid, so we skip validation for snappier UX.
     const applyLayout = (layout: string) => {

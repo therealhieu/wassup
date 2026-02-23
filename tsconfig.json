@@ -37,7 +37,6 @@
   ],
   "exclude": [
     "node_modules",
-    "src/components/Widget.tsx",
     "**/*.test.ts",
     "**/*.test.tsx",
     "**/tests/**/*",

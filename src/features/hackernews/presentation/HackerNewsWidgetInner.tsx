@@ -33,7 +33,7 @@ function timeAgo(unixSeconds: number): string {
 }
 
 export const HackerNewsWidgetInner = memo(
-    ({ config, stories }: HackerNewsWidgetInnerProps) => {
+    function HackerNewsWidgetInner({ config, stories }: HackerNewsWidgetInnerProps) {
         return (
             <Card>
                 {!config.hideTitle && (

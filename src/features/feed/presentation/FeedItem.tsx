@@ -15,7 +15,7 @@ import {
 
 export type FeedItemProps = Feed;
 
-export const FeedItem = memo(({
+export const FeedItem = memo(function FeedItem({
 	title,
 	feedUrl,
 	thumbnailUrl,
@@ -24,7 +24,7 @@ export const FeedItem = memo(({
 	categories,
 	source,
 	author,
-}: FeedItemProps) => {
+}: FeedItemProps) {
 	const theme = useTheme();
 	const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 	const formattedDate = new Date(publishedAt).toISOString().split("T")[0];

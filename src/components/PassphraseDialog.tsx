@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import {
     Dialog,
     DialogTitle,
@@ -29,20 +29,46 @@ export function PassphraseDialog({
     error,
     onSubmit,
 }: PassphraseDialogProps) {
+    // Track open transitions to generate a remount key (state-only, no refs)
+    const [openCount, setOpenCount] = useState(0);
+    const [wasOpen, setWasOpen] = useState(false);
+    if (open && !wasOpen) {
+        setOpenCount((c) => c + 1);
+    }
+    if (wasOpen !== open) {
+        setWasOpen(open);
+    }
+
+    return (
+        <Dialog
+            open={open}
+            disableEscapeKeyDown
+            onClose={(_e, reason) => {
+                if (reason === "backdropClick") return;
+            }}
+            maxWidth="xs"
+            fullWidth
+        >
+            <PassphraseForm
+                key={openCount}
+                isNewUser={isNewUser}
+                error={error}
+                onSubmit={onSubmit}
+            />
+        </Dialog>
+    );
+}
+
+function PassphraseForm({
+    isNewUser,
+    error,
+    onSubmit,
+}: Omit<PassphraseDialogProps, "open">) {
     const [passphrase, setPassphrase] = useState("");
     const [confirmPassphrase, setConfirmPassphrase] = useState("");
     const [localError, setLocalError] = useState<string | undefined>();
 
     const displayError = error || localError;
-
-    // Reset form state when dialog opens
-    useEffect(() => {
-        if (open) {
-            setPassphrase("");
-            setConfirmPassphrase("");
-            setLocalError(undefined);
-        }
-    }, [open]);
 
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
@@ -64,17 +90,7 @@ export function PassphraseDialog({
     }
 
     return (
-        <Dialog
-            open={open}
-            disableEscapeKeyDown
-            onClose={(_e, reason) => {
-                // Prevent closing via backdrop click
-                if (reason === "backdropClick") return;
-            }}
-            maxWidth="xs"
-            fullWidth
-            PaperProps={{ component: "form", onSubmit: handleSubmit }}
-        >
+        <form onSubmit={handleSubmit}>
             <DialogTitle
                 sx={{
                     display: "flex",
@@ -154,6 +170,6 @@ export function PassphraseDialog({
                     {isNewUser ? "Set Passphrase" : "Unlock"}
                 </Button>
             </DialogActions>
-        </Dialog>
+        </form>
     );
 }

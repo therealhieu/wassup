@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import {
     Dialog,
     DialogTitle,
@@ -37,6 +37,33 @@ export function WidgetFormDialog({
     onSubmit,
     onClose,
 }: WidgetFormDialogProps) {
+    // Track open transitions to generate a remount key (state-only, no refs)
+    const [openCount, setOpenCount] = useState(0);
+    const [wasOpen, setWasOpen] = useState(false);
+    if (open && !wasOpen) {
+        setOpenCount((c) => c + 1);
+    }
+    if (wasOpen !== open) {
+        setWasOpen(open);
+    }
+
+    return (
+        <Dialog open={open} maxWidth="lg" fullWidth onClose={onClose}>
+            <WidgetFormDialogInner
+                key={openCount}
+                initialValue={initialValue}
+                onSubmit={onSubmit}
+                onClose={onClose}
+            />
+        </Dialog>
+    );
+}
+
+function WidgetFormDialogInner({
+    initialValue,
+    onSubmit,
+    onClose,
+}: Omit<WidgetFormDialogProps, "open">) {
     const [selectedType, setSelectedType] = useState(
         initialValue?.type ?? "reddit",
     );
@@ -53,28 +80,16 @@ export function WidgetFormDialog({
 
     const [errors, setErrors] = useState<ZodIssue[]>([]);
 
-    // Reset when dialog opens/closes
-    useEffect(() => {
-        if (open) {
-            const type = initialValue?.type ?? "reddit";
-            setSelectedType(type);
-            if (initialValue) {
-                const { type: _, ...rest } = initialValue;
-                setFormValues(rest as Record<string, unknown>);
-            } else {
-                setFormValues(buildDefaults(WIDGET_REGISTRY[type].fields));
-            }
-            setErrors([]);
-        }
-    }, [open, initialValue]);
-
     // Reset form values when widget type changes (add mode only)
-    useEffect(() => {
+    // Uses React's "adjust state during render" pattern
+    const [prevType, setPrevType] = useState(selectedType);
+    if (prevType !== selectedType) {
+        setPrevType(selectedType);
         if (!initialValue) {
             setFormValues(buildDefaults(WIDGET_REGISTRY[selectedType].fields));
             setErrors([]);
         }
-    }, [selectedType, initialValue]);
+    }
 
     const registryEntry = WIDGET_REGISTRY[selectedType];
 
@@ -94,7 +109,7 @@ export function WidgetFormDialog({
     );
 
     return (
-        <Dialog open={open} maxWidth="lg" fullWidth onClose={onClose}>
+        <>
             <DialogTitle>
                 {initialValue ? "Edit Widget" : "Add Widget"}
             </DialogTitle>
@@ -147,6 +162,6 @@ export function WidgetFormDialog({
                     {initialValue ? "Save" : "Add Widget"}
                 </Button>
             </DialogActions>
-        </Dialog>
+        </>
     );
 }

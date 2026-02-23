@@ -18,6 +18,8 @@ const eslintConfig = defineConfig([
     "**/*.d.ts",
     "bun.lock",
     ".playwright/**",
+    "public/**/*.worker.js",
+    "src/generated/**",
   ]),
 ]);
 

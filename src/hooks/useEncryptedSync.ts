@@ -51,7 +51,7 @@ export function useEncryptedSync(): UseEncryptedSyncResult {
 
 	const clearPassphrase = useCallback(() => {
 		setPassphrase(null);
-		localStorage.removeItem(PASSPHRASE_CACHE_KEY);
+		sessionStorage.removeItem(PASSPHRASE_CACHE_KEY);
 		serverDataRef.current = null;
 	}, []);
 
@@ -79,7 +79,7 @@ export function useEncryptedSync(): UseEncryptedSyncResult {
 				dispatch({ type: "SET_STATE", payload: serverState });
 				saveToStorage(userId, serverState);
 				setPassphrase(pp);
-				localStorage.setItem(PASSPHRASE_CACHE_KEY, pp);
+				sessionStorage.setItem(PASSPHRASE_CACHE_KEY, pp);
 				serverDataRef.current = { encryptedData, salt };
 				isHydrated.current = true;
 				return true;
@@ -106,9 +106,9 @@ export function useEncryptedSync(): UseEncryptedSyncResult {
 				if (encryptedData && salt) {
 					serverDataRef.current = { encryptedData, salt };
 
-					// Try cached passphrase from localStorage (avoids re-prompting)
+					// Try cached passphrase from sessionStorage (avoids re-prompting within tab)
 					const cached =
-						localStorage.getItem(PASSPHRASE_CACHE_KEY);
+						sessionStorage.getItem(PASSPHRASE_CACHE_KEY);
 					if (cached) {
 						const ok = await tryDecrypt(
 							encryptedData,
@@ -119,7 +119,7 @@ export function useEncryptedSync(): UseEncryptedSyncResult {
 							isHydrated,
 						);
 						if (ok) return;
-						localStorage.removeItem(PASSPHRASE_CACHE_KEY);
+						sessionStorage.removeItem(PASSPHRASE_CACHE_KEY);
 					}
 
 					// No cached passphrase or it failed — prompt user
@@ -150,7 +150,7 @@ export function useEncryptedSync(): UseEncryptedSyncResult {
 		) => {
 			if (isNewEncryptionUser) {
 				setPassphrase(enteredPassphrase);
-				localStorage.setItem(
+				sessionStorage.setItem(
 					PASSPHRASE_CACHE_KEY,
 					enteredPassphrase,
 				);
@@ -172,7 +172,7 @@ export function useEncryptedSync(): UseEncryptedSyncResult {
 				dispatch({ type: "SET_STATE", payload: serverState });
 				saveToStorage(userId, serverState);
 				setPassphrase(enteredPassphrase);
-				localStorage.setItem(
+				sessionStorage.setItem(
 					PASSPHRASE_CACHE_KEY,
 					enteredPassphrase,
 				);

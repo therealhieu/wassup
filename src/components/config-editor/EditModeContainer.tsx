@@ -112,10 +112,11 @@ export function EditModeContainer({ onExitEditMode, initialPath }: EditModeConta
     });
     const [error, setError] = useState<string | null>(null);
 
-    // Sync draft when preset changes mid-edit (not on mount — useState handles that)
-    const prevPresetIdRef = useRef(activePresetId);
-    if (prevPresetIdRef.current !== activePresetId) {
-        prevPresetIdRef.current = activePresetId;
+    // Sync draft when preset changes mid-edit
+    // Uses React's "adjust state during render" pattern (state, not ref or effect)
+    const [prevPresetId, setPrevPresetId] = useState(activePresetId);
+    if (prevPresetId !== activePresetId) {
+        setPrevPresetId(activePresetId);
         setDraftPages(config.ui.pages);
         setActivePageIndex(0);
         setError(null);

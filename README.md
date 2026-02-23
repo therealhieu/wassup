@@ -7,7 +7,7 @@ A self-hosted personal dashboard that aggregates weather, Reddit, YouTube, RSS f
 ```bash
 bun install
 bunx prisma migrate dev   # Initialize SQLite database
-bun run dev                # → http://localhost:2506
+bun run dev                # → http://localhost:3000
 ```
 
 ## Tech Stack

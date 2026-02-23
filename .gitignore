@@ -43,6 +43,8 @@ next-env.d.ts
 .tmp
 
 *storybook.log
+debug-storybook.log
+storybook-static/
 
 resources/geonames/*
 .playwright

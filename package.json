@@ -31,7 +31,6 @@
     "@openmeteo/sdk": "^1.25.0",
     "@prisma/adapter-better-sqlite3": "^7.4.1",
     "@prisma/client": "^7.4.1",
-    "@rollup/rollup-darwin-x64": "4.58.0",
     "@tanstack/react-query": "^5.90.21",
     "adm-zip": "^0.5.16",
     "better-sqlite3": "^12.6.2",

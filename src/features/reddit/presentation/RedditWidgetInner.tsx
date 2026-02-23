@@ -13,10 +13,10 @@ export type RedditWidgetInnerProps = z.infer<
 	typeof RedditWidgetInnerPropsSchema
 >;
 
-export const RedditWidgetInner = memo(({
+export const RedditWidgetInner = memo(function RedditWidgetInner({
 	config,
 	posts,
-}: RedditWidgetInnerProps) => {
+}: RedditWidgetInnerProps) {
 	return (
 		<Card>
 			{!config.hideTitle && (

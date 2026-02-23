@@ -3,10 +3,9 @@ import {
 	AppConfigSchema,
 } from "@/infrastructure/config.schemas";
 
-// Kept as a separate export for personal reference — not included in SEED_PRESETS
-export const HIEU_PRESET: Preset = {
-	id: "hieu",
-	name: "Hieu's Preset",
+export const DATA_ENGINEERING_PRESET: Preset = {
+	id: "data-engineering",
+	name: "Data Engineering",
 	config: AppConfigSchema.parse({
 		ui: {
 			theme: "light",
@@ -16,11 +15,13 @@ export const HIEU_PRESET: Preset = {
 					path: "/",
 					columns: [
 						{
-							size: 2,
+							size: 3,
 							widgets: [
 								{
-									type: "weather",
-									location: "Ho Chi Minh City",
+									type: "hackernews",
+									sort: "top",
+									limit: 10,
+									query: "data engineering OR AI OR platform OR infrastructure",
 								},
 								{
 									type: "bookmark",
@@ -64,7 +65,7 @@ export const HIEU_PRESET: Preset = {
 							],
 						},
 						{
-							size: 7,
+							size: 6,
 							widgets: [
 								{
 									type: "tabs",
@@ -145,48 +146,77 @@ export const HIEU_PRESET: Preset = {
 					],
 				},
 				{
-					title: "AI",
-					path: "/ai",
+					title: "trends",
+					path: "/trends",
 					columns: [
 						{
 							size: 12,
 							widgets: [
-								{
-									type: "github",
-									topics: [
-										"llm",
-										"ai-agents",
-										"rag",
-										"machine-learning",
-									],
-									createdAfter: "2024-01-01",
-									dateRange: "90d",
-									limit: 30,
-								},
-							],
-						},
-					],
-				},
-				{
-					title: "Sports",
-					path: "/sports",
-					columns: [
-						{
-							size: 2,
-							widgets: [],
-						},
-						{
-							size: 7,
-							widgets: [
-								{
-									type: "youtube",
-									channels: [
-										"@skysportspremierleague",
-										"@chelseafc",
-										"@YounesTalksFootball",
-									],
-								},
-							],
+							{
+								type: "tabs",
+								labels: ["AI", "Data Engineering", "Rust","Platform", "Tools"],
+								tabs: [
+									{
+										type: "github",
+										topics: [
+											"llm",
+											"ai-agents",
+											"rag",
+											"machine-learning",
+										],
+										createdAfter: "2024-01-01",
+										dateRange: "90d",
+										limit: 30,
+									},
+									{
+										type: "github",
+										topics: [
+											"apache-spark",
+											"apache-kafka",
+											"apache-airflow",
+											"data-engineering",
+											"data"
+										],
+										createdAfter: "2024-01-01",
+										dateRange: "90d",
+										limit: 30,
+									},
+									{
+										type: "github",
+										topics: [
+											"rust",
+										],
+										createdAfter: "2024-01-01",
+										dateRange: "90d",
+										limit: 30,
+									},
+									{
+										type: "github",
+										topics: [
+											"kubernetes",
+											"terraform",
+											"platform-engineering",
+											"infrastructure-as-code",
+										],
+										createdAfter: "2024-01-01",
+										dateRange: "90d",
+										limit: 30,
+									},
+									{
+										type: "github",
+										topics: [
+											"cli",
+											"developer-tools",
+											"devops",
+											"command-line-tool",
+										],
+										createdAfter: "2024-01-01",
+										dateRange: "90d",
+										limit: 30,
+									},
+								],
+							},
+						],
 						},
 					],
 				},
@@ -344,6 +374,262 @@ export const SEED_PRESETS: Preset[] = [
 			},
 		}),
 	},
+	{
+		id: "data-science",
+		name: "Data Science",
+		config: AppConfigSchema.parse({
+			ui: {
+				theme: "dark",
+				pages: [
+					{
+						title: "Home",
+						path: "/",
+						columns: [
+							{
+								size: 3,
+								widgets: [
+									{
+										type: "bookmark",
+										title: "Data Science",
+										groups: [
+											{
+												title: "Fundamentals",
+												bookmarks: [
+													"https://seeing-theory.brown.edu",
+													"https://www.openintro.org/book/os/",
+													"https://www.khanacademy.org/math/statistics-probability",
+													"https://www.kaggle.com/learn",
+													"https://github.com/ossu/data-science",
+													 "https://github.com/PavelGrigoryevDS/awesome-data-analysis"
+												],
+											},
+											{
+												title: "Job Preparation",
+												bookmarks: [
+													"https://datalemur.com",
+													"https://www.stratascratch.com",
+													"https://www.interviewquery.com",
+													"https://www.tensortonic.com/problems",
+													"https://github.com/chiphuyen/machine-learning-systems-design",
+													"https://github.com/alexeygrigorev/data-science-interviews",
+													"https://github.com/kojino/120-Data-Science-Interview-Questions"
+												],
+											},
+											{
+												title: "Trends",
+												bookmarks: [
+													"https://paperswithcode.com",
+													"https://huggingface.co/papers",
+													"https://www.stateof.ai",
+													"https://github.com/academic/awesome-datascience",
+												],
+											},
+										],
+									},
+								],
+							},
+							{
+								size: 6,
+								widgets: [
+									{
+										type: "tabs",
+										labels: [
+											"r/datascience",
+											"r/MachineLearning",
+											"r/statistics",
+											"r/dataanalysis",
+											"r/dataisbeautiful",
+										],
+										tabs: [
+											{
+												type: "reddit",
+												subreddit: "datascience",
+												hideTitle: true,
+												sort: "hot",
+												limit: 5,
+											},
+											{
+												type: "reddit",
+												subreddit: "MachineLearning",
+												hideTitle: true,
+												sort: "hot",
+												limit: 5,
+											},
+											{
+												type: "reddit",
+												subreddit: "statistics",
+												hideTitle: true,
+												sort: "hot",
+												limit: 5,
+											},
+											{
+												type: "reddit",
+												subreddit: "dataanalysis",
+												hideTitle: true,
+												sort: "hot",
+												limit: 5,
+											},
+											{
+												type: "reddit",
+												subreddit: "dataisbeautiful",
+												hideTitle: true,
+												sort: "hot",
+												limit: 5,
+											},
+										],
+									},
+									{
+										type: "youtube",
+										channels: [
+											"@statquest",
+											"@3blue1brown",
+											"@AndrejKarpathy",
+											"@TwoMinutePapers",
+											"@AlexTheAnalyst",
+											"@LukeBarousse",
+										],
+									},
+								],
+							},
+							{
+								size: 3,
+								widgets: [
+									{
+										type: "feed",
+										limit: 12,
+										scrollAfterRow: 7,
+										urls: [
+											"https://towardsdatascience.com/feed",
+											"https://machinelearningmastery.com/feed/",
+											"https://simplystatistics.org/index.xml",
+											"https://flowingdata.com/feed",
+										],
+									},
+								],
+							},
+						],
+					},
+					{
+						title: "Research",
+						path: "/research",
+						columns: [
+							{
+								size: 5,
+								widgets: [
+									{
+										type: "hackernews",
+										sort: "top",
+										limit: 15,
+										query: "machine learning",
+									},
+									{
+										type: "hackernews",
+										sort: "show",
+										limit: 10,
+										query: "data science",
+									},
+								],
+							},
+							{
+								size: 7,
+								widgets: [
+									{
+										type: "tabs",
+										labels: [
+											"r/deeplearning",
+											"r/LanguageTechnology",
+											"r/kaggle",
+										],
+										tabs: [
+											{
+												type: "reddit",
+												subreddit: "deeplearning",
+												hideTitle: true,
+												sort: "hot",
+												limit: 8,
+											},
+											{
+												type: "reddit",
+												subreddit: "LanguageTechnology",
+												hideTitle: true,
+												sort: "hot",
+												limit: 8,
+											},
+											{
+												type: "reddit",
+												subreddit: "kaggle",
+												hideTitle: true,
+												sort: "hot",
+												limit: 8,
+											},
+										],
+									},
+								],
+							},
+						],
+					},
+					{
+						title: "Trends",
+						path: "/trends",
+						columns: [
+							{
+								size: 12,
+								widgets: [
+									{
+										type: "tabs",
+										labels: [
+											"ML / Deep Learning",
+											"Data Visualization",
+											"EDA / Statistics",
+										],
+										tabs: [
+											{
+												type: "github",
+												topics: [
+													"machine-learning",
+													"deep-learning",
+													"pytorch",
+													"transformers",
+												],
+												createdAfter: "2024-01-01",
+												dateRange: "90d",
+												limit: 20,
+											},
+											{
+												type: "github",
+												topics: [
+													"data-visualization",
+													"dashboard",
+													"streamlit",
+													"plotly",
+												],
+												createdAfter: "2024-01-01",
+												dateRange: "90d",
+												limit: 20,
+											},
+											{
+												type: "github",
+												topics: [
+													"exploratory-data-analysis",
+													"statistics",
+													"pandas",
+													"data-analysis",
+												],
+												createdAfter: "2024-01-01",
+												dateRange: "90d",
+												limit: 20,
+											},
+										],
+									},
+								],
+							},
+						],
+					},
+				],
+			},
+		}),
+	},
+	DATA_ENGINEERING_PRESET,
 	{
 		id: "blank",
 		name: "Blank",
