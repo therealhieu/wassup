@@ -40,6 +40,8 @@
     "**/*.test.ts",
     "**/*.test.tsx",
     "**/tests/**/*",
-    "src/lib/storage/tests/**/*"
+    "src/lib/storage/tests/**/*",
+    "e2e/**/*",
+    "playwright.config.ts"
   ]
 }

@@ -49,6 +49,8 @@ storybook-static/
 
 resources/geonames/*
 .playwright
+test-results/
+playwright-report/
 .serena/cache
 dev.log
 .cursor

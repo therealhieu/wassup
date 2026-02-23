@@ -213,7 +213,16 @@ export function AppConfigProvider({ children }: { children: ReactNode }) {
 	const isHydrated = useRef(false);
 
 	// Encryption hook
-	const encryption = useEncryptedSync();
+	const {
+		passphrase,
+		showPassphraseDialog,
+		isNewEncryptionUser,
+		passphraseError,
+		hydrateFromServer,
+		handlePassphraseSubmit: onPassphraseSubmit,
+		syncEncryptedState,
+		clearPassphrase,
+	} = useEncryptedSync();
 
 	// Derived: active preset's config
 	const activePreset = state.presets.find(
@@ -224,7 +233,7 @@ export function AppConfigProvider({ children }: { children: ReactNode }) {
 	// Debounced server sync — encrypts before sending
 	const syncToServer = useDebouncedCallback(
 		async (appState: AppState) => {
-			await encryption.syncEncryptedState(appState);
+			await syncEncryptedState(appState);
 		},
 		1000,
 	);
@@ -237,38 +246,38 @@ export function AppConfigProvider({ children }: { children: ReactNode }) {
 		dispatch({ type: "SET_STATE", payload: local });
 
 		if (isAuthenticated) {
-			encryption.hydrateFromServer(userId, dispatch, isHydrated);
+			hydrateFromServer(userId, dispatch, isHydrated);
 		} else {
 			isHydrated.current = true;
 		}
-	}, [status, userId, isAuthenticated, encryption]);
+	}, [status, userId, isAuthenticated, hydrateFromServer]);
 
 	// Clean up passphrase cache on sign-out
 	useEffect(() => {
-		if (status === "unauthenticated" && encryption.passphrase) {
-			encryption.clearPassphrase();
+		if (status === "unauthenticated" && passphrase) {
+			clearPassphrase();
 		}
-	}, [status, encryption]);
+	}, [status, passphrase, clearPassphrase]);
 
 	// Passphrase submit handler
 	const handlePassphraseSubmit = useCallback(
 		async (enteredPassphrase: string) => {
-			await encryption.handlePassphraseSubmit(
+			await onPassphraseSubmit(
 				enteredPassphrase,
 				userId,
 				dispatch,
 				isHydrated,
 			);
 		},
-		[encryption, userId],
+		[onPassphraseSubmit, userId],
 	);
 
 	// Write-through: localStorage (always) + encrypted server sync (if authed)
 	useEffect(() => {
 		if (!isHydrated.current) return;
 		saveToStorage(userId, state);
-		if (isAuthenticated && encryption.passphrase) syncToServer(state);
-	}, [state, userId, isAuthenticated, encryption.passphrase, syncToServer]);
+		if (isAuthenticated && passphrase) syncToServer(state);
+	}, [state, userId, isAuthenticated, passphrase, syncToServer]);
 
 	// Stable callbacks
 	const setConfig = useCallback(
@@ -343,9 +352,9 @@ export function AppConfigProvider({ children }: { children: ReactNode }) {
 	return (
 		<AppConfigContext.Provider value={value}>
 			<PassphraseDialog
-				open={encryption.showPassphraseDialog}
-				isNewUser={encryption.isNewEncryptionUser}
-				error={encryption.passphraseError}
+				open={showPassphraseDialog}
+				isNewUser={isNewEncryptionUser}
+				error={passphraseError}
 				onSubmit={handlePassphraseSubmit}
 			/>
 			{children}

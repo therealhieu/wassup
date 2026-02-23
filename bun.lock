@@ -42,6 +42,7 @@
       },
       "devDependencies": {
         "@chromatic-com/storybook": "^5.0.1",
+        "@playwright/test": "^1.58.2",
         "@storybook/addon-docs": "^10.2.10",
         "@storybook/addon-onboarding": "^10.2.10",
         "@storybook/addon-vitest": "10.2.10",
@@ -405,6 +406,8 @@
     "@openmeteo/sdk": ["@openmeteo/sdk@1.25.0", "", { "dependencies": { "flatbuffers": "^25.9.23" } }, "sha512-tpX2d/HOPn95NIU+/IU1VFFzOM3m/PqSpPSJnWuGQGEW5GogB50xUOUMrsD2N/6LCMy12e3cZEQd6c3Gb0lmtA=="],
 
     "@panva/hkdf": ["@panva/hkdf@1.2.1", "", {}, "sha512-6oclG6Y3PiDFcoyk8srjLfVKyMfVCKJ27JwNPViuXziFpmdz+MZnZN/aKY0JGXgYuO/VghU0jcOAZgWXZ1Dmrw=="],
+
+    "@playwright/test": ["@playwright/test@1.58.2", "", { "dependencies": { "playwright": "1.58.2" }, "bin": { "playwright": "cli.js" } }, "sha512-akea+6bHYBBfA9uQqSYmlJXn61cTa+jbO87xVLCWbTqbWadRVmhxlXATaOjOgcBaWU4ePo0wB41KMFv3o35IXA=="],
 
     "@polka/url": ["@polka/url@1.0.0-next.29", "", {}, "sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww=="],
 

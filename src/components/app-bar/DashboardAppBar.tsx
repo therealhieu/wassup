@@ -38,6 +38,7 @@ export const DashboardAppBar = () => {
 								onClick={enterEditMode}
 								color="inherit"
 								title="Edit dashboard"
+								data-testid="edit-mode-toggle"
 							>
 								<EditIcon />
 							</IconButton>

@@ -10,7 +10,7 @@
     "test": "vitest",
     "test:unit": "vitest --project unit",
     "test:integration": "vitest --project integration",
-    "test:e2e": "vitest --project e2e",
+    "test:e2e": "playwright test",
     "test:coverage": "vitest --coverage",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
@@ -55,6 +55,7 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.0.1",
+    "@playwright/test": "^1.58.2",
     "@storybook/addon-docs": "^10.2.10",
     "@storybook/addon-onboarding": "^10.2.10",
     "@storybook/addon-vitest": "10.2.10",

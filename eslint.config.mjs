@@ -20,6 +20,7 @@ const eslintConfig = defineConfig([
     ".playwright/**",
     "public/**/*.worker.js",
     "src/generated/**",
+    "e2e/**",
   ]),
 ]);
 

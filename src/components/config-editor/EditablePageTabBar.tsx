@@ -88,7 +88,7 @@ export function EditablePageTabBar({
                     ))}
                 </SortableContext>
             </DndContext>
-            <IconButton size="small" onClick={onAddPage} color="primary">
+            <IconButton size="small" onClick={onAddPage} color="primary" data-testid="add-page">
                 <AddIcon />
             </IconButton>
         </Box>
@@ -178,6 +178,7 @@ function SortablePageTab({
                 setEditValue(page.title);
                 setIsEditing(true);
             }}
+            data-testid={`page-tab-${id}`}
             sx={{
                 display: "flex",
                 alignItems: "center",

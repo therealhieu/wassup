@@ -456,8 +456,8 @@ export function EditModeContainer({ onExitEditMode, initialPath }: EditModeConta
                     onReorderPage={handleReorderPage}
                 />
                 <Box sx={{ display: "flex", gap: 1, flexShrink: 0 }}>
-                    <Button onClick={handleCancel}>Cancel</Button>
-                    <Button variant="contained" onClick={handleSave}>
+                    <Button onClick={handleCancel} data-testid="edit-cancel">Cancel</Button>
+                    <Button variant="contained" onClick={handleSave} data-testid="edit-save">
                         Save
                     </Button>
                 </Box>

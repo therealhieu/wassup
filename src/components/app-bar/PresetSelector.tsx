@@ -328,6 +328,7 @@ export function PresetSelector() {
                     fontSize: "0.875rem",
                 }}
                 size="small"
+                data-testid="preset-selector"
             >
                 {activePreset?.name ?? "Select Preset"}
             </Button>

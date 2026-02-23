@@ -15,6 +15,7 @@ export function LoginButton() {
                 size="small"
                 onClick={() => signIn()}
                 sx={{ color: "text.primary", borderColor: "text.secondary" }}
+                data-testid="sign-in"
             >
                 Sign In
             </Button>
