@@ -14,11 +14,7 @@ const nextConfig: NextConfig = {
 	output: "standalone",
 	serverExternalPackages: ["better-sqlite3"],
 	images: {
-		remotePatterns: [
-			{ protocol: "https", hostname: "avatars.githubusercontent.com" },
-			{ protocol: "https", hostname: "**.ytimg.com" },
-			{ protocol: "https", hostname: "openweathermap.org" },
-		],
+		remotePatterns: [{ protocol: "https", hostname: "**" }],
 	},
 	async headers() {
 		return [{ source: "/:path*", headers: securityHeaders }];

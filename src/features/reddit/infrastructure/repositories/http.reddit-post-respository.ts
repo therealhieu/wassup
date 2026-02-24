@@ -10,7 +10,9 @@ export class HttpRedditPostRepository implements RedditPostRepository {
 		const { subreddit, sort, limit } = params;
 		const url = `${this.BASE_URL}/${subreddit}/${sort}.json?limit=${limit}`;
 
-		const response = await fetch(url);
+		const response = await fetch(url, {
+			headers: { "User-Agent": "wassup-dashboard/1.0" },
+		});
 		if (!response.ok) {
 			throw new Error(`Reddit fetch failed: ${response.status} ${response.statusText}`);
 		}
