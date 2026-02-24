@@ -1,8 +1,7 @@
 import { test, expect } from "./fixtures/auth";
+import type { Page } from "@playwright/test";
 
-async function enterEditMode(
-	page: import("@playwright/test").Page,
-) {
+async function enterEditMode(page: Page) {
 	await page.getByTestId("edit-mode-toggle").click();
 	await expect(page.getByTestId("edit-save")).toBeVisible();
 }
@@ -22,16 +21,13 @@ test.describe("Page Tab Navigation", () => {
 		await enterEditMode(page);
 		const tabs = page.locator("[data-testid^='page-tab-']");
 		const count = await tabs.count();
+		expect(count).toBeGreaterThan(1);
 
-		if (count > 1) {
-			// Click second tab
-			await tabs.nth(1).click();
-			// Verify it's visually active (has primary background color)
-			await expect(tabs.nth(1)).toHaveCSS(
-				"border-color",
-				/rgb/,
-			);
-		}
+		// Click second tab
+		await tabs.nth(1).click();
+		// Verify it's visually active via the data-active attribute
+		await expect(tabs.nth(1)).toHaveAttribute("data-active", "true");
+		await expect(tabs.nth(0)).toHaveAttribute("data-active", "false");
 	});
 
 	test("can add a new page tab", async ({ authenticatedPage: page }) => {

@@ -20,5 +20,14 @@ resources
 **/*.test.ts
 **/*.test.tsx
 **/tests
+e2e
+playwright-report
+test-results
+.github
+playwright.config.ts
+vitest.config.ts
+vitest.shims.d.ts
+vtiest.setup.ts
+compose.yml
 README.md
 LICENSE
