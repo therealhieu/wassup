@@ -4,7 +4,7 @@ services:
     build: .
     # image: ghcr.io/therealhieu/wassup:latest  # use when pulling from registry
     ports:
-      - "2506:3000"
+      - "2506:2506"
     volumes:
       - wassup-data:/app/data
     env_file:
