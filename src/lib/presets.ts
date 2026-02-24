@@ -374,6 +374,257 @@ export const SEED_PRESETS: Preset[] = [
 			},
 		}),
 	},
+	DATA_ENGINEERING_PRESET,
+	{
+		id: "ai-engineering",
+		name: "AI Engineering",
+		config: AppConfigSchema.parse({
+			ui: {
+				theme: "dark",
+				pages: [
+					{
+						title: "Home",
+						path: "/",
+						columns: [
+							{
+								size: 3,
+								widgets: [
+									{
+										type: "bookmark",
+										title: "AI Engineering",
+										groups: [
+											{
+												title: "Frameworks",
+												bookmarks: [
+													"https://python.langchain.com/docs",
+													"https://docs.llamaindex.ai",
+													"https://huggingface.co",
+													"https://sdk.vercel.ai/docs",
+												],
+											},
+											{
+												title: "Project Ideas",
+												bookmarks: [
+													"https://github.com/NirDiamant/GenAI_Agents",
+													"https://github.com/e2b-dev/awesome-ai-agents",
+													"https://github.com/mlabonne/llm-course",
+													"https://github.com/chiphuyen/aie-book",
+												],
+											},
+											{
+												title: "MLOps & Eval",
+												bookmarks: [
+													"https://smith.langchain.com",
+													"https://wandb.ai",
+													"https://langfuse.com",
+													"https://ollama.com",
+												],
+											},
+										],
+									},
+								],
+							},
+							{
+								size: 6,
+								widgets: [
+									{
+										type: "tabs",
+										labels: [
+											"r/LocalLLaMA",
+											"r/MachineLearning",
+											"r/artificial",
+											"r/LLMDevs",
+											"r/singularity",
+										],
+										tabs: [
+											{
+												type: "reddit",
+												subreddit: "LocalLLaMA",
+												hideTitle: true,
+												sort: "hot",
+												limit: 5,
+											},
+											{
+												type: "reddit",
+												subreddit: "MachineLearning",
+												hideTitle: true,
+												sort: "hot",
+												limit: 5,
+											},
+											{
+												type: "reddit",
+												subreddit: "artificial",
+												hideTitle: true,
+												sort: "hot",
+												limit: 5,
+											},
+											{
+												type: "reddit",
+												subreddit: "LLMDevs",
+												hideTitle: true,
+												sort: "hot",
+												limit: 5,
+											},
+											{
+												type: "reddit",
+												subreddit: "singularity",
+												hideTitle: true,
+												sort: "hot",
+												limit: 5,
+											},
+										],
+									},
+									{
+										type: "youtube",
+										channels: [
+											"@AndrejKarpathy",
+											"@YannicKilcher",
+											"@aiexplained-official",
+											"@LatentSpacePod",
+											"@stanfordonline",
+											"@Fireship",
+										],
+									},
+								],
+							},
+							{
+								size: 3,
+								widgets: [
+									{
+										type: "feed",
+										limit: 12,
+										scrollAfterRow: 7,
+										urls: [
+											"https://lilianweng.github.io/index.xml",
+											"https://simonwillison.net/atom/everything",
+											"https://huyenchip.com/feed",
+											"https://www.latent.space/feed",
+										],
+									},
+								],
+							},
+						],
+					},
+					{
+						title: "Research",
+						path: "/research",
+						columns: [
+							{
+								size: 5,
+								widgets: [
+									{
+										type: "hackernews",
+										sort: "top",
+										limit: 15,
+										query: "LLM OR large language model",
+									},
+									{
+										type: "hackernews",
+										sort: "show",
+										limit: 10,
+										query: "AI agent OR RAG",
+									},
+								],
+							},
+							{
+								size: 7,
+								widgets: [
+									{
+										type: "tabs",
+										labels: [
+											"r/LocalLLaMA",
+											"r/LLMDevs",
+											"r/PromptEngineering",
+										],
+										tabs: [
+											{
+												type: "reddit",
+												subreddit: "LocalLLaMA",
+												hideTitle: true,
+												sort: "hot",
+												limit: 8,
+											},
+											{
+												type: "reddit",
+												subreddit: "LLMDevs",
+												hideTitle: true,
+												sort: "hot",
+												limit: 8,
+											},
+											{
+												type: "reddit",
+												subreddit: "PromptEngineering",
+												hideTitle: true,
+												sort: "hot",
+												limit: 8,
+											},
+										],
+									},
+								],
+							},
+						],
+					},
+					{
+						title: "Trends",
+						path: "/trends",
+						columns: [
+							{
+								size: 12,
+								widgets: [
+									{
+										type: "tabs",
+										labels: [
+											"LLM / Agents",
+											"RAG / Retrieval",
+											"MLOps / Serving",
+										],
+										tabs: [
+											{
+												type: "github",
+												topics: [
+													"llm",
+													"ai-agents",
+													"langchain",
+													"autogen",
+												],
+												createdAfter: "2024-01-01",
+												dateRange: "90d",
+												limit: 20,
+											},
+											{
+												type: "github",
+												topics: [
+													"rag",
+													"vector-database",
+													"embeddings",
+													"semantic-search",
+												],
+												createdAfter: "2024-01-01",
+												dateRange: "90d",
+												limit: 20,
+											},
+											{
+												type: "github",
+												topics: [
+													"mlops",
+													"model-serving",
+													"llm-inference",
+													"fine-tuning",
+												],
+												createdAfter: "2024-01-01",
+												dateRange: "90d",
+												limit: 20,
+											},
+										],
+									},
+								],
+							},
+						],
+					},
+				],
+			},
+		}),
+	},
 	{
 		id: "data-science",
 		name: "Data Science",
@@ -400,7 +651,7 @@ export const SEED_PRESETS: Preset[] = [
 													"https://www.khanacademy.org/math/statistics-probability",
 													"https://www.kaggle.com/learn",
 													"https://github.com/ossu/data-science",
-													 "https://github.com/PavelGrigoryevDS/awesome-data-analysis"
+													"https://github.com/PavelGrigoryevDS/awesome-data-analysis",
 												],
 											},
 											{
@@ -412,7 +663,7 @@ export const SEED_PRESETS: Preset[] = [
 													"https://www.tensortonic.com/problems",
 													"https://github.com/chiphuyen/machine-learning-systems-design",
 													"https://github.com/alexeygrigorev/data-science-interviews",
-													"https://github.com/kojino/120-Data-Science-Interview-Questions"
+													"https://github.com/kojino/120-Data-Science-Interview-Questions",
 												],
 											},
 											{
@@ -629,23 +880,17 @@ export const SEED_PRESETS: Preset[] = [
 			},
 		}),
 	},
-	DATA_ENGINEERING_PRESET,
-	{
-		id: "blank",
-		name: "Blank",
-		config: AppConfigSchema.parse({
-			ui: {
-				theme: "light",
-				pages: [
-					{
-						title: "Home",
-						path: "/",
-						columns: [{ size: 12, widgets: [] }],
-					},
-				],
-			},
-		}),
-	},
 ];
 
-export const BLANK_CONFIG = SEED_PRESETS.find((p) => p.id === "blank")!.config;
+export const BLANK_CONFIG = AppConfigSchema.parse({
+	ui: {
+		theme: "light",
+		pages: [
+			{
+				title: "Home",
+				path: "/",
+				columns: [{ size: 12, widgets: [] }],
+			},
+		],
+	},
+});
