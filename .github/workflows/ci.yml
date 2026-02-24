@@ -15,7 +15,7 @@ jobs:
         with:
           bun-version: "1.2.20"
 
-      - run: bun install --frozen-lockfile
+      - run: bun install
       - run: bunx prisma generate
       - run: bun run lint
       - run: bun run test:unit
