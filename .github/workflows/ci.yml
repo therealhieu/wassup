@@ -3,6 +3,7 @@ on:
   pull_request:
     branches: [main]
   workflow_call: # allows deploy.yml to reuse this workflow
+  workflow_dispatch:
 
 jobs:
   check:
