@@ -138,7 +138,7 @@ function SortablePresetItem({
                     sx={{ flex: 1, fontSize: "inherit" }}
                 />
             ) : (
-                <ListItemText primary={name} />
+                <ListItemText primary={name} data-testid="preset-name" />
             )}
             {isActive && (
                 <CheckIcon fontSize="small" color="primary" sx={{ ml: 1 }} />

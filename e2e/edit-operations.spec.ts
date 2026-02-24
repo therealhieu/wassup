@@ -65,11 +65,9 @@ test.describe("Edit Operations", () => {
 			tabsBefore + 1,
 		);
 
-		// Save
+		// Save and wait for the edit button to reappear (confirms save completed)
 		await page.getByTestId("edit-save").click();
-		// Wait for save to complete and state to propagate
 		await expect(page.getByTestId("edit-mode-toggle")).toBeVisible();
-		await page.waitForTimeout(500);
 
 		// Re-enter edit mode — change should persist
 		await page.getByTestId("edit-mode-toggle").click();
@@ -79,12 +77,10 @@ test.describe("Edit Operations", () => {
 		);
 	});
 
-
 	test("edit mode shows column layout editor", async ({
 		authenticatedPage: page,
 	}) => {
 		await page.getByTestId("edit-mode-toggle").click();
-		// Column layout editor has a text input for sizes like "4-4-4"
-		await expect(page.locator("input[type='text']").first()).toBeVisible();
+		await expect(page.getByTestId("column-layout-editor")).toBeVisible();
 	});
 });

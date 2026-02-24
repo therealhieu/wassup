@@ -65,7 +65,7 @@ export function ColumnLayoutEditor({ sizes, onChange }: ColumnLayoutEditorProps)
     };
 
     return (
-        <Box sx={{ mb: 2 }}>
+        <Box sx={{ mb: 2 }} data-testid="column-layout-editor">
             {/* Quick preset buttons */}
             <Stack direction="row" spacing={1} sx={{ mb: 1 }}>
                 {LAYOUT_PRESETS.map((preset) => (

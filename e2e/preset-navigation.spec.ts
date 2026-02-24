@@ -1,4 +1,10 @@
 import { test, expect } from "./fixtures/auth";
+import type { Locator } from "@playwright/test";
+
+/** Extract preset name from a sortable menu item via the dedicated test id. */
+async function getPresetName(item: Locator): Promise<string> {
+	return (await item.getByTestId("preset-name").innerText()).trim();
+}
 
 test.describe("Preset Navigation", () => {
 	test("shows active preset name in selector", async ({
@@ -22,15 +28,13 @@ test.describe("Preset Navigation", () => {
 		const menu = page.getByRole("menu");
 		const items = menu.getByRole("menuitem");
 		const count = await items.count();
+		expect(count).toBeGreaterThan(1);
 
-		if (count > 1) {
-			const secondPresetText = await items.nth(1).innerText();
-			const secondName = secondPresetText.split("\n")[0].trim();
-			await items.nth(1).click();
-			await expect(page.getByTestId("preset-selector")).toContainText(
-				secondName,
-			);
-		}
+		const secondName = await getPresetName(items.nth(1));
+		await items.nth(1).click();
+		await expect(page.getByTestId("preset-selector")).toContainText(
+			secondName,
+		);
 	});
 
 	test("menu closes after selecting a preset", async ({
@@ -51,28 +55,27 @@ test.describe("Preset Navigation", () => {
 		);
 	});
 
-	test("preset switch persists in session", async ({
+	test("preset switch persists across reload", async ({
 		authenticatedPage: page,
 	}) => {
-		// Get initial preset name
-		const initialText = await page.getByTestId("preset-selector").innerText();
-
-		// Switch to a different preset
 		await page.getByTestId("preset-selector").click();
 		const items = page.getByRole("menu").getByRole("menuitem");
 		const count = await items.count();
-		if (count > 1) {
-			const secondPresetText = await items.nth(1).innerText();
-			const secondName = secondPresetText.split("\n")[0].trim();
-			await items.nth(1).click();
+		expect(count).toBeGreaterThan(1);
 
-			// Verify the selector updated
-			await expect(page.getByTestId("preset-selector")).toContainText(
-				secondName,
-			);
-			// Verify it's different from initial
-			expect(secondName).not.toBe(initialText.split("\n")[0].trim());
-		}
+		const secondName = await getPresetName(items.nth(1));
+		await items.nth(1).click();
+
+		await expect(page.getByTestId("preset-selector")).toContainText(
+			secondName,
+		);
+
+		// Reload to verify persistence
+		await page.reload();
+		await page.getByTestId("preset-selector").waitFor({ state: "visible" });
+		await expect(page.getByTestId("preset-selector")).toContainText(
+			secondName,
+		);
 	});
 
 	// TODO: force-clicking delete icon inside sortable menu item is unreliable in Playwright

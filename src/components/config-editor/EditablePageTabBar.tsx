@@ -179,6 +179,7 @@ function SortablePageTab({
                 setIsEditing(true);
             }}
             data-testid={`page-tab-${id}`}
+            data-active={isActive}
             sx={{
                 display: "flex",
                 alignItems: "center",

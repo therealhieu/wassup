@@ -60,6 +60,9 @@ RUN cd /tmp && echo '{"dependencies":{"prisma":"7.4.1","dotenv":"16.5.0"}}' > pa
 RUN mkdir -p /app/data
 ENV DATABASE_URL=file:/app/data/wassup.db
 
+HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
+    CMD node -e "fetch('http://localhost:3000').then(r => { if (!r.ok) process.exit(1) }).catch(() => process.exit(1))"
+
 EXPOSE 3000
 
 CMD ["sh", "-c", "NODE_PATH=/app/prisma-cli/node_modules node /app/prisma-cli/node_modules/prisma/build/index.js migrate deploy && node server.js"]

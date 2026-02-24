@@ -5,6 +5,7 @@ import { test as base, expect, type Page } from "@playwright/test";
  * Only works when NODE_ENV=test (set by playwright.config.ts webServer command).
  */
 async function signInAsTestUser(page: Page) {
+	const csrfToken = await getCsrfToken(page);
 	const response = await page.request.post(
 		"/api/auth/callback/test-credentials",
 		{
@@ -12,7 +13,7 @@ async function signInAsTestUser(page: Page) {
 				userId: "test-user-id",
 				email: "test@example.com",
 				name: "Test User",
-				csrfToken: await getCsrfToken(page),
+				csrfToken,
 			},
 		}
 	);
@@ -26,6 +27,9 @@ async function signInAsTestUser(page: Page) {
 
 async function getCsrfToken(page: Page): Promise<string> {
 	const res = await page.request.get("/api/auth/csrf");
+	if (!res.ok()) {
+		throw new Error(`Failed to get CSRF token: ${res.status()}`);
+	}
 	const json = await res.json();
 	return json.csrfToken as string;
 }
@@ -36,6 +40,7 @@ export const test = base.extend<{ authenticatedPage: Page }>({
 		await page.goto("/");
 		await signInAsTestUser(page);
 		await page.goto("/");
+		await page.getByTestId("preset-selector").waitFor({ state: "visible" });
 		await use(page);
 	},
 });
