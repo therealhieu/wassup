@@ -10,7 +10,7 @@ export function middleware(request: NextRequest) {
 		`script-src 'self' 'nonce-${nonce}' 'strict-dynamic'`,
 		// MUI injects styles via <style> tags — 'unsafe-inline' is required
 		`style-src 'self' 'unsafe-inline'`,
-		`img-src 'self' https://avatars.githubusercontent.com https://authjs.dev https://*.ytimg.com https://openweathermap.org data: blob:`,
+		`img-src 'self' https: data: blob:`,
 		`font-src 'self'`,
 		`connect-src 'self' https://api.open-meteo.com https://geocoding-api.open-meteo.com`,
 		`frame-ancestors 'none'`,
