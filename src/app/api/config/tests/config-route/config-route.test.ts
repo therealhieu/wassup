@@ -37,7 +37,7 @@ describe("GET /api/config", () => {
 	});
 
 	it("should return 401 when unauthenticated", async () => {
-		mockAuth.mockResolvedValue(null);
+		mockAuth.mockResolvedValue(null as never);
 
 		const response = await GET();
 
@@ -89,7 +89,7 @@ describe("PUT /api/config", () => {
 	});
 
 	it("should return 401 when unauthenticated", async () => {
-		mockAuth.mockResolvedValue(null);
+		mockAuth.mockResolvedValue(null as never);
 
 		const request = new Request("http://localhost/api/config", {
 			method: "PUT",

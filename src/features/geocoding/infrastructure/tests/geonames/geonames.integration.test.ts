@@ -5,7 +5,6 @@ import path from "path";
 import fs from "fs";
 import { baseLogger as logger } from "@/lib/logger";
 
-
 const setUp = () => {
 	const testId = new Date().toISOString().replace(/[:.]/g, "-").slice(0, -5);
 	const testPath = path.resolve(
@@ -13,7 +12,7 @@ const setUp = () => {
 		".tmp",
 		"unit-tests",
 		"geonames-geocode-repository",
-		testId
+		testId,
 	);
 	fs.mkdirSync(testPath, { recursive: true });
 	logger.info(`Setting up test ${testId} at ${testPath}`);
@@ -58,7 +57,6 @@ describe("GeonamesGeocodeRepository", () => {
 		expect(repo.length()).toBeGreaterThan(10);
 
 		const geocode = await repo.find("Ho Chi Minh City");
-		expect(geocode.isOk()).toBe(true);
-		expect(geocode.unwrapOr(null)).toBeDefined();
+		expect(geocode).toBeDefined();
 	}, 30_000);
 });

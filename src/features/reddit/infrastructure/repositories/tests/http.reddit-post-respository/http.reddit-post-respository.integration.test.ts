@@ -13,11 +13,8 @@ describe("HttpRedditPostRepository", () => {
 				hideTitle: false,
 			});
 
-			if (posts.isErr()) {
-				throw new Error("Failed to fetch posts");
-			}
-
-			expect(posts.value).toBeInstanceOf(Array);
+			expect(posts).toBeInstanceOf(Array);
+			expect(posts.length).toBeGreaterThan(0);
 		}, 10000);
 	});
 });

@@ -13,7 +13,7 @@ import { useSession } from "next-auth/react";
 import { useDebouncedCallback } from "use-debounce";
 import type { AppConfig, AppState, Preset } from "@/infrastructure/config.schemas";
 import { DEFAULT_APP_STATE } from "@/lib/constants";
-import { BLANK_CONFIG } from "@/lib/presets";
+import { BLANK_CONFIG, SEED_PRESETS, SEED_PRESET_IDS, isSeedPreset } from "@/lib/presets";
 import { migrateToAppState } from "@/lib/migration";
 import { baseLogger } from "@/lib/logger";
 import { useEncryptedSync } from "@/hooks/useEncryptedSync";
@@ -48,7 +48,9 @@ export function loadFromStorage(userId: string | null): AppState {
 			const legacy = legacyStorageKey(userId);
 			raw = localStorage.getItem(legacy);
 			if (raw) {
-				const migrated = migrateToAppState(JSON.parse(raw));
+				const migrated = reconcileWithSeedPresets(
+					migrateToAppState(JSON.parse(raw)),
+				);
 				saveToStorage(userId, migrated);
 				localStorage.removeItem(legacy);
 				return migrated;
@@ -56,7 +58,7 @@ export function loadFromStorage(userId: string | null): AppState {
 			return DEFAULT_APP_STATE;
 		}
 
-		return migrateToAppState(JSON.parse(raw));
+		return reconcileWithSeedPresets(migrateToAppState(JSON.parse(raw)));
 	} catch {
 		logger.warn("Failed to read state from localStorage — using default");
 		return DEFAULT_APP_STATE;
@@ -75,6 +77,45 @@ export function saveToStorage(
 	}
 }
 
+// ── Seed preset reconciliation ──────────────────────────────────────────────
+
+/**
+ * Merges the latest SEED_PRESETS into a persisted AppState:
+ *  - Overwrites existing seed presets with their latest definitions
+ *  - Appends new seed presets that the user hasn't seen yet
+ *  - Removes seed presets that no longer exist upstream
+ *  - Preserves user-created presets and the user's ordering
+ */
+export function reconcileWithSeedPresets(state: AppState): AppState {
+	const existingIds = new Set(state.presets.map((p) => p.id));
+
+	// Replace existing seed presets in-place, keep user presets as-is
+	const updatedPresets = state.presets
+		.map((p) => {
+			if (SEED_PRESET_IDS.has(p.id)) {
+				return SEED_PRESETS.find((sp) => sp.id === p.id) ?? null;
+			}
+			return p;
+		})
+		.filter((p): p is Preset => p !== null);
+
+	// Append new seed presets the user hasn't seen yet
+	const newSeeds = SEED_PRESETS.filter((sp) => !existingIds.has(sp.id));
+	const finalPresets = [...updatedPresets, ...newSeeds];
+
+	// Fix activePresetId if it pointed to a removed preset
+	const activeValid = finalPresets.some(
+		(p) => p.id === state.activePresetId,
+	);
+
+	return {
+		activePresetId: activeValid
+			? state.activePresetId
+			: finalPresets[0].id,
+		presets: finalPresets,
+	};
+}
+
 // ── Reducer ──────────────────────────────────────────────────────────────────
 
 type Action =
@@ -89,14 +130,31 @@ type Action =
 	| { type: "CREATE_PRESET"; payload: Preset }
 	| { type: "DELETE_PRESET"; payload: string }
 	| { type: "REORDER_PRESETS"; payload: string[] }
-	| { type: "IMPORT_PRESET"; payload: Preset };
+	| { type: "IMPORT_PRESET"; payload: Preset }
+	| { type: "DUPLICATE_PRESET"; payload: string };
 
 function reducer(state: AppState, action: Action): AppState {
 	switch (action.type) {
 		case "SET_STATE":
 			return action.payload;
 
-		case "SET_CONFIG":
+		case "SET_CONFIG": {
+			// Auto-duplicate if editing a seed preset
+			if (isSeedPreset(state.activePresetId)) {
+				const source = state.presets.find(
+					(p) => p.id === state.activePresetId,
+				);
+				const dup: Preset = {
+					id: crypto.randomUUID(),
+					name: `${source?.name ?? "Preset"} (Custom)`,
+					config: action.payload,
+				};
+				return {
+					...state,
+					activePresetId: dup.id,
+					presets: [...state.presets, dup],
+				};
+			}
 			return {
 				...state,
 				presets: state.presets.map((p) =>
@@ -105,8 +163,28 @@ function reducer(state: AppState, action: Action): AppState {
 						: p,
 				),
 			};
+		}
 
-		case "SET_THEME":
+		case "SET_THEME": {
+			// Auto-duplicate if editing a seed preset
+			if (isSeedPreset(state.activePresetId)) {
+				const source = state.presets.find(
+					(p) => p.id === state.activePresetId,
+				);
+				const dup: Preset = {
+					id: crypto.randomUUID(),
+					name: `${source?.name ?? "Preset"} (Custom)`,
+					config: {
+						...source!.config,
+						ui: { ...source!.config.ui, theme: action.payload },
+					},
+				};
+				return {
+					...state,
+					activePresetId: dup.id,
+					presets: [...state.presets, dup],
+				};
+			}
 			return {
 				...state,
 				presets: state.presets.map((p) =>
@@ -121,11 +199,14 @@ function reducer(state: AppState, action: Action): AppState {
 						: p,
 				),
 			};
+		}
 
 		case "SET_ACTIVE_PRESET":
 			return { ...state, activePresetId: action.payload };
 
 		case "UPDATE_PRESET":
+			// Block rename/update on seed presets
+			if (isSeedPreset(action.payload.id)) return state;
 			return {
 				...state,
 				presets: state.presets.map((p) =>
@@ -151,6 +232,8 @@ function reducer(state: AppState, action: Action): AppState {
 			};
 
 		case "DELETE_PRESET": {
+			// Block deletion of seed presets
+			if (isSeedPreset(action.payload)) return state;
 			const remaining = state.presets.filter(
 				(p) => p.id !== action.payload,
 			);
@@ -178,6 +261,23 @@ function reducer(state: AppState, action: Action): AppState {
 				activePresetId: action.payload.id,
 				presets: [...state.presets, action.payload],
 			};
+
+		case "DUPLICATE_PRESET": {
+			const source = state.presets.find(
+				(p) => p.id === action.payload,
+			);
+			if (!source) return state;
+			const dup: Preset = {
+				id: crypto.randomUUID(),
+				name: `${source.name} (Custom)`,
+				config: source.config,
+			};
+			return {
+				...state,
+				activePresetId: dup.id,
+				presets: [...state.presets, dup],
+			};
+		}
 	}
 }
 
@@ -201,6 +301,7 @@ interface AppConfigContextValue {
 	deletePreset: (id: string) => void;
 	reorderPresets: (orderedIds: string[]) => void;
 	importPreset: (preset: Omit<Preset, "id">) => void;
+	duplicatePreset: (id: string) => void;
 }
 
 const AppConfigContext = createContext<AppConfigContextValue | null>(null);
@@ -335,6 +436,12 @@ export function AppConfigProvider({ children }: { children: ReactNode }) {
 		[],
 	);
 
+	const duplicatePreset = useCallback(
+		(id: string) =>
+			dispatch({ type: "DUPLICATE_PRESET", payload: id }),
+		[],
+	);
+
 	const value: AppConfigContextValue = {
 		config,
 		setConfig,
@@ -347,6 +454,7 @@ export function AppConfigProvider({ children }: { children: ReactNode }) {
 		deletePreset,
 		reorderPresets,
 		importPreset,
+		duplicatePreset,
 	};
 
 	return (

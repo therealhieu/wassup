@@ -6,16 +6,12 @@ describe("PageSourceYoutubeChannelRepository", () => {
 		const repository = new PageSourceYoutubeChannelRepository();
 		const channel = await repository.findByUsername("hello_interview");
 
-		if (channel.isErr()) {
-			throw new Error("Failed to find channel", { cause: channel.error });
-		}
-
-		expect(channel.value).toEqual(
+		expect(channel).toEqual(
 			expect.objectContaining({
 				id: expect.any(String),
 				name: expect.any(String),
 				rssUrl: expect.any(String),
-			})
+			}),
 		);
 	});
 });

@@ -26,8 +26,11 @@ import FileUploadIcon from "@mui/icons-material/FileUpload";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import CheckIcon from "@mui/icons-material/Check";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useAppConfig } from "@/providers/AppConfigProvider";
 import { PresetSchema } from "@/infrastructure/config.schemas";
+import { isSeedPreset } from "@/lib/presets";
 import {
     DndContext,
     closestCenter,
@@ -50,20 +53,24 @@ interface SortablePresetItemProps {
     presetId: string;
     name: string;
     isActive: boolean;
+    isSeed: boolean;
     canDelete: boolean;
     onSelect: () => void;
     onDelete: (e: React.MouseEvent) => void;
     onRename: (newName: string) => void;
+    onDuplicate: (e: React.MouseEvent) => void;
 }
 
 function SortablePresetItem({
     presetId,
     name,
     isActive,
+    isSeed,
     canDelete,
     onSelect,
     onDelete,
     onRename,
+    onDuplicate,
 }: SortablePresetItemProps) {
     const [isEditing, setIsEditing] = useState(false);
     const [editValue, setEditValue] = useState(name);
@@ -143,7 +150,23 @@ function SortablePresetItem({
             {isActive && (
                 <CheckIcon fontSize="small" color="primary" sx={{ ml: 1 }} />
             )}
-            {!isEditing && (
+            {isSeed && (
+                <LockOutlinedIcon
+                    fontSize="small"
+                    sx={{ color: "text.disabled", ml: 0.5 }}
+                />
+            )}
+            {isSeed && (
+                <IconButton
+                    size="small"
+                    onClick={onDuplicate}
+                    edge="end"
+                    title="Duplicate to customize"
+                >
+                    <ContentCopyIcon fontSize="small" />
+                </IconButton>
+            )}
+            {!isSeed && !isEditing && (
                 <IconButton
                     size="small"
                     onClick={handleEditClick}
@@ -152,7 +175,7 @@ function SortablePresetItem({
                     <EditOutlinedIcon fontSize="small" />
                 </IconButton>
             )}
-            {canDelete && (
+            {!isSeed && canDelete && (
                 <IconButton
                     size="small"
                     onClick={onDelete}
@@ -182,6 +205,7 @@ export function PresetSelector() {
         reorderPresets,
         importPreset,
         updatePreset,
+        duplicatePreset,
     } = useAppConfig();
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -355,6 +379,7 @@ export function PresetSelector() {
                                 presetId={p.id}
                                 name={p.name}
                                 isActive={p.id === activePresetId}
+                                isSeed={isSeedPreset(p.id)}
                                 canDelete={presets.length > 1}
                                 onSelect={() => handleSelect(p.id)}
                                 onDelete={(e) => handleDeleteClick(e, p.id)}
@@ -363,6 +388,11 @@ export function PresetSelector() {
                                         name: newName,
                                     })
                                 }
+                                onDuplicate={(e) => {
+                                    e.stopPropagation();
+                                    duplicatePreset(p.id);
+                                    handleClose();
+                                }}
                             />
                         ))}
                     </SortableContext>

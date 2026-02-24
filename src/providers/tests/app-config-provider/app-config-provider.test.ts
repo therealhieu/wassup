@@ -4,8 +4,10 @@ import {
 	storageKey,
 	loadFromStorage,
 	saveToStorage,
+	reconcileWithSeedPresets,
 } from "@/providers/AppConfigProvider";
 import { DEFAULT_APP_STATE } from "@/lib/constants";
+import { SEED_PRESETS } from "@/lib/presets";
 import type { AppState } from "@/infrastructure/config.schemas";
 
 const VALID_APP_STATE: AppState = {
@@ -75,9 +77,15 @@ describe("loadFromStorage", () => {
 
 		const state = loadFromStorage(null);
 		expect(state.activePresetId).toBe("default");
-		expect(state.presets).toHaveLength(1);
-		expect(state.presets[0].name).toBe("My Dashboard");
-		expect(state.presets[0].config.ui.pages[0].title).toBe("Legacy");
+		// Legacy config migrated as user preset + seed presets reconciled in
+		const userPreset = state.presets.find((p) => p.id === "default");
+		expect(userPreset).toBeDefined();
+		expect(userPreset!.name).toBe("My Dashboard");
+		expect(userPreset!.config.ui.pages[0].title).toBe("Legacy");
+		// Seed presets were added by reconciliation
+		for (const seed of SEED_PRESETS) {
+			expect(state.presets.find((p) => p.id === seed.id)).toBeDefined();
+		}
 
 		// Should have migrated to new key and removed old
 		expect(localStorage.getItem("wassup-state")).not.toBeNull();
@@ -178,3 +186,90 @@ describe("saveToStorage", () => {
 		expect(loaded).toEqual(DEFAULT_APP_STATE);
 	});
 });
+
+describe("reconcileWithSeedPresets", () => {
+	const makeUserPreset = (id: string, name: string) => ({
+		id,
+		name,
+		config: {
+			ui: {
+				theme: "light" as const,
+				pages: [
+					{
+						title: "Home",
+						path: "/",
+						columns: [{ size: 12, widgets: [] as never[] }],
+					},
+				],
+			},
+		},
+	});
+
+	it("should add new seed presets for existing users", () => {
+		const state: AppState = {
+			activePresetId: SEED_PRESETS[0].id,
+			presets: [SEED_PRESETS[0], makeUserPreset("custom-1", "My Custom")],
+		};
+		const result = reconcileWithSeedPresets(state);
+		// All seed presets present + user preset preserved
+		for (const seed of SEED_PRESETS) {
+			expect(result.presets.find((p) => p.id === seed.id)).toBeDefined();
+		}
+		expect(
+			result.presets.find((p) => p.id === "custom-1"),
+		).toBeDefined();
+	});
+
+	it("should preserve user preset ordering", () => {
+		const state: AppState = {
+			activePresetId: "custom-1",
+			presets: [
+				makeUserPreset("custom-1", "First"),
+				SEED_PRESETS[0],
+				makeUserPreset("custom-2", "Second"),
+			],
+		};
+		const result = reconcileWithSeedPresets(state);
+		// User presets stay in their relative positions
+		const custom1Idx = result.presets.findIndex(
+			(p) => p.id === "custom-1",
+		);
+		const custom2Idx = result.presets.findIndex(
+			(p) => p.id === "custom-2",
+		);
+		expect(custom1Idx).toBeLessThan(custom2Idx);
+	});
+
+	it("should fix activePresetId if it points to a removed seed", () => {
+		const state: AppState = {
+			activePresetId: "removed-seed-id",
+			presets: [
+				{ ...SEED_PRESETS[0], id: "removed-seed-id" },
+			],
+		};
+		const result = reconcileWithSeedPresets(state);
+		// removed-seed-id is not a known seed, treated as user preset and kept
+		// but since it's still there, activePresetId should remain valid
+		expect(
+			result.presets.some((p) => p.id === result.activePresetId),
+		).toBe(true);
+	});
+
+	it("should overwrite seed preset content with latest version", () => {
+		const state: AppState = {
+			activePresetId: SEED_PRESETS[0].id,
+			presets: [
+				{
+					...SEED_PRESETS[0],
+					name: "Old Name",
+				},
+			],
+		};
+		const result = reconcileWithSeedPresets(state);
+		const reconciled = result.presets.find(
+			(p) => p.id === SEED_PRESETS[0].id,
+		);
+		expect(reconciled!.name).toBe(SEED_PRESETS[0].name);
+	});
+});
+

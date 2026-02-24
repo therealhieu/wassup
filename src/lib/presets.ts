@@ -894,3 +894,8 @@ export const BLANK_CONFIG = AppConfigSchema.parse({
 		],
 	},
 });
+
+export const SEED_PRESET_IDS = new Set(SEED_PRESETS.map((p) => p.id));
+export function isSeedPreset(id: string): boolean {
+	return SEED_PRESET_IDS.has(id);
+}
