@@ -29,6 +29,8 @@ export default defineConfig(() => {
 							...configDefaults.exclude,
 							"**/*.integration.test.ts",
 							"**/*.e2e.test.ts",
+							"e2e/**",
+							".next/**",
 						],
 					},
 				},

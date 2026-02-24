@@ -54,19 +54,19 @@ describe("migrateToAppState", () => {
 
 	it("should return fallback for invalid data", () => {
 		const result = migrateToAppState({ garbage: true });
-		expect(result.activePresetId).toBe("hieu");
+		expect(result.activePresetId).toBe("general-swe");
 		expect(result.presets).toEqual(SEED_PRESETS);
 	});
 
 	it("should return fallback for null", () => {
 		const result = migrateToAppState(null);
-		expect(result.activePresetId).toBe("hieu");
+		expect(result.activePresetId).toBe("general-swe");
 		expect(result.presets).toEqual(SEED_PRESETS);
 	});
 
 	it("should return fallback for undefined", () => {
 		const result = migrateToAppState(undefined);
-		expect(result.activePresetId).toBe("hieu");
+		expect(result.activePresetId).toBe("general-swe");
 		expect(result.presets).toEqual(SEED_PRESETS);
 	});
 });
