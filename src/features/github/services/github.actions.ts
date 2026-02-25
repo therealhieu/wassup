@@ -8,6 +8,7 @@ import {
 } from "../presentation/github-widget.schemas";
 import { HttpGithubRepositoryRepository } from "../infrastructure/repositories/http.github-repository";
 import { LRUCache } from "lru-cache";
+import { serverActionDuration, cacheHits, cacheMisses } from "@/lib/metrics";
 
 const repository = new HttpGithubRepositoryRepository();
 
@@ -63,26 +64,41 @@ function resultKey(config: GithubWidgetConfig): string {
 export async function fetchGithubWidgetProps(
 	config: GithubWidgetConfig
 ): Promise<GithubWidgetInnerProps> {
-	const key = resultKey(config);
-	const cached = resultCache.get(key);
-	const lastRefresh = refreshedAt.get(key) ?? 0;
-	const isStale = Date.now() - lastRefresh > REFRESH_INTERVAL;
+	const end = serverActionDuration.startTimer({ action: "github" });
+	try {
+		const key = resultKey(config);
+		const cached = resultCache.get(key);
+		const lastRefresh = refreshedAt.get(key) ?? 0;
+		const isStale = Date.now() - lastRefresh > REFRESH_INTERVAL;
 
-	// Fresh cache → return immediately
-	if (cached && !isStale) return cached;
+		// Fresh cache → return immediately
+		if (cached && !isStale) {
+			cacheHits.inc({ cache: "github" });
+			end({ status: "hit" });
+			return cached;
+		}
 
-	// Stale cache → serve immediately, refresh in background
-	if (cached && isStale) {
-		triggerBackgroundRefresh(key, config);
-		return cached;
+		// Stale cache → serve immediately, refresh in background
+		if (cached && isStale) {
+			cacheHits.inc({ cache: "github" });
+			triggerBackgroundRefresh(key, config);
+			end({ status: "stale" });
+			return cached;
+		}
+
+		// No cache → blocking fetch (with negative cache check)
+		cacheMisses.inc({ cache: "github" });
+		if (errorCache.has(key)) {
+			throw new Error("GitHub API temporarily unavailable, retrying shortly");
+		}
+
+		const result = await freshFetch(key, config);
+		end({ status: "success" });
+		return result;
+	} catch (e) {
+		end({ status: "error" });
+		throw e;
 	}
-
-	// No cache → blocking fetch (with negative cache check)
-	if (errorCache.has(key)) {
-		throw new Error("GitHub API temporarily unavailable, retrying shortly");
-	}
-
-	return freshFetch(key, config);
 }
 
 // ── Internal ──────────────────────────────────────────────────────────────────

@@ -7,6 +7,7 @@ import {
 } from "../presentation/HackerNewsWidgetInner";
 import { HttpHackerNewsStoryRepository } from "../infrastructure/repositories/http.hackernews-story-repository";
 import { LRUCache } from "lru-cache";
+import { serverActionDuration, cacheHits, cacheMisses } from "@/lib/metrics";
 
 const repository = new HttpHackerNewsStoryRepository();
 
@@ -18,12 +19,24 @@ const dataCache = new LRUCache<string, HackerNewsWidgetInnerProps>({
 export async function fetchHackerNewsWidgetProps(
 	config: HackerNewsWidgetConfig
 ): Promise<HackerNewsWidgetInnerProps> {
-	const key = JSON.stringify(config);
-	const cached = dataCache.get(key);
-	if (cached) return cached;
+	const end = serverActionDuration.startTimer({ action: "hackernews" });
+	try {
+		const key = JSON.stringify(config);
+		const cached = dataCache.get(key);
+		if (cached) {
+			cacheHits.inc({ cache: "hackernews" });
+			end({ status: "hit" });
+			return cached;
+		}
+		cacheMisses.inc({ cache: "hackernews" });
 
-	const stories = await repository.fetchMany(config);
-	const data = HackerNewsWidgetInnerPropsSchema.parse({ config, stories });
-	dataCache.set(key, data);
-	return data;
+		const stories = await repository.fetchMany(config);
+		const data = HackerNewsWidgetInnerPropsSchema.parse({ config, stories });
+		dataCache.set(key, data);
+		end({ status: "success" });
+		return data;
+	} catch (e) {
+		end({ status: "error" });
+		throw e;
+	}
 }
