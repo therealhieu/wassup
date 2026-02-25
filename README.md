@@ -1,5 +1,7 @@
 # Wassup
 
+**[wassup.therealhieu.com](https://wassup.therealhieu.com)**
+
 A self-hosted personal dashboard that aggregates weather, Reddit, YouTube, RSS feeds, GitHub trending repos, and bookmarks into a single page. Manage multiple dashboard presets with a visual editor. Authenticated users get zero-knowledge encrypted cloud sync.
 
 ## Quick Start
