@@ -9,28 +9,26 @@ Wassup exposes Prometheus-compatible metrics via `prom-client`, scraped by Prome
 3. **Node.js runtime** — heap usage, event loop lag, GC pauses (auto-collected)
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    Wassup (Next.js)                          │
-│                                                             │
-│   Server Actions                 /api/metrics               │
-│   ┌──────────┐                   ┌──────────┐              │
-│   │ weather  │──┐                │ prom-    │              │
-│   │ feed     │  │ Histogram      │ client   │◄── GET       │
-│   │ reddit   │  ├─►  duration    │ Registry │              │
-│   │ youtube  │  │   + cache      └─────┬────┘              │
-│   │ github   │  │   counters           │                   │
-│   │ hackern. │──┘                      │                   │
-│   └──────────┘                         │                   │
-└────────────────────────────────────────┼────────────────────┘
-                                         │
-                              scrape every 30s
-                                         │
-                                         ▼
-                               ┌──────────────────┐
-                               │   Prometheus │
-                               │    (vmsingle)     │
-                               │       vmui        │
-                               └──────────────────┘
+┌──────────────────────────────────────────────────────────────┐
+│                       Wassup (Next.js)                       │
+│                                                              │
+│      Server Actions                  /api/metrics            │
+│      ┌────────────┐                  ┌──────────┐            │
+│      │ weather    │──┐               │ prom-    │            │
+│      │ feed       │  │ Histogram     │ client   │◄── GET     │
+│      │ reddit     │  ├─► duration    │ Registry │            │
+│      │ youtube    │  │   + cache     └────┬─────┘            │
+│      │ github     │  │   counters         │                  │
+│      │ hackernews │──┘                    │                  │
+│      └────────────┘                       │                  │
+└───────────────────────────────────────────┼──────────────────┘
+                                            │
+                                 scrape every 30s
+                                            │
+                                            ▼
+                                  ┌──────────────────┐
+                                  │    Prometheus     │
+                                  └──────────────────┘
 ```
 
 ---
@@ -93,11 +91,13 @@ src/
 ├── app/api/metrics/route.ts          # GET handler → Prometheus text format
 └── features/
     ├── weather/services/weather.actions.ts    # Instrumented
-    ├── feed/services/rss.actions.ts           # Instrumented (2 functions)
+    ├── feed/services/rss.actions.ts           # Instrumented (batch fetch)
+    ├── feed/services/thumbnail.actions.ts     # Thumbnail scraping (concurrency-limited)
     ├── reddit/services/reddit.actions.ts      # Instrumented
     ├── youtube/services/youtube.actions.ts    # Instrumented
     ├── github/services/github.actions.ts      # Instrumented (stale-aware)
-    └── hackernews/services/hackernews.actions.ts  # Instrumented
+    ├── hackernews/services/hackernews.actions.ts  # Instrumented
+    └── tabs/services/tabs.actions.ts          # Orchestrates child widget fetches
 ```
 
 ### Metric Definitions
@@ -111,6 +111,8 @@ src/
 
 **Action labels:** `weather`, `feed`, `feed_batch`, `reddit`, `youtube`, `github`, `hackernews`
 
+**Note:** The `tabs` action orchestrates child widget fetches (delegates to other actions) and the `thumbnail` action handles RSS image scraping — neither defines its own Prometheus timer, they inherit timing from the child actions they call.
+
 **Status labels:** `hit` (cache fresh), `stale` (cache served but stale), `success` (fetched), `error` (failed)
 
 ---
@@ -120,13 +122,18 @@ src/
 ### The globalThis Singleton Pattern
 
 ```typescript
-const globalForMetrics = globalThis as unknown as { metricsRegistry: Registry };
+const globalForMetrics = globalThis as unknown as {
+  __metrics: { register: Registry; serverActionDuration: Histogram; ... };
+};
 
-export const register = globalForMetrics.metricsRegistry ??= (() => {
-  const r = new Registry();
-  collectDefaultMetrics({ register: r });
-  return r;
-})();
+const metrics = (globalForMetrics.__metrics ??= (() => {
+  const register = new Registry();
+  collectDefaultMetrics({ register });
+  // ... create Histogram, Counter instances
+  return { register, serverActionDuration, cacheHits, cacheMisses };
+})());
+
+export const { register, serverActionDuration, cacheHits, cacheMisses } = metrics;
 ```
 
 **Why this is necessary:**
@@ -184,7 +191,7 @@ The background refresh is fire-and-forget — it's not timed because the user-fa
 1. Prometheus sends GET /api/metrics every 30s
 2. prom-client serializes all registered metrics to Prometheus text format
 3. Prometheus parses and stores the time series
-4. vmui queries the stored data for visualization
+4. Grafana queries the stored data for visualization
 ```
 
 Prometheus text format example:
@@ -283,4 +290,4 @@ A spike in `reddit` errors could indicate Reddit API issues, while `github` erro
 | **Auto-instrumentation (OTEL)** | Zero-code changes for HTTP/DB/DNS | Noisy, hard to filter, high cardinality | Large microservice fleets |
 | **AOP/Proxy pattern** | Wrap classes automatically | Complex setup, TypeScript decorator limitations | Java/Spring applications |
 
-Manual wrapping is the right choice for Wassup: 6 server actions is a small, stable surface. The instrumentation code adds ~10 lines per action and is completely explicit.
+Manual wrapping is the right choice for Wassup: 6 core instrumented server actions is a small, stable surface. The instrumentation code adds ~10 lines per action and is completely explicit.

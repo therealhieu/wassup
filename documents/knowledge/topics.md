@@ -6,6 +6,8 @@ Topics and lessons inferred from building the Wassup project. Each topic maps to
 
 ## Architecture & Design
 
+> 📄 **Full lesson:** [architecture-and-design.md](./architecture-and-design.md)
+
 ### 1. Dashboard Architecture Patterns
 - Multi-column, multi-widget layout with independent widget lifecycles
 - Pluggable widget system: each widget owns its own config schema, data fetching, and rendering
@@ -24,6 +26,8 @@ Topics and lessons inferred from building the Wassup project. Each topic maps to
 ---
 
 ## React & Next.js
+
+> 📄 **Full lesson:** [react-and-nextjs.md](./react-and-nextjs.md)
 
 ### 4. React 19 Performance Patterns
 - Memoization (`React.memo`, `useMemo`, `useCallback`) in data-heavy dashboards
@@ -50,6 +54,8 @@ Topics and lessons inferred from building the Wassup project. Each topic maps to
 
 ## Auth & Security
 
+> 📄 **Full lesson:** [auth-and-security.md](./auth-and-security.md)
+
 ### 8. NextAuth.js + OAuth Integration
 - Setting up GitHub OAuth with NextAuth.js in Next.js App Router
 - Session management and protected routes
@@ -63,6 +69,8 @@ Topics and lessons inferred from building the Wassup project. Each topic maps to
 ---
 
 ## Data & Persistence
+
+> 📄 **Full lesson:** [data-and-persistence.md](./data-and-persistence.md)
 
 ### 10. Write-Through Cache Strategy
 - `localStorage` as a fast local cache, server API as source of truth
@@ -94,7 +102,7 @@ Topics and lessons inferred from building the Wassup project. Each topic maps to
 - Seed presets vs user presets: display logic and fallback behavior
 
 ### 15. Widget Library Design
-- Feed (RSS), GitHub, Reddit, YouTube, Weather, Hacker News, Bookmarks
+- Feed (RSS), GitHub, Reddit, YouTube, Weather, Hacker News, Bookmarks, Tabs
 - Each widget: config schema, API route, client component, error/loading states
 - Adding a new widget end-to-end
 

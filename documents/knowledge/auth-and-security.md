@@ -14,14 +14,14 @@ These layers are independent and complement each other. A compromise in one does
 ┌─────────────────────────────────────────────────────────┐
 │                      Browser                            │
 │                                                         │
-│  ┌─────────────-┐  ┌──────────────┐  ┌────────────────┐ │
+│  ┌──────────────┐  ┌──────────────┐  ┌────────────────┐ │
 │  │ NextAuth.js  │  │   CSP Nonce  │  │  Web Crypto    │ │
 │  │ Session      │  │   Middleware │  │  AES-256-GCM   │ │
 │  └──────┬───────┘  └──────┬───────┘  └───────┬────────┘ │
 │         │                 │                  │          │
 │         ▼                 ▼                  ▼          │
-│  "Who are you?"    "What can load?"   "Encrypt before   │
-│                                        sending"         │
+│  "Who are you?"    "What can load?"  "Encrypt before    │
+│                                       sending"          │
 └─────────────────────────────────────────────────────────┘
           │                 │                  │
           ▼                 ▼                  ▼
@@ -155,9 +155,9 @@ flowchart LR
 
 ```
 ┌───────────────────────────────────────────┐
-│              Base64 blob                  │
+│                Base64 blob                │
 ├──────────┬────────────────────────────────┤
-│ IV (12B) │ Ciphertext + GCM Auth Tag     │
+│ IV (12B) │ Ciphertext + GCM Auth Tag      │
 └──────────┴────────────────────────────────┘
 ```
 
