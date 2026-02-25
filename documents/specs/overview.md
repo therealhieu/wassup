@@ -52,9 +52,9 @@ Pages → columns (12-col grid) → widgets (stacked vertically). Each page beco
 
 ## Key Design Decisions
 
-1. **Preset system** — Users manage multiple dashboard configurations as presets with drag-and-drop reordering, import/export (JSON), and inline renaming. State is `AppState = { activePresetId, presets[] }`.
+1. **Preset system** — Users manage multiple dashboard configurations as presets with drag-and-drop reordering, import/export (JSON), and inline renaming. Built-in seed presets are readonly and auto-reconciled on hydration; users duplicate to customize. State is `AppState = { activePresetId, presets[] }`.
 2. **Visual config editor** — Edit mode replaces YAML editing. Users add/edit/remove pages, columns, and widgets via a form-based UI with live preview.
 3. **DDD per feature** — Each widget is a self-contained module (`domain/`, `infrastructure/`, `presentation/`, `services/`).
 4. **Zero-knowledge encryption** — Authenticated users' config is encrypted client-side (AES-256-GCM, PBKDF2 key derivation) before being stored on the server. The server never sees plaintext config.
 5. **Server-side data caching** — LRU caches on server actions cache fetched data (not service instances) with 5 min TTL, making reloads instant.
-6. **CSP & security** — Content Security Policy via middleware, CSRF origin validation, rate limiting on mutation endpoints.
+6. **CSP & security** — Content Security Policy via proxy (`proxy.ts`), CSRF origin validation, rate limiting on mutation endpoints.

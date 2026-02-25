@@ -18,12 +18,6 @@ export const DATA_ENGINEERING_PRESET: Preset = {
 							size: 3,
 							widgets: [
 								{
-									type: "hackernews",
-									sort: "top",
-									limit: 10,
-									query: "data engineering OR AI OR platform OR infrastructure",
-								},
-								{
 									type: "bookmark",
 									title: "Bookmarks",
 									groups: [
@@ -45,12 +39,25 @@ export const DATA_ENGINEERING_PRESET: Preset = {
 											bookmarks: [
 												"https://blog.dataengineerthings.org/",
 												"https://blog.det.life/a-non-beginner-data-engineering-roadmap-2025-edition-2b39d865dd0b",
+												"https://www.startdataengineering.com",
+												"https://github.com/DataEngineer-io/data-engineer-handbook",
+												"https://docs.getdbt.com",
+												"https://iceberg.apache.org/docs/latest",
+												"https://duckdb.org/docs",
+												"https://use-the-index-luke.com",
 											],
 										},
 										{
 											title: "AI",
 											bookmarks: [
 												"https://github.com/e2b-dev/awesome-ai-agents",
+												"https://github.com/Shubhamsaboo/awesome-llm-apps",
+												"https://github.com/NirDiamant/RAG_Techniques",
+												"https://github.com/NirDiamant/GenAI_Agents",
+												"https://python.langchain.com/docs",
+												"https://docs.llamaindex.ai",
+												"https://paperswithcode.com",
+												"https://huggingface.co/papers",
 											],
 										},
 										{
@@ -70,47 +77,55 @@ export const DATA_ENGINEERING_PRESET: Preset = {
 								{
 									type: "tabs",
 									labels: [
-										"r/compsci",
-										"r/rust",
-										"r/vozforums",
-										"r/dataengineering",
-										"r/leetcode",
+										"Data Engineering",
+										"DataOps",
+										"Database",
+										"Rust",
+										"AI",
+										"Interview / Jobs",
 									],
 									tabs: [
 										{
-											type: "reddit",
-											subreddit: "compsci",
+											type: "hackernews",
 											hideTitle: true,
 											sort: "new",
 											limit: 5,
+											query: "data engineering OR data pipeline OR data platform",
 										},
 										{
-											type: "reddit",
-											subreddit: "rust",
+											type: "hackernews",
 											hideTitle: true,
 											sort: "new",
 											limit: 5,
+											query: "DataOps OR data quality OR data observability",
 										},
 										{
-											type: "reddit",
-											subreddit: "vozforums",
+											type: "hackernews",
 											hideTitle: true,
 											sort: "new",
 											limit: 5,
+											query: "database OR SQL OR distributed system",
 										},
 										{
-											type: "reddit",
-											subreddit: "dataengineering",
+											type: "hackernews",
 											hideTitle: true,
 											sort: "new",
 											limit: 5,
+											query: "rust lang OR rust",
 										},
 										{
-											type: "reddit",
-											subreddit: "leetcode",
+											type: "hackernews",
 											hideTitle: true,
 											sort: "new",
 											limit: 5,
+											query: "LLM OR AI agent OR RAG OR large language model",
+										},
+										{
+											type: "hackernews",
+											hideTitle: true,
+											sort: "new",
+											limit: 5,
+											query: "data engineer job OR data engineer interview prep",
 										},
 									],
 								},
@@ -231,7 +246,7 @@ export const SEED_PRESETS: Preset[] = [
 		name: "Software Engineer",
 		config: AppConfigSchema.parse({
 			ui: {
-				theme: "dark",
+				theme: "light",
 				pages: [
 					{
 						title: "Home",
@@ -241,25 +256,41 @@ export const SEED_PRESETS: Preset[] = [
 								size: 3,
 								widgets: [
 									{
-										type: "weather",
-										location: "San Francisco",
-									},
-									{
 										type: "bookmark",
 										title: "Dev Resources",
 										groups: [
+
 											{
-												title: "References",
+												title: "System Design",
 												bookmarks: [
-													"https://devdocs.io",
-													"https://developer.mozilla.org",
+													"https://www.hellointerview.com",
+													"https://github.com/ashishps1/awesome-system-design-resources",
+													"https://github.com/donnemartin/system-design-primer",
+													"https://highscalability.com",
 												],
 											},
 											{
-												title: "Tools",
+												title: "Design Patterns",
 												bookmarks: [
-													"https://github.com",
-													"https://stackoverflow.com",
+													"https://refactoring.guru/design-patterns",
+													"https://www.patterns.dev",
+													"https://github.com/kamranahmedse/design-patterns-for-humans",
+												],
+											},
+											{
+												title: "Distributed Systems",
+												bookmarks: [
+													"https://martinfowler.com/articles/patterns-of-distributed-systems",
+													"https://github.com/theanalyst/awesome-distributed-systems",
+													"https://jepsen.io",
+												],
+											},
+											{
+												title: "Database",
+												bookmarks: [
+													"https://use-the-index-luke.com",
+													"https://www.db-engines.com/en/ranking",
+													"https://duckdb.org/docs",
 												],
 											},
 										],
@@ -272,31 +303,47 @@ export const SEED_PRESETS: Preset[] = [
 									{
 										type: "tabs",
 										labels: [
-											"r/programming",
-											"r/webdev",
-											"r/typescript",
+											"Programming",
+											"System Design",
+											"Distributed Systems",
+											"Database",
+											"Platform",
 										],
 										tabs: [
 											{
-												type: "reddit",
-												subreddit: "programming",
+												type: "hackernews",
 												hideTitle: true,
 												sort: "new",
 												limit: 5,
+												query: "programming OR software engineering",
 											},
 											{
-												type: "reddit",
-												subreddit: "webdev",
+												type: "hackernews",
 												hideTitle: true,
 												sort: "new",
 												limit: 5,
+												query: "system design OR scalability OR architecture",
 											},
 											{
-												type: "reddit",
-												subreddit: "typescript",
+												type: "hackernews",
 												hideTitle: true,
 												sort: "new",
 												limit: 5,
+												query: "distributed systems OR consensus OR microservices",
+											},
+											{
+												type: "hackernews",
+												hideTitle: true,
+												sort: "new",
+												limit: 5,
+												query: "database OR SQL OR postgres OR distributed database",
+											},
+											{
+												type: "hackernews",
+												hideTitle: true,
+												sort: "new",
+												limit: 5,
+												query: "kubernetes OR k8s OR docker OR platform engineering",
 											},
 										],
 									},
@@ -336,17 +383,17 @@ export const SEED_PRESETS: Preset[] = [
 									{
 										type: "tabs",
 										labels: [
-											"AI / LLM",
-											"Platform",
+											"System Design",
+											"Platform / Infra",
+											"Database",
 										],
 										tabs: [
 											{
 												type: "github",
 												topics: [
-													"llm",
-													"ai-agents",
-													"rag",
-													"generative-ai",
+													"system-design",
+													"distributed-systems",
+													"architecture",
 												],
 												createdAfter: "2024-01-01",
 												dateRange: "90d",
@@ -359,6 +406,17 @@ export const SEED_PRESETS: Preset[] = [
 													"docker",
 													"platform-engineering",
 													"infrastructure",
+												],
+												createdAfter: "2024-01-01",
+												dateRange: "90d",
+												limit: 20,
+											},
+											{
+												type: "github",
+												topics: [
+													"postgresql",
+													"distributed-database",
+													"database",
 												],
 												createdAfter: "2024-01-01",
 												dateRange: "90d",
@@ -380,7 +438,7 @@ export const SEED_PRESETS: Preset[] = [
 		name: "AI Engineering",
 		config: AppConfigSchema.parse({
 			ui: {
-				theme: "dark",
+				theme: "light",
 				pages: [
 					{
 						title: "Home",
@@ -430,47 +488,47 @@ export const SEED_PRESETS: Preset[] = [
 									{
 										type: "tabs",
 										labels: [
-											"r/LocalLLaMA",
-											"r/MachineLearning",
-											"r/artificial",
-											"r/LLMDevs",
-											"r/singularity",
+											"AI",
+											"LLMs",
+											"Agents",
+											"RAG",
+											"AIOps",
 										],
 										tabs: [
 											{
-												type: "reddit",
-												subreddit: "LocalLLaMA",
+												type: "hackernews",
 												hideTitle: true,
-												sort: "hot",
+												sort: "top",
 												limit: 5,
+												query: "artificial intelligence OR AI",
 											},
 											{
-												type: "reddit",
-												subreddit: "MachineLearning",
+												type: "hackernews",
 												hideTitle: true,
-												sort: "hot",
+												sort: "top",
 												limit: 5,
+												query: "LLM OR large language model OR GPT",
 											},
 											{
-												type: "reddit",
-												subreddit: "artificial",
+												type: "hackernews",
 												hideTitle: true,
-												sort: "hot",
+												sort: "top",
 												limit: 5,
+												query: "AI agent OR agentic OR multi-agent",
 											},
 											{
-												type: "reddit",
-												subreddit: "LLMDevs",
+												type: "hackernews",
 												hideTitle: true,
-												sort: "hot",
+												sort: "top",
 												limit: 5,
+												query: "RAG OR retrieval augmented generation OR vector database",
 											},
 											{
-												type: "reddit",
-												subreddit: "singularity",
+												type: "hackernews",
 												hideTitle: true,
-												sort: "hot",
+												sort: "top",
 												limit: 5,
+												query: "MLOps OR AIOps OR model serving OR LLM inference",
 											},
 										],
 									},
@@ -505,65 +563,7 @@ export const SEED_PRESETS: Preset[] = [
 							},
 						],
 					},
-					{
-						title: "Research",
-						path: "/research",
-						columns: [
-							{
-								size: 5,
-								widgets: [
-									{
-										type: "hackernews",
-										sort: "top",
-										limit: 15,
-										query: "LLM OR large language model",
-									},
-									{
-										type: "hackernews",
-										sort: "show",
-										limit: 10,
-										query: "AI agent OR RAG",
-									},
-								],
-							},
-							{
-								size: 7,
-								widgets: [
-									{
-										type: "tabs",
-										labels: [
-											"r/LocalLLaMA",
-											"r/LLMDevs",
-											"r/PromptEngineering",
-										],
-										tabs: [
-											{
-												type: "reddit",
-												subreddit: "LocalLLaMA",
-												hideTitle: true,
-												sort: "hot",
-												limit: 8,
-											},
-											{
-												type: "reddit",
-												subreddit: "LLMDevs",
-												hideTitle: true,
-												sort: "hot",
-												limit: 8,
-											},
-											{
-												type: "reddit",
-												subreddit: "PromptEngineering",
-												hideTitle: true,
-												sort: "hot",
-												limit: 8,
-											},
-										],
-									},
-								],
-							},
-						],
-					},
+
 					{
 						title: "Trends",
 						path: "/trends",
@@ -630,7 +630,7 @@ export const SEED_PRESETS: Preset[] = [
 		name: "Data Science",
 		config: AppConfigSchema.parse({
 			ui: {
-				theme: "dark",
+				theme: "light",
 				pages: [
 					{
 						title: "Home",
@@ -685,47 +685,47 @@ export const SEED_PRESETS: Preset[] = [
 									{
 										type: "tabs",
 										labels: [
-											"r/datascience",
-											"r/MachineLearning",
-											"r/statistics",
-											"r/dataanalysis",
-											"r/dataisbeautiful",
+											"Data Science",
+											"ML",
+											"Statistics",
+											"Data Analysis",
+											"Data Viz",
 										],
 										tabs: [
 											{
-												type: "reddit",
-												subreddit: "datascience",
+												type: "hackernews",
 												hideTitle: true,
-												sort: "hot",
+												sort: "top",
 												limit: 5,
+												query: "data science",
 											},
 											{
-												type: "reddit",
-												subreddit: "MachineLearning",
+												type: "hackernews",
 												hideTitle: true,
-												sort: "hot",
+												sort: "top",
 												limit: 5,
+												query: "machine learning",
 											},
 											{
-												type: "reddit",
-												subreddit: "statistics",
+												type: "hackernews",
 												hideTitle: true,
-												sort: "hot",
+												sort: "top",
 												limit: 5,
+												query: "statistics OR statistical",
 											},
 											{
-												type: "reddit",
-												subreddit: "dataanalysis",
+												type: "hackernews",
 												hideTitle: true,
-												sort: "hot",
+												sort: "top",
 												limit: 5,
+												query: "data analysis",
 											},
 											{
-												type: "reddit",
-												subreddit: "dataisbeautiful",
+												type: "hackernews",
 												hideTitle: true,
-												sort: "hot",
+												sort: "top",
 												limit: 5,
+												query: "data visualization",
 											},
 										],
 									},
@@ -787,31 +787,31 @@ export const SEED_PRESETS: Preset[] = [
 									{
 										type: "tabs",
 										labels: [
-											"r/deeplearning",
-											"r/LanguageTechnology",
-											"r/kaggle",
+											"Deep Learning",
+											"NLP",
+											"Kaggle",
 										],
 										tabs: [
 											{
-												type: "reddit",
-												subreddit: "deeplearning",
+												type: "hackernews",
 												hideTitle: true,
-												sort: "hot",
+												sort: "top",
 												limit: 8,
+												query: "deep learning OR neural network",
 											},
 											{
-												type: "reddit",
-												subreddit: "LanguageTechnology",
+												type: "hackernews",
 												hideTitle: true,
-												sort: "hot",
+												sort: "top",
 												limit: 8,
+												query: "NLP OR language model",
 											},
 											{
-												type: "reddit",
-												subreddit: "kaggle",
+												type: "hackernews",
 												hideTitle: true,
-												sort: "hot",
+												sort: "top",
 												limit: 8,
+												query: "kaggle OR competition",
 											},
 										],
 									},

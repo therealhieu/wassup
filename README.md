@@ -18,10 +18,10 @@ Next.js 16 · React 19 · MUI 7 · TypeScript · Zod · TanStack Query · Prisma
 
 - **8 widget types** — Weather, Reddit, YouTube, RSS Feed, GitHub Trending, Hacker News, Bookmarks, Tabs (container)
 - **Visual config editor** — Add/edit/remove pages, columns, and widgets via forms with live preview
-- **Preset system** — Multiple dashboard configs with drag-and-drop reorder, import/export (JSON)
+- **Preset system** — Multiple dashboard configs with drag-and-drop reorder, import/export (JSON). Built-in presets are readonly and auto-update; duplicate to customize.
 - **Authentication** — GitHub OAuth via NextAuth v5
 - **Zero-knowledge encryption** — Config encrypted client-side (AES-256-GCM) before server storage
-- **Security** — CSP with per-request nonce, CSRF origin validation, rate limiting
+- **Security** — CSP with per-request nonce (via proxy), CSRF origin validation, rate limiting
 
 ## Project Structure
 

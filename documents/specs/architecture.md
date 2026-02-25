@@ -50,7 +50,7 @@ src/
 │       └── ErrorBoundary.tsx          # Error boundary for editor
 │
 ├── providers/
-│   ├── AppConfigProvider.tsx          # Config state (useReducer + localStorage + encrypted sync)
+│   ├── AppConfigProvider.tsx          # Config state (useReducer + localStorage + encrypted sync + seed reconciliation)
 │   ├── EditModeProvider.tsx           # Edit mode toggle context
 │   ├── ReactQueryProvider.tsx         # TanStack Query (in-memory)
 │   └── SessionProvider.tsx            # NextAuth session context
@@ -64,7 +64,7 @@ src/
 ├── lib/
 │   ├── auth.ts                        # NextAuth configuration (GitHub + Prisma adapter)
 │   ├── prisma.ts                      # Prisma client singleton
-│   ├── presets.ts                     # Seed presets (default configs)
+│   ├── presets.ts                     # Seed presets, isSeedPreset(), SEED_PRESET_IDS
 │   ├── widget-registry.ts            # Widget type registry (field definitions, defaults)
 │   ├── client-crypto.ts              # AES-256-GCM encrypt/decrypt (Web Crypto API)
 │   ├── constants.ts                   # Shared constants
@@ -75,7 +75,7 @@ src/
 │   ├── logger.ts                      # tslog factory
 │   └── http/constants.ts             # Shared HTTP config (timeouts, user agents)
 │
-├── middleware.ts                      # CSP headers + nonce generation
+├── proxy.ts                           # CSP headers + nonce generation (Next.js 16 proxy convention)
 ├── themes.ts                          # MUI theme definitions
 ├── generated/prisma/                  # Prisma generated client
 └── types/
@@ -158,7 +158,7 @@ AppStateSchema
 
 ## Security
 
-- **CSP**: Generated per-request nonce in `middleware.ts`. Strict `script-src`, `img-src`, `connect-src`, `form-action` directives.
+- **CSP**: Generated per-request nonce in `proxy.ts`. Strict `script-src`, `img-src`, `connect-src`, `form-action` directives.
 - **CSRF**: Origin validation on mutation endpoints (`lib/csrf.ts`).
 - **Rate limiting**: Sliding-window rate limiter on API routes (`lib/rate-limit.ts`).
 - **Security headers**: `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy` via `next.config.ts`.

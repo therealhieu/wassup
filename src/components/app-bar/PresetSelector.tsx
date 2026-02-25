@@ -350,6 +350,9 @@ export function PresetSelector() {
                     color: "text.primary",
                     textTransform: "none",
                     fontSize: "0.875rem",
+                    "&.Mui-focusVisible": {
+                        backgroundColor: "transparent",
+                    },
                 }}
                 size="small"
                 data-testid="preset-selector"
