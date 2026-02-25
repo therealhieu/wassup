@@ -2,7 +2,7 @@
 
 ## Scope
 
-Add Prometheus-compatible metrics to Wassup so VictoriaMetrics can scrape application-level performance data. This covers server action latency, LRU cache effectiveness, and Node.js runtime health.
+Add Prometheus-compatible metrics to Wassup so Prometheus can scrape application-level performance data. This covers server action latency, LRU cache effectiveness, and Node.js runtime health.
 
 ### What This Plan Does
 
@@ -96,7 +96,7 @@ export async function GET() {
 
 > **Public exposure note:** This route is accessible at `https://wassup.therealhieu.com/api/metrics`.
 > The data is non-sensitive (heap size, action durations) and this is a personal project,
-> so no auth is needed. VictoriaMetrics scrapes it from within the Docker network.
+> so no auth is needed. Prometheus scrapes it from within the Docker network.
 
 ---
 
@@ -210,7 +210,7 @@ export async function fetchGithubWidgetProps(config) {
 
 ---
 
-### Step 5 — Enable VictoriaMetrics Scraping (play-infra)
+### Step 5 — Enable Prometheus Scraping (play-infra)
 
 **File:** `play-infra/deploy/hetzner/prometheus.yml`
 

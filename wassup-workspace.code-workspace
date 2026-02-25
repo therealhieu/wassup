@@ -1,9 +1,11 @@
 {
 	"folders": [
 		{
+			"name": "wassup",
 			"path": "."
 		},
 		{
+			"name": "play-infra",
 			"path": "../play-infra"
 		}
 	],
