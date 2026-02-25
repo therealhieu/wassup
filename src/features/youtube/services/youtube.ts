@@ -30,7 +30,7 @@ export class YoutubeService {
 	}
 
 	private async resolveChannels(): Promise<YoutubeChannel[]> {
-		return Promise.all(
+		const results = await Promise.allSettled(
 			this.config.channels.map((channel) => {
 				if (channel.startsWith("@")) {
 					return this.channelRepository.findByName(channel);
@@ -43,6 +43,14 @@ export class YoutubeService {
 				);
 			})
 		);
+
+		return results.flatMap((result, i) => {
+			if (result.status === "fulfilled") return [result.value];
+			logger.warn(
+				`Failed to resolve channel ${this.config.channels[i]}: ${result.reason}`
+			);
+			return [];
+		});
 	}
 
 	async fetch(): Promise<YoutubeWidgetData> {
@@ -51,21 +59,27 @@ export class YoutubeService {
 			`Resolved ${channels.length} channels: ${channels.map((c) => c.name).join(", ")}`
 		);
 
-		const videoArrays = await Promise.all(
+		const results = await Promise.allSettled(
 			channels.map((c) => this.videoRepository.fetchMany(c.id))
 		);
 
-		const sorted = videoArrays
-			.flat()
+		const videos = results
+			.flatMap((result, i) => {
+				if (result.status === "fulfilled") return result.value;
+				logger.warn(
+					`Failed to fetch videos for ${channels[i].name}: ${result.reason}`
+				);
+				return [];
+			})
 			.sort(
 				(a, b) =>
 					new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
 			);
 
-		const limit = this.config.limit ?? sorted.length;
-		const videos = sorted.slice(0, limit);
-		logger.info(`Fetched ${videos.length} videos from ${channels.length} channels`);
+		const limit = this.config.limit ?? videos.length;
+		const sliced = videos.slice(0, limit);
+		logger.info(`Fetched ${sliced.length} videos from ${channels.length} channels`);
 
-		return { channels, videos };
+		return { channels, videos: sliced };
 	}
 }

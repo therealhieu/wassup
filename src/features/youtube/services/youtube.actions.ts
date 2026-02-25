@@ -9,7 +9,7 @@ import { YoutubeService, YoutubeWidgetData } from "./youtube";
 // Cache the fetched data (channels + videos), not the service instance
 const dataCache = new LRUCache<string, YoutubeWidgetData>({
 	max: 20,
-	ttl: 1000 * 60 * 5, // 5 minutes
+	ttl: 1000 * 60 * 60 * 12, // 12 hours
 });
 
 export async function fetchYoutubeWidgetProps(
