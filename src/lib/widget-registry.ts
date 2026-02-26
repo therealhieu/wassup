@@ -6,6 +6,9 @@ import { FeedWidgetConfigSchema } from "@/features/feed/infrastructure/config.sc
 import { BookmarkWidgetConfigSchema } from "@/features/bookmark/infrastructure/config.schemas";
 import { GithubWidgetConfigSchema } from "@/features/github/infrastructure/config.schemas";
 import { HackerNewsWidgetConfigSchema } from "@/features/hackernews/infrastructure/config.schemas";
+import { LobstersWidgetConfigSchema } from "@/features/lobsters/infrastructure/config.schemas";
+import { MultiSourceNewsWidgetConfigSchema } from "@/features/multisourcenews/infrastructure/config.schemas";
+import { DevtoWidgetConfigSchema } from "@/features/devto/infrastructure/config.schemas";
 import { TabsWidgetConfigSchema } from "@/features/tabs/infrastructure/config.schemas";
 import { WidgetConfig } from "@/infrastructure/config.schemas";
 
@@ -94,6 +97,12 @@ export function getWidgetSummary(config: WidgetConfig): string {
 			return `${config.labels.length} tab${config.labels.length !== 1 ? "s" : ""}`;
 		case "hackernews":
 			return config.query ?? `${config.sort} stories`;
+		case "lobsters":
+			return config.tag ?? `${config.sort} stories`;
+		case "multisourcenews":
+			return config.devto ? "HN + Lobsters + DEV" : "HN + Lobsters";
+		case "devto":
+			return config.tags?.join(", ") ?? `top ${config.top}d`;
 	}
 }
 
@@ -349,6 +358,84 @@ export const WIDGET_REGISTRY: Record<string, WidgetTypeRegistryEntry> = {
 				placeholder: "rust OR llm OR kubernetes",
 				helpText:
 					"Optional. Filter stories by topic (supports AND/OR).",
+			},
+			{
+				name: "limit",
+				label: "Limit",
+				type: "number",
+				min: 1,
+				max: 30,
+				defaultValue: 10,
+			},
+			{
+				name: "hideTitle",
+				label: "Hide Title",
+				type: "boolean",
+				defaultValue: false,
+			},
+		],
+	},
+	lobsters: {
+		type: "lobsters",
+		label: "Lobste.rs",
+		schema: LobstersWidgetConfigSchema,
+		fields: [
+			{
+				name: "sort",
+				label: "Sort",
+				type: "select",
+				options: ["hottest", "newest", "active"],
+				defaultValue: "hottest",
+			},
+			{
+				name: "tag",
+				label: "Tag",
+				type: "text",
+				placeholder: "rust",
+				helpText:
+					"Optional. Filter by tag. When set, sort is ignored (lobste.rs limitation).",
+			},
+			{
+				name: "limit",
+				label: "Limit",
+				type: "number",
+				min: 1,
+				max: 25,
+				defaultValue: 10,
+			},
+			{
+				name: "hideTitle",
+				label: "Hide Title",
+				type: "boolean",
+				defaultValue: false,
+			},
+		],
+	},
+	multisourcenews: {
+		type: "multisourcenews",
+		label: "Multi-Source News",
+		schema: MultiSourceNewsWidgetConfigSchema,
+		fields: [],
+	},
+	devto: {
+		type: "devto",
+		label: "DEV Community",
+		schema: DevtoWidgetConfigSchema,
+		fields: [
+			{
+				name: "tags",
+				label: "Tags",
+				type: "string-array",
+				placeholder: "ai",
+				helpText: "Optional. Filter by one or more tags.",
+			},
+			{
+				name: "top",
+				label: "Top Period",
+				type: "select",
+				options: ["1", "7", "30", "365"],
+				defaultValue: "7",
+				helpText: "Top articles from last N days.",
 			},
 			{
 				name: "limit",

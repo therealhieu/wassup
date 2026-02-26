@@ -7,6 +7,9 @@ import { BookmarkWidget } from "@/features/bookmark/presentation/BookmarkWidget"
 import { FeedWidget } from "@/features/feed/presentation/FeedWidget";
 import { GithubWidget } from "@/features/github/presentation/GithubWidget";
 import { HackerNewsWidget } from "@/features/hackernews/presentation/HackerNewsWidget";
+import { LobstersWidget } from "@/features/lobsters/presentation/LobstersWidget";
+import { MultiSourceNewsWidget } from "@/features/multisourcenews/presentation/MultiSourceNewsWidget";
+import { DevtoWidget } from "@/features/devto/presentation/DevtoWidget";
 import { memo } from "react";
 
 interface WidgetComponentProps {
@@ -32,6 +35,12 @@ export const Widget = memo(function Widget({ widgetConfig }: WidgetComponentProp
 				return <GithubWidget config={widgetConfig} />;
 			case "hackernews":
 				return <HackerNewsWidget config={widgetConfig} />;
+			case "lobsters":
+				return <LobstersWidget config={widgetConfig} />;
+			case "multisourcenews":
+				return <MultiSourceNewsWidget config={widgetConfig} />;
+			case "devto":
+				return <DevtoWidget config={widgetConfig} />;
 		}
 	})();
 

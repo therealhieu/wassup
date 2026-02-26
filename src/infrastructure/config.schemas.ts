@@ -32,6 +32,18 @@ import {
 	HackerNewsWidgetConfig,
 	HackerNewsWidgetConfigSchema,
 } from "@/features/hackernews/infrastructure/config.schemas";
+import {
+	LobstersWidgetConfig,
+	LobstersWidgetConfigSchema,
+} from "@/features/lobsters/infrastructure/config.schemas";
+import {
+	MultiSourceNewsWidgetConfig,
+	MultiSourceNewsWidgetConfigSchema,
+} from "@/features/multisourcenews/infrastructure/config.schemas";
+import {
+	DevtoWidgetConfig,
+	DevtoWidgetConfigSchema,
+} from "@/features/devto/infrastructure/config.schemas";
 
 export const WidgetConfigSchema = z.lazy(() =>
 	z.union([
@@ -43,6 +55,9 @@ export const WidgetConfigSchema = z.lazy(() =>
 		FeedWidgetConfigSchema,
 		GithubWidgetConfigSchema,
 		HackerNewsWidgetConfigSchema,
+		LobstersWidgetConfigSchema,
+		MultiSourceNewsWidgetConfigSchema,
+		DevtoWidgetConfigSchema,
 	])
 );
 
@@ -54,7 +69,10 @@ export type WidgetConfig =
 	| BookmarkWidgetConfig
 	| FeedWidgetConfig
 	| GithubWidgetConfig
-	| HackerNewsWidgetConfig;
+	| HackerNewsWidgetConfig
+	| LobstersWidgetConfig
+	| MultiSourceNewsWidgetConfig
+	| DevtoWidgetConfig;
 
 export const ColumnConfigSchema = z
 	.object({
