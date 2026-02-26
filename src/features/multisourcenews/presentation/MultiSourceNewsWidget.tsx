@@ -6,8 +6,7 @@ import { MultiSourceNewsWidgetConfig } from "../infrastructure/config.schemas";
 import { HackerNewsWidget } from "@/features/hackernews/presentation/HackerNewsWidget";
 import { LobstersWidget } from "@/features/lobsters/presentation/LobstersWidget";
 import { DevtoWidget } from "@/features/devto/presentation/DevtoWidget";
-
-type Source = "hackernews" | "lobsters" | "devto";
+import { useMultiSourceNews, type Source } from "./MultiSourceNewsContext";
 
 export interface MultiSourceNewsWidgetProps {
     config: MultiSourceNewsWidgetConfig;
@@ -16,7 +15,11 @@ export interface MultiSourceNewsWidgetProps {
 export const MultiSourceNewsWidget = ({
     config,
 }: MultiSourceNewsWidgetProps) => {
-    const [source, setSource] = useState<Source>("hackernews");
+    const ctx = useMultiSourceNews();
+    const [localSource, setLocalSource] = useState<Source>("hackernews");
+    // Use shared context when inside a TabsWidget, otherwise use local state
+    const source = ctx?.source ?? localSource;
+    const setSource = ctx?.setSource ?? setLocalSource;
     const contentRef = useRef<HTMLDivElement>(null);
 
     // Apply scroll-after-row: measure the Nth card's position and cap maxHeight.

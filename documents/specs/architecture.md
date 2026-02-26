@@ -20,6 +20,13 @@ src/
 │   ├── feed/
 │   ├── bookmark/
 │   ├── github/                       # GitHub trending repos
+│   ├── hackernews/                   # Hacker News (Firebase + Algolia)
+│   ├── lobsters/                     # Lobste.rs
+│   ├── devto/                        # DEV Community
+│   ├── multisourcenews/              # Unified HN + Lobsters + DEV widget
+│   │   └── presentation/
+│   │       ├── MultiSourceNewsWidget.tsx
+│   │       └── MultiSourceNewsContext.tsx  # Global source state (React Context)
 │   ├── tabs/
 │   ├── geocoding/                    # Shared (used by weather)
 │   └── lib/                          # Shared feature utilities

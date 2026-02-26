@@ -182,6 +182,8 @@ Container widget that renders other widgets in a tab switcher.
 | `labels` | string[] | *required* | Tab header text |
 | `tabs` | widget[] | *required* | Must match `labels` length |
 
+> **Note:** When `multisourcenews` widgets are children of a `tabs` widget, their source selection (🔥 / 🦞 / DEV) is **shared across all topic tabs**. This is implemented via React Context (`MultiSourceNewsProvider`) scoped to the `tabs` container.
+
 ---
 
 ## `hackernews`
@@ -206,4 +208,93 @@ Displays stories from Hacker News, optionally filtered by topic.
 | `hideTitle` | boolean | `false` | Useful inside tabs |
 
 When `query` is absent, fetches from Firebase global feeds. When present, uses Algolia full-text search.
+
+---
+
+## `lobsters`
+
+Displays stories from [Lobste.rs](https://lobste.rs), optionally filtered by tag.
+
+**Data source:** Lobste.rs public JSON API. No key required.
+
+```yaml
+- type: lobsters
+  sort: hottest
+  tag: programming
+  limit: 10
+  hideTitle: false
+```
+
+| Field | Type | Default | Notes |
+|-------|------|---------|-------|
+| `sort` | `"hottest"` \| `"newest"` \| `"active"` | `"hottest"` | Feed type |
+| `tag` | string | — | Optional tag filter (e.g. `"programming"`, `"rust"`) |
+| `limit` | number | `10` | Max 25 |
+| `hideTitle` | boolean | `false` | Useful inside tabs |
+
+---
+
+## `devto`
+
+Displays articles from [DEV Community](https://dev.to), optionally filtered by tags.
+
+**Data source:** DEV.to public API. No key required.
+
+```yaml
+- type: devto
+  tags:
+    - javascript
+    - webdev
+  top: "7"
+  limit: 10
+  hideTitle: false
+```
+
+| Field | Type | Default | Notes |
+|-------|------|---------|-------|
+| `tags` | string[] | — | Optional tag filters; multiple tags are OR-combined |
+| `top` | `"1"` \| `"7"` \| `"30"` \| `"365"` | `"7"` | Articles from the top N days |
+| `limit` | number | `10` | Max 30 |
+| `hideTitle` | boolean | `false` | Useful inside tabs |
+
+---
+
+## `multisourcenews`
+
+A unified news widget that aggregates Hacker News, Lobste.rs, and optionally DEV Community into a single view with a source toggle (🔥 / 🦞 / DEV) in the bottom-right corner.
+
+When used inside a `tabs` widget, the source selection is **global across all topic tabs** — switching from PROGRAMMING to SYSTEM DESIGN applies the same source to that tab too.
+
+**Data sources:** Same as `hackernews`, `lobsters`, and `devto` respectively.
+
+```yaml
+- type: multisourcenews
+  scrollAfterRow: 6
+  hackernews:
+    type: hackernews
+    sort: top
+    query: "rust OR systems"
+    limit: 15
+    hideTitle: true
+  lobsters:
+    type: lobsters
+    sort: hottest
+    tag: programming
+    limit: 15
+    hideTitle: true
+  devto:                   # Optional; omit to hide the DEV toggle
+    type: devto
+    tags:
+      - webdev
+    top: "7"
+    limit: 15
+    hideTitle: true
+```
+
+| Field | Type | Default | Notes |
+|-------|------|---------|-------|
+| `hackernews` | HackerNews config | *required* | Embedded HN widget config (without `hideTitle` override needed) |
+| `lobsters` | Lobsters config | *required* | Embedded Lobsters widget config |
+| `devto` | DEV config | — | Optional; when absent the DEV toggle button is hidden |
+| `scrollAfterRow` | number | — | Enables vertical scrolling after N rows |
 
