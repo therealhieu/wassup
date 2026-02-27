@@ -90,7 +90,7 @@ src/
 
 prisma/
 ├── schema.prisma                      # User, Account, Session, UserConfig models
-└── migrations/                        # SQLite migrations
+└── migrations/                        # PostgreSQL migrations
 ```
 
 ## Feature Module Structure
@@ -158,7 +158,7 @@ AppStateSchema
 
 ## Authentication & Encryption
 
-1. **NextAuth v5** with GitHub OAuth provider and Prisma adapter (SQLite)
+1. **NextAuth v5** with GitHub OAuth provider and Prisma adapter (PostgreSQL)
 2. **Zero-knowledge encryption**: Config is encrypted client-side with AES-256-GCM before being sent to the server. PBKDF2 (600k iterations, SHA-256) derives the key from a user passphrase.
 3. **Server stores**: ciphertext (base64) + PBKDF2 salt (base64) in `UserConfig` table. Server never sees plaintext.
 4. **Passphrase caching**: Cached in localStorage (`wassup-pk`) to avoid re-prompting on page reload.

@@ -11,7 +11,7 @@ A self-hosted personal dashboard that aggregates weather, Reddit, YouTube, RSS f
 | UI | React 19 + MUI 7 |
 | Schema | Zod 3 → JSON Schema |
 | Auth | NextAuth v5 (GitHub OAuth) |
-| Database | Prisma 7 + SQLite (better-sqlite3) |
+| Database | Prisma 7 + PostgreSQL |
 | Client State | React Context + useReducer (persisted to localStorage) |
 | Server Cache | LRU Cache (per server action, 5 min TTL) |
 | Client Cache | TanStack React Query (in-memory, 5 min stale) |

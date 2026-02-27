@@ -77,8 +77,8 @@ Topics and lessons inferred from building the Wassup project. Each topic maps to
 - Handling anonymous vs authenticated user flows
 - Conflict resolution and sync timing
 
-### 11. Prisma + SQLite for Solo/Small Projects
-- When an embedded database is the right choice
+### 11. Prisma + PostgreSQL for Solo/Small Projects
+- When a Docker-managed database is the right choice
 - Integrating Prisma with Next.js server actions
 - Schema design and migrations for a single-user / small-user app
 

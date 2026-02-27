@@ -4,9 +4,10 @@
 
 ```bash
 bun install
-cp .env.local.example .env.local   # Fill in env vars (GitHub OAuth, etc.)
-bunx prisma migrate dev            # Initialize SQLite database
-bun run dev                        # Starts Next.js with Turbopack on :2506
+cp .env.example .env               # Fill in env vars (GitHub OAuth, etc.)
+docker compose up -d postgres       # Start PostgreSQL
+bunx prisma migrate dev             # Initialize database
+bun run dev                         # Starts Next.js with Turbopack on :2506
 ```
 
 ## Commands
@@ -79,7 +80,7 @@ The registry powers the `SchemaForm` component, default value generation, and wi
 
 ## Database
 
-SQLite via Prisma with `better-sqlite3` driver. Schema at `prisma/schema.prisma`.
+PostgreSQL via Prisma with `@prisma/adapter-pg` driver adapter. Schema at `prisma/schema.prisma`.
 
 | Model | Purpose |
 |-------|---------|

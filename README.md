@@ -8,13 +8,14 @@ A self-hosted personal dashboard that aggregates weather, Reddit, YouTube, RSS f
 
 ```bash
 bun install
-bunx prisma migrate dev   # Initialize SQLite database
-bun run dev                # → http://localhost:3000
+docker compose up -d postgres   # Start PostgreSQL
+bunx prisma migrate dev         # Initialize database
+bun run dev                     # → http://localhost:3000
 ```
 
 ## Tech Stack
 
-Next.js 16 · React 19 · MUI 7 · TypeScript · Zod · TanStack Query · Prisma + SQLite · NextAuth v5 · @dnd-kit
+Next.js 16 · React 19 · MUI 7 · TypeScript · Zod · TanStack Query · Prisma + PostgreSQL · NextAuth v5 · @dnd-kit
 
 ## Features
 
@@ -37,7 +38,7 @@ src/
 ├── lib/              # Auth, presets, widget-registry, crypto, rate-limit
 └── infrastructure/   # Root config schema (AppState, Preset, AppConfig)
 
-prisma/               # SQLite schema + migrations
+prisma/               # Prisma schema + PostgreSQL migrations
 documents/specs/      # Detailed specifications
 ```
 

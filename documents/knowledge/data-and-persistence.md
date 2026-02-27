@@ -23,7 +23,7 @@ The persistence architecture is designed around a single principle: **the server
 │        │                            │                                │
 │        │ instant read               │ ciphertext blob                │
 │        ▼                            ▼                                │
-│  AppConfigProvider              SQLite (Prisma)                      │
+│  AppConfigProvider              PostgreSQL (Prisma)                   │
 │  └── useReducer                 └── UserConfig table                 │
 │                                                                      │
 │                                ┌──────────────────────────────────┐  │
@@ -99,9 +99,9 @@ useEffect fires (state changed, isHydrated = true)
 
 **Local-first philosophy:** The user sees their dashboard instantly from localStorage. Server data reconciles asynchronously. If the server is unreachable, the app still works.
 
-### 2. Prisma + SQLite
+### 2. Prisma + PostgreSQL
 
-Wassup uses **Prisma ORM** with **SQLite** via the `better-sqlite3` driver adapter. This is an embedded, single-file database — zero infrastructure, zero network round-trips.
+Wassup uses **Prisma ORM** with **PostgreSQL** via the `@prisma/adapter-pg` driver adapter. PostgreSQL runs as a Docker service alongside the app, providing a robust relational database with connection pooling managed by the adapter.
 
 **Prisma setup:**
 
@@ -109,10 +109,8 @@ Wassup uses **Prisma ORM** with **SQLite** via the `better-sqlite3` driver adapt
 prisma/
 ├── schema.prisma          # Schema definition (models, relations)
 ├── migrations/
-│   ├── 20260222014239_init/
-│   │   └── migration.sql  # Initial tables (User, Account, Session, etc.)
-│   ├── 20260222084838_encryption_salt/
-│   │   └── migration.sql  # Added salt column to UserConfig
+│   ├── 20260227045727_init/
+│   │   └── migration.sql  # All tables (User, Account, Session, UserConfig)
 │   └── migration_lock.toml
 └── (prisma.config.ts at project root)
 ```
@@ -159,19 +157,20 @@ export const prisma = globalForPrisma.prisma ?? createPrismaClient();
 if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
 ```
 
-In development, Next.js re-evaluates modules on each hot reload. Without this pattern, each reload creates a new `PrismaClient`, eventually exhausting SQLite's file handles. The `globalThis` cache ensures exactly one instance survives across reloads.
+In development, Next.js re-evaluates modules on each hot reload. Without this pattern, each reload creates a new `PrismaClient`, eventually exhausting the PostgreSQL connection pool. The `globalThis` cache ensures exactly one instance survives across reloads.
 
 **Driver adapter pattern (Prisma 7+):**
 
 ```typescript
 function createPrismaClient(): PrismaClient {
-  const url = process.env.DATABASE_URL!.replace("file:", "");
-  const adapter = new PrismaBetterSqlite3({ url });
+  const connectionString = process.env.DATABASE_URL;
+  if (!connectionString) throw new Error("DATABASE_URL environment variable is required");
+  const adapter = new PrismaPg({ connectionString });
   return new PrismaClient({ adapter });
 }
 ```
 
-Prisma 7 introduced driver adapters, decoupling the query engine from the database driver. Wassup uses `@prisma/adapter-better-sqlite3` instead of the default Prisma query engine, because `better-sqlite3` is synchronous C++ bindings — faster for single-process apps.
+Prisma 7 introduced driver adapters, decoupling the query engine from the database driver. Wassup uses `@prisma/adapter-pg`, which manages connection pooling internally via the `pg` driver.
 
 ### 3. Server-Side LRU Caching
 
@@ -479,7 +478,7 @@ next build                  # includes prisma generate via postinstall
 
 **Prisma in Next.js standalone output:**
 
-The `next.config.ts` sets `output: "standalone"` and `serverExternalPackages: ["better-sqlite3"]`. This is required because `better-sqlite3` is a native C++ addon — it cannot be bundled by webpack and must be loaded at runtime.
+The `next.config.ts` sets `output: "standalone"`. The `pg` driver used by `@prisma/adapter-pg` is pure JavaScript, so no `serverExternalPackages` configuration is needed.
 
 ### LRU Cache Lifecycle (lru-cache library)
 
@@ -540,8 +539,7 @@ Without this, Next.js module re-evaluation in production would throw "metric alr
 | **No conflict resolution** | Server state wins on hydration (overwrites local) | Acceptable for single-user/single-device primary use. True CRDT would be overkill |
 | **Debounced 1s server sync** | Up to 1s of unsaved changes on tab close | Reduces API calls during rapid config edits (preset switching, drag-and-drop) |
 | **LRU cache per-process** | Cache lost on restart, not shared across instances | Single-instance deployment (Hetzner VPS). Redis needed for horizontal scaling |
-| **SQLite single-writer** | No concurrent writes from multiple instances | Wassup runs as one container. PostgreSQL migration path exists |
-| **`better-sqlite3` adapter** | Native addon — requires matching libc (Alpine vs Debian) | Faster than Prisma's default query engine for embedded SQLite |
+| **PostgreSQL as Docker service** | Adds a second container to manage | Docker Compose handles lifecycle; health-checked dependency ensures ordering |
 | **Opaque ciphertext on server** | Server cannot validate stored config structure | By design: zero-knowledge. Size-only validation prevents abuse |
 | **No passphrase recovery** | Forgotten passphrase = permanent data loss | Inherent to zero-knowledge. No recovery mechanism is a feature, not a bug |
 | **`JSON.stringify(config)` as cache key** | Object key ordering matters; functionally identical configs with different key order = cache miss | Acceptable because configs always originate from the same serialization path |
@@ -678,8 +676,7 @@ The 30 req/min sliding window rate limiter prevented the database from being ham
 
 | Database | Deployment | Scaling | Best For |
 |---|---|---|---|
-| **SQLite + better-sqlite3 (Wassup)** | Embedded (file) | Single-writer, single-instance | Personal apps, embedded devices, edge |
-| **PostgreSQL** | Server or managed | Multi-writer, horizontal read replicas | Production multi-user apps |
+| **PostgreSQL (Wassup)** | Docker service | Multi-writer, horizontal read replicas | Personal to production-scale apps |
 | **MySQL / MariaDB** | Server or managed | Multi-writer, horizontal | Legacy/enterprise apps |
 | **Turso (libSQL)** | Edge-hosted SQLite | Multi-region read replicas, single-writer | SQLite at scale, edge computing |
 | **Supabase** | Managed PostgreSQL | Auto-scaling | Full-stack apps wanting auth + DB + API |
@@ -720,4 +717,4 @@ The 30 req/min sliding window rate limiter prevented the database from being ham
 
 6. **The server is a blind vault** — `UserConfig.data` is ciphertext. The API validates shape and size, but never structure. This makes the server trivially simple and impossible to breach for user data.
 
-7. **SQLite is enough** — For a personal/small-team dashboard with one instance, SQLite provides ACID transactions, zero configuration, and sub-millisecond queries. Migrate to PostgreSQL only when horizontal scaling is needed.
+7. **PostgreSQL via Docker** — PostgreSQL runs as a Docker service alongside the app, providing ACID transactions and full SQL capabilities. The `@prisma/adapter-pg` manages connection pooling internally.

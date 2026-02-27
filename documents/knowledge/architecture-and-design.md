@@ -35,7 +35,7 @@ The architecture combines three design patterns:
 │  ┌──────────────────────────────────────────────────────────────────┐    │
 │  │              Persistence Layer (Zero-Knowledge)                  │    │
 │  │                                                                  │    │
-│  │  localStorage ←──write-through──→ AES-256-GCM → SQLite (opaque)  │    │
+│  │  localStorage ←──write-through──→ AES-256-GCM → PostgreSQL (opaque)  │    │
 │  └──────────────────────────────────────────────────────────────────┘    │
 └──────────────────────────────────────────────────────────────────────────┘
 ```
@@ -255,7 +255,7 @@ The `SchemaForm` component reads `WIDGET_REGISTRY[widgetType].fields` and render
 │  └── ... (one per external data source)                                │
 │                                                                        │
 │  Config schemas (Zod)                                                  │
-│  Database (Prisma + SQLite)                                            │
+│  Database (Prisma + PostgreSQL)                                         │
 │  Client cryptography (Web Crypto API)                                  │
 └──────────────────────────────────────────────────────────────────────┘
 ```
@@ -289,16 +289,16 @@ The `SchemaForm` component reads `WIDGET_REGISTRY[widgetType].fields` and render
 │  └────────────────┘              │ (opaque ciphertext blob) │    │
 │                                  └──────────┬───────────────┘    │
 │                                             │                    │
-│                                  ┌──────────▼───────────────┐    │
-│                                  │ Prisma + SQLite          │    │
-│                                  │ UserConfig table         │    │
-│                                  └──────────────────────────┘    │
+│                                  ┌──────────────▼───────────────┐    │
+│                                  │ Prisma + PostgreSQL           │    │
+│                                  │ UserConfig table              │    │
+│                                  └──────────────────────────────┘    │
 └──────────────────────────────────────────────────────────────────┘
 ```
 
 ### Database Design
 
-Wassup uses **Prisma + SQLite** — a single-file embedded database with zero infrastructure overhead.
+Wassup uses **Prisma + PostgreSQL** — a Docker-managed relational database.
 
 ```
 ┌───────────────────────────────────────────────────┐
@@ -505,7 +505,7 @@ This three-way fallback ensures the app **never crashes** on invalid stored data
 | **useReducer over Zustand/Redux** | External state library | Zero dependencies; the state shape (presets + active config) maps naturally to a reducer |
 | **Server Actions over API routes** | REST API for each widget | Less boilerplate; automatic serialization; data never leaves the server boundary |
 | **LRU cache in-process** | Redis / Memcached | Single-instance deployment; no cache infrastructure needed |
-| **SQLite over PostgreSQL** | Full RDBMS | File-based, zero-config, embedded. Sufficient for personal/small-team use |
+| **PostgreSQL via Docker** | Embedded SQLite | Docker Compose manages the Postgres container lifecycle; health checks ensure ordering |
 | **Memoization (React.memo)** | Fine-grained state (Jotai/Recoil) | Context updates propagate to all consumers; memo prevents cascade re-renders at Widget/Column level |
 | **Auto-duplicate seed presets** | Lock icon + explicit clone button | Frictionless UX — users can immediately customize, no extra step |
 
@@ -513,7 +513,7 @@ This three-way fallback ensures the app **never crashes** on invalid stored data
 
 | Limitation | Impact | Mitigation Path |
 |---|---|---|
-| **Single-file SQLite** | No concurrent writers, no horizontal scaling | Migrate to PostgreSQL when multi-instance is needed |
+| **Single PostgreSQL instance** | No horizontal read replicas | Add read replicas when scaling beyond one node |
 | **In-process LRU cache** | Cache is lost on restart, not shared across instances | Add Redis when scaling beyond one instance |
 | **No schema versioning** | Config format changes require migration code in `migrateToAppState` | Currently handles 2 formats; add version field when changes become frequent |
 | **Widget registry is centralized** | Adding a widget requires touching 4 registration files | Could be automated with a build-time plugin or convention-based auto-discovery |

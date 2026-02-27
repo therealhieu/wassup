@@ -28,7 +28,7 @@ These layers are independent and complement each other. A compromise in one does
 ┌─────────────────────────────────────────────────────────┐
 │                      Server                             │
 │                                                         │
-│  Prisma/SQLite stores:                                  │
+│  Prisma/PostgreSQL stores:                               │
 │  - User accounts (OAuth)                                │
 │  - Encrypted config blobs (opaque to server)            │
 └─────────────────────────────────────────────────────────┘
@@ -47,7 +47,7 @@ NextAuth.js provides a battle-tested OAuth abstraction on top of Next.js. Wassup
 | Decision | Choice | Rationale |
 |---|---|---|
 | Provider | GitHub OAuth | Target audience is developers; GitHub is ubiquitous |
-| Adapter | PrismaAdapter + SQLite | Lightweight, file-based, zero-infrastructure DB |
+| Adapter | PrismaAdapter + PostgreSQL | Robust, Docker-managed, full SQL capabilities |
 | Session strategy | Database sessions (default with adapter) | Sessions persist across server restarts |
 | Test support | Credentials provider (gated by env var) | Enables E2E tests without real OAuth |
 
@@ -213,7 +213,7 @@ The three security layers integrate into the application architecture as follows
 │  3. NextAuth Route Handler (/api/auth/[...nextauth])         │
 │     ├── OAuth flow (GitHub)                                  │
 │     ├── Session management                                   │
-│     └── PrismaAdapter ↔ SQLite                               │
+│     └── PrismaAdapter ↔ PostgreSQL                            │
 │     │                                                        │
 │     ▼                                                        │
 │  4. Config API (/api/config)                                 │
@@ -269,7 +269,7 @@ The three security layers integrate into the application architecture as follows
 | **sessionStorage caching** | Passphrase exists in memory/sessionStorage during the session. A browser extension with full page access could read it |
 | **No key rotation** | Changing passphrase requires decrypt-with-old → re-encrypt-with-new, which is not yet implemented |
 | **Single-provider OAuth** | Only GitHub. Adding Google/GitLab requires additional CSP `form-action` entries and provider config |
-| **SQLite** | Single-writer. Adequate for personal/small-team dashboards but not horizontally scalable |
+| **PostgreSQL** | Docker service to manage alongside the app. Docker Compose handles lifecycle with health checks |
 
 ---
 

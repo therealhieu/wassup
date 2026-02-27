@@ -23,7 +23,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # DATABASE_URL needed at build time for page data collection (Prisma import)
-ENV DATABASE_URL=file:/tmp/build.db
+ENV DATABASE_URL=postgresql://build:build@localhost:5432/build
 
 RUN bunx prisma generate && bun run build
 
@@ -37,7 +37,6 @@ ENV HOSTNAME=0.0.0.0
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     openssl \
-    libsqlite3-0 \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy standalone output + static/public assets
@@ -55,10 +54,6 @@ RUN cd /tmp && echo '{"dependencies":{"prisma":"7.4.1","dotenv":"16.5.0"}}' > pa
     && mkdir -p /app/prisma-cli \
     && mv node_modules /app/prisma-cli/node_modules \
     && rm package.json
-
-# SQLite DB lives here — mount a volume in production
-RUN mkdir -p /app/data
-ENV DATABASE_URL=file:/app/data/wassup.db
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
     CMD node -e "fetch('http://localhost:3000').then(r => { if (!r.ok) process.exit(1) }).catch(() => process.exit(1))"
