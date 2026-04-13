@@ -27,7 +27,7 @@
     "@fontsource/roboto": "^5.2.9",
     "@mui/icons-material": "^7.3.8",
     "@mui/lab": "^7.0.1-beta.22",
-    "@mui/material": "^7.3.8",
+    "@mui/material": "^9.0.0",
     "@openmeteo/sdk": "^1.25.0",
     "@prisma/adapter-pg": "^7.4.1",
     "@prisma/client": "^7.4.1",
