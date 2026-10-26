@@ -44,16 +44,32 @@ jobs:
   deploy:
     needs: build-and-push
     runs-on: ubuntu-latest
+    env:
+      WASSUP_TAG: ${{ github.ref_name }}
     steps:
       - uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.VPS_HOST }}
           username: root
           key: ${{ secrets.VPS_SSH_KEY }}
+          envs: WASSUP_TAG
           script: |
+            set -euo pipefail
+            # The /opt/app stack is owned by the giavang365 monorepo. This job
+            # only moves wassup's pinned tag and restarts wassup.
+            if ! printf '%s' "$WASSUP_TAG" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+$'; then
+              echo "refusing to deploy non-release ref '$WASSUP_TAG'" >&2
+              exit 1
+            fi
             cd /opt/app
-            docker compose pull
-            docker compose up -d --remove-orphans
+            grep -q 'WASSUP_TAG' compose.yml || { echo "compose.yml does not pin WASSUP_TAG" >&2; exit 1; }
+            if grep -q '^WASSUP_TAG=' .env; then
+              sed -i "s/^WASSUP_TAG=.*/WASSUP_TAG=${WASSUP_TAG}/" .env
+            else
+              echo "WASSUP_TAG=${WASSUP_TAG}" >> .env
+            fi
+            docker compose pull wassup
+            docker compose up -d --no-deps wassup
             sleep 15
             docker compose exec wassup node -e "fetch('http://localhost:3000').then(r => { if (!r.ok) process.exit(1); console.log('Health check passed') }).catch(() => process.exit(1))"
             docker image prune -f
